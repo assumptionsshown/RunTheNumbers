@@ -111,6 +111,28 @@ data/        pinned dataset snapshots
 episodes/    per-episode simulation output
 ```
 
+## How this is made
+
+Most of the code here was written by an AI coding agent (Claude), directed by a
+human. That is stated plainly because a channel whose entire pitch is "we show you
+the assumptions" cannot then be quiet about how the work is produced.
+
+What that does and does not mean:
+
+- **The agent wrote most of the tooling and the simulation code.** The `.xls`
+  reader, the capture pipeline, the chart rendering, the assembly step.
+- **A human decides which questions get asked, which assumptions the base case
+  uses, and what may be claimed on screen.** Those are the choices that determine
+  whether a result is honest, and they are not delegated.
+- **Neither of those is a reason to trust the output.** It is a reason to check it.
+  The dataset is pinned and hashed, the loader is cross-validated against sources
+  that share none of its code, and every number in every video is read from
+  `results.json` rather than typed. Whoever or whatever wrote a line of code here,
+  the arithmetic either reproduces on your machine or it does not.
+
+If you find a bug that changes a published number, open an issue. A correction is
+worth more to this project than a clean record.
+
 ## A note on what is not here
 
 The videos are produced from a private working repository that also holds scripts,
