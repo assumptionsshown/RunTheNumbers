@@ -1,0 +1,251 @@
+/* Shared look for every episode. Slides are fixed 1920x1080 so frames can be
+   captured at 1:1 with no scaling artefacts. */
+
+:root {
+  --bg: #0d1117;
+  --panel: #161b22;
+  --ink: #f0f4f8;
+  --muted: #8b98a5;
+  --rule: #263140;
+
+  /* One colour per strategy, held constant across every episode. */
+  --lumpsum: #f0a35e;
+  --dca: #4dc9c0;
+  --warn: #e5646e;
+  --ok: #7bc86f;
+
+  --font: "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "Cascadia Mono", "Consolas", ui-monospace, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #05070a;
+  color: var(--ink);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+.slide {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  padding: 84px 104px;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin: 0 auto 40px;
+}
+
+.slide__eyebrow {
+  font-size: 26px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.slide__title {
+  font-size: 68px;
+  font-weight: 650;
+  line-height: 1.1;
+  margin: 0 0 18px;
+  max-width: 1500px;
+}
+
+.slide__sub {
+  font-size: 32px;
+  color: var(--muted);
+  margin: 0 0 40px;
+  max-width: 1400px;
+  line-height: 1.4;
+}
+
+.slide__body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* Keeps a closing note from crowding the footer rule, which reads on screen as
+     the rule striking through the last line of text. */
+  padding-bottom: 34px;
+}
+
+/* Charts must render at their authored size. As plain flex items they get
+   shrunk when the slide runs tall, and because SVG keeps its aspect ratio that
+   shows up as a chart that is mysteriously narrow rather than one that is
+   obviously clipped. */
+.slide__body svg {
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+}
+
+.slide__foot {
+  position: absolute;
+  left: 104px;
+  right: 104px;
+  bottom: 46px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 22px;
+  color: var(--muted);
+  border-top: 1px solid var(--rule);
+  padding-top: 18px;
+}
+
+/* Title slide ------------------------------------------------------------ */
+.slide--title {
+  justify-content: center;
+}
+
+/* The empty body would otherwise absorb all the free space with flex:1 and
+   push the titling into the upper half of the frame. */
+.slide--title .slide__body {
+  flex: 0 0 auto;
+}
+
+/* The wordmark is already the first line on this slide. */
+.slide--title .slide__foot {
+  display: none;
+}
+
+.slide--title .slide__title {
+  font-size: 104px;
+  max-width: 1600px;
+}
+
+.brand {
+  font-size: 30px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--dca);
+}
+
+/* Big number ------------------------------------------------------------- */
+.stat-row {
+  display: flex;
+  gap: 90px;
+}
+
+.stat__value {
+  font-size: 132px;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat__label {
+  font-size: 27px;
+  color: var(--muted);
+  margin-top: 16px;
+  max-width: 460px;
+  line-height: 1.35;
+}
+
+.is-lumpsum { color: var(--lumpsum); }
+.is-dca { color: var(--dca); }
+.is-warn { color: var(--warn); }
+
+/* Legend ----------------------------------------------------------------- */
+.legend {
+  display: flex;
+  gap: 46px;
+  font-size: 28px;
+  margin-bottom: 26px;
+}
+
+.legend span::before {
+  content: "";
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  margin-right: 14px;
+  vertical-align: -2px;
+  background: currentColor;
+}
+
+/* Tables ----------------------------------------------------------------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 30px;
+  font-variant-numeric: tabular-nums;
+}
+
+th {
+  text-align: right;
+  font-weight: 500;
+  color: var(--muted);
+  padding: 14px 22px;
+  border-bottom: 2px solid var(--rule);
+  font-size: 25px;
+}
+
+th:first-child, td:first-child { text-align: left; }
+
+td {
+  padding: 15px 22px;
+  text-align: right;
+  border-bottom: 1px solid var(--rule);
+}
+
+tr.is-highlight td {
+  background: rgba(229, 100, 110, 0.13);
+  color: #ffd9dc;
+}
+
+/* A full-height data table needs tighter rows than the default to leave room
+   for the heading block and the closing note. */
+.slide--table table { font-size: 27px; }
+.slide--table th { font-size: 23px; padding: 11px 22px; }
+.slide--table td { padding: 11px 22px; }
+.slide--table .note { margin-top: 20px; font-size: 24px; }
+
+/* Assumption panel ------------------------------------------------------- */
+.assumptions {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  border-left: 8px solid var(--dca);
+  border-radius: 10px;
+  padding: 44px 54px;
+}
+
+.assumptions h2 {
+  font-size: 34px;
+  margin: 0 0 26px;
+  letter-spacing: 0.04em;
+}
+
+.assumptions ul {
+  margin: 0;
+  padding-left: 34px;
+  font-size: 29px;
+  line-height: 1.75;
+  color: #d6dee6;
+}
+
+.assumptions .source {
+  margin-top: 30px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+  font-family: var(--mono);
+  font-size: 21px;
+  color: var(--muted);
+  line-height: 1.6;
+  word-break: break-all;
+}
+
+.note {
+  font-size: 26px;
+  color: var(--muted);
+  margin-top: 26px;
+  line-height: 1.5;
+}

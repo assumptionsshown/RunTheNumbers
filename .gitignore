@@ -1,0 +1,10 @@
+bin/
+obj/
+node_modules/
+render/frames/
+episodes/*/audio/
+episodes/*/build/
+*.mp4
+*.wav
+*.mp3
+.env

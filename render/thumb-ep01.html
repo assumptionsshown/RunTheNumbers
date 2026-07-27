@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ep01 thumbnails</title>
+<link rel="stylesheet" href="lib/slides.css">
+<style>
+/* Thumbnails are judged at roughly a fifth of this size in a phone feed, so
+   everything is sized to survive that: few words, huge type, one focal object,
+   and no thin strokes. */
+.thumb {
+  position: relative;
+  width: 1280px;
+  height: 720px;
+  background: var(--bg);
+  overflow: hidden;
+  margin: 0 auto 40px;
+}
+
+.thumb__chart {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+}
+
+.thumb__chart svg { width: 120%; height: auto; }
+
+.thumb__scrim {
+  position: absolute;
+  inset: 0;
+  /* Heavy enough on the right that the chart's axis labels do not read as
+     clutter at feed size, while the bar shapes still show through. */
+  background: linear-gradient(90deg, rgba(13,17,23,0.98) 42%, rgba(13,17,23,0.86) 100%);
+}
+
+.thumb__content {
+  position: absolute;
+  inset: 0;
+  padding: 64px 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.thumb__kicker {
+  font-size: 30px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dca);
+  margin-bottom: 14px;
+  font-weight: 600;
+}
+
+.thumb__huge {
+  font-size: 190px;
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+
+.thumb__line {
+  font-size: 62px;
+  font-weight: 750;
+  line-height: 1.05;
+  margin-top: 10px;
+  max-width: 780px;
+}
+
+.thumb__foot {
+  position: absolute;
+  left: 72px;
+  bottom: 52px;
+  font-size: 27px;
+  color: var(--muted);
+}
+
+/* Variant B leans on the table rows instead of a chart. */
+.thumb--table .rows {
+  position: absolute;
+  right: 56px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 520px;
+  font-variant-numeric: tabular-nums;
+}
+
+.thumb--table .row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 29px;
+  padding: 9px 20px;
+  border-radius: 7px;
+  color: var(--muted);
+}
+
+.thumb--table .row.bad {
+  background: rgba(229, 100, 110, 0.28);
+  color: #ffe2e5;
+  font-weight: 700;
+  box-shadow: inset 0 0 0 3px rgba(229, 100, 110, 0.75);
+}
+</style>
+</head>
+<body>
+<main id="deck"></main>
+
+<script type="module">
+import { gapHistogram, COLORS } from "./lib/charts.js";
+
+const r = await (await fetch("../episodes/ep01-lumpsum-vs-dca/results.json")).json();
+const w12 = r.baseCase.windows.find((w) => w.Months === 12);
+const pct = (v, d = 1) => `${(v * 100).toFixed(d)}%`;
+
+const variants = [];
+
+// A - the headline number over its own chart.
+variants.push(`
+  <section class="thumb">
+    <div class="thumb__chart">${gapHistogram(r.baseCase.gapHistogram12mo, { clipLow: -0.2, clipHigh: 0.2 })}</div>
+    <div class="thumb__scrim"></div>
+    <div class="thumb__content">
+      <div class="thumb__kicker">All at once vs 12 monthly buys</div>
+      <div class="thumb__huge is-lumpsum">${pct(w12.LumpSumWinRate)}</div>
+      <div class="thumb__line">of the time,<br>all at once won</div>
+    </div>
+    <div class="thumb__foot">${w12.Starts.toLocaleString()} start months since 1871</div>
+  </section>`);
+
+// B - the surprise, which is the stronger claim but the busier picture.
+// All eight rows, not a top slice: the whole point is that TWO of them are red,
+// and the second one sits seventh in the list.
+const worst = r.baseCase.worstLumpSumStarts;
+variants.push(`
+  <section class="thumb thumb--table">
+    <div class="thumb__content">
+      <div class="thumb__kicker">The 8 worst months to invest</div>
+      <div class="thumb__line" style="font-size:76px;max-width:640px">
+        Averaging in<br>made it <span class="is-warn">worse</span>
+      </div>
+    </div>
+    <div class="rows">
+      ${worst.map((s) => `
+        <div class="row ${s.Gap < 0 ? "bad" : ""}">
+          <span>${s.Date}</span><span>${s.Gap > 0 ? "+" : ""}${(s.Gap * 100).toFixed(1)}%</span>
+        </div>`).join("")}
+    </div>
+    <div class="thumb__foot">155 years of data</div>
+  </section>`);
+
+const only = Number(new URLSearchParams(location.search).get("only"));
+document.getElementById("deck").innerHTML =
+  only >= 1 && only <= variants.length
+    ? variants[only - 1].replace('class="thumb', 'style="margin:0" class="thumb')
+    : variants.join("");
+
+document.documentElement.dataset.ready = "1";
+</script>
+</body>
+</html>

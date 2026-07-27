@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ep01 animations</title>
+<style>
+  html, body { margin: 0; background: #0d1117; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="stage" width="1920" height="1080"></canvas>
+
+<script type="module">
+// Frame-accurate animations for episode 1.
+//
+// The capture harness drives this page: it reads window.FRAME_COUNT, then calls
+// window.renderFrame(i) and screenshots after each call. Every frame is drawn
+// purely from its index, so a frame never depends on the one before it and a
+// re-render always produces identical output.
+
+const C = {
+  bg: "#0d1117",
+  ink: "#f0f4f8",
+  muted: "#8b98a5",
+  rule: "#263140",
+  lumpsum: "#f0a35e",
+  dca: "#4dc9c0",
+  warn: "#e5646e",
+};
+
+const FONT = '"Segoe UI", system-ui, sans-serif';
+const MONO = '"Cascadia Mono", Consolas, monospace';
+
+const canvas = document.getElementById("stage");
+const ctx = canvas.getContext("2d");
+
+const r = await (await fetch("../episodes/ep01-lumpsum-vs-dca/results.json")).json();
+const params = new URLSearchParams(location.search);
+const which = params.get("anim") ?? "histogram";
+const FPS = Number(params.get("fps") ?? 30);
+
+// Ease so motion starts and stops gently instead of snapping.
+const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+const clamp01 = (t) => Math.max(0, Math.min(1, t));
+
+function clear() {
+  ctx.fillStyle = C.bg;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function label(text, x, y, { size = 26, fill = C.muted, align = "center", weight = 400, mono = false, tracking = 0 } = {}) {
+  ctx.font = `${weight} ${size}px ${mono ? MONO : FONT}`;
+  ctx.fillStyle = fill;
+  ctx.textAlign = align;
+  ctx.letterSpacing = `${tracking}px`;
+  ctx.fillText(text, x, y);
+  ctx.letterSpacing = "0px";
+}
+
+// These coordinates are measured from the CSS slides by tools/diag-layout.mjs,
+// not guessed. If the canvas furniture sits even a few pixels off, the shared
+// rule and footer visibly jump every time the video cuts between a still slide
+// and an animated one.
+const CHROME = {
+  left: 104,
+  right: 1816,
+  eyebrowBaseline: 111,
+  titleBaseline: 198,
+  subtitleBaseline: 267,
+  ruleY: 985,
+  footBaseline: 1027,
+};
+
+function chrome(title, subtitle, eyebrow) {
+  if (eyebrow) {
+    label(eyebrow.toUpperCase(), CHROME.left, CHROME.eyebrowBaseline, {
+      size: 26, align: "left", tracking: 26 * 0.18,
+    });
+  }
+  label(title, CHROME.left, CHROME.titleBaseline, { size: 68, fill: C.ink, align: "left", weight: 650 });
+  if (subtitle) label(subtitle, CHROME.left, CHROME.subtitleBaseline, { size: 32, align: "left" });
+
+  ctx.strokeStyle = C.rule;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(CHROME.left, CHROME.ruleY + 0.5);
+  ctx.lineTo(CHROME.right, CHROME.ruleY + 0.5);
+  ctx.stroke();
+
+  label("Shiller S&P Composite, 1871-01 to 2026-06. Real total return.",
+    CHROME.left, CHROME.footBaseline, { size: 22, align: "left" });
+  label("THE ASSUMPTION PANEL", CHROME.right, CHROME.footBaseline, { size: 22, align: "right" });
+}
+
+// ---------------------------------------------------------------------------
+// 1. The histogram filling up as history runs.
+// ---------------------------------------------------------------------------
+const series = r.baseCase.gapSeries12mo;
+const BIN = 0.01;
+const LOW = -0.25;
+const HIGH = 0.35;
+
+function histogramFrame(i, frames) {
+  // Linear, not eased: this animation is history running, so it should run at a
+  // constant rate. Easing would make the early decades crawl for no reason.
+  const p = clamp01(i / (frames - 1));
+  const shown = Math.round(p * series.gaps.length);
+
+  clear();
+
+  // Bottom leaves room for tick labels and the axis caption to clear the
+  // footer rule at y=985.
+  const plot = { left: 190, right: 1830, top: 360, bottom: 850 };
+  const w = plot.right - plot.left;
+  const h = plot.bottom - plot.top;
+  const x = (v) => plot.left + ((v - LOW) / (HIGH - LOW)) * w;
+
+  // Bin only what has been "played" so far.
+  const counts = new Map();
+  let wins = 0;
+  for (let k = 0; k < shown; k++) {
+    const g = series.gaps[k];
+    if (g < 0) wins++;
+    const b = Math.floor(g / BIN);
+    counts.set(b, (counts.get(b) ?? 0) + 1);
+  }
+
+  // A fixed y-scale keeps bars from rescaling under the viewer mid-animation.
+  const maxCount = 108;
+  const y = (c) => plot.bottom - (c / maxCount) * h;
+
+  ctx.strokeStyle = C.rule;
+  ctx.lineWidth = 1;
+  for (let t = 0; t <= 4; t++) {
+    const yy = plot.bottom - (h / 4) * t;
+    ctx.beginPath();
+    ctx.moveTo(plot.left, yy);
+    ctx.lineTo(plot.right, yy);
+    ctx.stroke();
+    label(String(Math.round((maxCount / 4) * t)), plot.left - 20, yy + 8, { size: 22, align: "right" });
+  }
+
+  for (const [bin, count] of counts) {
+    const lo = bin * BIN;
+    if (lo < LOW || lo >= HIGH) continue;
+    const bx = x(lo);
+    const bw = Math.max(1, x(lo + BIN) - bx - 2);
+    ctx.fillStyle = lo + BIN <= 0.0000001 ? C.lumpsum : C.dca;
+    ctx.fillRect(bx + 1, y(count), bw, plot.bottom - y(count));
+  }
+
+  ctx.strokeStyle = C.ink;
+  ctx.lineWidth = 3;
+  ctx.beginPath();
+  ctx.moveTo(x(0), plot.top - 10);
+  ctx.lineTo(x(0), plot.bottom + 12);
+  ctx.stroke();
+
+  ctx.strokeStyle = C.rule;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(plot.left, plot.bottom);
+  ctx.lineTo(plot.right, plot.bottom);
+  ctx.stroke();
+
+  for (let v = LOW; v <= HIGH + 1e-9; v += 0.05) {
+    const vv = Math.abs(v) < 1e-9 ? 0 : v;
+    label(`${vv > 0 ? "+" : ""}${Math.round(vv * 100)}%`, x(vv), plot.bottom + 44, { size: 24 });
+  }
+  label("DCA result minus lump sum result", (plot.left + plot.right) / 2, plot.bottom + 92, { size: 26 });
+
+  // Running counters: the year being played, and the win rate so far.
+  const startYear = Number(series.firstDate.slice(0, 4));
+  const monthsIn = Math.max(0, shown - 1);
+  const year = startYear + Math.floor(monthsIn / 12);
+  const rate = shown > 0 ? wins / shown : 0;
+
+  chrome(
+    "Investing it all at once, month by month",
+    "One bar per starting month. Left of the line, the lump sum ended ahead.",
+    "The answer",
+  );
+
+  label(String(year), 1816, 396, { size: 96, fill: C.muted, align: "right", weight: 700, mono: true });
+  label(`${(rate * 100).toFixed(1)}%`, 1816, 506, {
+    size: 108, fill: C.lumpsum, align: "right", weight: 800, mono: true,
+  });
+  label("of start months won by investing it all at once", 1816, 552, { size: 25, align: "right" });
+  label(`${shown.toLocaleString()} of ${series.gaps.length.toLocaleString()} months`, 1816, 594, { size: 25, align: "right" });
+}
+
+// ---------------------------------------------------------------------------
+// 2. A single start date playing out, month by month.
+// ---------------------------------------------------------------------------
+function pathwayFrame(i, frames, pathway) {
+  const p = easeInOut(clamp01(i / (frames - 1)));
+
+  // There are only 121 monthly points spread over ~1500 frames, so advancing a
+  // whole point at a time would hold still for a dozen frames and then jump.
+  // The drawn position is interpolated between months so the line grows
+  // smoothly, while the numbers on the right stay snapped to real monthly
+  // values rather than showing a figure that never existed.
+  const exact = clamp01(p) * (pathway.Points.length - 1);
+  const whole = Math.floor(exact);
+  const frac = exact - whole;
+  const shown = Math.max(2, whole + 1);
+  const pts = pathway.Points.slice(0, shown);
+
+  clear();
+
+  const plot = { left: 190, right: 1500, top: 360, bottom: 860 };
+  const w = plot.right - plot.left;
+  const h = plot.bottom - plot.top;
+
+  const all = pathway.Points.flatMap((q) => [q.LumpSum, q.Dca]);
+  const lo = Math.min(...all) * 0.92;
+  const hi = Math.max(...all) * 1.06;
+  const x = (k) => plot.left + (k / (pathway.Points.length - 1)) * w;
+  const y = (v) => plot.bottom - ((v - lo) / (hi - lo)) * h;
+
+  // The buying window is the only stretch where the two can separate.
+  ctx.fillStyle = "rgba(77, 201, 192, 0.10)";
+  ctx.fillRect(plot.left, plot.top, x(pathway.WindowMonths - 1) - plot.left, h);
+  label("still buying", (plot.left + x(pathway.WindowMonths - 1)) / 2, plot.top - 14, { size: 24, fill: C.dca });
+
+  ctx.strokeStyle = C.rule;
+  ctx.lineWidth = 1;
+  for (let t = 0; t <= 4; t++) {
+    const v = lo + ((hi - lo) / 4) * t;
+    ctx.beginPath();
+    ctx.moveTo(plot.left, y(v));
+    ctx.lineTo(plot.right, y(v));
+    ctx.stroke();
+    label(`$${v.toFixed(2)}`, plot.left - 20, y(v) + 8, { size: 22, align: "right", mono: true });
+  }
+
+  // $1 reference: below this line the money is underwater in real terms.
+  if (lo < 1 && hi > 1) {
+    ctx.strokeStyle = C.muted;
+    ctx.lineWidth = 2;
+    ctx.setLineDash([10, 8]);
+    ctx.beginPath();
+    ctx.moveTo(plot.left, y(1));
+    ctx.lineTo(plot.right, y(1));
+    ctx.stroke();
+    ctx.setLineDash([]);
+  }
+
+  const next = pathway.Points[Math.min(whole + 1, pathway.Points.length - 1)];
+
+  const drawLine = (key, colour) => {
+    // The tip sits partway between this month and the next.
+    const tipX = x(exact);
+    const tipY = y(pathway.Points[whole][key] + (next[key] - pathway.Points[whole][key]) * frac);
+
+    ctx.strokeStyle = colour;
+    ctx.lineWidth = 5;
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    for (let k = 0; k <= whole; k++) {
+      const px = x(k);
+      const py = y(pathway.Points[k][key]);
+      if (k === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }
+    ctx.lineTo(tipX, tipY);
+    ctx.stroke();
+
+    ctx.fillStyle = colour;
+    ctx.beginPath();
+    ctx.arc(tipX, tipY, 11, 0, Math.PI * 2);
+    ctx.fill();
+  };
+
+  drawLine("LumpSum", C.lumpsum);
+  drawLine("Dca", C.dca);
+
+  const last = pts[pts.length - 1];
+  const gap = last.Dca / last.LumpSum - 1;
+
+  chrome(
+    `${pathway.StartDate}, month by month`,
+    `$1 invested all at once, against $1 spread over ${pathway.WindowMonths} months.`,
+    "Watch one of them happen",
+  );
+
+  label(last.Date, 1816, 396, { size: 76, fill: C.muted, align: "right", weight: 700, mono: true });
+
+  label("all at once", 1816, 476, { size: 27, fill: C.lumpsum, align: "right" });
+  label(`$${last.LumpSum.toFixed(3)}`, 1816, 540, {
+    size: 66, fill: C.lumpsum, align: "right", weight: 700, mono: true,
+  });
+
+  label("spread over 12 months", 1816, 624, { size: 27, fill: C.dca, align: "right" });
+  label(`$${last.Dca.toFixed(3)}`, 1816, 688, {
+    size: 66, fill: C.dca, align: "right", weight: 700, mono: true,
+  });
+
+  label("difference", 1816, 772, { size: 27, align: "right" });
+  label(`${gap > 0 ? "+" : ""}${(gap * 100).toFixed(1)}%`, 1816, 832, {
+    size: 66, fill: gap >= 0 ? C.dca : C.warn, align: "right", weight: 700, mono: true,
+  });
+
+  label(`${pathway.StartDate} to ${pathway.Points[pathway.Points.length - 1].Date}`,
+    (plot.left + plot.right) / 2, plot.bottom + 56, { size: 26 });
+}
+
+// ---------------------------------------------------------------------------
+// Registry
+// ---------------------------------------------------------------------------
+// Length is set per capture so an animation can be matched to the narration it
+// runs under, rather than finishing early and freezing for a minute.
+const seconds = Number(params.get("seconds") ?? 0);
+const framesFor = (fallback) => Math.round((seconds > 0 ? seconds : fallback) * FPS);
+
+const ANIMATIONS = {
+  histogram: { frames: framesFor(11), draw: (i, n) => histogramFrame(i, n) },
+  path1998: {
+    frames: framesFor(12),
+    draw: (i, n) => pathwayFrame(i, n, r.baseCase.pathways.find((q) => q.StartDate === "1998-04")),
+  },
+  path1931: {
+    frames: framesFor(10),
+    draw: (i, n) => pathwayFrame(i, n, r.baseCase.pathways.find((q) => q.StartDate === "1931-08")),
+  },
+};
+
+const animation = ANIMATIONS[which];
+if (!animation) throw new Error(`unknown animation "${which}"`);
+
+window.FRAME_COUNT = animation.frames;
+window.renderFrame = (i) => {
+  animation.draw(i, animation.frames);
+  return true;
+};
+
+// Draw frame zero so the page is never blank, then signal readiness.
+window.renderFrame(0);
+document.documentElement.dataset.ready = "1";
+</script>
+</body>
+</html>

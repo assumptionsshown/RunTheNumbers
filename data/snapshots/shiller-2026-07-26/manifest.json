@@ -1,0 +1,26 @@
+{
+  "source": "https://img1.wsimg.com/blobby/go/e5e77e0b-59d1-44d9-ab25-4763ac982e53/downloads/165d8a6e-26bf-44ec-a26c-a35f7f993480/ie_data.xls",
+  "note": "econ.yale.edu/~shiller/data/ie_data.xls is a stale mirror (frozen at 2023-09). Use shillerdata.com.",
+  "fetchedAt": "2026-07-26",
+  "sha256": "0e3d716f83f51c14f40c5ab5662e767cde4f83fcb7305db24ab003df2c9ee6c5",
+  "rawBytes": 1651712,
+  "months": 1866,
+  "firstMonth": "1871-01",
+  "lastMonth": "2026-06",
+  "droppedPartialMonth": "2026-07",
+  "rowsWithoutTotalReturn": 0,
+  "columnsUsed": {
+    "date": 0,
+    "price": 1,
+    "dividend": 2,
+    "earnings": 3,
+    "cpi": 4,
+    "dateFraction": 5,
+    "gs10": 6,
+    "realPrice": 7,
+    "realDividend": 8,
+    "realTotalReturnPrice": 9,
+    "realEarnings": 10,
+    "cape": 12
+  }
+}
