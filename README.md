@@ -15,9 +15,13 @@ date and hash, using code you can read.
 
 Don't trust it. Re-run it.
 
-## Reproducing episode 1
+## Episodes
 
-**Lump Sum vs DCA: I Tested All 1,855 Months Since 1871**
+| # | Question | Video | Data |
+|---|---|---|---|
+| 1 | Lump sum or spread it out? | [Lump Sum vs DCA: I Tested All 1,855 Months Since 1871](https://youtu.be/YV2cOHZvYcY) | `episodes/ep01-lumpsum-vs-dca/results.json` |
+
+## Reproducing episode 1
 
 Requires [Node.js](https://nodejs.org) 22 or newer and the
 [.NET SDK](https://dotnet.microsoft.com/download) 9 or newer. Nothing else. There
