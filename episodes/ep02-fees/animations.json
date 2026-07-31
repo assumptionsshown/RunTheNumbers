@@ -1,0 +1,6 @@
+{
+  "_comment": "Slide number -> animation name. The named sequence must exist at render/frames/<episode>/anim-<name>/, captured by tools/capture-animation.mjs. Any slide not listed here uses its still frame. When an animation is shorter than the slide's voice over, the final frame is held for the remainder.",
+  "3": "feetable",
+  "4": "feecurve",
+  "9": "breakeven"
+}

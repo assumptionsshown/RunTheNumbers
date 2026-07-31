@@ -20,6 +20,11 @@ Don't trust it. Re-run it.
 | # | Question | Video | Data |
 |---|---|---|---|
 | 1 | Lump sum or spread it out? | [Lump Sum vs DCA: I Tested All 1,855 Months Since 1871](https://youtu.be/YV2cOHZvYcY) | `episodes/ep01-lumpsum-vs-dca/results.json` |
+| 2 | What does a 1% fee actually cost, and is it ever worth it? | publishing shortly | `episodes/ep02-fees/results.json` |
+
+Episode 2's code and results are public before its video, on purpose. Reproduce it
+with the same command as episode 1, adding `--episode ep02` and pointing the output
+at `episodes/ep02-fees/results.json`.
 
 ## Reproducing episode 1
 

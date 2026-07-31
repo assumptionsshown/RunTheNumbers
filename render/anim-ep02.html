@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ep02 animations</title>
+<style>
+  html, body { margin: 0; background: #0d1117; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="stage" width="1920" height="1080"></canvas>
+
+<script type="module">
+// Frame-accurate animations for episode 2.
+//
+// Same contract as episode 1: the capture harness reads window.FRAME_COUNT, calls
+// window.renderFrame(i), and screenshots. Every frame is drawn purely from its
+// index, so nothing depends on the frame before it.
+
+const C = {
+  bg: "#0d1117",
+  ink: "#f0f4f8",
+  muted: "#8b98a5",
+  rule: "#263140",
+  warn: "#e5646e",
+  lumpsum: "#f0a35e",
+  dca: "#4dc9c0",
+};
+
+const FONT = '"Segoe UI", system-ui, sans-serif';
+const MONO = '"Cascadia Mono", Consolas, monospace';
+
+const canvas = document.getElementById("stage");
+const ctx = canvas.getContext("2d");
+
+const r = await (await fetch("../episodes/ep02-fees/results.json")).json();
+const params = new URLSearchParams(location.search);
+const which = params.get("anim") ?? "feecurve";
+const FPS = Number(params.get("fps") ?? 30);
+const seconds = Number(params.get("seconds") ?? 0);
+
+const clamp01 = (t) => Math.max(0, Math.min(1, t));
+
+function clear() {
+  ctx.fillStyle = C.bg;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function label(text, x, y, { size = 26, fill = C.muted, align = "center", weight = 400, mono = false, tracking = 0 } = {}) {
+  ctx.font = `${weight} ${size}px ${mono ? MONO : FONT}`;
+  ctx.fillStyle = fill;
+  ctx.textAlign = align;
+  ctx.letterSpacing = `${tracking}px`;
+  ctx.fillText(text, x, y);
+  ctx.letterSpacing = "0px";
+}
+
+// Measured from the CSS slides by tools/diag-layout.mjs. Must stay identical to
+// the episode 1 values, or the shared furniture jumps when the video cuts between
+// a still slide and an animated one.
+const CHROME = {
+  left: 104, right: 1816,
+  eyebrowBaseline: 111, titleBaseline: 198, subtitleBaseline: 267,
+  ruleY: 985, footBaseline: 1027,
+};
+
+function chrome(title, subtitle, eyebrow) {
+  if (eyebrow) {
+    label(eyebrow.toUpperCase(), CHROME.left, CHROME.eyebrowBaseline, {
+      size: 26, align: "left", tracking: 26 * 0.18,
+    });
+  }
+  label(title, CHROME.left, CHROME.titleBaseline, { size: 68, fill: C.ink, align: "left", weight: 650 });
+  if (subtitle) label(subtitle, CHROME.left, CHROME.subtitleBaseline, { size: 32, align: "left" });
+
+  ctx.strokeStyle = C.rule;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(CHROME.left, CHROME.ruleY + 0.5);
+  ctx.lineTo(CHROME.right, CHROME.ruleY + 0.5);
+  ctx.stroke();
+
+  label("Shiller S&P Composite, 1871-01 to 2026-06. Real total return.",
+    CHROME.left, CHROME.footBaseline, { size: 22, align: "left" });
+  label("THE ASSUMPTION PANEL", CHROME.right, CHROME.footBaseline, { size: 22, align: "right" });
+}
+
+// ---------------------------------------------------------------------------
+// The fee curves growing year by year.
+// ---------------------------------------------------------------------------
+const COLOURS = {
+  0.0003: "#7bc86f",
+  0.0025: "#4dc9c0",
+  0.005: "#8b98a5",
+  0.01: "#f0a35e",
+  0.02: "#e5646e",
+};
+
+const curves = r.feeCurves.map((c) => ({
+  fee: c.fee,
+  colour: COLOURS[c.fee] ?? C.muted,
+  emphasis: Math.abs(c.fee - 0.01) < 1e-9,
+  points: c.points.map((p) => ({ x: p.HorizonYears, y: p.ShareOfGainLost })),
+}));
+
+const MAX_YEARS = 40;
+const Y_MAX = 0.65;
+
+function feeCurveFrame(i, frames) {
+  // Linear: this is time passing, so it should pass at a constant rate.
+  const p = clamp01(i / (frames - 1));
+  const year = 1 + p * (MAX_YEARS - 1);
+
+  clear();
+
+  const plot = { left: 190, right: 1560, top: 360, bottom: 850 };
+  const w = plot.right - plot.left;
+  const h = plot.bottom - plot.top;
+  const x = (v) => plot.left + ((v - 1) / (MAX_YEARS - 1)) * w;
+  const y = (v) => plot.bottom - (v / Y_MAX) * h;
+
+  ctx.strokeStyle = C.rule;
+  ctx.lineWidth = 1;
+  for (let t = 0; t <= 4; t++) {
+    const v = (Y_MAX / 4) * t;
+    ctx.beginPath();
+    ctx.moveTo(plot.left, y(v));
+    ctx.lineTo(plot.right, y(v));
+    ctx.stroke();
+    label(`${Math.round(v * 100)}%`, plot.left - 20, y(v) + 8, { align: "right", size: 22 });
+  }
+
+  for (const t of [1, 10, 20, 30, 40]) {
+    label(String(t), x(t), plot.bottom + 44, { size: 24 });
+  }
+  label("years held", (plot.left + plot.right) / 2, plot.bottom + 92, { size: 26 });
+
+  for (const c of curves) {
+    // Draw up to the current year, interpolating the final segment so the tip
+    // moves smoothly instead of stepping once per year.
+    const whole = Math.floor(year) - 1;
+    const frac = year - Math.floor(year);
+
+    ctx.strokeStyle = c.colour;
+    ctx.lineWidth = c.emphasis ? 6 : 3;
+    ctx.globalAlpha = c.emphasis ? 1 : 0.55;
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    for (let k = 0; k <= whole; k++) {
+      const pt = c.points[k];
+      if (k === 0) ctx.moveTo(x(pt.x), y(pt.y));
+      else ctx.lineTo(x(pt.x), y(pt.y));
+    }
+
+    const a = c.points[whole];
+    const b = c.points[Math.min(whole + 1, c.points.length - 1)];
+    const tipY = a.y + (b.y - a.y) * frac;
+    ctx.lineTo(x(year), y(tipY));
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    ctx.fillStyle = c.colour;
+    ctx.beginPath();
+    ctx.arc(x(year), y(tipY), c.emphasis ? 11 : 7, 0, Math.PI * 2);
+    ctx.fill();
+
+    label(`${(c.fee * 100).toFixed(2)}%`, x(year) + 26, y(tipY) + 9, {
+      align: "left", size: c.emphasis ? 30 : 25, fill: c.colour,
+      weight: c.emphasis ? 700 : 400, mono: true,
+    });
+  }
+
+  chrome(
+    "The share taken rises the longer you hold",
+    "Share of the gain consumed by an annual fee, by holding period.",
+    "Why the number keeps growing",
+  );
+
+  label(`${Math.round(year)}`, 1816, 400, {
+    size: 110, fill: C.muted, align: "right", weight: 700, mono: true,
+  });
+  label("years held", 1816, 446, { size: 26, align: "right" });
+}
+
+// ---------------------------------------------------------------------------
+// Staged reveal of the fee table (slide 3). Thirty numbers at once forces the
+// viewer to read against the narration; rows arriving one at a time turn the
+// same table into a guided walk.
+// ---------------------------------------------------------------------------
+const FEES = [0, 0.0003, 0.0025, 0.005, 0.01, 0.02];
+const HORIZONS = [10, 20, 30, 40];
+const cellOf = (fee, h) =>
+  r.feeGrid.find((g) => Math.abs(g.AnnualFee - fee) < 1e-9 && g.HorizonYears === h);
+
+function feeTableFrame(i, frames) {
+  const p = clamp01(i / (frames - 1));
+  clear();
+
+  chrome(
+    "It is charged on the balance, not on the gain",
+    "Every year, including the years you lost money, and on the compounding as well as on the capital.",
+    "The mechanism",
+  );
+
+  const left = CHROME.left + 26;
+  const right = CHROME.right - 26;
+  const colX = [left, 760, 1090, 1420, right];
+  const headerY = 420;
+  const rowH = 82;
+
+  label("Annual fee", colX[0], headerY, { size: 25, align: "left" });
+  HORIZONS.forEach((h, k) => label(`${h} years`, colX[k + 1], headerY, { size: 25, align: "right" }));
+
+  ctx.strokeStyle = C.rule;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(CHROME.left, headerY + 22);
+  ctx.lineTo(CHROME.right, headerY + 22);
+  ctx.stroke();
+
+  // Row k fades in at its own moment; everything already shown stays.
+  FEES.forEach((fee, k) => {
+    const tIn = 0.06 + k * 0.13;
+    const a = clamp01((p - tIn) / 0.05);
+    if (a <= 0) return;
+
+    const y = headerY + 78 + k * rowH;
+    const isOne = Math.abs(fee - 0.01) < 1e-9;
+
+    ctx.globalAlpha = a;
+    if (isOne) {
+      ctx.fillStyle = "rgba(229, 100, 110, 0.13)";
+      ctx.fillRect(CHROME.left, y - 52, CHROME.right - CHROME.left, 74);
+    }
+    label(fee === 0 ? "none" : `${(fee * 100).toFixed(2)}%`, colX[0], y, {
+      size: 30, align: "left", fill: isOne ? "#ffd9dc" : C.ink,
+    });
+    HORIZONS.forEach((h, m) => {
+      label(`$${cellOf(fee, h).Wealth.Median.toFixed(3)}`, colX[m + 1], y, {
+        size: 30, align: "right", fill: isOne ? "#ffd9dc" : C.ink, mono: true,
+      });
+    });
+    ctx.globalAlpha = 1;
+  });
+
+  // Sits between the last row (baseline 908) and the footer rule at 985.
+  const noteA = clamp01((p - 0.1) / 0.05);
+  if (noteA > 0) {
+    ctx.globalAlpha = noteA;
+    label("Median real value of $1, across every start month since 1871.",
+      CHROME.left, 952, { size: 26, align: "left" });
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Two-stage reveal of the break-even result (slide 9). Stage one grows the fee
+// ladder a bar at a time; stage two pulls focus to the 1% row, which is the
+// episode's headline.
+// ---------------------------------------------------------------------------
+const byFee = [...new Set(r.breakEvens.map((b) => b.AnnualFee))].map((fee) => {
+  const rows = r.breakEvens.filter((b) => b.AnnualFee === fee);
+  return { fee, never: rows.filter((b) => b.PanicsToBreakEven === null).length, total: rows.length };
+});
+
+function breakEvenFrame(i, frames) {
+  const p = clamp01(i / (frames - 1));
+  clear();
+
+  chrome(
+    "At 1%, panicking every single time still wins",
+    "Twelve settings of when you sell and when you buy back. In how many does the fee never pay for itself?",
+    "So how many?",
+  );
+
+  const plot = { left: CHROME.left + 420, right: CHROME.right - 240, top: 430 };
+  const rowH = 96;
+  const stageTwo = clamp01((p - 0.62) / 0.08);
+
+  byFee.forEach((b, k) => {
+    const tIn = 0.06 + k * 0.11;
+    const grow = clamp01((p - tIn) / 0.07);
+    if (grow <= 0) return;
+
+    const y = plot.top + k * rowH;
+    const isOne = Math.abs(b.fee - 0.01) < 1e-9;
+    // Stage two dims everything except the 1% row.
+    const dim = stageTwo > 0 && !isOne ? 1 - stageTwo * 0.6 : 1;
+
+    ctx.globalAlpha = dim;
+    label(Math.abs(b.fee - 0.0003) < 1e-9 ? "0.03%  index fund" : `${(b.fee * 100).toFixed(2)}%`,
+      plot.left - 28, y + 40, { size: 30, align: "right", fill: C.ink });
+
+    ctx.fillStyle = "rgba(38, 49, 64, 0.55)";
+    ctx.fillRect(plot.left, y, plot.right - plot.left, 56);
+
+    const frac = (b.never / b.total) * grow;
+    ctx.fillStyle = b.never === 0 ? C.dca : b.never > 8 ? C.warn : C.lumpsum;
+    ctx.fillRect(plot.left, y, (plot.right - plot.left) * frac, 56);
+
+    label(`${b.never} of ${b.total}`, plot.right + 30, y + 42, {
+      size: 36, align: "left", weight: 700,
+      fill: b.never === 0 ? C.dca : b.never > 8 ? C.warn : C.lumpsum, mono: true,
+    });
+    ctx.globalAlpha = 1;
+  });
+
+  if (stageTwo > 0) {
+    ctx.globalAlpha = stageTwo;
+    label('"Never" is literal: the market only offers 1.3 to 5.5 of these falls in 30 years,',
+      CHROME.left, 970 - 34, { size: 27, align: "left" });
+    label("and panicking at every one of them still beat paying 1%.",
+      CHROME.left, 970, { size: 27, align: "left", fill: C.ink });
+    ctx.globalAlpha = 1;
+  }
+}
+
+const ANIMATIONS = {
+  feecurve: {
+    frames: Math.round((seconds > 0 ? seconds : 12) * FPS),
+    draw: (i, n) => feeCurveFrame(i, n),
+  },
+  feetable: {
+    frames: Math.round((seconds > 0 ? seconds : 40) * FPS),
+    draw: (i, n) => feeTableFrame(i, n),
+  },
+  breakeven: {
+    frames: Math.round((seconds > 0 ? seconds : 48) * FPS),
+    draw: (i, n) => breakEvenFrame(i, n),
+  },
+};
+
+const animation = ANIMATIONS[which];
+if (!animation) throw new Error(`unknown animation "${which}"`);
+
+window.FRAME_COUNT = animation.frames;
+window.renderFrame = (i) => {
+  animation.draw(i, animation.frames);
+  return true;
+};
+
+window.renderFrame(0);
+document.documentElement.dataset.ready = "1";
+</script>
+</body>
+</html>

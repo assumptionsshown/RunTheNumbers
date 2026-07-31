@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ep02 - 1% in fees</title>
+<link rel="stylesheet" href="lib/slides.css">
+</head>
+<body>
+<main id="deck"></main>
+
+<script type="module">
+import { multiLine, horizontalBars, COLORS } from "./lib/charts.js";
+
+const r = await (await fetch("../episodes/ep02-fees/results.json")).json();
+
+const pct = (v, d = 1) => `${(v * 100).toFixed(d)}%`;
+const money = (v) => `$${Math.round(v).toLocaleString()}`;
+const cell = (fee, years) =>
+  r.feeGrid.find((g) => Math.abs(g.AnnualFee - fee) < 1e-9 && g.HorizonYears === years);
+
+const FEES = [0, 0.0003, 0.0025, 0.005, 0.01, 0.02];
+const HORIZONS = [10, 20, 30, 40];
+const one30 = cell(0.01, 30);
+const two40 = cell(0.02, 40);
+
+const deck = document.getElementById("deck");
+const slides = [];
+
+const slide = ({ eyebrow, title, sub, body, foot, cls = "" }) => slides.push(`
+  <section class="slide ${cls}">
+    ${eyebrow ? `<div class="slide__eyebrow">${eyebrow}</div>` : ""}
+    ${title ? `<h1 class="slide__title">${title}</h1>` : ""}
+    ${sub ? `<p class="slide__sub">${sub}</p>` : ""}
+    <div class="slide__body">${body ?? ""}</div>
+    <div class="slide__foot">
+      <span>${foot ?? `Shiller S&amp;P Composite, ${r.meta.firstMonth} to ${r.meta.lastMonth}. Real total return.`}</span>
+      <span>THE ASSUMPTION PANEL</span>
+    </div>
+  </section>`);
+
+// 1 - Title, carrying the number so there is something to look at immediately ---
+slide({
+  cls: "slide--title",
+  body: `
+    <div class="brand">The Assumption Panel</div>
+    <h1 class="slide__title" style="margin-top:28px;font-size:88px">"It's only 1%"</h1>
+    <div style="display:flex;align-items:baseline;gap:36px;margin-top:44px">
+      <div class="stat__value is-warn" style="font-size:170px">${pct(one30.ShareOfGainLost)}</div>
+      <div style="font-size:36px;line-height:1.3;color:var(--muted);max-width:760px">
+        of everything the market gave you over 30 years,
+        <span style="color:var(--ink)">taken by a 1% annual fee</span>
+      </div>
+    </div>
+    <p class="slide__sub" style="font-size:30px;margin-top:52px">
+      Assumptions on screen. Code and data public.
+    </p>`,
+  foot: " ",
+});
+
+// 2 - The bait -----------------------------------------------------------------
+slide({
+  eyebrow: "The bait",
+  title: "It is quoted next to a much bigger number",
+  sub: "One percent, against returns of eight or nine. It reads as a rounding error, and it is meant to.",
+  body: `
+    <div class="stat-row">
+      <div>
+        <div class="stat__value">1%</div>
+        <div class="stat__label">what you are quoted, once, as an annual figure</div>
+      </div>
+      <div>
+        <div class="stat__value is-warn">${pct(one30.ShareOfFinalLost)}</div>
+        <div class="stat__label">of your final balance after 30 years</div>
+      </div>
+      <div>
+        <div class="stat__value is-warn">${pct(one30.ShareOfGainLost)}</div>
+        <div class="stat__label">of your <span style="color:var(--ink)">gain</span>, which is the only part that was ever at stake</div>
+      </div>
+    </div>
+    <p class="note">
+      The last number is the honest one. The money you put in was never the market's to give or take,
+      so measuring the fee against the whole balance understates it.
+    </p>`,
+});
+
+// 3 - The mechanism ------------------------------------------------------------
+slide({
+  eyebrow: "The mechanism",
+  title: "It is charged on the balance, not on the gain",
+  sub: "Every year, including the years you lost money, and on the compounding as well as on the capital.",
+  body: `
+    <table>
+      <thead>
+        <tr>
+          <th>Annual fee</th>
+          ${HORIZONS.map((h) => `<th>${h} years</th>`).join("")}
+        </tr>
+      </thead>
+      <tbody>
+        ${FEES.map((f) => `
+          <tr class="${Math.abs(f - 0.01) < 1e-9 ? "is-highlight" : ""}">
+            <td>${f === 0 ? "none" : pct(f, 2)}</td>
+            ${HORIZONS.map((h) => `<td>$${cell(f, h).Wealth.Median.toFixed(3)}</td>`).join("")}
+          </tr>`).join("")}
+      </tbody>
+    </table>
+    <p class="note">Median real value of $1, across every start month since ${r.meta.firstMonth.slice(0, 4)}.</p>`,
+  cls: "slide--table",
+});
+
+// 4 - The compounding curve ----------------------------------------------------
+const feeColours = {
+  0.0003: "#7bc86f",
+  0.0025: "#4dc9c0",
+  0.005: "#8b98a5",
+  0.01: COLORS.lumpsum,
+  0.02: COLORS.warn,
+};
+slide({
+  eyebrow: "Why the number keeps growing",
+  title: "The share taken rises the longer you hold",
+  sub: "Share of the gain consumed, by holding period. The fee compounds against you exactly as your returns compound for you.",
+  body: `
+    ${multiLine(
+      [0.0003, 0.0025, 0.005, 0.01, 0.02].map((f) => ({
+        label: pct(f, 2),
+        colour: feeColours[f],
+        emphasis: Math.abs(f - 0.01) < 1e-9,
+        points: HORIZONS.map((h) => ({ x: h, y: cell(f, h).ShareOfGainLost })),
+      })),
+      {
+        yMin: 0, yMax: 0.65, yTicks: 4,
+        formatY: (v) => pct(v, 0),
+        xTicks: HORIZONS,
+        xLabel: "years held",
+      },
+    )}
+    <p class="note">
+      At 2% over 40 years the fee takes ${pct(two40.ShareOfGainLost)} of the gain. Two percent is not exotic:
+      a 1% fund inside a 1% advised account gets you there.
+    </p>`,
+});
+
+// 5 - The cost, made concrete --------------------------------------------------
+slide({
+  eyebrow: "The cost",
+  title: "What that looks like on ten thousand dollars",
+  sub: `Held for ${r.example.horizonYears} years at ${pct(r.example.annualFee, 0)}, in real terms.`,
+  body: `
+    <div class="stat-row">
+      <div>
+        <div class="stat__value is-dca">${money(r.example.withoutFee)}</div>
+        <div class="stat__label">with no fee</div>
+      </div>
+      <div>
+        <div class="stat__value">${money(r.example.withFee)}</div>
+        <div class="stat__label">after a 1% annual fee</div>
+      </div>
+      <div>
+        <div class="stat__value is-warn">${money(r.example.lostToFee)}</div>
+        <div class="stat__label">the difference, which is ${pct(r.example.shareLost)} of what you would have had</div>
+      </div>
+    </div>`,
+});
+
+// 6 - The steelman -------------------------------------------------------------
+slide({
+  eyebrow: "But",
+  title: "A fee is only a pure loss if you would have behaved",
+  sub: "",
+  body: `
+    <p class="slide__sub" style="font-size:38px;max-width:1560px">
+      The honest case for paying someone is not that they pick better funds. It is that they stop you
+      selling at the bottom.
+    </p>
+    <p class="slide__sub" style="font-size:38px;max-width:1560px;color:var(--ink)">
+      So the question is not whether 1% is expensive. It is: how big a mistake does it have to prevent?
+    </p>
+    <p class="note" style="font-size:32px;color:var(--dca)">
+      That is answerable. So we answered it.
+    </p>`,
+});
+
+// 7 - Every panic setting against the fee, in one picture ----------------------
+// Twelve rows of numbers is too dense to read on video, and the point is a
+// comparison rather than the individual figures: every bar is shorter than the line.
+slide({
+  eyebrow: "Pricing the mistake",
+  title: "One panic sale costs less than the fee",
+  sub: "Sell after a fall, sit in cash, buy back later. Twelve settings of when to sell and when to return, each measured the same way as the fee.",
+  body: `
+    ${horizontalBars(
+      r.panicGrid.map((p) => ({
+        label: `${pct(p.DropThreshold, 0)}, ${p.Reentry.replace("after ", "").replace(" in cash", " out")}`,
+        value: Math.max(0, p.MedianCost),
+        display: pct(p.MedianCost),
+        color: COLORS.lumpsum,
+      })),
+      {
+        max: 0.3,
+        height: 560,
+        labelWidth: 420,
+        labelSize: 25,
+        reference: r.feeVersusPanic.feeCostOfBalance30y,
+        referenceLabel: `1% a year for 30 years: ${pct(r.feeVersusPanic.feeCostOfBalance30y)}`,
+      },
+    )}
+    <p class="note">
+      Every setting sits left of the line. Saving you from one panic does not pay for the fee.
+    </p>`,
+});
+
+// 9 - The break-even -----------------------------------------------------------
+const byFee = [...new Set(r.breakEvens.map((b) => b.AnnualFee))].map((fee) => {
+  const rows = r.breakEvens.filter((b) => b.AnnualFee === fee);
+  const never = rows.filter((b) => b.PanicsToBreakEven === null).length;
+  return { fee, never, total: rows.length };
+});
+slide({
+  eyebrow: "So how many?",
+  title: "At 1%, panicking every single time still wins",
+  sub: "Twelve settings of when you sell and when you buy back. In how many of them does the fee never pay for itself, no matter how badly you behave?",
+  body: `
+    ${horizontalBars(
+      byFee.map((b) => ({
+        label: Math.abs(b.fee - 0.0003) < 1e-9 ? "0.03%  index fund" : pct(b.fee, 2),
+        value: b.never / b.total,
+        display: `${b.never} of ${b.total}`,
+        color: b.never === 0 ? COLORS.dca : b.never > 8 ? COLORS.warn : COLORS.lumpsum,
+      })),
+      { max: 1, labelWidth: 400, labelSize: 32 },
+    )}
+    <p class="note">
+      "Never" is literal. The market only offers 1.3 to 5.5 of these falls in a 30-year stretch, and the
+      simulation lets you panic at every one of them. At 1% a year, in 10 of 12 settings, doing that still
+      left you ahead of paying the fee.
+    </p>`,
+});
+
+// 10 - The honest limits -------------------------------------------------------
+slide({
+  eyebrow: "Where this stops being solid",
+  title: "Two things this does not settle",
+  sub: "",
+  body: `
+    <p class="slide__sub" style="font-size:34px;max-width:1620px">
+      <span style="color:var(--ink)">Panicking more is not reliably worse.</span>
+      Selling into a fall that keeps falling can help, so two panics sometimes beat one. The headline
+      survives that, because the wobble is around one percent against a fee effect of twenty six.
+      The precise break-even counts do not, and should be read as approximate.
+    </p>
+    <p class="slide__sub" style="font-size:34px;max-width:1620px">
+      <span style="color:var(--ink)">This models someone who sells and comes back.</span>
+      It does not model someone who sells and stays out for a decade, or never returns. For that person the
+      arithmetic flips, and the fee can be the cheapest thing they ever buy.
+    </p>`,
+});
+
+// 11 - The escape --------------------------------------------------------------
+slide({
+  eyebrow: "What to do with this",
+  title: "The question is not the fee. It is which investor you are.",
+  sub: "",
+  body: `
+    <p class="slide__sub" style="font-size:38px;max-width:1560px">
+      If you would have held anyway, a 1% fee is close to a pure transfer, and over thirty years it is
+      ${pct(one30.ShareOfGainLost)} of everything you made.
+    </p>
+    <p class="slide__sub" style="font-size:38px;max-width:1560px;color:var(--ink)">
+      If you are someone who sells and then stays out, it may be the best money you spend.
+    </p>
+    <p class="note" style="font-size:32px;color:var(--dca)">
+      Most people believe they are the first sort. The evidence for that belief is usually nothing at all.
+    </p>`,
+});
+
+// 12 - Assumption panel --------------------------------------------------------
+slide({
+  eyebrow: "The assumption panel",
+  title: "Everything this result rests on",
+  sub: "Change any of these and the number changes. That is the point.",
+  body: `
+    <div class="assumptions">
+      <ul>${r.meta.assumptions.map((a) => `<li>${a}</li>`).join("")}</ul>
+      <div class="source">
+        source: ${r.meta.snapshot.source}<br>
+        snapshot ${r.meta.snapshot.fetchedAt} &middot; sha256 ${r.meta.snapshot.sha256.slice(0, 32)}...<br>
+        ${r.meta.snapshot.months.toLocaleString()} months, ${r.meta.snapshot.firstMonth} to ${r.meta.snapshot.lastMonth}
+      </div>
+    </div>`,
+});
+
+const only = Number(new URLSearchParams(location.search).get("only"));
+deck.innerHTML = only >= 1 && only <= slides.length
+  ? slides[only - 1].replace('class="slide ', 'style="margin:0" class="slide ')
+  : slides.join("");
+
+document.title = `Ep02 - ${slides.length} slides`;
+document.documentElement.dataset.slideCount = String(slides.length);
+document.documentElement.dataset.ready = "1";
+</script>
+</body>
+</html>

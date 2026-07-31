@@ -19,8 +19,13 @@ const fps = Number(argOf("--fps", "30"));
 const port = argOf("--port", "5173");
 const [width, height] = argOf("--size", "1920,1080").split(",").map(Number);
 
+// Episode animations follow the anim-<episode>.html convention; shorts live on
+// their own shared page, so the page name can be overridden.
+const page = argOf("--page", `anim-${episode}`);
+const outName = argOf("--out", `anim-${anim}`);
+
 const root = join(import.meta.dirname, "..");
-const outDir = join(root, "render", "frames", episode, `anim-${anim}`);
+const outDir = join(root, "render", "frames", episode, outName);
 
 // Stale frames from a previous, longer run would be picked up by ffmpeg.
 if (existsSync(outDir)) rmSync(outDir, { recursive: true, force: true });
@@ -28,14 +33,16 @@ mkdirSync(outDir, { recursive: true });
 
 // Match the animation to the length of the narration it plays under.
 const seconds = argOf("--seconds", "");
-const url = `http://localhost:${port}/render/anim-${episode}.html?anim=${anim}&fps=${fps}` +
+const url = `http://localhost:${port}/render/${page}.html?anim=${anim}&fps=${fps}` +
   (seconds ? `&seconds=${seconds}` : "");
 console.log(`capturing ${anim} from ${url}`);
 
 const browser = await Browser.launch({ url, width, height });
 
 try {
-  await browser.waitFor("document.documentElement.dataset.ready === '1'");
+  // Null-safe: during navigation the document can be mid-swap, and a poll that
+  // lands in that window would otherwise throw instead of retrying.
+  await browser.waitFor("document.documentElement?.dataset?.ready === '1'");
   const frames = await browser.evaluate("window.FRAME_COUNT");
   if (!frames) throw new Error("page did not expose FRAME_COUNT");
 

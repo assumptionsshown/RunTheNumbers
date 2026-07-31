@@ -107,12 +107,22 @@ export function gapHistogram(bins, opts = {}) {
   return svg(f, out);
 }
 
-/** Horizontal bars, used for win rate by deployment window. */
+/**
+ * Horizontal bars. `labelWidth` reserves room on the left: a label longer than the
+ * margin is silently clipped by the viewBox rather than overflowing visibly, which
+ * turns "0.03%" into "3%" and is very easy to miss.
+ */
 export function horizontalBars(items, opts = {}) {
-  const f = frame({ width: 1712, height: 480, margin: { top: 20, right: 260, bottom: 40, left: 260 } });
+  const labelWidth = opts.labelWidth ?? 260;
+  const height = opts.height ?? 480;
+  const f = frame({
+    width: 1712, height,
+    margin: { top: 30, right: 260, bottom: opts.reference != null ? 66 : 40, left: labelWidth },
+  });
   const max = opts.max ?? 1;
   const x = scale([0, max], [f.margin.left, f.margin.left + f.innerWidth]);
   const band = f.innerHeight / items.length;
+  const labelSize = opts.labelSize ?? 34;
 
   let out = "";
   for (const [i, item] of items.entries()) {
@@ -123,13 +133,25 @@ export function horizontalBars(items, opts = {}) {
       fill: item.color ?? COLORS.lumpsum,
       rx: 6,
     });
-    out += text(f.margin.left - 28, yTop + h / 2 + 12, item.label, {
-      anchor: "end", size: 34, fill: COLORS.ink,
+    out += text(f.margin.left - 28, yTop + h / 2 + labelSize * 0.35, item.label, {
+      anchor: "end", size: labelSize, fill: COLORS.ink,
     });
-    out += text(f.margin.left + f.innerWidth + 28, yTop + h / 2 + 12, item.display, {
+    out += text(f.margin.left + f.innerWidth + 28, yTop + h / 2 + 13, item.display, {
       anchor: "start", size: 38, fill: item.color ?? COLORS.lumpsum, weight: 700,
     });
   }
+
+  // A vertical line to compare every bar against, drawn last so it sits on top.
+  if (opts.reference != null) {
+    const rx = x(opts.reference);
+    out += line(rx, f.margin.top - 8, rx, f.margin.top + f.innerHeight + 10, {
+      stroke: COLORS.warn, width: 4, dash: "12 8",
+    });
+    out += text(rx, f.margin.top + f.innerHeight + 46, opts.referenceLabel ?? "", {
+      size: 26, fill: COLORS.warn, weight: 600,
+    });
+  }
+
   return svg(f, out);
 }
 
@@ -224,6 +246,56 @@ export function tailAdvantage(points, opts = {}) {
   // plot pushes them past x=0 and the first letter gets clipped by the viewBox.
   out += text(8, y(maxAbs * 0.75), opts.aboveLabel ?? "DCA better", { anchor: "start", size: 24, fill: COLORS.dca });
   out += text(8, y(-maxAbs * 0.75), opts.belowLabel ?? "DCA worse", { anchor: "start", size: 24, fill: COLORS.lumpsum });
+
+  return svg(f, out);
+}
+
+/**
+ * Several series over a shared x axis, labelled at the right-hand end rather than
+ * in a legend, so the eye never has to travel to work out which line is which.
+ *
+ * series: [{ label, colour, points: [{x, y}], emphasis }]
+ */
+export function multiLine(series, opts = {}) {
+  const f = frame({ width: 1712, height: 560, margin: { top: 40, right: 250, bottom: 96, left: 110 } });
+
+  const xs = series.flatMap((s) => s.points.map((p) => p.x));
+  const ys = series.flatMap((s) => s.points.map((p) => p.y));
+  const x = scale([Math.min(...xs), Math.max(...xs)], [f.margin.left, f.margin.left + f.innerWidth]);
+  const y = scale([opts.yMin ?? 0, opts.yMax ?? Math.max(...ys) * 1.1], [f.margin.top + f.innerHeight, f.margin.top]);
+
+  let out = "";
+
+  const ticks = opts.yTicks ?? 4;
+  const yTop = opts.yMax ?? Math.max(...ys) * 1.1;
+  for (let i = 0; i <= ticks; i++) {
+    const v = (opts.yMin ?? 0) + ((yTop - (opts.yMin ?? 0)) / ticks) * i;
+    out += line(f.margin.left, y(v), f.margin.left + f.innerWidth, y(v));
+    out += text(f.margin.left - 20, y(v) + 8, opts.formatY ? opts.formatY(v) : v.toFixed(0), {
+      anchor: "end", size: 22,
+    });
+  }
+
+  for (const xt of opts.xTicks ?? []) {
+    out += text(x(xt), f.margin.top + f.innerHeight + 44, String(xt), { size: 24 });
+  }
+
+  for (const s of series) {
+    const width = s.emphasis ? 6 : 3;
+    const opacity = s.emphasis ? 1 : 0.55;
+    out += `<path d="${s.points.map((p, i) => `${i === 0 ? "M" : "L"}${x(p.x)},${y(p.y)}`).join(" ")}" ` +
+      `fill="none" stroke="${s.colour}" stroke-width="${width}" stroke-linejoin="round" opacity="${opacity}"/>`;
+
+    const last = s.points[s.points.length - 1];
+    out += text(x(last.x) + 18, y(last.y) + 8, s.label, {
+      anchor: "start", size: s.emphasis ? 28 : 24, fill: s.colour,
+      weight: s.emphasis ? 700 : 400,
+    });
+  }
+
+  if (opts.xLabel) {
+    out += text(f.margin.left + f.innerWidth / 2, f.height - 18, opts.xLabel, { size: 26 });
+  }
 
   return svg(f, out);
 }

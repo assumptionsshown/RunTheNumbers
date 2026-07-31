@@ -2,9 +2,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using RunTheNumbers.Sim;
 
-// Episode 1 - Lump Sum vs DCA.
+// Episode simulations.
 //
-//   dotnet run --project src/RunTheNumbers.Sim -- <snapshotDir> <outputJson>
+//   dotnet run --project src/RunTheNumbers.Sim -- <snapshotDir> <outputJson> [--episode ep02]
+//
+// Episode 1 is the default and stays inline below. Later episodes live in their
+// own files, so adding one cannot disturb a published result.
 
 var snapshotDir = args.Length > 0
     ? args[0]
@@ -12,6 +15,15 @@ var snapshotDir = args.Length > 0
 var outputPath = args.Length > 1
     ? args[1]
     : Path.Combine("episodes", "ep01-lumpsum-vs-dca", "results.json");
+
+var episodeFlag = Array.IndexOf(args, "--episode");
+var episode = episodeFlag >= 0 && episodeFlag + 1 < args.Length ? args[episodeFlag + 1] : "ep01";
+
+if (episode == "ep02")
+{
+    Ep02.Run(snapshotDir, outputPath);
+    return;
+}
 
 var series = ShillerSeries.Load(Path.Combine(snapshotDir, "shiller-monthly.csv"));
 var manifest = JsonSerializer.Deserialize<JsonElement>(

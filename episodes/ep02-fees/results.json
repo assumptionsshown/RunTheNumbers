@@ -1,0 +1,3132 @@
+{
+  "meta": {
+    "episode": "ep02-fees",
+    "generatedAt": "2026-07-29T01:48:24Z",
+    "snapshot": {
+      "source": "https://img1.wsimg.com/blobby/go/e5e77e0b-59d1-44d9-ab25-4763ac982e53/downloads/165d8a6e-26bf-44ec-a26c-a35f7f993480/ie_data.xls",
+      "note": "econ.yale.edu/~shiller/data/ie_data.xls is a stale mirror (frozen at 2023-09). Use shillerdata.com.",
+      "fetchedAt": "2026-07-26",
+      "sha256": "0e3d716f83f51c14f40c5ab5662e767cde4f83fcb7305db24ab003df2c9ee6c5",
+      "rawBytes": 1651712,
+      "months": 1866,
+      "firstMonth": "1871-01",
+      "lastMonth": "2026-06",
+      "droppedPartialMonth": "2026-07",
+      "rowsWithoutTotalReturn": 0,
+      "columnsUsed": {
+        "date": 0,
+        "price": 1,
+        "dividend": 2,
+        "earnings": 3,
+        "cpi": 4,
+        "dateFraction": 5,
+        "gs10": 6,
+        "realPrice": 7,
+        "realDividend": 8,
+        "realTotalReturnPrice": 9,
+        "realEarnings": 10,
+        "cape": 12
+      }
+    },
+    "firstMonth": "1871-01",
+    "lastMonth": "2026-06",
+    "months": 1866,
+    "assumptions": [
+      "Real (inflation-adjusted) total return, dividends reinvested.",
+      "The fee is deducted monthly at one twelfth of the annual rate, which is close to how a fund actually accrues its expense ratio.",
+      "The fee is charged on the whole balance, not on the gain.",
+      "The fee rate is held constant for the entire period. This flatters the high-fee case, since real fee schedules have generally fallen.",
+      "No taxes, no transaction costs, no bid-ask spread.",
+      "US large-cap index only (S\u0026P Composite).",
+      "Buy and hold from a single lump sum. No contributions during the period.",
+      "Panic-sale scenario: one sale per lifetime, into cash that holds its real value. Both choices are generous to the seller, so they understate rather than overstate what the mistake costs."
+    ]
+  },
+  "feeGrid": [
+    {
+      "AnnualFee": 0,
+      "HorizonYears": 10,
+      "Starts": 1746,
+      "Wealth": {
+        "P1": 0.6819319297645107,
+        "P5": 0.7986421324512147,
+        "P25": 1.4558065709355346,
+        "Median": 1.9715751403757222,
+        "P75": 2.73809306589997,
+        "P95": 4.075148555316648,
+        "Mean": 2.166808297914462
+      },
+      "MedianWealthNoFee": 1.9715751403757222,
+      "ShareOfFinalLost": 0,
+      "ShareOfGainLost": 0
+    },
+    {
+      "AnnualFee": 0,
+      "HorizonYears": 20,
+      "Starts": 1626,
+      "Wealth": {
+        "P1": 1.1505048894661207,
+        "P5": 1.439291499296365,
+        "P25": 2.501588694584849,
+        "Median": 3.746364408348693,
+        "P75": 5.240001703553595,
+        "P95": 9.28654702885188,
+        "Mean": 4.165378503247894
+      },
+      "MedianWealthNoFee": 3.746364408348693,
+      "ShareOfFinalLost": 0,
+      "ShareOfGainLost": 0
+    },
+    {
+      "AnnualFee": 0,
+      "HorizonYears": 30,
+      "Starts": 1506,
+      "Wealth": {
+        "P1": 2.6207454323618964,
+        "P5": 3.2193391887406535,
+        "P25": 4.786191062630523,
+        "Median": 7.1361676517165336,
+        "P75": 9.877896499406926,
+        "P95": 13.64392609302843,
+        "Mean": 7.672131884297142
+      },
+      "MedianWealthNoFee": 7.1361676517165336,
+      "ShareOfFinalLost": 0,
+      "ShareOfGainLost": 0
+    },
+    {
+      "AnnualFee": 0,
+      "HorizonYears": 40,
+      "Starts": 1386,
+      "Wealth": {
+        "P1": 4.322189448498824,
+        "P5": 5.781446620955574,
+        "P25": 8.389164638023615,
+        "Median": 12.423772291150243,
+        "P75": 18.05919147895012,
+        "P95": 33.37869840215497,
+        "Mean": 14.7875465612129
+      },
+      "MedianWealthNoFee": 12.423772291150243,
+      "ShareOfFinalLost": 0,
+      "ShareOfGainLost": 0
+    },
+    {
+      "AnnualFee": 0.0003,
+      "HorizonYears": 10,
+      "Starts": 1746,
+      "Wealth": {
+        "P1": 0.6798891741062338,
+        "P5": 0.7962497664923919,
+        "P25": 1.4514456413759491,
+        "Median": 1.9656692044634512,
+        "P75": 2.7298909934362454,
+        "P95": 4.062941277131908,
+        "Mean": 2.1603175329014577
+      },
+      "MedianWealthNoFee": 1.9715751403757222,
+      "ShareOfFinalLost": 0.0029955418849243465,
+      "ShareOfGainLost": 0.00607872275322643
+    },
+    {
+      "AnnualFee": 0.0003,
+      "HorizonYears": 20,
+      "Starts": 1626,
+      "Wealth": {
+        "P1": 1.1436224420880807,
+        "P5": 1.4306814985077856,
+        "P25": 2.4866239145916333,
+        "Median": 3.7239532424896877,
+        "P75": 5.2086554343497475,
+        "P95": 9.230993878374244,
+        "Mean": 4.14046074877271
+      },
+      "MedianWealthNoFee": 3.746364408348693,
+      "ShareOfFinalLost": 0.0059821104986643725,
+      "ShareOfGainLost": 0.008160303050417232
+    },
+    {
+      "AnnualFee": 0.0003,
+      "HorizonYears": 30,
+      "Starts": 1506,
+      "Wealth": {
+        "P1": 2.5972642537580737,
+        "P5": 3.1904947700712003,
+        "P25": 4.743308069957572,
+        "Median": 7.072229496904695,
+        "P75": 9.789393186926244,
+        "P95": 13.52168016196941,
+        "Mean": 7.603391633213344
+      },
+      "MedianWealthNoFee": 7.1361676517165336,
+      "ShareOfFinalLost": 0.008959732721029678,
+      "ShareOfGainLost": 0.010419883947263437
+    },
+    {
+      "AnnualFee": 0.0003,
+      "HorizonYears": 40,
+      "Starts": 1386,
+      "Wealth": {
+        "P1": 4.270632491086289,
+        "P5": 5.712483008700453,
+        "P25": 8.28909502998745,
+        "Median": 12.275576126555855,
+        "P75": 17.843773580896524,
+        "P95": 32.980542756153966,
+        "Mean": 14.611154268053003
+      },
+      "MedianWealthNoFee": 12.423772291150243,
+      "ShareOfFinalLost": 0.011928435351310496,
+      "ShareOfGainLost": 0.012972611919899069
+    },
+    {
+      "AnnualFee": 0.0025,
+      "HorizonYears": 10,
+      "Starts": 1746,
+      "Wealth": {
+        "P1": 0.6650932381714415,
+        "P5": 0.7789215592171368,
+        "P25": 1.4198588805617867,
+        "Median": 1.9228917684843174,
+        "P75": 2.6704823518720575,
+        "P95": 3.9745224272181807,
+        "Mean": 2.1133041062534477
+      },
+      "MedianWealthNoFee": 1.9715751403757222,
+      "ShareOfFinalLost": 0.024692628190740584,
+      "ShareOfGainLost": 0.05010767553457394
+    },
+    {
+      "AnnualFee": 0.0025,
+      "HorizonYears": 20,
+      "Starts": 1626,
+      "Wealth": {
+        "P1": 1.0943884031458775,
+        "P5": 1.3690892928819391,
+        "P25": 2.3795723789273926,
+        "Median": 3.5636334969057164,
+        "P75": 4.9844178406706074,
+        "P95": 8.83359077105737,
+        "Mean": 3.9622099570415275
+      },
+      "MedianWealthNoFee": 3.746364408348693,
+      "ShareOfFinalLost": 0.048775530494514774,
+      "ShareOfGainLost": 0.06653556639734023
+    },
+    {
+      "AnnualFee": 0.0025,
+      "HorizonYears": 30,
+      "Starts": 1506,
+      "Wealth": {
+        "P1": 2.4313605064822434,
+        "P5": 2.9866976257287,
+        "P25": 4.440322887702433,
+        "Median": 6.620481326331198,
+        "P75": 9.164082531332543,
+        "P95": 12.657964656282967,
+        "Mean": 7.117714766821898
+      },
+      "MedianWealthNoFee": 7.1361676517165336,
+      "ShareOfFinalLost": 0.07226376264594792,
+      "ShareOfGainLost": 0.08404045564841713
+    },
+    {
+      "AnnualFee": 0.0025,
+      "HorizonYears": 40,
+      "Starts": 1386,
+      "Wealth": {
+        "P1": 3.910837997074918,
+        "P5": 5.2312147333445616,
+        "P25": 7.590750988829299,
+        "Median": 11.241376927638417,
+        "P75": 16.340461951953454,
+        "P95": 30.201980630300692,
+        "Mean": 13.38018605250912
+      },
+      "MedianWealthNoFee": 12.423772291150243,
+      "ShareOfFinalLost": 0.0951720086140081,
+      "ShareOfGainLost": 0.10350305777959207
+    },
+    {
+      "AnnualFee": 0.005,
+      "HorizonYears": 10,
+      "Starts": 1746,
+      "Wealth": {
+        "P1": 0.6486669582383501,
+        "P5": 0.7596839804187149,
+        "P25": 1.3847916176593456,
+        "Median": 1.875400745185087,
+        "P75": 2.604527553130105,
+        "P95": 3.8763608248399484,
+        "Mean": 2.0611103342516306
+      },
+      "MedianWealthNoFee": 1.9715751403757222,
+      "ShareOfFinalLost": 0.04878048684074365,
+      "ShareOfGainLost": 0.09898811856532606
+    },
+    {
+      "AnnualFee": 0.005,
+      "HorizonYears": 20,
+      "Starts": 1626,
+      "Wealth": {
+        "P1": 1.0409981799079855,
+        "P5": 1.3022976650015115,
+        "P25": 2.2634838858873936,
+        "Median": 3.389780057495261,
+        "P75": 4.741250807413161,
+        "P95": 8.402640130587113,
+        "Mean": 3.7689117883897487
+      },
+      "MedianWealthNoFee": 3.746364408348693,
+      "ShareOfFinalLost": 0.09518143778506738,
+      "ShareOfGainLost": 0.12983868774640706
+    },
+    {
+      "AnnualFee": 0.005,
+      "HorizonYears": 30,
+      "Starts": 1506,
+      "Wealth": {
+        "P1": 2.255625988813097,
+        "P5": 2.770824304893852,
+        "P25": 4.119384055766463,
+        "Median": 6.141964426217642,
+        "P75": 8.50171855065984,
+        "P95": 11.743068939413988,
+        "Mean": 6.603258696601451
+      },
+      "MedianWealthNoFee": 7.1361676517165336,
+      "ShareOfFinalLost": 0.13931892775245347,
+      "ShareOfGainLost": 0.1620234781591687
+    },
+    {
+      "AnnualFee": 0.005,
+      "HorizonYears": 40,
+      "Starts": 1386,
+      "Wealth": {
+        "P1": 3.538561937992678,
+        "P5": 4.733250868157854,
+        "P25": 6.868180822100438,
+        "Median": 10.171300513220505,
+        "P75": 14.784999213889034,
+        "P95": 27.327027913277902,
+        "Mean": 12.106514543451247
+      },
+      "MedianWealthNoFee": 12.423772291150243,
+      "ShareOfFinalLost": 0.1813033694713021,
+      "ShareOfGainLost": 0.19717407880010712
+    },
+    {
+      "AnnualFee": 0.01,
+      "HorizonYears": 10,
+      "Starts": 1746,
+      "Wealth": {
+        "P1": 0.6170118029514579,
+        "P5": 0.7226111588980563,
+        "P25": 1.3172133432609663,
+        "Median": 1.7838805882539959,
+        "P75": 2.477425774480501,
+        "P95": 3.6871931752473426,
+        "Mean": 1.9605274899036693
+      },
+      "MedianWealthNoFee": 1.9715751403757222,
+      "ShareOfFinalLost": 0.09520030369522592,
+      "ShareOfGainLost": 0.19318583228585096
+    },
+    {
+      "AnnualFee": 0.01,
+      "HorizonYears": 20,
+      "Starts": 1626,
+      "Wealth": {
+        "P1": 0.9418751980659213,
+        "P5": 1.1782939632733134,
+        "P25": 2.0479568307484,
+        "Median": 3.0670080166090865,
+        "P75": 4.289792844505458,
+        "P95": 7.602547718165023,
+        "Mean": 3.4100391390658893
+      },
+      "MedianWealthNoFee": 3.746364408348693,
+      "ShareOfFinalLost": 0.1813375095667883,
+      "ShareOfGainLost": 0.24736571362286303
+    },
+    {
+      "AnnualFee": 0.01,
+      "HorizonYears": 30,
+      "Starts": 1506,
+      "Wealth": {
+        "P1": 1.9412531613397996,
+        "P5": 2.3846468643601186,
+        "P25": 3.5452541160147226,
+        "Median": 5.285941870844239,
+        "P75": 7.31681054179287,
+        "P95": 10.106404969408928,
+        "Mean": 5.682944283979991
+      },
+      "MedianWealthNoFee": 7.1361676517165336,
+      "ShareOfFinalLost": 0.2592744272799199,
+      "ShareOfGainLost": 0.3015279056716633
+    },
+    {
+      "AnnualFee": 0.01,
+      "HorizonYears": 40,
+      "Starts": 1386,
+      "Wealth": {
+        "P1": 2.8967671269045216,
+        "P5": 3.8747733566732134,
+        "P25": 5.6224875459952415,
+        "Median": 8.326514974407441,
+        "P75": 12.103419537259368,
+        "P95": 22.370679819184076,
+        "Mean": 9.910736046280752
+      },
+      "MedianWealthNoFee": 12.423772291150243,
+      "ShareOfFinalLost": 0.32979172675769164,
+      "ShareOfGainLost": 0.3586606256076078
+    },
+    {
+      "AnnualFee": 0.02,
+      "HorizonYears": 10,
+      "Starts": 1746,
+      "Wealth": {
+        "P1": 0.5582254935464518,
+        "P5": 0.6537637835913102,
+        "P25": 1.1917147534788297,
+        "Median": 1.6139198910662729,
+        "P75": 2.241386986551503,
+        "P95": 3.3358927984972238,
+        "Mean": 1.7737366131859242
+      },
+      "MedianWealthNoFee": 1.9715751403757222,
+      "ShareOfFinalLost": 0.18140584245817337,
+      "ShareOfGainLost": 0.36811897963047807
+    },
+    {
+      "AnnualFee": 0.02,
+      "HorizonYears": 20,
+      "Starts": 1626,
+      "Wealth": {
+        "P1": 0.7709491785868556,
+        "P5": 0.9644640446895307,
+        "P25": 1.6763055654177172,
+        "Median": 2.5104252834976823,
+        "P75": 3.5113062500959744,
+        "P95": 6.222881683817813,
+        "Mean": 2.7912051178439414
+      },
+      "MedianWealthNoFee": 3.746364408348693,
+      "ShareOfFinalLost": 0.329903605238387,
+      "ShareOfGainLost": 0.450027360205321
+    },
+    {
+      "AnnualFee": 0.02,
+      "HorizonYears": 30,
+      "Starts": 1506,
+      "Wealth": {
+        "P1": 1.437575820830081,
+        "P5": 1.7659266404266347,
+        "P25": 2.62540285696873,
+        "Median": 3.9144519505093394,
+        "P75": 5.418391650276318,
+        "P95": 7.484198201903725,
+        "Mean": 4.208448159402189
+      },
+      "MedianWealthNoFee": 7.1361676517165336,
+      "ShareOfFinalLost": 0.45146300625830205,
+      "ShareOfGainLost": 0.5250371052534639
+    },
+    {
+      "AnnualFee": 0.02,
+      "HorizonYears": 40,
+      "Starts": 1386,
+      "Wealth": {
+        "P1": 1.9407891763975462,
+        "P5": 2.5960382254340693,
+        "P25": 3.766979703804555,
+        "Median": 5.578636262939991,
+        "P75": 8.109103910058913,
+        "P95": 14.988009515325636,
+        "Mean": 6.640039881047936
+      },
+      "MedianWealthNoFee": 12.423772291150243,
+      "ShareOfFinalLost": 0.5509708217274885,
+      "ShareOfGainLost": 0.5992010216724151
+    }
+  ],
+  "onePercentByYear": [
+    {
+      "HorizonYears": 1,
+      "ShareOfGainLost": 0.12263189607021055,
+      "ShareOfFinalLost": 0.00995429374308443
+    },
+    {
+      "HorizonYears": 2,
+      "ShareOfGainLost": 0.1458714854326923,
+      "ShareOfFinalLost": 0.0198094995222452
+    },
+    {
+      "HorizonYears": 3,
+      "ShareOfGainLost": 0.14965097381458256,
+      "ShareOfFinalLost": 0.029566603688181536
+    },
+    {
+      "HorizonYears": 4,
+      "ShareOfGainLost": 0.1558549695729334,
+      "ShareOfFinalLost": 0.039226582773168706
+    },
+    {
+      "HorizonYears": 5,
+      "ShareOfGainLost": 0.1627285042364929,
+      "ShareOfFinalLost": 0.0487904035887915
+    },
+    {
+      "HorizonYears": 6,
+      "ShareOfGainLost": 0.17054228955531786,
+      "ShareOfFinalLost": 0.05825902332270938
+    },
+    {
+      "HorizonYears": 7,
+      "ShareOfGainLost": 0.17712058344305281,
+      "ShareOfFinalLost": 0.06763338963445442
+    },
+    {
+      "HorizonYears": 8,
+      "ShareOfGainLost": 0.18062511974647752,
+      "ShareOfFinalLost": 0.07691444075027709
+    },
+    {
+      "HorizonYears": 9,
+      "ShareOfGainLost": 0.1843154312970117,
+      "ShareOfFinalLost": 0.08610310555704814
+    },
+    {
+      "HorizonYears": 10,
+      "ShareOfGainLost": 0.19318583228585096,
+      "ShareOfFinalLost": 0.09520030369522592
+    },
+    {
+      "HorizonYears": 11,
+      "ShareOfGainLost": 0.19424005291644889,
+      "ShareOfFinalLost": 0.10420694565089694
+    },
+    {
+      "HorizonYears": 12,
+      "ShareOfGainLost": 0.19886436821848513,
+      "ShareOfFinalLost": 0.11312393284690281
+    },
+    {
+      "HorizonYears": 13,
+      "ShareOfGainLost": 0.20781397363913406,
+      "ShareOfFinalLost": 0.12195215773305634
+    },
+    {
+      "HorizonYears": 14,
+      "ShareOfGainLost": 0.2117618024412542,
+      "ShareOfFinalLost": 0.13069250387546283
+    },
+    {
+      "HorizonYears": 15,
+      "ShareOfGainLost": 0.2199455557465485,
+      "ShareOfFinalLost": 0.1393458460449517
+    },
+    {
+      "HorizonYears": 16,
+      "ShareOfGainLost": 0.2255226594619074,
+      "ShareOfFinalLost": 0.14791305030462576
+    },
+    {
+      "HorizonYears": 17,
+      "ShareOfGainLost": 0.2327380396723382,
+      "ShareOfFinalLost": 0.15639497409654257
+    },
+    {
+      "HorizonYears": 18,
+      "ShareOfGainLost": 0.23873371730616352,
+      "ShareOfFinalLost": 0.16479246632752786
+    },
+    {
+      "HorizonYears": 19,
+      "ShareOfGainLost": 0.24439234450171424,
+      "ShareOfFinalLost": 0.17310636745414076
+    },
+    {
+      "HorizonYears": 20,
+      "ShareOfGainLost": 0.24736571362286303,
+      "ShareOfFinalLost": 0.1813375095667883
+    },
+    {
+      "HorizonYears": 21,
+      "ShareOfGainLost": 0.25589291369897726,
+      "ShareOfFinalLost": 0.18948671647300552
+    },
+    {
+      "HorizonYears": 22,
+      "ShareOfGainLost": 0.2630397246938625,
+      "ShareOfFinalLost": 0.19755480377990497
+    },
+    {
+      "HorizonYears": 23,
+      "ShareOfGainLost": 0.26984138156094334,
+      "ShareOfFinalLost": 0.20554257897580697
+    },
+    {
+      "HorizonYears": 24,
+      "ShareOfGainLost": 0.27413906046456477,
+      "ShareOfFinalLost": 0.2134508415110551
+    },
+    {
+      "HorizonYears": 25,
+      "ShareOfGainLost": 0.2771712965481677,
+      "ShareOfFinalLost": 0.22128038287802998
+    },
+    {
+      "HorizonYears": 26,
+      "ShareOfGainLost": 0.2802702205658056,
+      "ShareOfFinalLost": 0.22903198669036418
+    },
+    {
+      "HorizonYears": 27,
+      "ShareOfGainLost": 0.2843459909037018,
+      "ShareOfFinalLost": 0.2367064287613705
+    },
+    {
+      "HorizonYears": 28,
+      "ShareOfGainLost": 0.28902486019711504,
+      "ShareOfFinalLost": 0.2443044771816878
+    },
+    {
+      "HorizonYears": 29,
+      "ShareOfGainLost": 0.2943295095684337,
+      "ShareOfFinalLost": 0.25182689239615497
+    },
+    {
+      "HorizonYears": 30,
+      "ShareOfGainLost": 0.3015279056716633,
+      "ShareOfFinalLost": 0.2592744272799199
+    },
+    {
+      "HorizonYears": 31,
+      "ShareOfGainLost": 0.3060820685591203,
+      "ShareOfFinalLost": 0.2666478272137902
+    },
+    {
+      "HorizonYears": 32,
+      "ShareOfGainLost": 0.3127636336565099,
+      "ShareOfFinalLost": 0.27394783015883317
+    },
+    {
+      "HorizonYears": 33,
+      "ShareOfGainLost": 0.3194946732990896,
+      "ShareOfFinalLost": 0.281175166730236
+    },
+    {
+      "HorizonYears": 34,
+      "ShareOfGainLost": 0.3257459239358154,
+      "ShareOfFinalLost": 0.2883305602704268
+    },
+    {
+      "HorizonYears": 35,
+      "ShareOfGainLost": 0.3305354985113972,
+      "ShareOfFinalLost": 0.2954147269214712
+    },
+    {
+      "HorizonYears": 36,
+      "ShareOfGainLost": 0.3366063171514809,
+      "ShareOfFinalLost": 0.3024283756967464
+    },
+    {
+      "HorizonYears": 37,
+      "ShareOfGainLost": 0.3412086187886566,
+      "ShareOfFinalLost": 0.3093722085519015
+    },
+    {
+      "HorizonYears": 38,
+      "ShareOfGainLost": 0.3475828065056395,
+      "ShareOfFinalLost": 0.3162469204551135
+    },
+    {
+      "HorizonYears": 39,
+      "ShareOfGainLost": 0.35234156838600594,
+      "ShareOfFinalLost": 0.323053199456642
+    },
+    {
+      "HorizonYears": 40,
+      "ShareOfGainLost": 0.3586606256076078,
+      "ShareOfFinalLost": 0.32979172675769164
+    }
+  ],
+  "feeCurves": [
+    {
+      "fee": 0.0003,
+      "points": [
+        {
+          "HorizonYears": 1,
+          "ShareOfGainLost": 0.003695341088613991,
+          "ShareOfFinalLost": 0.00029995875343791223
+        },
+        {
+          "HorizonYears": 2,
+          "ShareOfGainLost": 0.004416958285235734,
+          "ShareOfFinalLost": 0.0005998275316222434
+        },
+        {
+          "HorizonYears": 3,
+          "ShareOfGainLost": 0.00455334570971598,
+          "ShareOfFinalLost": 0.0008996063615412941
+        },
+        {
+          "HorizonYears": 4,
+          "ShareOfGainLost": 0.004765037243320694,
+          "ShareOfFinalLost": 0.0011992952701767035
+        },
+        {
+          "HorizonYears": 5,
+          "ShareOfGainLost": 0.004999196706406671,
+          "ShareOfFinalLost": 0.0014988942845001185
+        },
+        {
+          "HorizonYears": 6,
+          "ShareOfGainLost": 0.005264486447864668,
+          "ShareOfFinalLost": 0.0017984034314770803
+        },
+        {
+          "HorizonYears": 7,
+          "ShareOfGainLost": 0.005493848368892346,
+          "ShareOfFinalLost": 0.0020978227380634706
+        },
+        {
+          "HorizonYears": 8,
+          "ShareOfGainLost": 0.0056294488341699376,
+          "ShareOfFinalLost": 0.002397152231207955
+        },
+        {
+          "HorizonYears": 9,
+          "ShareOfGainLost": 0.005771994398523685,
+          "ShareOfFinalLost": 0.0026963919378508727
+        },
+        {
+          "HorizonYears": 10,
+          "ShareOfGainLost": 0.00607872275322643,
+          "ShareOfFinalLost": 0.0029955418849243465
+        },
+        {
+          "HorizonYears": 11,
+          "ShareOfGainLost": 0.006141084762821472,
+          "ShareOfFinalLost": 0.003294602099352617
+        },
+        {
+          "HorizonYears": 12,
+          "ShareOfGainLost": 0.006317262212891943,
+          "ShareOfFinalLost": 0.0035935726080517094
+        },
+        {
+          "HorizonYears": 13,
+          "ShareOfGainLost": 0.006632979942119022,
+          "ShareOfFinalLost": 0.003892453437929766
+        },
+        {
+          "HorizonYears": 14,
+          "ShareOfGainLost": 0.006791097331627638,
+          "ShareOfFinalLost": 0.004191244615886824
+        },
+        {
+          "HorizonYears": 15,
+          "ShareOfGainLost": 0.007086997807264178,
+          "ShareOfFinalLost": 0.004489946168814263
+        },
+        {
+          "HorizonYears": 16,
+          "ShareOfGainLost": 0.0073011026464351045,
+          "ShareOfFinalLost": 0.004788558123596465
+        },
+        {
+          "HorizonYears": 17,
+          "ShareOfGainLost": 0.0075703017422349625,
+          "ShareOfFinalLost": 0.00508708050710871
+        },
+        {
+          "HorizonYears": 18,
+          "ShareOfGainLost": 0.00780195629932207,
+          "ShareOfFinalLost": 0.005385513346219284
+        },
+        {
+          "HorizonYears": 19,
+          "ShareOfGainLost": 0.008024494288000374,
+          "ShareOfFinalLost": 0.005683856667787368
+        },
+        {
+          "HorizonYears": 20,
+          "ShareOfGainLost": 0.008160303050417232,
+          "ShareOfFinalLost": 0.0059821104986643725
+        },
+        {
+          "HorizonYears": 21,
+          "ShareOfGainLost": 0.008481216330759909,
+          "ShareOfFinalLost": 0.006280274865694158
+        },
+        {
+          "HorizonYears": 22,
+          "ShareOfGainLost": 0.00875892302336421,
+          "ShareOfFinalLost": 0.006578349795712035
+        },
+        {
+          "HorizonYears": 23,
+          "ShareOfGainLost": 0.009027423081237008,
+          "ShareOfFinalLost": 0.006876335315545767
+        },
+        {
+          "HorizonYears": 24,
+          "ShareOfGainLost": 0.009214004760476313,
+          "ShareOfFinalLost": 0.007174231452014346
+        },
+        {
+          "HorizonYears": 25,
+          "ShareOfGainLost": 0.009359322763567234,
+          "ShareOfFinalLost": 0.007472038231928879
+        },
+        {
+          "HorizonYears": 26,
+          "ShareOfGainLost": 0.009507978209640585,
+          "ShareOfFinalLost": 0.007769755682093149
+        },
+        {
+          "HorizonYears": 27,
+          "ShareOfGainLost": 0.009691026394792236,
+          "ShareOfFinalLost": 0.008067383829302277
+        },
+        {
+          "HorizonYears": 28,
+          "ShareOfGainLost": 0.009896137156047154,
+          "ShareOfFinalLost": 0.00836492270034328
+        },
+        {
+          "HorizonYears": 29,
+          "ShareOfGainLost": 0.010124382558877777,
+          "ShareOfFinalLost": 0.008662372321995182
+        },
+        {
+          "HorizonYears": 30,
+          "ShareOfGainLost": 0.010419883947263437,
+          "ShareOfFinalLost": 0.008959732721029678
+        },
+        {
+          "HorizonYears": 31,
+          "ShareOfGainLost": 0.010626011617601723,
+          "ShareOfFinalLost": 0.009257003924209695
+        },
+        {
+          "HorizonYears": 32,
+          "ShareOfGainLost": 0.01090792329040233,
+          "ShareOfFinalLost": 0.00955418595828983
+        },
+        {
+          "HorizonYears": 33,
+          "ShareOfGainLost": 0.011193844585799835,
+          "ShareOfFinalLost": 0.009851278850017686
+        },
+        {
+          "HorizonYears": 34,
+          "ShareOfGainLost": 0.011465179748239573,
+          "ShareOfFinalLost": 0.010148282626131766
+        },
+        {
+          "HorizonYears": 35,
+          "ShareOfGainLost": 0.011686988448413694,
+          "ShareOfFinalLost": 0.010445197313363574
+        },
+        {
+          "HorizonYears": 36,
+          "ShareOfGainLost": 0.011955997090992009,
+          "ShareOfFinalLost": 0.01074202293843618
+        },
+        {
+          "HorizonYears": 37,
+          "ShareOfGainLost": 0.012174719601805974,
+          "ShareOfFinalLost": 0.01103875952806399
+        },
+        {
+          "HorizonYears": 38,
+          "ShareOfGainLost": 0.012458595992474284,
+          "ShareOfFinalLost": 0.011335407108954532
+        },
+        {
+          "HorizonYears": 39,
+          "ShareOfGainLost": 0.012686532892396888,
+          "ShareOfFinalLost": 0.011631965707806446
+        },
+        {
+          "HorizonYears": 40,
+          "ShareOfGainLost": 0.012972611919899069,
+          "ShareOfFinalLost": 0.011928435351310496
+        }
+      ]
+    },
+    {
+      "fee": 0.0025,
+      "points": [
+        {
+          "HorizonYears": 1,
+          "ShareOfGainLost": 0.030763477814715202,
+          "ShareOfFinalLost": 0.002497137405028882
+        },
+        {
+          "HorizonYears": 2,
+          "ShareOfGainLost": 0.03673049257305726,
+          "ShareOfFinalLost": 0.004988039114838139
+        },
+        {
+          "HorizonYears": 3,
+          "ShareOfGainLost": 0.03782307706747013,
+          "ShareOfFinalLost": 0.007472720700815505
+        },
+        {
+          "HorizonYears": 4,
+          "ShareOfGainLost": 0.039538076079924024,
+          "ShareOfFinalLost": 0.009951197695465264
+        },
+        {
+          "HorizonYears": 5,
+          "ShareOfGainLost": 0.04143550942743536,
+          "ShareOfFinalLost": 0.012423485592503725
+        },
+        {
+          "HorizonYears": 6,
+          "ShareOfGainLost": 0.043586491905246987,
+          "ShareOfFinalLost": 0.014889599846958812
+        },
+        {
+          "HorizonYears": 7,
+          "ShareOfGainLost": 0.04543559735381232,
+          "ShareOfFinalLost": 0.017349555875263878
+        },
+        {
+          "HorizonYears": 8,
+          "ShareOfGainLost": 0.04650603803544545,
+          "ShareOfFinalLost": 0.01980336905535618
+        },
+        {
+          "HorizonYears": 9,
+          "ShareOfGainLost": 0.047631414944272414,
+          "ShareOfFinalLost": 0.022251054726771247
+        },
+        {
+          "HorizonYears": 10,
+          "ShareOfGainLost": 0.05010767553457394,
+          "ShareOfFinalLost": 0.024692628190740584
+        },
+        {
+          "HorizonYears": 11,
+          "ShareOfGainLost": 0.0505663462405063,
+          "ShareOfFinalLost": 0.027128104710285816
+        },
+        {
+          "HorizonYears": 12,
+          "ShareOfGainLost": 0.051960123011210405,
+          "ShareOfFinalLost": 0.029557499510314944
+        },
+        {
+          "HorizonYears": 13,
+          "ShareOfGainLost": 0.05449729651609774,
+          "ShareOfFinalLost": 0.0319808277777176
+        },
+        {
+          "HorizonYears": 14,
+          "ShareOfGainLost": 0.05573544333204125,
+          "ShareOfFinalLost": 0.03439810466145887
+        },
+        {
+          "HorizonYears": 15,
+          "ShareOfGainLost": 0.058100418006385914,
+          "ShareOfFinalLost": 0.03680934527267543
+        },
+        {
+          "HorizonYears": 16,
+          "ShareOfGainLost": 0.059790349121571607,
+          "ShareOfFinalLost": 0.03921456468476925
+        },
+        {
+          "HorizonYears": 17,
+          "ShareOfGainLost": 0.061927240025147,
+          "ShareOfFinalLost": 0.04161377793350196
+        },
+        {
+          "HorizonYears": 18,
+          "ShareOfGainLost": 0.06375263952110038,
+          "ShareOfFinalLost": 0.04400700001708857
+        },
+        {
+          "HorizonYears": 19,
+          "ShareOfGainLost": 0.06549960404540026,
+          "ShareOfFinalLost": 0.04639424589629182
+        },
+        {
+          "HorizonYears": 20,
+          "ShareOfGainLost": 0.06653556639734023,
+          "ShareOfFinalLost": 0.048775530494514774
+        },
+        {
+          "HorizonYears": 21,
+          "ShareOfGainLost": 0.06907684650920123,
+          "ShareOfFinalLost": 0.051150868697895646
+        },
+        {
+          "HorizonYears": 22,
+          "ShareOfGainLost": 0.07126102846230012,
+          "ShareOfFinalLost": 0.05352027535539927
+        },
+        {
+          "HorizonYears": 23,
+          "ShareOfGainLost": 0.07336558928485437,
+          "ShareOfFinalLost": 0.055883765278910924
+        },
+        {
+          "HorizonYears": 24,
+          "ShareOfGainLost": 0.07480050088012323,
+          "ShareOfFinalLost": 0.0582413532433278
+        },
+        {
+          "HorizonYears": 25,
+          "ShareOfGainLost": 0.0758976241673943,
+          "ShareOfFinalLost": 0.06059305398665338
+        },
+        {
+          "HorizonYears": 26,
+          "ShareOfGainLost": 0.07701934849403516,
+          "ShareOfFinalLost": 0.06293888221008714
+        },
+        {
+          "HorizonYears": 27,
+          "ShareOfGainLost": 0.07841688169819146,
+          "ShareOfFinalLost": 0.0652788525781185
+        },
+        {
+          "HorizonYears": 28,
+          "ShareOfGainLost": 0.07998965977259004,
+          "ShareOfFinalLost": 0.06761297971861713
+        },
+        {
+          "HorizonYears": 29,
+          "ShareOfGainLost": 0.08174576560139166,
+          "ShareOfFinalLost": 0.06994127822292528
+        },
+        {
+          "HorizonYears": 30,
+          "ShareOfGainLost": 0.08404045564841713,
+          "ShareOfFinalLost": 0.07226376264594792
+        },
+        {
+          "HorizonYears": 31,
+          "ShareOfGainLost": 0.0856100643508112,
+          "ShareOfFinalLost": 0.0745804475062457
+        },
+        {
+          "HorizonYears": 32,
+          "ShareOfGainLost": 0.08778612029892348,
+          "ShareOfFinalLost": 0.07689134728612279
+        },
+        {
+          "HorizonYears": 33,
+          "ShareOfGainLost": 0.08998964118430682,
+          "ShareOfFinalLost": 0.07919647643172045
+        },
+        {
+          "HorizonYears": 34,
+          "ShareOfGainLost": 0.09207120022089478,
+          "ShareOfFinalLost": 0.08149584935310505
+        },
+        {
+          "HorizonYears": 35,
+          "ShareOfGainLost": 0.0937509039264615,
+          "ShareOfFinalLost": 0.08378948042435974
+        },
+        {
+          "HorizonYears": 36,
+          "ShareOfGainLost": 0.0958051345083814,
+          "ShareOfFinalLost": 0.08607738398367315
+        },
+        {
+          "HorizonYears": 37,
+          "ShareOfGainLost": 0.09745234860035959,
+          "ShareOfFinalLost": 0.08835957433342934
+        },
+        {
+          "HorizonYears": 38,
+          "ShareOfGainLost": 0.09961690079165147,
+          "ShareOfFinalLost": 0.0906360657402977
+        },
+        {
+          "HorizonYears": 39,
+          "ShareOfGainLost": 0.10132991470989394,
+          "ShareOfFinalLost": 0.09290687243532192
+        },
+        {
+          "HorizonYears": 40,
+          "ShareOfGainLost": 0.10350305777959207,
+          "ShareOfFinalLost": 0.0951720086140081
+        }
+      ]
+    },
+    {
+      "fee": 0.005,
+      "points": [
+        {
+          "HorizonYears": 1,
+          "ShareOfGainLost": 0.06145652205735501,
+          "ShareOfFinalLost": 0.004988557566108276
+        },
+        {
+          "HorizonYears": 2,
+          "ShareOfGainLost": 0.07328536937809886,
+          "ShareOfFinalLost": 0.009952229425626014
+        },
+        {
+          "HorizonYears": 3,
+          "ShareOfGainLost": 0.07537130690282685,
+          "ShareOfFinalLost": 0.014891139722333246
+        },
+        {
+          "HorizonYears": 4,
+          "ShareOfGainLost": 0.07869081789466043,
+          "ShareOfFinalLost": 0.01980541198071173
+        },
+        {
+          "HorizonYears": 5,
+          "ShareOfGainLost": 0.08236472001439767,
+          "ShareOfFinalLost": 0.024695169109033577
+        },
+        {
+          "HorizonYears": 6,
+          "ShareOfGainLost": 0.08653287953357928,
+          "ShareOfFinalLost": 0.029560533402436695
+        },
+        {
+          "HorizonYears": 7,
+          "ShareOfGainLost": 0.09009213050162251,
+          "ShareOfFinalLost": 0.034401626545982
+        },
+        {
+          "HorizonYears": 8,
+          "ShareOfGainLost": 0.09210050498165699,
+          "ShareOfFinalLost": 0.039218569617697874
+        },
+        {
+          "HorizonYears": 9,
+          "ShareOfGainLost": 0.09421257729985337,
+          "ShareOfFinalLost": 0.04401148309160785
+        },
+        {
+          "HorizonYears": 10,
+          "ShareOfGainLost": 0.09898811856532606,
+          "ShareOfFinalLost": 0.04878048684074365
+        },
+        {
+          "HorizonYears": 11,
+          "ShareOfGainLost": 0.09977103505597301,
+          "ShareOfFinalLost": 0.053525700140143795
+        },
+        {
+          "HorizonYears": 12,
+          "ShareOfGainLost": 0.10239478617506927,
+          "ShareOfFinalLost": 0.05824724166983675
+        },
+        {
+          "HorizonYears": 13,
+          "ShareOfGainLost": 0.10726254058051242,
+          "ShareOfFinalLost": 0.06294522951780801
+        },
+        {
+          "HorizonYears": 14,
+          "ShareOfGainLost": 0.1095647135020889,
+          "ShareOfFinalLost": 0.06761978118295486
+        },
+        {
+          "HorizonYears": 15,
+          "ShareOfGainLost": 0.11407364264491314,
+          "ShareOfFinalLost": 0.07227101357802423
+        },
+        {
+          "HorizonYears": 16,
+          "ShareOfGainLost": 0.11724777941538485,
+          "ShareOfFinalLost": 0.07689904303253736
+        },
+        {
+          "HorizonYears": 17,
+          "ShareOfGainLost": 0.12128956107946605,
+          "ShareOfFinalLost": 0.08150398529569924
+        },
+        {
+          "HorizonYears": 18,
+          "ShareOfGainLost": 0.12471213418762572,
+          "ShareOfFinalLost": 0.08608595553929266
+        },
+        {
+          "HorizonYears": 19,
+          "ShareOfGainLost": 0.12797311329419517,
+          "ShareOfFinalLost": 0.09064506836055974
+        },
+        {
+          "HorizonYears": 20,
+          "ShareOfGainLost": 0.12983868774640706,
+          "ShareOfFinalLost": 0.09518143778506738
+        },
+        {
+          "HorizonYears": 21,
+          "ShareOfGainLost": 0.13463365595275412,
+          "ShareOfFinalLost": 0.09969517726955968
+        },
+        {
+          "HorizonYears": 22,
+          "ShareOfGainLost": 0.13872181982335433,
+          "ShareOfFinalLost": 0.10418639970479537
+        },
+        {
+          "HorizonYears": 23,
+          "ShareOfGainLost": 0.14264525690041505,
+          "ShareOfFinalLost": 0.1086552174183707
+        },
+        {
+          "HorizonYears": 24,
+          "ShareOfGainLost": 0.1452587636476828,
+          "ShareOfFinalLost": 0.11310174217752944
+        },
+        {
+          "HorizonYears": 25,
+          "ShareOfGainLost": 0.14721077841247532,
+          "ShareOfFinalLost": 0.11752608519195784
+        },
+        {
+          "HorizonYears": 26,
+          "ShareOfGainLost": 0.1492057421153399,
+          "ShareOfFinalLost": 0.12192835711656669
+        },
+        {
+          "HorizonYears": 27,
+          "ShareOfGainLost": 0.1517295646153399,
+          "ShareOfFinalLost": 0.1263086680542579
+        },
+        {
+          "HorizonYears": 28,
+          "ShareOfGainLost": 0.15458598512265245,
+          "ShareOfFinalLost": 0.13066712755867893
+        },
+        {
+          "HorizonYears": 29,
+          "ShareOfGainLost": 0.15778940447448786,
+          "ShareOfFinalLost": 0.1350038446369627
+        },
+        {
+          "HorizonYears": 30,
+          "ShareOfGainLost": 0.1620234781591687,
+          "ShareOfFinalLost": 0.13931892775245347
+        },
+        {
+          "HorizonYears": 31,
+          "ShareOfGainLost": 0.16485117049781348,
+          "ShareOfFinalLost": 0.14361248482742017
+        },
+        {
+          "HorizonYears": 32,
+          "ShareOfGainLost": 0.16883846862904184,
+          "ShareOfFinalLost": 0.1478846232457548
+        },
+        {
+          "HorizonYears": 33,
+          "ShareOfGainLost": 0.17286898560098565,
+          "ShareOfFinalLost": 0.1521354498556593
+        },
+        {
+          "HorizonYears": 34,
+          "ShareOfGainLost": 0.1766558649467965,
+          "ShareOfFinalLost": 0.15636507097231678
+        },
+        {
+          "HorizonYears": 35,
+          "ShareOfGainLost": 0.1796635968638764,
+          "ShareOfFinalLost": 0.16057359238055113
+        },
+        {
+          "HorizonYears": 36,
+          "ShareOfGainLost": 0.18338105166941446,
+          "ShareOfFinalLost": 0.16476111933747217
+        },
+        {
+          "HorizonYears": 37,
+          "ShareOfGainLost": 0.1863115202424186,
+          "ShareOfFinalLost": 0.16892775657510894
+        },
+        {
+          "HorizonYears": 38,
+          "ShareOfGainLost": 0.1902229132206299,
+          "ShareOfFinalLost": 0.17307360830302876
+        },
+        {
+          "HorizonYears": 39,
+          "ShareOfGainLost": 0.1932638201260325,
+          "ShareOfFinalLost": 0.1771987782109432
+        },
+        {
+          "HorizonYears": 40,
+          "ShareOfGainLost": 0.19717407880010712,
+          "ShareOfFinalLost": 0.1813033694713021
+        }
+      ]
+    },
+    {
+      "fee": 0.01,
+      "points": [
+        {
+          "HorizonYears": 1,
+          "ShareOfGainLost": 0.12263189607021055,
+          "ShareOfFinalLost": 0.00995429374308443
+        },
+        {
+          "HorizonYears": 2,
+          "ShareOfGainLost": 0.1458714854326923,
+          "ShareOfFinalLost": 0.0198094995222452
+        },
+        {
+          "HorizonYears": 3,
+          "ShareOfGainLost": 0.14965097381458256,
+          "ShareOfFinalLost": 0.029566603688181536
+        },
+        {
+          "HorizonYears": 4,
+          "ShareOfGainLost": 0.1558549695729334,
+          "ShareOfFinalLost": 0.039226582773168706
+        },
+        {
+          "HorizonYears": 5,
+          "ShareOfGainLost": 0.1627285042364929,
+          "ShareOfFinalLost": 0.0487904035887915
+        },
+        {
+          "HorizonYears": 6,
+          "ShareOfGainLost": 0.17054228955531786,
+          "ShareOfFinalLost": 0.05825902332270938
+        },
+        {
+          "HorizonYears": 7,
+          "ShareOfGainLost": 0.17712058344305281,
+          "ShareOfFinalLost": 0.06763338963445442
+        },
+        {
+          "HorizonYears": 8,
+          "ShareOfGainLost": 0.18062511974647752,
+          "ShareOfFinalLost": 0.07691444075027709
+        },
+        {
+          "HorizonYears": 9,
+          "ShareOfGainLost": 0.1843154312970117,
+          "ShareOfFinalLost": 0.08610310555704814
+        },
+        {
+          "HorizonYears": 10,
+          "ShareOfGainLost": 0.19318583228585096,
+          "ShareOfFinalLost": 0.09520030369522592
+        },
+        {
+          "HorizonYears": 11,
+          "ShareOfGainLost": 0.19424005291644889,
+          "ShareOfFinalLost": 0.10420694565089694
+        },
+        {
+          "HorizonYears": 12,
+          "ShareOfGainLost": 0.19886436821848513,
+          "ShareOfFinalLost": 0.11312393284690281
+        },
+        {
+          "HorizonYears": 13,
+          "ShareOfGainLost": 0.20781397363913406,
+          "ShareOfFinalLost": 0.12195215773305634
+        },
+        {
+          "HorizonYears": 14,
+          "ShareOfGainLost": 0.2117618024412542,
+          "ShareOfFinalLost": 0.13069250387546283
+        },
+        {
+          "HorizonYears": 15,
+          "ShareOfGainLost": 0.2199455557465485,
+          "ShareOfFinalLost": 0.1393458460449517
+        },
+        {
+          "HorizonYears": 16,
+          "ShareOfGainLost": 0.2255226594619074,
+          "ShareOfFinalLost": 0.14791305030462576
+        },
+        {
+          "HorizonYears": 17,
+          "ShareOfGainLost": 0.2327380396723382,
+          "ShareOfFinalLost": 0.15639497409654257
+        },
+        {
+          "HorizonYears": 18,
+          "ShareOfGainLost": 0.23873371730616352,
+          "ShareOfFinalLost": 0.16479246632752786
+        },
+        {
+          "HorizonYears": 19,
+          "ShareOfGainLost": 0.24439234450171424,
+          "ShareOfFinalLost": 0.17310636745414076
+        },
+        {
+          "HorizonYears": 20,
+          "ShareOfGainLost": 0.24736571362286303,
+          "ShareOfFinalLost": 0.1813375095667883
+        },
+        {
+          "HorizonYears": 21,
+          "ShareOfGainLost": 0.25589291369897726,
+          "ShareOfFinalLost": 0.18948671647300552
+        },
+        {
+          "HorizonYears": 22,
+          "ShareOfGainLost": 0.2630397246938625,
+          "ShareOfFinalLost": 0.19755480377990497
+        },
+        {
+          "HorizonYears": 23,
+          "ShareOfGainLost": 0.26984138156094334,
+          "ShareOfFinalLost": 0.20554257897580697
+        },
+        {
+          "HorizonYears": 24,
+          "ShareOfGainLost": 0.27413906046456477,
+          "ShareOfFinalLost": 0.2134508415110551
+        },
+        {
+          "HorizonYears": 25,
+          "ShareOfGainLost": 0.2771712965481677,
+          "ShareOfFinalLost": 0.22128038287802998
+        },
+        {
+          "HorizonYears": 26,
+          "ShareOfGainLost": 0.2802702205658056,
+          "ShareOfFinalLost": 0.22903198669036418
+        },
+        {
+          "HorizonYears": 27,
+          "ShareOfGainLost": 0.2843459909037018,
+          "ShareOfFinalLost": 0.2367064287613705
+        },
+        {
+          "HorizonYears": 28,
+          "ShareOfGainLost": 0.28902486019711504,
+          "ShareOfFinalLost": 0.2443044771816878
+        },
+        {
+          "HorizonYears": 29,
+          "ShareOfGainLost": 0.2943295095684337,
+          "ShareOfFinalLost": 0.25182689239615497
+        },
+        {
+          "HorizonYears": 30,
+          "ShareOfGainLost": 0.3015279056716633,
+          "ShareOfFinalLost": 0.2592744272799199
+        },
+        {
+          "HorizonYears": 31,
+          "ShareOfGainLost": 0.3060820685591203,
+          "ShareOfFinalLost": 0.2666478272137902
+        },
+        {
+          "HorizonYears": 32,
+          "ShareOfGainLost": 0.3127636336565099,
+          "ShareOfFinalLost": 0.27394783015883317
+        },
+        {
+          "HorizonYears": 33,
+          "ShareOfGainLost": 0.3194946732990896,
+          "ShareOfFinalLost": 0.281175166730236
+        },
+        {
+          "HorizonYears": 34,
+          "ShareOfGainLost": 0.3257459239358154,
+          "ShareOfFinalLost": 0.2883305602704268
+        },
+        {
+          "HorizonYears": 35,
+          "ShareOfGainLost": 0.3305354985113972,
+          "ShareOfFinalLost": 0.2954147269214712
+        },
+        {
+          "HorizonYears": 36,
+          "ShareOfGainLost": 0.3366063171514809,
+          "ShareOfFinalLost": 0.3024283756967464
+        },
+        {
+          "HorizonYears": 37,
+          "ShareOfGainLost": 0.3412086187886566,
+          "ShareOfFinalLost": 0.3093722085519015
+        },
+        {
+          "HorizonYears": 38,
+          "ShareOfGainLost": 0.3475828065056395,
+          "ShareOfFinalLost": 0.3162469204551135
+        },
+        {
+          "HorizonYears": 39,
+          "ShareOfGainLost": 0.35234156838600594,
+          "ShareOfFinalLost": 0.323053199456642
+        },
+        {
+          "HorizonYears": 40,
+          "ShareOfGainLost": 0.3586606256076078,
+          "ShareOfFinalLost": 0.32979172675769164
+        }
+      ]
+    },
+    {
+      "fee": 0.02,
+      "points": [
+        {
+          "HorizonYears": 1,
+          "ShareOfGainLost": 0.24414387454972528,
+          "ShareOfFinalLost": 0.01981768137590645
+        },
+        {
+          "HorizonYears": 2,
+          "ShareOfGainLost": 0.28897143991094143,
+          "ShareOfFinalLost": 0.03924262225669628
+        },
+        {
+          "HorizonYears": 3,
+          "ShareOfGainLost": 0.2949966392367762,
+          "ShareOfFinalLost": 0.05828260584836453
+        },
+        {
+          "HorizonYears": 4,
+          "ShareOfGainLost": 0.3057187366717428,
+          "ShareOfFinalLost": 0.07694526111181088
+        },
+        {
+          "HorizonYears": 5,
+          "ShareOfGainLost": 0.31764336544171,
+          "ShareOfFinalLost": 0.09523806581961747
+        },
+        {
+          "HorizonYears": 6,
+          "ShareOfGainLost": 0.3312789734035014,
+          "ShareOfFinalLost": 0.1131683495522533
+        },
+        {
+          "HorizonYears": 7,
+          "ShareOfGainLost": 0.3423949192314905,
+          "ShareOfFinalLost": 0.13074329663489626
+        },
+        {
+          "HorizonYears": 8,
+          "ShareOfGainLost": 0.3474911797991481,
+          "ShareOfFinalLost": 0.14796994901605687
+        },
+        {
+          "HorizonYears": 9,
+          "ShareOfGainLost": 0.35289504098890434,
+          "ShareOfFinalLost": 0.16485520908915396
+        },
+        {
+          "HorizonYears": 10,
+          "ShareOfGainLost": 0.36811897963047807,
+          "ShareOfFinalLost": 0.18140584245817337
+        },
+        {
+          "HorizonYears": 11,
+          "ShareOfGainLost": 0.36837627568095505,
+          "ShareOfFinalLost": 0.1976284806485158
+        },
+        {
+          "HorizonYears": 12,
+          "ShareOfGainLost": 0.37537091097470865,
+          "ShareOfFinalLost": 0.21352962376412554
+        },
+        {
+          "HorizonYears": 13,
+          "ShareOfGainLost": 0.39042714043688675,
+          "ShareOfFinalLost": 0.22911564309195764
+        },
+        {
+          "HorizonYears": 14,
+          "ShareOfGainLost": 0.39599100817364624,
+          "ShareOfFinalLost": 0.24439278365483186
+        },
+        {
+          "HorizonYears": 15,
+          "ShareOfGainLost": 0.4093889932452589,
+          "ShareOfFinalLost": 0.2593671667136962
+        },
+        {
+          "HorizonYears": 16,
+          "ShareOfGainLost": 0.41783541226365234,
+          "ShareOfFinalLost": 0.2740447922202991
+        },
+        {
+          "HorizonYears": 17,
+          "ShareOfGainLost": 0.4292272937240802,
+          "ShareOfFinalLost": 0.28843154122125714
+        },
+        {
+          "HorizonYears": 18,
+          "ShareOfGainLost": 0.43827774323155344,
+          "ShareOfFinalLost": 0.3025331782144792
+        },
+        {
+          "HorizonYears": 19,
+          "ShareOfGainLost": 0.44663190421328103,
+          "ShareOfFinalLost": 0.316355353458891
+        },
+        {
+          "HorizonYears": 20,
+          "ShareOfGainLost": 0.450027360205321,
+          "ShareOfFinalLost": 0.329903605238387
+        },
+        {
+          "HorizonYears": 21,
+          "ShareOfGainLost": 0.4634530171322457,
+          "ShareOfFinalLost": 0.3431833620809164
+        },
+        {
+          "HorizonYears": 22,
+          "ShareOfGainLost": 0.47427211922260143,
+          "ShareOfFinalLost": 0.356199944933591
+        },
+        {
+          "HorizonYears": 23,
+          "ShareOfGainLost": 0.4843779355758025,
+          "ShareOfFinalLost": 0.3689585692946882
+        },
+        {
+          "HorizonYears": 24,
+          "ShareOfGainLost": 0.4899220683796978,
+          "ShareOfFinalLost": 0.3814643473034023
+        },
+        {
+          "HorizonYears": 25,
+          "ShareOfGainLost": 0.4931685137252116,
+          "ShareOfFinalLost": 0.3937222897881819
+        },
+        {
+          "HorizonYears": 26,
+          "ShareOfGainLost": 0.49650743778247686,
+          "ShareOfFinalLost": 0.40573730827447396
+        },
+        {
+          "HorizonYears": 27,
+          "ShareOfGainLost": 0.5015431746278243,
+          "ShareOfFinalLost": 0.4175142169526791
+        },
+        {
+          "HorizonYears": 28,
+          "ShareOfGainLost": 0.5075975405439889,
+          "ShareOfFinalLost": 0.4290577346071063
+        },
+        {
+          "HorizonYears": 29,
+          "ShareOfGainLost": 0.5146972856935751,
+          "ShareOfFinalLost": 0.440372486506701
+        },
+        {
+          "HorizonYears": 30,
+          "ShareOfGainLost": 0.5250371052534639,
+          "ShareOfFinalLost": 0.45146300625830205
+        },
+        {
+          "HorizonYears": 31,
+          "ShareOfGainLost": 0.5307077438246297,
+          "ShareOfFinalLost": 0.46233373762317276
+        },
+        {
+          "HorizonYears": 32,
+          "ShareOfGainLost": 0.5400070867009085,
+          "ShareOfFinalLost": 0.4729890362975313
+        },
+        {
+          "HorizonYears": 33,
+          "ShareOfGainLost": 0.549317085989092,
+          "ShareOfFinalLost": 0.4834331716577962
+        },
+        {
+          "HorizonYears": 34,
+          "ShareOfGainLost": 0.5577317129226173,
+          "ShareOfFinalLost": 0.4936703284712446
+        },
+        {
+          "HorizonYears": 35,
+          "ShareOfGainLost": 0.563588198977454,
+          "ShareOfFinalLost": 0.503704608572769
+        },
+        {
+          "HorizonYears": 36,
+          "ShareOfGainLost": 0.5715760588081801,
+          "ShareOfFinalLost": 0.5135400325084047
+        },
+        {
+          "HorizonYears": 37,
+          "ShareOfGainLost": 0.577019217909738,
+          "ShareOfFinalLost": 0.5231805411462871
+        },
+        {
+          "HorizonYears": 38,
+          "ShareOfGainLost": 0.5854065835923229,
+          "ShareOfFinalLost": 0.5326299972556822
+        },
+        {
+          "HorizonYears": 39,
+          "ShareOfGainLost": 0.5910207464408982,
+          "ShareOfFinalLost": 0.5418921870547257
+        },
+        {
+          "HorizonYears": 40,
+          "ShareOfGainLost": 0.5992010216724151,
+          "ShareOfFinalLost": 0.5509708217274885
+        }
+      ]
+    }
+  ],
+  "panicGrid": [
+    {
+      "DropThreshold": 0.2,
+      "Reentry": "after 6 months in cash",
+      "MaxPanics": 1,
+      "HorizonYears": 30,
+      "Starts": 1506,
+      "MeanPanicsUsed": 1,
+      "MedianWealth": 7.03433848367329,
+      "MedianCost": 0.08977627135919719,
+      "P25Cost": -0.09901389686675865,
+      "P75Cost": 0.12181299990861372,
+      "WorstCost": 0.3538529657396171,
+      "WorstStart": "1932-04"
+    },
+    {
+      "DropThreshold": 0.2,
+      "Reentry": "after 12 months in cash",
+      "MaxPanics": 1,
+      "HorizonYears": 30,
+      "Starts": 1506,
+      "MeanPanicsUsed": 1,
+      "MedianWealth": 6.64034118345921,
+      "MedianCost": 0.08990482021894941,
+      "P25Cost": -0.028811321195605366,
+      "P75Cost": 0.22274578486214647,
+      "WorstCost": 0.6020808704860355,
+      "WorstStart": "1932-04"
+    },
+    {
+      "DropThreshold": 0.2,
+      "Reentry": "after 24 months in cash",
+      "MaxPanics": 1,
+      "HorizonYears": 30,
+      "Starts": 1506,
+      "MeanPanicsUsed": 1,
+      "MedianWealth": 5.753630806667171,
+      "MedianCost": 0.23208462544134123,
+      "P25Cost": -0.03680613196854998,
+      "P75Cost": 0.306342853031794,
+      "WorstCost": 0.5796131805650303,
+      "WorstStart": "1932-04"
+    },
+    {
+      "DropThreshold": 0.2,
+      "Reentry": "after a 20% bounce off the low",
+      "MaxPanics": 1,
+      "HorizonYears": 30,
+      "Starts": 1506,
+      "MeanPanicsUsed": 1,
+      "MedianWealth": 6.383732632288913,
+      "MedianCost": 0.15929581853496144,
+      "P25Cost": 0.05719575510567809,
+      "P75Cost": 0.17221081608415245,
+      "WorstCost": 0.3818965835178314,
+      "WorstStart": "1932-04"
+    },
+    {
+      "DropThreshold": 0.3,
+      "Reentry": "after 6 months in cash",
+      "MaxPanics": 1,
+      "HorizonYears": 30,
+      "Starts": 1506,
+      "MeanPanicsUsed": 0.9462151394422311,
+      "MedianWealth": 6.602011827289067,
+      "MedianCost": 0.09839424833985122,
+      "P25Cost": 0,
+      "P75Cost": 0.17538781169631013,
+      "WorstCost": 0.281631777357056,
+      "WorstStart": "1931-12"
+    },
+    {
+      "DropThreshold": 0.3,
+      "Reentry": "after 12 months in cash",
+      "MaxPanics": 1,
+      "HorizonYears": 30,
+      "Starts": 1506,
+      "MeanPanicsUsed": 0.9462151394422311,
+      "MedianWealth": 6.526269682265324,
+      "MedianCost": 0.038671185700756894,
+      "P25Cost": -0.12127916814673578,
+      "P75Cost": 0.24594755288686443,
+      "WorstCost": 0.47378860006979606,
+      "WorstStart": "1932-01"
+    },
+    {
+      "DropThreshold": 0.3,
+      "Reentry": "after 24 months in cash",
+      "MaxPanics": 1,
+      "HorizonYears": 30,
+      "Starts": 1506,
+      "MeanPanicsUsed": 0.9462151394422311,
+      "MedianWealth": 6.052732256777345,
+      "MedianCost": 0.18303446845233262,
+      "P25Cost": -0.030034281140603136,
+      "P75Cost": 0.2876925795865356,
+      "WorstCost": 0.5189356786003217,
+      "WorstStart": "1932-01"
+    },
+    {
+      "DropThreshold": 0.3,
+      "Reentry": "after a 20% bounce off the low",
+      "MaxPanics": 1,
+      "HorizonYears": 30,
+      "Starts": 1506,
+      "MeanPanicsUsed": 0.9462151394422311,
+      "MedianWealth": 6.231155700933078,
+      "MedianCost": 0.17221081608415234,
+      "P25Cost": 0,
+      "P75Cost": 0.17538781169631013,
+      "WorstCost": 0.2992973394726707,
+      "WorstStart": "1932-01"
+    },
+    {
+      "DropThreshold": 0.4,
+      "Reentry": "after 6 months in cash",
+      "MaxPanics": 1,
+      "HorizonYears": 30,
+      "Starts": 1506,
+      "MeanPanicsUsed": 0.7928286852589641,
+      "MedianWealth": 7.290705222881614,
+      "MedianCost": -0.0085324031799896,
+      "P25Cost": -0.05055840969334735,
+      "P75Cost": 0.028208845426471174,
+      "WorstCost": 0.28163177735705613,
+      "WorstStart": "1931-10"
+    },
+    {
+      "DropThreshold": 0.4,
+      "Reentry": "after 12 months in cash",
+      "MaxPanics": 1,
+      "HorizonYears": 30,
+      "Starts": 1506,
+      "MeanPanicsUsed": 0.7928286852589641,
+      "MedianWealth": 7.1119368497087585,
+      "MedianCost": 0,
+      "P25Cost": -0.012841420134748871,
+      "P75Cost": 0.08015360533432414,
+      "WorstCost": 0.47378860006979606,
+      "WorstStart": "1931-10"
+    },
+    {
+      "DropThreshold": 0.4,
+      "Reentry": "after 24 months in cash",
+      "MaxPanics": 1,
+      "HorizonYears": 30,
+      "Starts": 1506,
+      "MeanPanicsUsed": 0.7928286852589641,
+      "MedianWealth": 6.349051513633186,
+      "MedianCost": 0.1694979753664374,
+      "P25Cost": 0,
+      "P75Cost": 0.2236928161475099,
+      "WorstCost": 0.5189356786003217,
+      "WorstStart": "1931-09"
+    },
+    {
+      "DropThreshold": 0.4,
+      "Reentry": "after a 20% bounce off the low",
+      "MaxPanics": 1,
+      "HorizonYears": 30,
+      "Starts": 1506,
+      "MeanPanicsUsed": 0.7928286852589641,
+      "MedianWealth": 7.018785337836146,
+      "MedianCost": 0.07074707458697149,
+      "P25Cost": 0,
+      "P75Cost": 0.09188951802492662,
+      "WorstCost": 0.2992973394726708,
+      "WorstStart": "1931-10"
+    }
+  ],
+  "breakEvens": [
+    {
+      "AnnualFee": 0.0003,
+      "DropThreshold": 0.2,
+      "Reentry": "after 6 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 7.072229496904695,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.03433848367329,
+        7.227311479846241,
+        7.286385425948809,
+        7.340719354056734,
+        7.480471448296142,
+        7.5196638058589285,
+        7.678155605229958,
+        7.6319136907882985
+      ],
+      "MeanPanicsAvailable": 5.51460823373174,
+      "PanicsToBreakEven": 0.6278962701991803,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.0003,
+      "DropThreshold": 0.2,
+      "Reentry": "after 12 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 7.072229496904695,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.64034118345921,
+        6.4232259715447935,
+        6.284382216233128,
+        6.448422417441289,
+        6.36232205468891,
+        6.149033088190837,
+        6.013264704986991,
+        5.8947995751985385
+      ],
+      "MeanPanicsAvailable": 4.820717131474104,
+      "PanicsToBreakEven": 0.128952685879318,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.0003,
+      "DropThreshold": 0.2,
+      "Reentry": "after 24 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 7.072229496904695,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        5.753630806667171,
+        4.525165371496264,
+        3.8083182625933674,
+        3.5783327932951594,
+        3.5562124385563525,
+        3.580678064025409,
+        3.580678064025409,
+        3.580678064025409
+      ],
+      "MeanPanicsAvailable": 4.385790172642762,
+      "PanicsToBreakEven": 0.04624698071576921,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.0003,
+      "DropThreshold": 0.2,
+      "Reentry": "after a 20% bounce off the low",
+      "HorizonYears": 30,
+      "FeeWealth": 7.072229496904695,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.383732632288913,
+        6.113050258492498,
+        6.313521004883727,
+        6.572022487261945,
+        6.457712681625219,
+        6.538758678677826,
+        6.572022487261945,
+        6.572022487261945
+      ],
+      "MeanPanicsAvailable": 4.4050464807436915,
+      "PanicsToBreakEven": 0.08497498542861046,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.0003,
+      "DropThreshold": 0.3,
+      "Reentry": "after 6 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 7.072229496904695,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.602011827289067,
+        7.221849758768164,
+        7.281162818849161,
+        7.23849053006641,
+        7.23849053006641,
+        7.278224578403002,
+        7.278224578403002,
+        7.278224578403002
+      ],
+      "MeanPanicsAvailable": 2.695219123505976,
+      "PanicsToBreakEven": 0.11969944328580556,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.0003,
+      "DropThreshold": 0.3,
+      "Reentry": "after 12 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 7.072229496904695,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.526269682265324,
+        6.651259840899117,
+        6.673765589186384,
+        6.258312077540003,
+        6.118224344458404,
+        6.118224344458404,
+        6.118224344458404,
+        6.118224344458404
+      ],
+      "MeanPanicsAvailable": 2.4694555112881806,
+      "PanicsToBreakEven": 0.10483418213274315,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.0003,
+      "DropThreshold": 0.3,
+      "Reentry": "after 24 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 7.072229496904695,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.052732256777345,
+        5.784365484724956,
+        4.80093543722304,
+        4.4255493893086815,
+        4.393917798257984,
+        4.393917798257984,
+        4.393917798257984,
+        4.393917798257984
+      ],
+      "MeanPanicsAvailable": 2.460823373173971,
+      "PanicsToBreakEven": 0.059014275433956105,
+      "MonotonicInPanicCount": true
+    },
+    {
+      "AnnualFee": 0.0003,
+      "DropThreshold": 0.3,
+      "Reentry": "after a 20% bounce off the low",
+      "HorizonYears": 30,
+      "FeeWealth": 7.072229496904695,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.231155700933078,
+        6.990850165741428,
+        7.010571910842437,
+        6.93046018735558,
+        6.793779684028351,
+        6.793779684028351,
+        6.793779684028351,
+        6.793779684028351
+      ],
+      "MeanPanicsAvailable": 2.4721115537848606,
+      "PanicsToBreakEven": 0.07064896187999282,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.0003,
+      "DropThreshold": 0.4,
+      "Reentry": "after 6 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 7.072229496904695,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.290705222881614,
+        7.065368400022677,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663
+      ],
+      "MeanPanicsAvailable": 1.4827357237715804,
+      "PanicsToBreakEven": 1.9695518167205466,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.0003,
+      "DropThreshold": 0.4,
+      "Reentry": "after 12 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 7.072229496904695,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.1119368497087585,
+        6.522225535193362,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914
+      ],
+      "MeanPanicsAvailable": 1.4820717131474104,
+      "PanicsToBreakEven": 1.0673335441031742,
+      "MonotonicInPanicCount": true
+    },
+    {
+      "AnnualFee": 0.0003,
+      "DropThreshold": 0.4,
+      "Reentry": "after 24 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 7.072229496904695,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.349051513633186,
+        5.956182682044343,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066
+      ],
+      "MeanPanicsAvailable": 1.2636122177954847,
+      "PanicsToBreakEven": 0.08123090318987704,
+      "MonotonicInPanicCount": true
+    },
+    {
+      "AnnualFee": 0.0003,
+      "DropThreshold": 0.4,
+      "Reentry": "after a 20% bounce off the low",
+      "HorizonYears": 30,
+      "FeeWealth": 7.072229496904695,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.018785337836146,
+        7.086368243776761,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063
+      ],
+      "MeanPanicsAvailable": 1.2636122177954847,
+      "PanicsToBreakEven": 0.5447000719119508,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.0025,
+      "DropThreshold": 0.2,
+      "Reentry": "after 6 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 6.620481326331198,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.03433848367329,
+        7.227311479846241,
+        7.286385425948809,
+        7.340719354056734,
+        7.480471448296142,
+        7.5196638058589285,
+        7.678155605229958,
+        7.6319136907882985
+      ],
+      "MeanPanicsAvailable": 5.51460823373174,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.0025,
+      "DropThreshold": 0.2,
+      "Reentry": "after 12 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 6.620481326331198,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.64034118345921,
+        6.4232259715447935,
+        6.284382216233128,
+        6.448422417441289,
+        6.36232205468891,
+        6.149033088190837,
+        6.013264704986991,
+        5.8947995751985385
+      ],
+      "MeanPanicsAvailable": 4.820717131474104,
+      "PanicsToBreakEven": 1.091471513916031,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.0025,
+      "DropThreshold": 0.2,
+      "Reentry": "after 24 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 6.620481326331198,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        5.753630806667171,
+        4.525165371496264,
+        3.8083182625933674,
+        3.5783327932951594,
+        3.5562124385563525,
+        3.580678064025409,
+        3.580678064025409,
+        3.580678064025409
+      ],
+      "MeanPanicsAvailable": 4.385790172642762,
+      "PanicsToBreakEven": 0.3730000594428446,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.0025,
+      "DropThreshold": 0.2,
+      "Reentry": "after a 20% bounce off the low",
+      "HorizonYears": 30,
+      "FeeWealth": 6.620481326331198,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.383732632288913,
+        6.113050258492498,
+        6.313521004883727,
+        6.572022487261945,
+        6.457712681625219,
+        6.538758678677826,
+        6.572022487261945,
+        6.572022487261945
+      ],
+      "MeanPanicsAvailable": 4.4050464807436915,
+      "PanicsToBreakEven": 0.6853566249184139,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.0025,
+      "DropThreshold": 0.3,
+      "Reentry": "after 6 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 6.620481326331198,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.602011827289067,
+        7.221849758768164,
+        7.281162818849161,
+        7.23849053006641,
+        7.23849053006641,
+        7.278224578403002,
+        7.278224578403002,
+        7.278224578403002
+      ],
+      "MeanPanicsAvailable": 2.695219123505976,
+      "PanicsToBreakEven": 0.9654230129158881,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.0025,
+      "DropThreshold": 0.3,
+      "Reentry": "after 12 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 6.620481326331198,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.526269682265324,
+        6.651259840899117,
+        6.673765589186384,
+        6.258312077540003,
+        6.118224344458404,
+        6.118224344458404,
+        6.118224344458404,
+        6.118224344458404
+      ],
+      "MeanPanicsAvailable": 2.4694555112881806,
+      "PanicsToBreakEven": 0.8455288445202623,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.0025,
+      "DropThreshold": 0.3,
+      "Reentry": "after 24 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 6.620481326331198,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.052732256777345,
+        5.784365484724956,
+        4.80093543722304,
+        4.4255493893086815,
+        4.393917798257984,
+        4.393917798257984,
+        4.393917798257984,
+        4.393917798257984
+      ],
+      "MeanPanicsAvailable": 2.460823373173971,
+      "PanicsToBreakEven": 0.4759733047250868,
+      "MonotonicInPanicCount": true
+    },
+    {
+      "AnnualFee": 0.0025,
+      "DropThreshold": 0.3,
+      "Reentry": "after a 20% bounce off the low",
+      "HorizonYears": 30,
+      "FeeWealth": 6.620481326331198,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.231155700933078,
+        6.990850165741428,
+        7.010571910842437,
+        6.93046018735558,
+        6.793779684028351,
+        6.793779684028351,
+        6.793779684028351,
+        6.793779684028351
+      ],
+      "MeanPanicsAvailable": 2.4721115537848606,
+      "PanicsToBreakEven": 0.5698116195470271,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.0025,
+      "DropThreshold": 0.4,
+      "Reentry": "after 6 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 6.620481326331198,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.290705222881614,
+        7.065368400022677,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663
+      ],
+      "MeanPanicsAvailable": 1.4827357237715804,
+      "PanicsToBreakEven": 2.9121161945352543,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.0025,
+      "DropThreshold": 0.4,
+      "Reentry": "after 12 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 6.620481326331198,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.1119368497087585,
+        6.522225535193362,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914
+      ],
+      "MeanPanicsAvailable": 1.4820717131474104,
+      "PanicsToBreakEven": 1.8333832356284714,
+      "MonotonicInPanicCount": true
+    },
+    {
+      "AnnualFee": 0.0025,
+      "DropThreshold": 0.4,
+      "Reentry": "after 24 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 6.620481326331198,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.349051513633186,
+        5.956182682044343,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066
+      ],
+      "MeanPanicsAvailable": 1.2636122177954847,
+      "PanicsToBreakEven": 0.655159131460635,
+      "MonotonicInPanicCount": true
+    },
+    {
+      "AnnualFee": 0.0025,
+      "DropThreshold": 0.4,
+      "Reentry": "after a 20% bounce off the low",
+      "HorizonYears": 30,
+      "FeeWealth": 6.620481326331198,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.018785337836146,
+        7.086368243776761,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063
+      ],
+      "MeanPanicsAvailable": 1.2636122177954847,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.005,
+      "DropThreshold": 0.2,
+      "Reentry": "after 6 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 6.141964426217642,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.03433848367329,
+        7.227311479846241,
+        7.286385425948809,
+        7.340719354056734,
+        7.480471448296142,
+        7.5196638058589285,
+        7.678155605229958,
+        7.6319136907882985
+      ],
+      "MeanPanicsAvailable": 5.51460823373174,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.005,
+      "DropThreshold": 0.2,
+      "Reentry": "after 12 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 6.141964426217642,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.64034118345921,
+        6.4232259715447935,
+        6.284382216233128,
+        6.448422417441289,
+        6.36232205468891,
+        6.149033088190837,
+        6.013264704986991,
+        5.8947995751985385
+      ],
+      "MeanPanicsAvailable": 4.820717131474104,
+      "PanicsToBreakEven": 6.052064124256247,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.005,
+      "DropThreshold": 0.2,
+      "Reentry": "after 24 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 6.141964426217642,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        5.753630806667171,
+        4.525165371496264,
+        3.8083182625933674,
+        3.5783327932951594,
+        3.5562124385563525,
+        3.580678064025409,
+        3.580678064025409,
+        3.580678064025409
+      ],
+      "MeanPanicsAvailable": 4.385790172642762,
+      "PanicsToBreakEven": 0.7191151751643868,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.005,
+      "DropThreshold": 0.2,
+      "Reentry": "after a 20% bounce off the low",
+      "HorizonYears": 30,
+      "FeeWealth": 6.141964426217642,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.383732632288913,
+        6.113050258492498,
+        6.313521004883727,
+        6.572022487261945,
+        6.457712681625219,
+        6.538758678677826,
+        6.572022487261945,
+        6.572022487261945
+      ],
+      "MeanPanicsAvailable": 4.4050464807436915,
+      "PanicsToBreakEven": 1.893180456046646,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.005,
+      "DropThreshold": 0.3,
+      "Reentry": "after 6 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 6.141964426217642,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.602011827289067,
+        7.221849758768164,
+        7.281162818849161,
+        7.23849053006641,
+        7.23849053006641,
+        7.278224578403002,
+        7.278224578403002,
+        7.278224578403002
+      ],
+      "MeanPanicsAvailable": 2.695219123505976,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.005,
+      "DropThreshold": 0.3,
+      "Reentry": "after 12 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 6.141964426217642,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.526269682265324,
+        6.651259840899117,
+        6.673765589186384,
+        6.258312077540003,
+        6.118224344458404,
+        6.118224344458404,
+        6.118224344458404,
+        6.118224344458404
+      ],
+      "MeanPanicsAvailable": 2.4694555112881806,
+      "PanicsToBreakEven": 4.8305341857062505,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.005,
+      "DropThreshold": 0.3,
+      "Reentry": "after 24 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 6.141964426217642,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.052732256777345,
+        5.784365484724956,
+        4.80093543722304,
+        4.4255493893086815,
+        4.393917798257984,
+        4.393917798257984,
+        4.393917798257984,
+        4.393917798257984
+      ],
+      "MeanPanicsAvailable": 2.460823373173971,
+      "PanicsToBreakEven": 0.9176396028253205,
+      "MonotonicInPanicCount": true
+    },
+    {
+      "AnnualFee": 0.005,
+      "DropThreshold": 0.3,
+      "Reentry": "after a 20% bounce off the low",
+      "HorizonYears": 30,
+      "FeeWealth": 6.141964426217642,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.231155700933078,
+        6.990850165741428,
+        7.010571910842437,
+        6.93046018735558,
+        6.793779684028351,
+        6.793779684028351,
+        6.793779684028351,
+        6.793779684028351
+      ],
+      "MeanPanicsAvailable": 2.4721115537848606,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.005,
+      "DropThreshold": 0.4,
+      "Reentry": "after 6 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 6.141964426217642,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.290705222881614,
+        7.065368400022677,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663
+      ],
+      "MeanPanicsAvailable": 1.4827357237715804,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.005,
+      "DropThreshold": 0.4,
+      "Reentry": "after 12 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 6.141964426217642,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.1119368497087585,
+        6.522225535193362,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914
+      ],
+      "MeanPanicsAvailable": 1.4820717131474104,
+      "PanicsToBreakEven": 2.7279260030518437,
+      "MonotonicInPanicCount": true
+    },
+    {
+      "AnnualFee": 0.005,
+      "DropThreshold": 0.4,
+      "Reentry": "after 24 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 6.141964426217642,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.349051513633186,
+        5.956182682044343,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066
+      ],
+      "MeanPanicsAvailable": 1.2636122177954847,
+      "PanicsToBreakEven": 1.5271150846404398,
+      "MonotonicInPanicCount": true
+    },
+    {
+      "AnnualFee": 0.005,
+      "DropThreshold": 0.4,
+      "Reentry": "after a 20% bounce off the low",
+      "HorizonYears": 30,
+      "FeeWealth": 6.141964426217642,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.018785337836146,
+        7.086368243776761,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063
+      ],
+      "MeanPanicsAvailable": 1.2636122177954847,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.01,
+      "DropThreshold": 0.2,
+      "Reentry": "after 6 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 5.285941870844239,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.03433848367329,
+        7.227311479846241,
+        7.286385425948809,
+        7.340719354056734,
+        7.480471448296142,
+        7.5196638058589285,
+        7.678155605229958,
+        7.6319136907882985
+      ],
+      "MeanPanicsAvailable": 5.51460823373174,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.01,
+      "DropThreshold": 0.2,
+      "Reentry": "after 12 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 5.285941870844239,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.64034118345921,
+        6.4232259715447935,
+        6.284382216233128,
+        6.448422417441289,
+        6.36232205468891,
+        6.149033088190837,
+        6.013264704986991,
+        5.8947995751985385
+      ],
+      "MeanPanicsAvailable": 4.820717131474104,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.01,
+      "DropThreshold": 0.2,
+      "Reentry": "after 24 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 5.285941870844239,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        5.753630806667171,
+        4.525165371496264,
+        3.8083182625933674,
+        3.5783327932951594,
+        3.5562124385563525,
+        3.580678064025409,
+        3.580678064025409,
+        3.580678064025409
+      ],
+      "MeanPanicsAvailable": 4.385790172642762,
+      "PanicsToBreakEven": 1.3807098860358789,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.01,
+      "DropThreshold": 0.2,
+      "Reentry": "after a 20% bounce off the low",
+      "HorizonYears": 30,
+      "FeeWealth": 5.285941870844239,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.383732632288913,
+        6.113050258492498,
+        6.313521004883727,
+        6.572022487261945,
+        6.457712681625219,
+        6.538758678677826,
+        6.572022487261945,
+        6.572022487261945
+      ],
+      "MeanPanicsAvailable": 4.4050464807436915,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.01,
+      "DropThreshold": 0.3,
+      "Reentry": "after 6 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 5.285941870844239,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.602011827289067,
+        7.221849758768164,
+        7.281162818849161,
+        7.23849053006641,
+        7.23849053006641,
+        7.278224578403002,
+        7.278224578403002,
+        7.278224578403002
+      ],
+      "MeanPanicsAvailable": 2.695219123505976,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.01,
+      "DropThreshold": 0.3,
+      "Reentry": "after 12 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 5.285941870844239,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.526269682265324,
+        6.651259840899117,
+        6.673765589186384,
+        6.258312077540003,
+        6.118224344458404,
+        6.118224344458404,
+        6.118224344458404,
+        6.118224344458404
+      ],
+      "MeanPanicsAvailable": 2.4694555112881806,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.01,
+      "DropThreshold": 0.3,
+      "Reentry": "after 24 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 5.285941870844239,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.052732256777345,
+        5.784365484724956,
+        4.80093543722304,
+        4.4255493893086815,
+        4.393917798257984,
+        4.393917798257984,
+        4.393917798257984,
+        4.393917798257984
+      ],
+      "MeanPanicsAvailable": 2.460823373173971,
+      "PanicsToBreakEven": 2.5068216241173435,
+      "MonotonicInPanicCount": true
+    },
+    {
+      "AnnualFee": 0.01,
+      "DropThreshold": 0.3,
+      "Reentry": "after a 20% bounce off the low",
+      "HorizonYears": 30,
+      "FeeWealth": 5.285941870844239,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.231155700933078,
+        6.990850165741428,
+        7.010571910842437,
+        6.93046018735558,
+        6.793779684028351,
+        6.793779684028351,
+        6.793779684028351,
+        6.793779684028351
+      ],
+      "MeanPanicsAvailable": 2.4721115537848606,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.01,
+      "DropThreshold": 0.4,
+      "Reentry": "after 6 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 5.285941870844239,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.290705222881614,
+        7.065368400022677,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663
+      ],
+      "MeanPanicsAvailable": 1.4827357237715804,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.01,
+      "DropThreshold": 0.4,
+      "Reentry": "after 12 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 5.285941870844239,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.1119368497087585,
+        6.522225535193362,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914
+      ],
+      "MeanPanicsAvailable": 1.4820717131474104,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": true
+    },
+    {
+      "AnnualFee": 0.01,
+      "DropThreshold": 0.4,
+      "Reentry": "after 24 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 5.285941870844239,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.349051513633186,
+        5.956182682044343,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066
+      ],
+      "MeanPanicsAvailable": 1.2636122177954847,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": true
+    },
+    {
+      "AnnualFee": 0.01,
+      "DropThreshold": 0.4,
+      "Reentry": "after a 20% bounce off the low",
+      "HorizonYears": 30,
+      "FeeWealth": 5.285941870844239,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.018785337836146,
+        7.086368243776761,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063
+      ],
+      "MeanPanicsAvailable": 1.2636122177954847,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.02,
+      "DropThreshold": 0.2,
+      "Reentry": "after 6 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 3.9144519505093394,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.03433848367329,
+        7.227311479846241,
+        7.286385425948809,
+        7.340719354056734,
+        7.480471448296142,
+        7.5196638058589285,
+        7.678155605229958,
+        7.6319136907882985
+      ],
+      "MeanPanicsAvailable": 5.51460823373174,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.02,
+      "DropThreshold": 0.2,
+      "Reentry": "after 12 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 3.9144519505093394,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.64034118345921,
+        6.4232259715447935,
+        6.284382216233128,
+        6.448422417441289,
+        6.36232205468891,
+        6.149033088190837,
+        6.013264704986991,
+        5.8947995751985385
+      ],
+      "MeanPanicsAvailable": 4.820717131474104,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.02,
+      "DropThreshold": 0.2,
+      "Reentry": "after 24 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 3.9144519505093394,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        5.753630806667171,
+        4.525165371496264,
+        3.8083182625933674,
+        3.5783327932951594,
+        3.5562124385563525,
+        3.580678064025409,
+        3.580678064025409,
+        3.580678064025409
+      ],
+      "MeanPanicsAvailable": 4.385790172642762,
+      "PanicsToBreakEven": 2.8519437595578716,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.02,
+      "DropThreshold": 0.2,
+      "Reentry": "after a 20% bounce off the low",
+      "HorizonYears": 30,
+      "FeeWealth": 3.9144519505093394,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.383732632288913,
+        6.113050258492498,
+        6.313521004883727,
+        6.572022487261945,
+        6.457712681625219,
+        6.538758678677826,
+        6.572022487261945,
+        6.572022487261945
+      ],
+      "MeanPanicsAvailable": 4.4050464807436915,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.02,
+      "DropThreshold": 0.3,
+      "Reentry": "after 6 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 3.9144519505093394,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.602011827289067,
+        7.221849758768164,
+        7.281162818849161,
+        7.23849053006641,
+        7.23849053006641,
+        7.278224578403002,
+        7.278224578403002,
+        7.278224578403002
+      ],
+      "MeanPanicsAvailable": 2.695219123505976,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.02,
+      "DropThreshold": 0.3,
+      "Reentry": "after 12 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 3.9144519505093394,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.526269682265324,
+        6.651259840899117,
+        6.673765589186384,
+        6.258312077540003,
+        6.118224344458404,
+        6.118224344458404,
+        6.118224344458404,
+        6.118224344458404
+      ],
+      "MeanPanicsAvailable": 2.4694555112881806,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.02,
+      "DropThreshold": 0.3,
+      "Reentry": "after 24 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 3.9144519505093394,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.052732256777345,
+        5.784365484724956,
+        4.80093543722304,
+        4.4255493893086815,
+        4.393917798257984,
+        4.393917798257984,
+        4.393917798257984,
+        4.393917798257984
+      ],
+      "MeanPanicsAvailable": 2.460823373173971,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": true
+    },
+    {
+      "AnnualFee": 0.02,
+      "DropThreshold": 0.3,
+      "Reentry": "after a 20% bounce off the low",
+      "HorizonYears": 30,
+      "FeeWealth": 3.9144519505093394,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.231155700933078,
+        6.990850165741428,
+        7.010571910842437,
+        6.93046018735558,
+        6.793779684028351,
+        6.793779684028351,
+        6.793779684028351,
+        6.793779684028351
+      ],
+      "MeanPanicsAvailable": 2.4721115537848606,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.02,
+      "DropThreshold": 0.4,
+      "Reentry": "after 6 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 3.9144519505093394,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.290705222881614,
+        7.065368400022677,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663,
+        6.577615768990663
+      ],
+      "MeanPanicsAvailable": 1.4827357237715804,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    },
+    {
+      "AnnualFee": 0.02,
+      "DropThreshold": 0.4,
+      "Reentry": "after 12 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 3.9144519505093394,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.1119368497087585,
+        6.522225535193362,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914,
+        5.99983574916914
+      ],
+      "MeanPanicsAvailable": 1.4820717131474104,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": true
+    },
+    {
+      "AnnualFee": 0.02,
+      "DropThreshold": 0.4,
+      "Reentry": "after 24 months in cash",
+      "HorizonYears": 30,
+      "FeeWealth": 3.9144519505093394,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        6.349051513633186,
+        5.956182682044343,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066,
+        5.749385169042066
+      ],
+      "MeanPanicsAvailable": 1.2636122177954847,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": true
+    },
+    {
+      "AnnualFee": 0.02,
+      "DropThreshold": 0.4,
+      "Reentry": "after a 20% bounce off the low",
+      "HorizonYears": 30,
+      "FeeWealth": 3.9144519505093394,
+      "WealthByPanicCount": [
+        7.1361676517165336,
+        7.018785337836146,
+        7.086368243776761,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063,
+        7.022266947398063
+      ],
+      "MeanPanicsAvailable": 1.2636122177954847,
+      "PanicsToBreakEven": null,
+      "MonotonicInPanicCount": false
+    }
+  ],
+  "feeVersusPanic": {
+    "feeCostOfBalance30y": 0.2592744272799199,
+    "feeCostOfGain30y": 0.3015279056716633,
+    "onePanicCostLow": -0.0085324031799896,
+    "onePanicCostHigh": 0.23208462544134123,
+    "note": "Compare like with like: both are shares of the final balance over 30 years."
+  },
+  "example": {
+    "annualFee": 0.01,
+    "horizonYears": 30,
+    "startingAmount": 10000,
+    "withoutFee": 71361.67651716534,
+    "withFee": 52859.41870844239,
+    "lostToFee": 18502.25780872295,
+    "shareLost": 0.25927442727991984
+  }
+}

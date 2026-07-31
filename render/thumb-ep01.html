@@ -151,6 +151,17 @@ variants.push(`
     <div class="thumb__foot">155 years of data</div>
   </section>`);
 
+// C - maximum reduction, per the packaging test protocol: no chart, no table,
+// no dates, nothing that needs reading at feed size. Three lines, one number.
+variants.push(`
+  <section class="thumb">
+    <div class="thumb__content" style="align-items:center;text-align:center">
+      <div class="thumb__kicker" style="font-size:44px;letter-spacing:0.1em;color:var(--ink)">ALL AT ONCE WON</div>
+      <div class="thumb__huge" style="font-size:290px;color:var(--lumpsum)">${pct(w12.LumpSumWinRate)}</div>
+      <div class="thumb__kicker" style="font-size:38px;margin-top:10px">1,855 START DATES</div>
+    </div>
+  </section>`);
+
 const only = Number(new URLSearchParams(location.search).get("only"));
 document.getElementById("deck").innerHTML =
   only >= 1 && only <= variants.length

@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ep02 thumbnails</title>
+<link rel="stylesheet" href="lib/slides.css">
+<style>
+/* Judged at roughly a fifth of this size in a phone feed: few words, huge type,
+   one focal object, no thin strokes. */
+.thumb {
+  position: relative;
+  width: 1280px;
+  height: 720px;
+  background: var(--bg);
+  overflow: hidden;
+  margin: 0 auto 40px;
+}
+
+.thumb__content {
+  position: absolute;
+  inset: 0;
+  padding: 60px 68px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.thumb__kicker {
+  font-size: 30px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dca);
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+
+.thumb__huge {
+  font-size: 178px;
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--warn);
+}
+
+.thumb__line {
+  font-size: 54px;
+  font-weight: 750;
+  line-height: 1.08;
+  margin-top: 18px;
+  max-width: 700px;
+}
+
+.thumb__foot {
+  position: absolute;
+  left: 68px;
+  bottom: 46px;
+  font-size: 26px;
+  color: var(--muted);
+}
+
+/* The fee ladder, right-hand side. The eye should read the two red bars first. */
+.ladder {
+  position: absolute;
+  right: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 396px;
+}
+
+.ladder__row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ladder__fee {
+  width: 92px;
+  text-align: right;
+  font-size: 28px;
+  color: var(--muted);
+}
+
+.ladder__track {
+  flex: 1;
+  height: 34px;
+  background: rgba(38, 49, 64, 0.55);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.ladder__bar { height: 100%; border-radius: 6px; }
+
+.ladder__row.hot .ladder__fee { color: var(--ink); font-weight: 700; }
+</style>
+</head>
+<body>
+<main id="deck"></main>
+
+<script type="module">
+const r = await (await fetch("../episodes/ep02-fees/results.json")).json();
+
+const fees = [...new Set(r.breakEvens.map((b) => b.AnnualFee))].map((fee) => {
+  const rows = r.breakEvens.filter((b) => b.AnnualFee === fee);
+  return { fee, never: rows.filter((b) => b.PanicsToBreakEven === null).length, total: rows.length };
+});
+const one = fees.find((f) => Math.abs(f.fee - 0.01) < 1e-9);
+
+const variants = [];
+
+// A - the count, with the ladder behind it showing it is not cherry-picked.
+variants.push(`
+  <section class="thumb">
+    <div class="thumb__content">
+      <div class="thumb__kicker">Paying 1% a year</div>
+      <div class="thumb__huge">${one.never} of ${one.total}</div>
+      <div class="thumb__line">
+        times it loses to<br><span style="color:var(--warn)">panic selling</span> every crash
+      </div>
+    </div>
+    <div class="ladder">
+      ${fees.map((f) => `
+        <div class="ladder__row ${f.never > 8 ? "hot" : ""}">
+          <div class="ladder__fee">${(f.fee * 100).toFixed(2)}%</div>
+          <div class="ladder__track">
+            <div class="ladder__bar" style="width:${(f.never / f.total) * 100}%;background:${f.never > 8 ? "var(--warn)" : f.never === 0 ? "var(--dca)" : "var(--lumpsum)"}"></div>
+          </div>
+        </div>`).join("")}
+    </div>
+    <div class="thumb__foot">155 years of data</div>
+  </section>`);
+
+// B - fallback, the plain cost number.
+variants.push(`
+  <section class="thumb">
+    <div class="thumb__content">
+      <div class="thumb__kicker">"It's only 1%"</div>
+      <div class="thumb__huge">${(r.feeGrid.find((g) => Math.abs(g.AnnualFee - 0.01) < 1e-9 && g.HorizonYears === 30).ShareOfGainLost * 100).toFixed(1)}%</div>
+      <div class="thumb__line">of everything<br>you ever made</div>
+    </div>
+    <div class="thumb__foot">30 years, inflation adjusted</div>
+  </section>`);
+
+const only = Number(new URLSearchParams(location.search).get("only"));
+document.getElementById("deck").innerHTML =
+  only >= 1 && only <= variants.length
+    ? variants[only - 1].replace('class="thumb', 'style="margin:0" class="thumb')
+    : variants.join("");
+
+document.documentElement.dataset.ready = "1";
+</script>
+</body>
+</html>

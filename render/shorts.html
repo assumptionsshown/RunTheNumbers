@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Shorts</title>
+<style>
+  html, body { margin: 0; background: #0d1117; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="stage" width="1080" height="1920"></canvas>
+
+<script type="module">
+// Vertical cuts of the episode animations, 1080x1920.
+//
+// These are re-drawn for the frame rather than cropped from the wide versions.
+// Cropping a 16:9 chart to 9:16 throws away most of the chart, which is the only
+// thing worth watching.
+//
+// Shorts are watched small, often muted, and abandoned in about a second, so:
+// the hook is on screen from frame zero, type is large enough to read on a phone
+// at arm's length, and the payoff number is always visible rather than saved for
+// the end.
+//
+//   ?anim=path1998|feecurve|histogram [&fps=30] [&seconds=N]
+
+const C = {
+  bg: "#0d1117",
+  ink: "#f0f4f8",
+  muted: "#8b98a5",
+  rule: "#263140",
+  lumpsum: "#f0a35e",
+  dca: "#4dc9c0",
+  warn: "#e5646e",
+};
+
+const FONT = '"Segoe UI", system-ui, sans-serif';
+const MONO = '"Cascadia Mono", Consolas, monospace';
+
+const canvas = document.getElementById("stage");
+const ctx = canvas.getContext("2d");
+const W = canvas.width;
+
+const params = new URLSearchParams(location.search);
+const which = params.get("anim") ?? "path1998";
+const FPS = Number(params.get("fps") ?? 30);
+const seconds = Number(params.get("seconds") ?? 0);
+
+const clamp01 = (t) => Math.max(0, Math.min(1, t));
+
+const ep01 = await (await fetch("../episodes/ep01-lumpsum-vs-dca/results.json")).json();
+const ep02 = await (await fetch("../episodes/ep02-fees/results.json")).json();
+
+function clear() {
+  ctx.fillStyle = C.bg;
+  ctx.fillRect(0, 0, W, canvas.height);
+}
+
+function label(text, x, y, { size = 40, fill = C.muted, align = "center", weight = 400, mono = false } = {}) {
+  ctx.font = `${weight} ${size}px ${mono ? MONO : FONT}`;
+  ctx.fillStyle = fill;
+  ctx.textAlign = align;
+  ctx.fillText(text, x, y);
+}
+
+/** Hook lines at the top, and the wordmark at the very bottom. */
+function frameChrome(lines) {
+  lines.forEach((l, i) => {
+    label(l.text, 60, 190 + i * 92, {
+      size: 76, align: "left", weight: 750, fill: l.fill ?? C.ink,
+    });
+  });
+  label("THE ASSUMPTION PANEL", W / 2, 1855, { size: 30, fill: C.rule, weight: 600 });
+}
+
+// ---------------------------------------------------------------------------
+// 1. April 1998, the two lines separating.
+// ---------------------------------------------------------------------------
+const path = ep01.baseCase.pathways.find((p) => p.StartDate === "1998-04");
+
+function path1998Frame(i, frames) {
+  const p = clamp01(i / (frames - 1));
+  const exact = p * (path.Points.length - 1);
+  const whole = Math.floor(exact);
+  const frac = exact - whole;
+
+  clear();
+  frameChrome([
+    { text: "The worst month in" },
+    { text: "155 years to invest" },
+  ]);
+
+  const plot = { left: 90, right: W - 70, top: 470, bottom: 1330 };
+  const all = path.Points.flatMap((q) => [q.LumpSum, q.Dca]);
+  const lo = Math.min(...all) * 0.92;
+  const hi = Math.max(...all) * 1.06;
+  const x = (k) => plot.left + (k / (path.Points.length - 1)) * (plot.right - plot.left);
+  const y = (v) => plot.bottom - ((v - lo) / (hi - lo)) * (plot.bottom - plot.top);
+
+  ctx.fillStyle = "rgba(77, 201, 192, 0.10)";
+  ctx.fillRect(plot.left, plot.top, x(path.WindowMonths - 1) - plot.left, plot.bottom - plot.top);
+  label("still buying", (plot.left + x(path.WindowMonths - 1)) / 2, plot.top - 22, { size: 30, fill: C.dca });
+
+  ctx.strokeStyle = C.rule;
+  ctx.lineWidth = 2;
+  ctx.setLineDash([10, 8]);
+  ctx.beginPath();
+  ctx.moveTo(plot.left, y(1));
+  ctx.lineTo(plot.right, y(1));
+  ctx.stroke();
+  ctx.setLineDash([]);
+  label("$1", plot.left - 18, y(1) + 12, { size: 28, align: "right" });
+
+  const next = path.Points[Math.min(whole + 1, path.Points.length - 1)];
+  const draw = (key, colour) => {
+    const tipY = y(path.Points[whole][key] + (next[key] - path.Points[whole][key]) * frac);
+    ctx.strokeStyle = colour;
+    ctx.lineWidth = 7;
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    for (let k = 0; k <= whole; k++) {
+      const px = x(k), py = y(path.Points[k][key]);
+      k === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+    }
+    ctx.lineTo(x(exact), tipY);
+    ctx.stroke();
+    ctx.fillStyle = colour;
+    ctx.beginPath();
+    ctx.arc(x(exact), tipY, 14, 0, Math.PI * 2);
+    ctx.fill();
+  };
+  draw("LumpSum", C.lumpsum);
+  draw("Dca", C.dca);
+
+  const last = path.Points[whole];
+  const gap = last.Dca / last.LumpSum - 1;
+
+  label(last.Date, W / 2, 1420, { size: 84, fill: C.muted, weight: 700, mono: true });
+
+  label("all at once", 60, 1530, { size: 34, fill: C.lumpsum, align: "left" });
+  label(`$${last.LumpSum.toFixed(2)}`, 60, 1602, { size: 68, fill: C.lumpsum, align: "left", weight: 700, mono: true });
+
+  label("spread over 12 months", W - 60, 1530, { size: 34, fill: C.dca, align: "right" });
+  label(`$${last.Dca.toFixed(2)}`, W - 60, 1602, { size: 68, fill: C.dca, align: "right", weight: 700, mono: true });
+
+  // The caption has to track the number underneath it. Asserting "made it worse"
+  // while the gap is positive would be a caption that is false at that frame,
+  // which is exactly the thing this channel is not allowed to do.
+  const behind = gap < 0;
+  label(
+    behind ? "spreading it out is BEHIND" : "spreading it out is ahead",
+    W / 2, 1700, { size: 38, fill: behind ? C.warn : C.dca, weight: 700 },
+  );
+  label(`${gap > 0 ? "+" : ""}${(gap * 100).toFixed(1)}%`, W / 2, 1780, {
+    size: 76, fill: behind ? C.warn : C.dca, weight: 800, mono: true,
+  });
+}
+
+// ---------------------------------------------------------------------------
+// 2. The fee curves climbing.
+// ---------------------------------------------------------------------------
+const COLOURS = { 0.0003: "#7bc86f", 0.0025: C.dca, 0.005: C.muted, 0.01: C.lumpsum, 0.02: C.warn };
+// Emphasis stays on 1%, matching the hook. Emphasising 2% while the headline says
+// "it's only 1%" makes the viewer track the wrong line.
+const curves = ep02.feeCurves.map((c) => ({
+  fee: c.fee,
+  colour: COLOURS[c.fee] ?? C.muted,
+  emphasis: Math.abs(c.fee - 0.01) < 1e-9,
+  points: c.points.map((q) => ({ x: q.HorizonYears, y: q.ShareOfGainLost })),
+}));
+
+function feeCurveFrame(i, frames) {
+  const p = clamp01(i / (frames - 1));
+  // The curve is the resolved first claim, so it completes in the first 55% of
+  // the runtime. The remainder belongs to the bridge: a second question opened
+  // out loud, with the CTA on screen. Per the bridge rule in decisions/0005.
+  const year = 1 + clamp01(p / 0.55) * 39;
+
+  clear();
+  frameChrome([
+    { text: '"It\'s only 1%"' },
+    { text: "Here is 40 years of it", fill: C.muted },
+  ]);
+
+  const plot = { left: 120, right: W - 190, top: 600, bottom: 1330 };
+  const x = (v) => plot.left + ((v - 1) / 39) * (plot.right - plot.left);
+  const y = (v) => plot.bottom - (v / 0.65) * (plot.bottom - plot.top);
+
+  ctx.strokeStyle = C.rule;
+  ctx.lineWidth = 1;
+  for (let t = 0; t <= 4; t++) {
+    const v = (0.65 / 4) * t;
+    ctx.beginPath();
+    ctx.moveTo(plot.left, y(v));
+    ctx.lineTo(plot.right, y(v));
+    ctx.stroke();
+    label(`${Math.round(v * 100)}%`, plot.left - 16, y(v) + 10, { align: "right", size: 28 });
+  }
+
+  for (const c of curves) {
+    const whole = Math.floor(year) - 1;
+    const frac = year - Math.floor(year);
+    const a = c.points[whole];
+    const b = c.points[Math.min(whole + 1, c.points.length - 1)];
+    const tipY = a.y + (b.y - a.y) * frac;
+
+    ctx.strokeStyle = c.colour;
+    ctx.lineWidth = c.emphasis ? 8 : 4;
+    ctx.globalAlpha = c.emphasis ? 1 : 0.6;
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    ctx.beginPath();
+    for (let k = 0; k <= whole; k++) {
+      const px = x(c.points[k].x), py = y(c.points[k].y);
+      k === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+    }
+    ctx.lineTo(x(year), y(tipY));
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+
+    ctx.fillStyle = c.colour;
+    ctx.beginPath();
+    ctx.arc(x(year), y(tipY), c.emphasis ? 13 : 8, 0, Math.PI * 2);
+    ctx.fill();
+    label(`${(c.fee * 100).toFixed(2)}%`, x(year) + 22, y(tipY) + 10, {
+      align: "left", size: c.emphasis ? 34 : 28, fill: c.colour,
+      weight: c.emphasis ? 700 : 400, mono: true,
+    });
+  }
+
+  label(`${Math.round(year)} years`, W / 2, 1440, { size: 64, fill: C.muted, weight: 700, mono: true });
+  label("share of your GAIN taken by the fee", W / 2, 1530, { size: 36 });
+
+  // The headline number tracks the 1% line, the one the hook names.
+  const onePct = curves.find((c) => Math.abs(c.fee - 0.01) < 1e-9);
+  const nowY = onePct.points[Math.max(0, Math.floor(year) - 1)].y;
+  label(`${(nowY * 100).toFixed(1)}%`, W / 2, 1660, { size: 110, fill: C.lumpsum, weight: 800, mono: true });
+  label("at just 1% a year", W / 2, 1730, { size: 36, fill: C.lumpsum });
+
+  // The bridge. Fades in once the curve has finished making its own point.
+  const bridge = clamp01((p - 0.62) / 0.08);
+  if (bridge > 0) {
+    ctx.globalAlpha = bridge * 0.92;
+    ctx.fillStyle = C.bg;
+    ctx.fillRect(0, 560, W, 780);
+    ctx.globalAlpha = bridge;
+    label("So is 1% ever worth paying?", W / 2, 760, { size: 66, fill: C.ink, weight: 750 });
+    label("It is, if it stops you panic selling.", W / 2, 860, { size: 44, fill: C.muted });
+    label("I simulated a panic seller against", W / 2, 1010, { size: 44, fill: C.muted });
+    label("a fee payer, every crash, 30 years.", W / 2, 1070, { size: 44, fill: C.muted });
+    const cta = clamp01((p - 0.82) / 0.06);
+    if (cta > 0) {
+      ctx.globalAlpha = cta;
+      label("the count is in the full video", W / 2, 1240, { size: 52, fill: C.dca, weight: 750 });
+      label("link below", W / 2, 1310, { size: 36, fill: C.dca });
+    }
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 3. The histogram filling as history runs.
+// ---------------------------------------------------------------------------
+const series = ep01.baseCase.gapSeries12mo;
+
+function histogramFrame(i, frames) {
+  const p = clamp01(i / (frames - 1));
+  // History finishes playing at 58% of the runtime; the remainder is the bridge.
+  const shown = Math.round(clamp01(p / 0.58) * series.gaps.length);
+
+  clear();
+  frameChrome([
+    { text: "Lump sum or" },
+    { text: "spread it out?" },
+  ]);
+
+  const plot = { left: 80, right: W - 60, top: 620, bottom: 1330 };
+  const LOW = -0.2, HIGH = 0.2, BIN = 0.01;
+  const x = (v) => plot.left + ((v - LOW) / (HIGH - LOW)) * (plot.right - plot.left);
+
+  const counts = new Map();
+  let wins = 0;
+  for (let k = 0; k < shown; k++) {
+    const g = series.gaps[k];
+    if (g < 0) wins++;
+    const b = Math.floor(g / BIN);
+    counts.set(b, (counts.get(b) ?? 0) + 1);
+  }
+
+  const maxCount = 108;
+  const y = (c) => plot.bottom - (c / maxCount) * (plot.bottom - plot.top);
+
+  for (const [bin, count] of counts) {
+    const lo = bin * BIN;
+    if (lo < LOW || lo >= HIGH) continue;
+    ctx.fillStyle = lo + BIN <= 1e-7 ? C.lumpsum : C.dca;
+    ctx.fillRect(x(lo) + 1, y(count), Math.max(2, x(lo + BIN) - x(lo) - 2), plot.bottom - y(count));
+  }
+
+  ctx.strokeStyle = C.ink;
+  ctx.lineWidth = 4;
+  ctx.beginPath();
+  ctx.moveTo(x(0), plot.top - 10);
+  ctx.lineTo(x(0), plot.bottom + 14);
+  ctx.stroke();
+
+  label("lump sum won", x(0) - 20, plot.bottom + 62, { size: 30, align: "right", fill: C.lumpsum });
+  label("spreading won", x(0) + 20, plot.bottom + 62, { size: 30, align: "left", fill: C.dca });
+
+  const startYear = Number(series.firstDate.slice(0, 4));
+  const year = startYear + Math.floor(Math.max(0, shown - 1) / 12);
+  const rate = shown > 0 ? wins / shown : 0;
+
+  label(String(year), W / 2, 1470, { size: 78, fill: C.muted, weight: 700, mono: true });
+  label(`${(rate * 100).toFixed(1)}%`, W / 2, 1640, { size: 130, fill: C.lumpsum, weight: 800, mono: true });
+  label("of all start months since 1871,", W / 2, 1710, { size: 36 });
+  label("investing it all at once won", W / 2, 1758, { size: 36, fill: C.ink });
+
+  // The bridge, per decisions/0005: the 67.2% claim is fully resolved above;
+  // what opens here is the reversal, which the long video explains.
+  const bridge = clamp01((p - 0.66) / 0.08);
+  if (bridge > 0) {
+    ctx.globalAlpha = bridge * 0.92;
+    ctx.fillStyle = C.bg;
+    ctx.fillRect(0, 540, W, 800);
+    ctx.globalAlpha = bridge;
+    label("But in the 8 worst months ever,", W / 2, 740, { size: 54, fill: C.ink, weight: 700 });
+    label("the answer FLIPS", W / 2, 830, { size: 66, fill: C.warn, weight: 800 });
+    label("and twice, spreading it out", W / 2, 990, { size: 44, fill: C.muted });
+    label("made things WORSE", W / 2, 1055, { size: 44, fill: C.warn, weight: 700 });
+    const cta = clamp01((p - 0.85) / 0.06);
+    if (cta > 0) {
+      ctx.globalAlpha = cta;
+      label("which two months? full video", W / 2, 1220, { size: 52, fill: C.dca, weight: 750 });
+      label("link below", W / 2, 1290, { size: 36, fill: C.dca });
+    }
+    ctx.globalAlpha = 1;
+  }
+}
+
+const ANIMATIONS = {
+  path1998: { fallback: 34, draw: path1998Frame },
+  feecurve: { fallback: 26, draw: feeCurveFrame },
+  histogram: { fallback: 30, draw: histogramFrame },
+};
+
+const animation = ANIMATIONS[which];
+if (!animation) throw new Error(`unknown short "${which}"`);
+
+const frameCount = Math.round((seconds > 0 ? seconds : animation.fallback) * FPS);
+window.FRAME_COUNT = frameCount;
+window.renderFrame = (i) => {
+  animation.draw(i, frameCount);
+  return true;
+};
+
+window.renderFrame(0);
+document.documentElement.dataset.ready = "1";
+</script>
+</body>
+</html>
