@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ep03 - buying at the top</title>
+<link rel="stylesheet" href="lib/slides.css">
+</head>
+<body>
+<main id="deck"></main>
+
+<script type="module">
+import { horizontalBars, verticalBars, multiLine, COLORS } from "./lib/charts.js";
+
+const r = await (await fetch("../episodes/ep03-buying-at-the-top/results.json")).json();
+
+const pct = (v, d = 1) => `${(v * 100).toFixed(d)}%`;
+const signed = (v, d = 1) => `${v > 0 ? "+" : ""}${(v * 100).toFixed(d)}%`;
+
+const freq = (basis, from) =>
+  r.frequency.find((f) => f.Basis === basis && f.From.startsWith(String(from)));
+const fwd = (years) => r.forward.find((f) => f.HorizonMonths === years * 12);
+const saver = (s) => r.saverTiming40.find((x) => x.Strategy === s);
+const wait = (t) => r.waiting.find((w) => Math.abs(w.DipThreshold - t) < 1e-9);
+
+const HORIZONS = [1, 3, 5, 10];
+const nominalHigh = freq("NominalPrice", 1960);
+
+const deck = document.getElementById("deck");
+const slides = [];
+
+const slide = ({ eyebrow, title, sub, body, foot, cls = "" }) => slides.push(`
+  <section class="slide ${cls}">
+    ${eyebrow ? `<div class="slide__eyebrow">${eyebrow}</div>` : ""}
+    ${title ? `<h1 class="slide__title">${title}</h1>` : ""}
+    ${sub ? `<p class="slide__sub">${sub}</p>` : ""}
+    <div class="slide__body">${body ?? ""}</div>
+    <div class="slide__foot">
+      <span>${foot ?? `Shiller S&amp;P Composite, ${r.meta.firstMonth} to ${r.meta.lastMonth}. Real total return.`}</span>
+      <span>THE ASSUMPTION PANEL</span>
+    </div>
+  </section>`);
+
+// 1 - Title --------------------------------------------------------------------
+slide({
+  cls: "slide--title",
+  body: `
+    <div class="brand">The Assumption Panel</div>
+    <h1 class="slide__title" style="margin-top:28px;font-size:84px">
+      What if you only ever bought at the top?
+    </h1>
+    <div style="display:flex;align-items:baseline;gap:36px;margin-top:44px">
+      <div class="stat__value" style="font-size:170px">${pct(Math.abs(r.headline.worstTimingVersusImmediate))}</div>
+      <div style="font-size:36px;line-height:1.3;color:var(--muted);max-width:800px">
+        is what forty years of the
+        <span style="color:var(--ink)">worst possible timing</span>
+        cost, against buying the moment the money arrived
+      </div>
+    </div>
+    <p class="slide__sub" style="font-size:30px;margin-top:52px">
+      Assumptions on screen. Code and data public.
+    </p>`,
+  foot: " ",
+});
+
+// 2 - The premise --------------------------------------------------------------
+slide({
+  eyebrow: "The fear",
+  title: "It sounds like the one thing you should never do",
+  sub: "Every new high arrives with the same advice attached: wait for a pullback, do not buy the top.",
+  body: `
+    <p class="note" style="font-size:34px;line-height:1.5">
+      The argument is intuitive and it has a testable shape. If buying at a high is a mistake,
+      then returns after a high should be worse than returns after any other month, and a saver
+      with terrible timing should end up meaningfully poorer than one with ordinary timing.
+    </p>
+    <p class="note" style="font-size:34px;line-height:1.5;margin-top:28px">
+      Both of those are measurable. So this episode measures them, and then prices the thing
+      people actually do instead, which is wait.
+    </p>`,
+});
+
+// 3 - Frequency ----------------------------------------------------------------
+slide({
+  eyebrow: "First, the premise itself",
+  title: "An all-time high is not a rare event",
+  sub: `Share of all months that set a new high on the index a headline quotes, since 1960.`,
+  body: `
+    <div class="stat-row">
+      <div>
+        <div class="stat__value">${pct(nominalHigh.Share)}</div>
+        <div class="stat__label">of months since 1960 were a new all-time high on the S&amp;P price index</div>
+      </div>
+      <div>
+        <div class="stat__value">${nominalHigh.Highs}</div>
+        <div class="stat__label">of ${nominalHigh.Months} months</div>
+      </div>
+    </div>
+    <p class="note">
+      Roughly one month in three. Refusing to buy at a high is not avoiding a rare trap,
+      it is sitting out a third of all available months, and a rising market spends most of its
+      life near its own record.
+    </p>`,
+});
+
+// 4 - Which index ---------------------------------------------------------------
+slide({
+  eyebrow: "The first place this argument gets slippery",
+  title: "Nobody says which index they mean",
+  sub: "The same sentence, four defensible definitions, and the answer moves by a factor of three.",
+  body: `
+    <table>
+      <thead>
+        <tr><th>&ldquo;All-time high&rdquo; measured on</th><th>Since 1871</th><th>Since 1960</th></tr>
+      </thead>
+      <tbody>
+        ${[
+          ["NominalPrice", "Price index, before inflation", true],
+          ["RealPrice", "Price index, after inflation", false],
+          ["NominalTotalReturn", "With dividends, before inflation", false],
+          ["RealTotalReturn", "With dividends, after inflation", false],
+        ].map(([basis, label, hi]) => `
+          <tr class="${hi ? "is-highlight" : ""}">
+            <td>${label}</td>
+            <td>${pct(freq(basis, 1871).Share)}</td>
+            <td>${pct(freq(basis, 1960).Share)}</td>
+          </tr>`).join("")}
+      </tbody>
+    </table>
+    <p class="note">
+      A headline means the first row. Your portfolio lives on the last one. Every number after this
+      slide uses the headline definition, because that is the one people are reacting to.
+    </p>`,
+  cls: "slide--table",
+});
+
+// 5 - One year after a high ------------------------------------------------------
+slide({
+  eyebrow: "The test",
+  title: "One year after a high, there is no difference",
+  sub: "Real total return over the following twelve months, from every all-time high against every month in the sample.",
+  body: `
+    <div class="stat-row">
+      <div>
+        <div class="stat__value">${pct(fwd(1).AfterHighMean)}</div>
+        <div class="stat__label">average next 12 months, buying at an all-time high</div>
+      </div>
+      <div>
+        <div class="stat__value">${pct(fwd(1).AllStartsMean)}</div>
+        <div class="stat__label">average next 12 months, buying in any month at all</div>
+      </div>
+      <div>
+        <div class="stat__value is-warn">${signed(fwd(1).MeanGap, 1)}</div>
+        <div class="stat__label">the entire difference</div>
+      </div>
+    </div>
+    <p class="note">
+      ${fwd(1).AfterHighCount} highs against ${fwd(1).AllStartsCount} months. Positive a year later
+      ${pct(fwd(1).AfterHighPositive)} of the time from a high, ${pct(fwd(1).AllStartsPositive)} from anywhere.
+      At a one-year horizon the premise simply does not show up in the data.
+    </p>`,
+});
+
+// 6 - Longer horizons ------------------------------------------------------------
+slide({
+  eyebrow: "But do not stop there",
+  title: "Stretch the horizon and a gap opens",
+  sub: "Average real total return after a high, against the same measure from every month.",
+  body: `
+    ${multiLine(
+      [
+        {
+          label: "from a high",
+          colour: COLORS.warn,
+          emphasis: true,
+          points: HORIZONS.map((h) => ({ x: h, y: fwd(h).AfterHighMean })),
+        },
+        {
+          label: "from any month",
+          colour: COLORS.dca,
+          emphasis: true,
+          points: HORIZONS.map((h) => ({ x: h, y: fwd(h).AllStartsMean })),
+        },
+      ],
+      { yMin: 0, yMax: 1.3, yTicks: 4, formatY: (v) => pct(v, 0), xTicks: HORIZONS, xLabel: "years held" },
+    )}
+    <p class="note">
+      Identical at one year, ${pct(Math.abs(fwd(10).MeanGap))} apart at ten. This is the part of the
+      answer the reassuring version leaves out, and it is the reason this episode does not stop at slide five.
+    </p>`,
+});
+
+// 7 - Why the gap ----------------------------------------------------------------
+const capeBuckets = r.afterHighByCape;
+// Plain-language bucket names. "CAPE 8-16" on screen assumed the viewer knows
+// CAPE; the founder watched this slide cold and could not parse it, and the
+// channel's own rule is no stats background. The cut points stay in the note.
+const capeBucketNames = ["cheapest fifth", "2nd", "3rd", "4th", "most expensive fifth"];
+slide({
+  eyebrow: "So which is it",
+  title: "The ends are far apart. The middle is noise",
+  sub: "Five-year return after inflation, following an all-time high.",
+  body: `
+    ${verticalBars(
+      capeBuckets.map((b) => ({
+        label: capeBucketNames[b.bucket - 1],
+        sublabel: `${pct(b.positive, 0)} positive`,
+        value: b.mean,
+        display: pct(b.mean, 0),
+        color: b.bucket === capeBuckets.length ? COLORS.warn : COLORS.dca,
+      })),
+      { max: 0.75, xLabel: "how expensive the market was at the high, cheapest fifth to most expensive fifth" },
+    )}
+    <p class="note">
+      "Expensive" here is Shiller's CAPE ratio: the market's price divided by ten years of average
+      earnings, so a high number means you are paying more for the same dollar of profit. These fifths
+      run from ${capeBuckets[0].capeLow.toFixed(0)} to ${capeBuckets[capeBuckets.length - 1].capeHigh.toFixed(0)},
+      about ${capeBuckets[0].starts} overlapping windows each.
+    </p>`,
+});
+
+// 8 - The quoted number ----------------------------------------------------------
+slide({
+  eyebrow: "A number you will meet in this argument",
+  title: "Around 11% a year after a record. True, and incomplete",
+  sub: "Twelve months after a high, from 1960, under each combination of choices the claim leaves unstated.",
+  body: `
+    <table>
+      <thead>
+        <tr><th>High measured on</th><th>Return measured in</th><th>Average next 12 months</th><th>Positive</th></tr>
+      </thead>
+      <tbody>
+        ${r.reconciliation.map((x) => `
+          <tr class="${x.MeasuredOn === "real total return" ? "is-highlight" : ""}">
+            <td>${x.HighBasis === "NominalPrice" ? "price index" : "price plus dividends"}</td>
+            <td>${x.MeasuredOn.replace(" total return", "")}</td>
+            <td>${pct(x.AfterHighMean)}</td>
+            <td>${pct(x.AfterHighPositive)}</td>
+          </tr>`).join("")}
+      </tbody>
+    </table>
+    <p class="note">
+      The quoted figure is a nominal one. After inflation the same calculation gives
+      ${pct(r.reconciliation[2].AfterHighMean)} to ${pct(r.reconciliation[3].AfterHighMean)}.
+      Nothing here is wrong; it is simply reported in the units that flatter it, which is worth
+      knowing before it is used to talk you into or out of anything.
+    </p>`,
+  cls: "slide--table",
+});
+
+// 9 - The saver setup -------------------------------------------------------------
+slide({
+  eyebrow: "The other half of the question",
+  title: "Now give someone the worst luck available",
+  sub: "One unit invested every year for forty years. Same money, same years, only the timing changes.",
+  body: `
+    <div class="stat-row">
+      <div>
+        <div class="stat__value is-warn">peak</div>
+        <div class="stat__label">buys at the highest month of every single year, for forty years</div>
+      </div>
+      <div>
+        <div class="stat__value">January</div>
+        <div class="stat__label">buys as soon as the money exists, no timing at all</div>
+      </div>
+      <div>
+        <div class="stat__value">cash</div>
+        <div class="stat__label">never invests, and the cash keeps its real value</div>
+      </div>
+    </div>
+    <p class="note">
+      The peak strategy is impossible. It needs to know each year's worst month before the year has
+      happened. That is deliberate: it is the ceiling on how much damage bad timing can do.
+    </p>`,
+});
+
+// 10 - The saver result ------------------------------------------------------------
+slide({
+  eyebrow: "The result",
+  title: "Perfect bad timing costs less than not investing",
+  sub: `Median real wealth after forty years of one unit a year, across ${saver("peak").Windows} rolling windows.`,
+  body: `
+    ${horizontalBars(
+      ["trough", "january", "peak", "cash"].map((s) => ({
+        label: { trough: "buys the yearly low", january: "buys in January", peak: "buys the yearly high", cash: "never invests" }[s],
+        value: saver(s).MedianWealth,
+        display: saver(s).MedianWealth.toFixed(0),
+        color: s === "cash" ? COLORS.warn : s === "peak" ? COLORS.lumpsum : COLORS.dca,
+      })),
+      { max: 220, labelWidth: 430, reference: saver("january").MedianWealth, referenceLabel: "no timing at all" },
+    )}
+    <p class="note">
+      Forty units went in. The unluckiest investor in history ends with ${saver("peak").MedianWealth.toFixed(0)},
+      the one who never thought about it ends with ${saver("january").MedianWealth.toFixed(0)}, and the one who
+      waited ends with ${saver("cash").MedianWealth.toFixed(0)}.
+    </p>`,
+});
+
+// 11 - The comparison that matters --------------------------------------------------
+slide({
+  eyebrow: "Put the two mistakes side by side",
+  title: "One costs a tenth. The other costs four fifths",
+  body: `
+    <div class="stat-row">
+      <div>
+        <div class="stat__value">${pct(Math.abs(r.headline.worstTimingVersusImmediate))}</div>
+        <div class="stat__label">cost of the worst possible timing, every year, for forty years</div>
+      </div>
+      <div>
+        <div class="stat__value is-warn">${pct(Math.abs(saver("cash").MedianVsImmediate))}</div>
+        <div class="stat__label">cost of staying in cash while you wait for a better moment</div>
+      </div>
+      <div>
+        <div class="stat__value">${r.headline.worstTimingVersusCash.toFixed(1)}x</div>
+        <div class="stat__label">what the unluckiest investor still ends up with, against the one who waited</div>
+      </div>
+    </div>
+    <p class="note">
+      These are the two errors on offer, and they are not the same size. The one everybody warns about
+      is the small one.
+    </p>`,
+});
+
+// 12 - Waiting for a dip -------------------------------------------------------------
+slide({
+  eyebrow: "The thing people actually do",
+  title: "Waiting for a dip is a strategy, so price it",
+  sub: "Hold cash from the start, invest everything the moment the market falls this far from its peak, then hold for ten years.",
+  body: `
+    <table>
+      <thead>
+        <tr><th>Waits for a fall of</th><th>Waiting beat buying now</th><th>Median cost of waiting</th><th>The fall never came</th><th>Median wait</th></tr>
+      </thead>
+      <tbody>
+        ${r.waiting.map((w) => `
+          <tr class="${Math.abs(w.DipThreshold - 0.2) < 1e-9 ? "is-highlight" : ""}">
+            <td>${pct(w.DipThreshold, 0)}</td>
+            <td>${pct(w.WaitingWinRate)}</td>
+            <td>${pct(w.MedianCostOfWaiting)}</td>
+            <td>${pct(w.NeverArrivedShare)}</td>
+            <td>${w.MedianMonthsWaited.toFixed(0)} months</td>
+          </tr>`).join("")}
+      </tbody>
+    </table>
+    <p class="note">
+      Cash is assumed to hold its real value the whole time, which is generous to waiting.
+      Even so, waiting for a 10% pullback lost to buying immediately in ${pct(1 - wait(0.1).WaitingWinRate)}
+      of ten-year windows.
+    </p>`,
+  cls: "slide--table",
+});
+
+// 13 - The deeper the dip ------------------------------------------------------------
+slide({
+  eyebrow: "And the discipline makes it worse",
+  title: "The bigger the discount you hold out for, the more often it never arrives",
+  body: `
+    <div class="stat-row">
+      <div>
+        <div class="stat__value is-warn">${pct(wait(0.3).NeverArrivedShare)}</div>
+        <div class="stat__label">of ten-year windows never offered a 30% fall, so the money simply sat there</div>
+      </div>
+      <div>
+        <div class="stat__value is-warn">${pct(wait(0.3).MedianCostOfWaiting)}</div>
+        <div class="stat__label">median cost of that patience</div>
+      </div>
+      <div>
+        <div class="stat__value">${wait(0.2).MedianMonthsWaited.toFixed(0)}</div>
+        <div class="stat__label">months of waiting, at the median, for a 20% fall to show up</div>
+      </div>
+    </div>
+    <p class="note">
+      Waiting is not free and it is not neutral. It is a position, it has a cost, and the cost rises
+      with how disciplined you are about the entry price.
+    </p>`,
+});
+
+// 14 - Where it flips ------------------------------------------------------------------
+slide({
+  eyebrow: "Where the answer flips",
+  title: "Buying at a record is fine. Buying at a rich price is the risk",
+  sub: "The two get argued as if they were one thing, and they behave completely differently.",
+  body: `
+    <p class="note" style="font-size:34px;line-height:1.5">
+      A new high tells you almost nothing on its own: at one year the returns after one are
+      indistinguishable from the returns after any other month, and forty years of buying nothing but
+      yearly peaks costs about a tenth against not trying to time at all.
+    </p>
+    <p class="note" style="font-size:34px;line-height:1.5;margin-top:24px">
+      Valuation carries more information than the record does, though less cleanly than anyone selling
+      the idea would like: at the extremes, highs struck when the market was most expensive returned
+      ${pct(capeBuckets[capeBuckets.length - 1].mean)} over five years against
+      ${pct(capeBuckets[0].mean)} at the cheapest, and were still ahead
+      ${pct(capeBuckets[capeBuckets.length - 1].positive, 0)} of the time against
+      ${pct(capeBuckets[0].positive, 0)}. In between, the order breaks down.
+    </p>
+    <p class="note" style="font-size:34px;line-height:1.5;margin-top:24px">
+      Two caveats carried in the open, because they cut against the tidy version of this conclusion:
+      highs cluster inside the same bull markets, so these windows overlap and the long-horizon gap
+      rests on far fewer independent periods than the counts suggest; and a valuation reading has never
+      been enough to time anything, only enough to know what you are paying.
+    </p>`,
+});
+
+// 15 - Assumptions ----------------------------------------------------------------------
+slide({
+  eyebrow: "The assumption panel",
+  title: "Everything this result rests on",
+  sub: "Change any of these and the number changes. That is the point.",
+  body: `
+    <div class="assumptions">
+      <ul>${r.meta.assumptions.map((a) => `<li>${a}</li>`).join("")}</ul>
+      <div class="source">
+        source: ${r.meta.snapshot.source}<br>
+        snapshot ${r.meta.snapshot.fetchedAt} &middot; sha256 ${r.meta.snapshot.sha256.slice(0, 32)}...<br>
+        ${r.meta.snapshot.months.toLocaleString()} months, ${r.meta.snapshot.firstMonth} to ${r.meta.snapshot.lastMonth}
+      </div>
+    </div>`,
+});
+
+const only = Number(new URLSearchParams(location.search).get("only"));
+deck.innerHTML = only >= 1 && only <= slides.length
+  ? slides[only - 1].replace('class="slide ', 'style="margin:0" class="slide ')
+  : slides.join("");
+
+document.title = `Ep03 - ${slides.length} slides`;
+document.documentElement.dataset.slideCount = String(slides.length);
+window.SLIDE_COUNT = slides.length;
+document.documentElement.dataset.ready = "1";
+</script>
+</body>
+</html>

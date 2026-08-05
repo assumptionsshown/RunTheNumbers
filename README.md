@@ -21,12 +21,9 @@ Don't trust it. Re-run it.
 |---|---|---|---|
 | 1 | Lump sum or spread it out? | [Lump Sum vs DCA: I Tested All 1,855 Months Since 1871](https://youtu.be/YV2cOHZvYcY) | `episodes/ep01-lumpsum-vs-dca/results.json` |
 | 2 | What does a 1% fee actually cost, and is it ever worth it? | [Paying 1% Costs More Than Panic Selling Every Crash for 30 Years](https://youtu.be/-v4_SQQyTNc) | `episodes/ep02-fees/results.json` |
+| 3 | What if you only ever bought at the market top? | [I Only Ever Bought at the Market Top. It Cost 10%.](https://youtu.be/X28aftmVfvM) | `episodes/ep03-buying-at-the-top/results.json` |
 
-Episode 2's code and results are public before its video, on purpose. Reproduce it
-with the same command as episode 1, adding `--episode ep02` and pointing the output
-at `episodes/ep02-fees/results.json`.
-
-## Reproducing episode 1
+## Reproducing the episodes
 
 Requires [Node.js](https://nodejs.org) 22 or newer and the
 [.NET SDK](https://dotnet.microsoft.com/download) 9 or newer. Nothing else. There
@@ -44,6 +41,18 @@ node tools/validate-shiller.mjs data/snapshots/shiller-2026-07-26
 dotnet run --project src/RunTheNumbers.Sim -- \
   data/snapshots/shiller-2026-07-26 \
   episodes/ep01-lumpsum-vs-dca/results.json
+
+# Episode 2
+dotnet run --project src/RunTheNumbers.Sim -- \
+  data/snapshots/shiller-2026-07-26 \
+  episodes/ep02-fees/results.json \
+  --episode ep02
+
+# Episode 3
+dotnet run --project src/RunTheNumbers.Sim -- \
+  data/snapshots/shiller-2026-07-26 \
+  episodes/ep03-buying-at-the-top/results.json \
+  --episode ep03
 ```
 
 `results.json` holds every number that appears on screen. The slides read from it
@@ -55,7 +64,8 @@ To see the slides:
 node tools/serve.mjs 5173
 ```
 
-then open `http://localhost:5173/render/ep01.html`.
+then open `http://localhost:5173/render/ep01.html`, `render/ep02.html`, or
+`render/ep03.html`.
 
 ## The result
 

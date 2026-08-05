@@ -11,7 +11,10 @@ public sealed record Month(
     double RealTotalReturnPrice,
     double? Cpi,
     double? Cape,
-    double? RealPrice);
+    double? RealPrice,
+    // The nominal index as published. Never reconstruct this as RealPrice x Cpi:
+    // the round trip can turn a genuine tie into a strict new high.
+    double? Price);
 
 public sealed class ShillerSeries
 {
@@ -39,6 +42,7 @@ public sealed class ShillerSeries
         int cpi = Index("cpi");
         int cape = Index("cape");
         int realPrice = Index("realPrice");
+        int price = Index("price");
 
         var months = new List<Month>(lines.Length - 1);
         for (int i = 1; i < lines.Length; i++)
@@ -49,7 +53,8 @@ public sealed class ShillerSeries
                 Required(f[realTr], "realTotalReturnPrice", i),
                 Optional(f[cpi]),
                 Optional(f[cape]),
-                Optional(f[realPrice])));
+                Optional(f[realPrice]),
+                Optional(f[price])));
         }
 
         // The snapshot builder already guarantees a contiguous monthly series,

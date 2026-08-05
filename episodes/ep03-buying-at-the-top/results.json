@@ -1,0 +1,378 @@
+{
+  "meta": {
+    "episode": "ep03-buying-at-the-top",
+    "generatedAt": "2026-07-31T23:48:55Z",
+    "snapshot": {
+      "source": "https://img1.wsimg.com/blobby/go/e5e77e0b-59d1-44d9-ab25-4763ac982e53/downloads/165d8a6e-26bf-44ec-a26c-a35f7f993480/ie_data.xls",
+      "note": "econ.yale.edu/~shiller/data/ie_data.xls is a stale mirror (frozen at 2023-09). Use shillerdata.com.",
+      "fetchedAt": "2026-07-26",
+      "sha256": "0e3d716f83f51c14f40c5ab5662e767cde4f83fcb7305db24ab003df2c9ee6c5",
+      "rawBytes": 1651712,
+      "months": 1866,
+      "firstMonth": "1871-01",
+      "lastMonth": "2026-06",
+      "droppedPartialMonth": "2026-07",
+      "rowsWithoutTotalReturn": 0,
+      "columnsUsed": {
+        "date": 0,
+        "price": 1,
+        "dividend": 2,
+        "earnings": 3,
+        "cpi": 4,
+        "dateFraction": 5,
+        "gs10": 6,
+        "realPrice": 7,
+        "realDividend": 8,
+        "realTotalReturnPrice": 9,
+        "realEarnings": 10,
+        "cape": 12
+      }
+    },
+    "firstMonth": "1871-01",
+    "lastMonth": "2026-06",
+    "months": 1866,
+    "assumptions": [
+      "Real (inflation-adjusted) total return, dividends reinvested, unless a line is explicitly labelled nominal.",
+      "Shiller\u0027s data is monthly averages, not daily closes, so \u0027the top\u0027 means the worst month of the year, not the worst day.",
+      "A new high means a strict new high on the stated index. Four definitions are reported because the choice changes the frequency several times over.",
+      "Idle cash holds its real value (0% real). Deliberately the generous assumption for waiting.",
+      "No taxes, no transaction costs, no fund fees.",
+      "US large-cap index only (S\u0026P Composite).",
+      "Start months overlap, so counts are not independent trials."
+    ]
+  },
+  "frequency": [
+    {
+      "Basis": "NominalPrice",
+      "From": "1871-01",
+      "Months": 1866,
+      "Highs": 332,
+      "Share": 0.17792068595927116
+    },
+    {
+      "Basis": "NominalPrice",
+      "From": "1960-01",
+      "Months": 798,
+      "Highs": 232,
+      "Share": 0.2907268170426065
+    },
+    {
+      "Basis": "RealPrice",
+      "From": "1871-01",
+      "Months": 1866,
+      "Highs": 191,
+      "Share": 0.10235798499464094
+    },
+    {
+      "Basis": "RealPrice",
+      "From": "1960-01",
+      "Months": 798,
+      "Highs": 124,
+      "Share": 0.15538847117794485
+    },
+    {
+      "Basis": "NominalTotalReturn",
+      "From": "1871-01",
+      "Months": 1866,
+      "Highs": 578,
+      "Share": 0.3097534833869239
+    },
+    {
+      "Basis": "NominalTotalReturn",
+      "From": "1960-01",
+      "Months": 798,
+      "Highs": 302,
+      "Share": 0.37844611528822053
+    },
+    {
+      "Basis": "RealTotalReturn",
+      "From": "1871-01",
+      "Months": 1866,
+      "Highs": 454,
+      "Share": 0.2433011789924973
+    },
+    {
+      "Basis": "RealTotalReturn",
+      "From": "1960-01",
+      "Months": 798,
+      "Highs": 196,
+      "Share": 0.24561403508771928
+    }
+  ],
+  "forward": [
+    {
+      "HighBasis": "NominalPrice",
+      "MeasuredOn": "real total return",
+      "HorizonMonths": 12,
+      "AfterHighCount": 322,
+      "AfterHighMean": 0.08652623439920615,
+      "AfterHighMedian": 0.09380143396231444,
+      "AfterHighPositive": 0.6956521739130435,
+      "AllStartsCount": 1854,
+      "AllStartsMean": 0.0875090925125182,
+      "AllStartsMedian": 0.08834314484421713,
+      "AllStartsPositive": 0.6957928802588996,
+      "MeanGap": -0.0009828581133120573
+    },
+    {
+      "HighBasis": "NominalPrice",
+      "MeasuredOn": "real total return",
+      "HorizonMonths": 36,
+      "AfterHighCount": 310,
+      "AfterHighMean": 0.2673860584288667,
+      "AfterHighMedian": 0.23691419991369944,
+      "AfterHighPositive": 0.8193548387096774,
+      "AllStartsCount": 1830,
+      "AllStartsMean": 0.27428135106382084,
+      "AllStartsMedian": 0.24621525396735422,
+      "AllStartsPositive": 0.7879781420765027,
+      "MeanGap": -0.006895292634954142
+    },
+    {
+      "HighBasis": "NominalPrice",
+      "MeasuredOn": "real total return",
+      "HorizonMonths": 60,
+      "AfterHighCount": 305,
+      "AfterHighMean": 0.40765470958249406,
+      "AfterHighMedian": 0.4476287841716218,
+      "AfterHighPositive": 0.7442622950819672,
+      "AllStartsCount": 1806,
+      "AllStartsMean": 0.4932503815885437,
+      "AllStartsMedian": 0.4282185090977798,
+      "AllStartsPositive": 0.8133997785160576,
+      "MeanGap": -0.08559567200604962
+    },
+    {
+      "HighBasis": "NominalPrice",
+      "MeasuredOn": "real total return",
+      "HorizonMonths": 120,
+      "AfterHighCount": 272,
+      "AfterHighMean": 0.901037593074705,
+      "AfterHighMedian": 0.9396039267952873,
+      "AfterHighPositive": 0.8161764705882353,
+      "AllStartsCount": 1746,
+      "AllStartsMean": 1.166808297914461,
+      "AllStartsMedian": 0.971575140375722,
+      "AllStartsPositive": 0.8894616265750286,
+      "MeanGap": -0.26577070483975596
+    }
+  ],
+  "reconciliation": [
+    {
+      "HighBasis": "NominalPrice",
+      "MeasuredOn": "nominal total return",
+      "HorizonMonths": 12,
+      "AfterHighCount": 222,
+      "AfterHighMean": 0.10477474503707458,
+      "AfterHighMedian": 0.11943755625756314,
+      "AfterHighPositive": 0.7432432432432432,
+      "AllStartsCount": 786,
+      "AllStartsMean": 0.11880372124661503,
+      "AllStartsMedian": 0.13467519561896024,
+      "AllStartsPositive": 0.7849872773536896,
+      "MeanGap": -0.014028976209540453
+    },
+    {
+      "HighBasis": "NominalTotalReturn",
+      "MeasuredOn": "nominal total return",
+      "HorizonMonths": 12,
+      "AfterHighCount": 292,
+      "AfterHighMean": 0.11352896035474613,
+      "AfterHighMedian": 0.12498866521908036,
+      "AfterHighPositive": 0.7773972602739726,
+      "AllStartsCount": 786,
+      "AllStartsMean": 0.11880372124661503,
+      "AllStartsMedian": 0.13467519561896024,
+      "AllStartsPositive": 0.7849872773536896,
+      "MeanGap": -0.0052747608918689015
+    },
+    {
+      "HighBasis": "NominalPrice",
+      "MeasuredOn": "real total return",
+      "HorizonMonths": 12,
+      "AfterHighCount": 222,
+      "AfterHighMean": 0.07133349635794083,
+      "AfterHighMedian": 0.08907031682428146,
+      "AfterHighPositive": 0.6936936936936937,
+      "AllStartsCount": 786,
+      "AllStartsMean": 0.07937725164491559,
+      "AllStartsMedian": 0.09476135353031712,
+      "AllStartsPositive": 0.7315521628498728,
+      "MeanGap": -0.008043755286974763
+    },
+    {
+      "HighBasis": "NominalTotalReturn",
+      "MeasuredOn": "real total return",
+      "HorizonMonths": 12,
+      "AfterHighCount": 292,
+      "AfterHighMean": 0.07575670774898419,
+      "AfterHighMedian": 0.08816164554898298,
+      "AfterHighPositive": 0.7157534246575342,
+      "AllStartsCount": 786,
+      "AllStartsMean": 0.07937725164491559,
+      "AllStartsMedian": 0.09476135353031712,
+      "AllStartsPositive": 0.7315521628498728,
+      "MeanGap": -0.0036205438959314024
+    }
+  ],
+  "afterHighByCape": [
+    {
+      "bucket": 1,
+      "capeLow": 8.347476938155426,
+      "capeHigh": 15.789062002327094,
+      "starts": 58,
+      "mean": 0.6251852964350758,
+      "median": 0.6338428778387084,
+      "positive": 0.8275862068965517
+    },
+    {
+      "bucket": 2,
+      "capeLow": 15.820802594477753,
+      "capeHigh": 19.722137498351525,
+      "starts": 59,
+      "mean": 0.32267062568340976,
+      "median": 0.3473464524337777,
+      "positive": 0.7966101694915254
+    },
+    {
+      "bucket": 3,
+      "capeLow": 19.743492419697773,
+      "capeHigh": 23.21215468067534,
+      "starts": 58,
+      "mean": 0.5062272402814023,
+      "median": 0.30258621801175567,
+      "positive": 0.8103448275862069
+    },
+    {
+      "bucket": 4,
+      "capeLow": 23.22501979309582,
+      "capeHigh": 27.93546783028869,
+      "starts": 59,
+      "mean": 0.3974637525053465,
+      "median": 0.4710637215746247,
+      "positive": 0.6610169491525424
+    },
+    {
+      "bucket": 5,
+      "capeLow": 28.063573742124454,
+      "capeHigh": 44.19793976104055,
+      "starts": 59,
+      "mean": 0.2006986084615131,
+      "median": 0.325642747012582,
+      "positive": 0.576271186440678
+    }
+  ],
+  "saverTiming40": [
+    {
+      "Strategy": "peak",
+      "Windows": 116,
+      "MedianWealth": 167.84577447596004,
+      "MeanWealth": 187.5961198373815,
+      "P5Wealth": 89.62743968882108,
+      "P95Wealth": 336.9775749975043,
+      "MedianVsImmediate": -0.1021926697898281
+    },
+    {
+      "Strategy": "january",
+      "Windows": 116,
+      "MedianWealth": 186.95077309813036,
+      "MeanWealth": 212.65501585685726,
+      "P5Wealth": 100.15560997088885,
+      "P95Wealth": 389.44092612463777,
+      "MedianVsImmediate": 0
+    },
+    {
+      "Strategy": "trough",
+      "Windows": 116,
+      "MedianWealth": 199.7729913636077,
+      "MeanWealth": 231.68779386483942,
+      "P5Wealth": 105.8322617280437,
+      "P95Wealth": 438.78451219624327,
+      "MedianVsImmediate": 0.06858606708594328
+    },
+    {
+      "Strategy": "cash",
+      "Windows": 116,
+      "MedianWealth": 40,
+      "MeanWealth": 40,
+      "P5Wealth": 40,
+      "P95Wealth": 40,
+      "MedianVsImmediate": -0.7860399326671732
+    }
+  ],
+  "saverTiming20": [
+    {
+      "Strategy": "peak",
+      "Windows": 136,
+      "MedianWealth": 39.1397479817384,
+      "MeanWealth": 41.28998727851054,
+      "P5Wealth": 18.0563285233114,
+      "P95Wealth": 75.20795013688772,
+      "MedianVsImmediate": -0.10371499638165105
+    },
+    {
+      "Strategy": "january",
+      "Windows": 136,
+      "MedianWealth": 43.6688640596788,
+      "MeanWealth": 46.54494887116846,
+      "P5Wealth": 19.702062801047294,
+      "P95Wealth": 85.83434293442721,
+      "MedianVsImmediate": 0
+    },
+    {
+      "Strategy": "trough",
+      "Windows": 136,
+      "MedianWealth": 47.0858581917949,
+      "MeanWealth": 50.11791108672205,
+      "P5Wealth": 21.5530777882891,
+      "P95Wealth": 90.7058922710614,
+      "MedianVsImmediate": 0.07824783643207112
+    },
+    {
+      "Strategy": "cash",
+      "Windows": 136,
+      "MedianWealth": 20,
+      "MeanWealth": 20,
+      "P5Wealth": 20,
+      "P95Wealth": 20,
+      "MedianVsImmediate": -0.5420077798985663
+    }
+  ],
+  "headline": {
+    "years": 40,
+    "worstTimingWealth": 167.84577447596004,
+    "immediateWealth": 186.95077309813036,
+    "cashWealth": 40,
+    "worstTimingVersusImmediate": -0.1021926697898281,
+    "worstTimingVersusCash": 4.196144361899001
+  },
+  "waiting": [
+    {
+      "DipThreshold": 0.1,
+      "HorizonYears": 10,
+      "Starts": 1746,
+      "WaitingWinRate": 0.4536082474226804,
+      "MedianCostOfWaiting": -0.030760453913263208,
+      "NeverArrivedShare": 0,
+      "MedianMonthsWaited": 16
+    },
+    {
+      "DipThreshold": 0.2,
+      "HorizonYears": 10,
+      "Starts": 1746,
+      "WaitingWinRate": 0.3768613974799542,
+      "MedianCostOfWaiting": -0.10015765412169397,
+      "NeverArrivedShare": 0.05555555555555555,
+      "MedianMonthsWaited": 34
+    },
+    {
+      "DipThreshold": 0.3,
+      "HorizonYears": 10,
+      "Starts": 1746,
+      "WaitingWinRate": 0.3413516609392898,
+      "MedianCostOfWaiting": -0.28843145651946733,
+      "NeverArrivedShare": 0.361397479954181,
+      "MedianMonthsWaited": 46
+    }
+  ]
+}

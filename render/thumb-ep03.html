@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ep03 thumbnails</title>
+<link rel="stylesheet" href="lib/slides.css">
+<style>
+/* Judged at roughly a fifth of this size in a phone feed. Episode 1's packaging
+   test settled the rule the hard way: the variant that needed reading lost, so
+   every variant here is one number and at most six words. */
+.thumb {
+  position: relative;
+  width: 1280px;
+  height: 720px;
+  background: var(--bg);
+  overflow: hidden;
+  margin: 0 auto 40px;
+}
+
+.thumb__content {
+  position: absolute;
+  inset: 0;
+  padding: 60px 68px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.thumb__kicker {
+  font-size: 30px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dca);
+  font-weight: 600;
+  margin-bottom: 16px;
+  max-width: 700px;
+}
+
+.thumb__huge {
+  font-size: 178px;
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+  color: var(--warn);
+}
+
+.thumb__line {
+  font-size: 54px;
+  font-weight: 750;
+  line-height: 1.08;
+  margin-top: 18px;
+  max-width: 700px;
+}
+
+.thumb__foot {
+  position: absolute;
+  left: 68px;
+  bottom: 46px;
+  font-size: 26px;
+  color: var(--muted);
+}
+
+.savers {
+  position: absolute;
+  right: 48px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 400px;
+}
+
+.savers__row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+  font-variant-numeric: tabular-nums;
+}
+
+.savers__label {
+  width: 60px;
+  text-align: right;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.savers__track {
+  flex: 1;
+  height: 44px;
+  background: rgba(38, 49, 64, 0.55);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.savers__bar { height: 100%; border-radius: 6px; }
+</style>
+</head>
+<body>
+<main id="deck"></main>
+
+<script type="module">
+const r = await (await fetch("../episodes/ep03-buying-at-the-top/results.json")).json();
+
+const saver = (s) => r.saverTiming40.find((x) => x.Strategy === s);
+const peak = saver("peak"), january = saver("january"), cash = saver("cash");
+const max = saver("trough").MedianWealth;
+const freq = r.frequency.find((f) => f.Basis === "NominalPrice" && f.From.startsWith("1960"));
+
+const bar = (value, colour) => `
+  <div class="savers__row">
+    <div class="savers__label" style="color:${colour}">${value.toFixed(0)}</div>
+    <div class="savers__track"><div class="savers__bar" style="width:${(value / max) * 100}%;background:${colour}"></div></div>
+  </div>`;
+
+const variants = [];
+
+// A - the penalty, with the three savers behind it so it does not look asserted.
+variants.push(`
+  <section class="thumb">
+    <div class="thumb__content">
+      <div class="thumb__kicker">Bought the top. Every year. 40 years.</div>
+      <div class="thumb__huge">${(Math.abs(peak.MedianVsImmediate) * 100).toFixed(0)}%</div>
+      <div class="thumb__line">is all it cost</div>
+    </div>
+    <div class="savers">
+      ${bar(january.MedianWealth, "var(--dca)")}
+      ${bar(peak.MedianWealth, "var(--lumpsum)")}
+      ${bar(cash.MedianWealth, "var(--warn)")}
+    </div>
+    <div class="thumb__foot">155 years, inflation adjusted</div>
+  </section>`);
+
+// B - the other mistake, in case A reads as "nothing happened".
+variants.push(`
+  <section class="thumb">
+    <div class="thumb__content">
+      <div class="thumb__kicker">Waited for a better price</div>
+      <div class="thumb__huge">${(Math.abs(cash.MedianVsImmediate) * 100).toFixed(0)}%</div>
+      <div class="thumb__line">the bigger<br>mistake</div>
+    </div>
+    <div class="savers">
+      ${bar(january.MedianWealth, "var(--dca)")}
+      ${bar(peak.MedianWealth, "var(--lumpsum)")}
+      ${bar(cash.MedianWealth, "var(--warn)")}
+    </div>
+    <div class="thumb__foot">40 years of saving, median outcome</div>
+  </section>`);
+
+// C - the premise, no chart at all, for the smallest sizes.
+variants.push(`
+  <section class="thumb">
+    <div class="thumb__content" style="align-items:flex-start">
+      <div class="thumb__kicker">All-time high</div>
+      <div class="thumb__huge" style="color:var(--ink);font-size:210px">1 in 3</div>
+      <div class="thumb__line">months since 1960</div>
+    </div>
+    <div class="thumb__foot">${freq.Highs} of ${freq.Months} months, S&amp;P price index</div>
+  </section>`);
+
+const only = Number(new URLSearchParams(location.search).get("only"));
+document.getElementById("deck").innerHTML =
+  only >= 1 && only <= variants.length
+    ? variants[only - 1].replace('class="thumb', 'style="margin:0" class="thumb')
+    : variants.join("");
+
+document.documentElement.dataset.ready = "1";
+</script>
+</body>
+</html>

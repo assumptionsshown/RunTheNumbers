@@ -4,7 +4,7 @@ using RunTheNumbers.Sim;
 
 // Episode simulations.
 //
-//   dotnet run --project src/RunTheNumbers.Sim -- <snapshotDir> <outputJson> [--episode ep02]
+//   dotnet run --project src/RunTheNumbers.Sim -- <snapshotDir> <outputJson> [--episode ep02|ep03]
 //
 // Episode 1 is the default and stays inline below. Later episodes live in their
 // own files, so adding one cannot disturb a published result.
@@ -22,6 +22,12 @@ var episode = episodeFlag >= 0 && episodeFlag + 1 < args.Length ? args[episodeFl
 if (episode == "ep02")
 {
     Ep02.Run(snapshotDir, outputPath);
+    return;
+}
+
+if (episode == "ep03")
+{
+    Ep03.Run(snapshotDir, outputPath);
     return;
 }
 
