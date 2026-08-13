@@ -22,7 +22,7 @@ Don't trust it. Re-run it.
 | 1 | Lump sum or spread it out? | [Lump Sum vs DCA: I Tested All 1,855 Months Since 1871](https://youtu.be/YV2cOHZvYcY) | `episodes/ep01-lumpsum-vs-dca/results.json` |
 | 2 | What does a 1% fee actually cost, and is it ever worth it? | [Paying 1% Costs More Than Panic Selling Every Crash for 30 Years](https://youtu.be/-v4_SQQyTNc) | `episodes/ep02-fees/results.json` |
 | 3 | What if you only ever bought at the market top? | [I Only Ever Bought at the Market Top. It Cost 10%.](https://youtu.be/X28aftmVfvM) | `episodes/ep03-buying-at-the-top/results.json` |
-| 4 | Which numbers flip rent versus buy? | Video link added at publication | `episodes/ep04-rent-vs-buy/results.json` |
+| 4 | Which numbers flip rent versus buy? | [Rent vs Buy: One Assumption Flipped 82% to 31%](https://youtu.be/_AazljGWkgc) | `episodes/ep04-rent-vs-buy/results.json` |
 
 ## Reproducing the episodes
 
