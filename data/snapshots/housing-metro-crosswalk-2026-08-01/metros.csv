@@ -1,0 +1,734 @@
+zillow_region_id,zillow_size_rank,zillow_metro_name,zillow_primary_state,fhfa_cbsa,fhfa_metro_name,fhfa_series_id,match_status,match_method,zori_first_month,zori_last_month,zori_numeric_months,zhvi_first_month,zhvi_last_month,zhvi_numeric_months,fhfa_first_quarter,fhfa_last_quarter,fhfa_numeric_quarters,overlap_start,overlap_end,overlap_months,value_overlap_start,value_overlap_end,value_overlap_months,notes
+394913,1,"New York, NY",NY,,,,excluded-msad-mismatch,,2015-01,2026-06,138,,,,,,,,,,,,,"Zillow publishes the whole MSA; FHFA candidates are division series: 35614 New York-Jersey City-White Plains, NY-NJ (MSAD)"
+753899,2,"Los Angeles, CA",CA,,,,excluded-msad-mismatch,,2015-01,2026-06,138,,,,,,,,,,,,,"Zillow publishes the whole MSA; FHFA candidates are division series: 31084 Los Angeles-Long Beach-Glendale, CA (MSAD)"
+394463,3,"Chicago, IL",IL,,,,excluded-msad-mismatch,,2015-01,2026-06,138,,,,,,,,,,,,,"Zillow publishes the whole MSA; FHFA candidates are division series: 16984 Chicago-Naperville-Schaumburg, IL (MSAD)"
+394514,4,"Dallas, TX",TX,,,,excluded-msad-mismatch,,2015-01,2026-06,138,,,,,,,,,,,,,"Zillow publishes the whole MSA; FHFA candidates are division series: 19124 Dallas-Plano-Irving, TX (MSAD)"
+394692,5,"Houston, TX",TX,26420,"Houston-Pasadena-The Woodlands, TX",fhfa-at-nsa-26420,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q1,2026Q1,201,2015-01,2026-03,135,2015-01,2026-03,135,
+395209,6,"Washington, DC",VA,,,,excluded-msad-mismatch,,2015-01,2026-06,138,,,,,,,,,,,,,"Zillow publishes the whole MSA; FHFA candidates are division series: 47764 Washington, DC-MD (MSAD)"
+394974,7,"Philadelphia, PA",PA,,,,excluded-msad-mismatch,,2015-01,2026-06,138,,,,,,,,,,,,,"Zillow publishes the whole MSA; FHFA candidates are division series: 37964 Philadelphia, PA (MSAD)"
+394856,8,"Miami, FL",FL,,,,excluded-msad-mismatch,,2015-01,2026-06,138,,,,,,,,,,,,,"Zillow publishes the whole MSA; FHFA candidates are division series: 33124 Miami-Miami Beach-Kendall, FL (MSAD)"
+394347,9,"Atlanta, GA",GA,,,,excluded-msad-mismatch,,2015-01,2026-06,138,,,,,,,,,,,,,"Zillow publishes the whole MSA; FHFA candidates are division series: 12054 Atlanta-Sandy Springs-Roswell, GA (MSAD)"
+394404,10,"Boston, MA",MA,,,,excluded-msad-mismatch,,2015-01,2026-06,138,,,,,,,,,,,,,"Zillow publishes the whole MSA; FHFA candidates are division series: 14454 Boston, MA (MSAD)"
+394976,11,"Phoenix, AZ",AZ,38060,"Phoenix-Mesa-Chandler, AZ",fhfa-at-nsa-38060,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,316,1977Q2,2026Q1,196,2015-01,2026-03,135,2015-01,2026-03,135,
+395057,12,"San Francisco, CA",CA,,,,excluded-msad-mismatch,,2015-01,2026-06,138,,,,,,,,,,,,,"Zillow publishes the whole MSA; FHFA candidates are division series: 41884 San Francisco-San Mateo-Redwood City, CA (MSAD)"
+395025,13,"Riverside, CA",CA,40140,"Riverside-San Bernardino-Ontario, CA",fhfa-at-nsa-40140,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q2,2026Q1,200,2015-01,2026-03,135,2015-01,2026-03,135,
+394532,14,"Detroit, MI",MI,,,,excluded-msad-mismatch,,2015-01,2026-06,138,,,,,,,,,,,,,"Zillow publishes the whole MSA; FHFA candidates are division series: 19804 Detroit-Dearborn-Livonia, MI (MSAD)"
+395078,15,"Seattle, WA",WA,,,,excluded-msad-mismatch,,2015-01,2026-06,138,,,,,,,,,,,,,"Zillow publishes the whole MSA; FHFA candidates are division series: 42644 Seattle-Bellevue-Kent, WA (MSAD)"
+394865,16,"Minneapolis, MN",MN,33460,"Minneapolis-St. Paul-Bloomington, MN-WI",fhfa-at-nsa-33460,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q2,2026Q1,200,2015-01,2026-03,135,2015-01,2026-03,135,
+395056,17,"San Diego, CA",CA,41740,"San Diego-Chula Vista-Carlsbad, CA",fhfa-at-nsa-41740,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1975Q4,2026Q1,202,2015-01,2026-03,135,2015-01,2026-03,135,
+395148,18,"Tampa, FL",FL,,,,excluded-msad-mismatch,,2015-01,2026-06,138,,,,,,,,,,,,,"Zillow publishes the whole MSA; FHFA candidates are division series: 45294 Tampa, FL (MSAD)"
+394530,19,"Denver, CO",CO,19740,"Denver-Aurora-Centennial, CO",fhfa-at-nsa-19740,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q2,2026Q1,200,2015-01,2026-03,135,2015-01,2026-03,135,
+394358,20,"Baltimore, MD",MD,12580,"Baltimore-Columbia-Towson, MD",fhfa-at-nsa-12580,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q2,2026Q1,200,2015-01,2026-03,135,2015-01,2026-03,135,
+395121,21,"St. Louis, MO",MO,41180,"St. Louis, MO-IL",fhfa-at-nsa-41180,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1975Q3,2026Q1,203,2015-01,2026-03,135,2015-01,2026-03,135,
+394943,22,"Orlando, FL",FL,36740,"Orlando-Kissimmee-Sanford, FL",fhfa-at-nsa-36740,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q2,2026Q1,192,2015-01,2026-03,135,2015-01,2026-03,135,
+394458,23,"Charlotte, NC",NC,16740,"Charlotte-Concord-Gastonia, NC-SC",fhfa-at-nsa-16740,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q1,2026Q1,197,2015-01,2026-03,135,2015-01,2026-03,135,
+395055,24,"San Antonio, TX",TX,41700,"San Antonio-New Braunfels, TX",fhfa-at-nsa-41700,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q1,2026Q1,189,2015-01,2026-03,135,2015-01,2026-03,135,
+394998,25,"Portland, OR",OR,38900,"Portland-Vancouver-Hillsboro, OR-WA",fhfa-at-nsa-38900,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q2,2026Q1,200,2015-01,2026-03,135,2015-01,2026-03,135,
+395045,26,"Sacramento, CA",CA,40900,"Sacramento-Roseville-Folsom, CA",fhfa-at-nsa-40900,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q2,2026Q1,200,2015-01,2026-03,135,2015-01,2026-03,135,
+394982,27,"Pittsburgh, PA",PA,38300,"Pittsburgh, PA",fhfa-at-nsa-38300,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q2,2026Q1,200,2015-01,2026-03,135,2015-01,2026-03,135,
+394466,28,"Cincinnati, OH",OH,17140,"Cincinnati, OH-KY-IN",fhfa-at-nsa-17140,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q2,2026Q1,200,2015-01,2026-03,135,2015-01,2026-03,135,
+394355,29,"Austin, TX",TX,12420,"Austin-Round Rock-San Marcos, TX",fhfa-at-nsa-12420,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q2,2026Q1,196,2015-01,2026-03,135,2015-01,2026-03,135,
+394775,30,"Las Vegas, NV",NV,29820,"Las Vegas-Henderson-North Las Vegas, NV",fhfa-at-nsa-29820,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q1,2026Q1,193,2015-01,2026-03,135,2015-01,2026-03,135,
+394735,31,"Kansas City, MO",MO,28140,"Kansas City, MO-KS",fhfa-at-nsa-28140,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q1,2026Q1,201,2015-01,2026-03,135,2015-01,2026-03,135,
+394492,32,"Columbus, OH",OH,18140,"Columbus, OH",fhfa-at-nsa-18140,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q2,2026Q1,200,2015-01,2026-03,135,2015-01,2026-03,135,
+394705,34,"Indianapolis, IN",IN,26900,"Indianapolis-Carmel-Greenwood, IN",fhfa-at-nsa-26900,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2003-06,2026-06,277,1976Q4,2026Q1,198,2015-01,2026-03,135,2015-01,2026-03,135,
+394475,35,"Cleveland, OH",OH,17410,"Cleveland, OH",fhfa-at-nsa-17410,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1975Q3,2026Q1,203,2015-01,2026-03,135,2015-01,2026-03,135,
+395059,36,"San Jose, CA",CA,41940,"San Jose-Sunnyvale-Santa Clara, CA",fhfa-at-nsa-41940,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,317,1975Q3,2026Q1,203,2015-01,2026-03,135,2015-01,2026-03,135,
+394902,37,"Nashville, TN",TN,34980,"Nashville-Davidson--Murfreesboro--Franklin, TN",fhfa-at-nsa-34980,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q2,2026Q1,188,2015-01,2026-03,135,2015-01,2026-03,135,
+395194,38,"Virginia Beach, VA",VA,47260,"Virginia Beach-Chesapeake-Norfolk, VA-NC",fhfa-at-nsa-47260,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q3,2026Q1,199,2015-01,2026-03,135,2015-01,2026-03,135,
+395005,39,"Providence, RI",RI,39300,"Providence-Warwick, RI-MA",fhfa-at-nsa-39300,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q3,2026Q1,199,2015-01,2026-03,135,2015-01,2026-03,135,
+394714,40,"Jacksonville, FL",FL,27260,"Jacksonville, FL",fhfa-at-nsa-27260,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q1,2026Q1,193,2015-01,2026-03,135,2015-01,2026-03,135,
+394862,41,"Milwaukee, WI",WI,33340,"Milwaukee-Waukesha, WI",fhfa-at-nsa-33340,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q1,2026Q1,197,2015-01,2026-03,135,2015-01,2026-03,135,
+394935,42,"Oklahoma City, OK",OK,36420,"Oklahoma City, OK",fhfa-at-nsa-36420,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q1,2026Q1,197,2015-01,2026-03,135,2015-01,2026-03,135,
+395012,43,"Raleigh, NC",NC,39580,"Raleigh-Cary, NC",fhfa-at-nsa-39580,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q4,2026Q1,194,2015-01,2026-03,135,2015-01,2026-03,135,
+394849,44,"Memphis, TN",TN,32820,"Memphis, TN-MS-AR",fhfa-at-nsa-32820,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q2,2026Q1,196,2015-01,2026-03,135,2015-01,2026-03,135,
+395022,45,"Richmond, VA",VA,40060,"Richmond, VA",fhfa-at-nsa-40060,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,317,1976Q1,2026Q1,201,2015-01,2026-03,135,2015-01,2026-03,135,
+394807,46,"Louisville, KY",KY,31140,"Louisville/Jefferson County, KY-IN",fhfa-at-nsa-31140,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q3,2026Q1,199,2015-01,2026-03,135,2015-01,2026-03,135,
+394910,47,"New Orleans, LA",LA,35380,"New Orleans-Metairie, LA",fhfa-at-nsa-35380,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q3,2026Q1,195,2015-01,2026-03,135,2015-01,2026-03,135,
+395053,48,"Salt Lake City, UT",UT,41620,"Salt Lake City-Murray, UT",fhfa-at-nsa-41620,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q1,2026Q1,197,2015-01,2026-03,135,2015-01,2026-03,135,
+394669,49,"Hartford, CT",CT,25540,"Hartford-West Hartford-East Hartford, CT",fhfa-at-nsa-25540,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q4,2026Q1,194,2015-01,2026-03,135,2015-01,2026-03,135,
+394425,50,"Buffalo, NY",NY,15380,"Buffalo-Cheektowaga, NY",fhfa-at-nsa-15380,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q3,2026Q1,195,2015-01,2026-03,135,2015-01,2026-03,135,
+394388,51,"Birmingham, AL",AL,13820,"Birmingham, AL",fhfa-at-nsa-13820,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q1,2026Q1,193,2015-01,2026-03,135,2015-01,2026-03,135,
+395031,52,"Rochester, NY",NY,40380,"Rochester, NY",fhfa-at-nsa-40380,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q3,2026Q1,191,2015-01,2026-03,135,2015-01,2026-03,135,
+394640,53,"Grand Rapids, MI",MI,24340,"Grand Rapids-Wyoming-Kentwood, MI",fhfa-at-nsa-24340,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q3,2026Q1,191,2015-01,2026-03,135,2015-01,2026-03,135,
+395167,54,"Tucson, AZ",AZ,46060,"Tucson, AZ",fhfa-at-nsa-46060,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,317,1977Q2,2026Q1,196,2015-01,2026-03,135,2015-01,2026-03,135,
+753924,55,"Urban Honolulu, HI",HI,46520,"Urban Honolulu, HI",fhfa-at-nsa-46520,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q1,2026Q1,197,2015-01,2026-03,135,2015-01,2026-03,135,
+395169,56,"Tulsa, OK",OK,46140,"Tulsa, OK",fhfa-at-nsa-46140,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q1,2026Q1,197,2015-01,2026-03,135,2015-01,2026-03,135,
+394619,57,"Fresno, CA",CA,23420,"Fresno, CA",fhfa-at-nsa-23420,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q4,2026Q1,198,2015-01,2026-03,135,2015-01,2026-03,135,
+395238,58,"Worcester, MA",MA,49340,"Worcester, MA",fhfa-at-nsa-49340,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q2,2026Q1,188,2015-01,2026-03,135,2015-01,2026-03,135,
+394938,59,"Omaha, NE",NE,36540,"Omaha, NE-IA",fhfa-at-nsa-36540,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q4,2026Q1,194,2015-01,2026-03,135,2015-01,2026-03,135,
+394415,60,"Bridgeport, CT",CT,14860,"Bridgeport-Stamford-Danbury, CT",fhfa-at-nsa-14860,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q3,2026Q1,199,2015-01,2026-03,135,2015-01,2026-03,135,
+394653,61,"Greenville, SC",SC,24860,"Greenville-Anderson-Greer, SC",fhfa-at-nsa-24860,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q3,2026Q1,187,2015-01,2026-03,135,2015-01,2026-03,135,
+394312,62,"Albuquerque, NM",NM,10740,"Albuquerque, NM",fhfa-at-nsa-10740,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2002-06,2026-06,289,1977Q2,2026Q1,196,2015-01,2026-03,135,2015-01,2026-03,135,
+394357,63,"Bakersfield, CA",CA,12540,"Bakersfield-Delano, CA",fhfa-at-nsa-12540,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q3,2026Q1,195,2015-01,2026-03,135,2015-01,2026-03,135,
+394308,64,"Albany, NY",NY,10580,"Albany-Schenectady-Troy, NY",fhfa-at-nsa-10580,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q3,2026Q1,186,2015-01,2026-03,135,2015-01,2026-03,135,
+394753,65,"Knoxville, TN",TN,28940,"Knoxville, TN",fhfa-at-nsa-28940,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1983Q1,2026Q1,173,2015-01,2026-03,135,2015-01,2026-03,135,
+394367,66,"Baton Rouge, LA",LA,12940,"Baton Rouge, LA",fhfa-at-nsa-12940,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2002-04,2026-06,291,1978Q1,2026Q1,193,2015-01,2026-03,135,2015-01,2026-03,135,
+394843,67,"McAllen, TX",TX,32580,"McAllen-Edinburg-Mission, TX",fhfa-at-nsa-32580,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2007-01,2026-06,230,1986Q4,2026Q1,158,2015-01,2026-03,135,2015-01,2026-03,135,
+394908,68,"New Haven, CT",CT,35300,"New Haven, CT",fhfa-at-nsa-35300,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q4,2026Q1,190,2015-01,2026-03,135,2015-01,2026-03,135,
+394561,69,"El Paso, TX",TX,21340,"El Paso, TX",fhfa-at-nsa-21340,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1981Q1,2026Q1,181,2015-01,2026-03,135,2015-01,2026-03,135,
+394318,70,"Allentown, PA",PA,10900,"Allentown-Bethlehem-Easton, PA-NJ",fhfa-at-nsa-10900,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q2,2026Q1,192,2015-01,2026-03,135,2015-01,2026-03,135,
+394952,71,"Oxnard, CA",CA,37100,"Oxnard-Thousand Oaks-Ventura, CA",fhfa-at-nsa-37100,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q2,2026Q1,200,2015-01,2026-03,135,2015-01,2026-03,135,
+394486,72,"Columbia, SC",SC,17900,"Columbia, SC",fhfa-at-nsa-17900,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,317,1978Q4,2026Q1,190,2015-01,2026-03,135,2015-01,2026-03,135,
+753906,73,"North Port, FL",FL,35840,"North Port-Bradenton-Sarasota, FL",fhfa-at-nsa-35840,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q4,2026Q1,194,2015-01,2026-03,135,2015-01,2026-03,135,
+845158,74,"Dayton, OH",OH,19430,"Dayton-Kettering-Beavercreek, OH",fhfa-at-nsa-19430,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,,,,1977Q1,2026Q1,197,2015-01,2026-03,135,,,,
+394457,75,"Charleston, SC",SC,16700,"Charleston-North Charleston, SC",fhfa-at-nsa-16700,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q3,2026Q1,191,2015-01,2026-03,135,2015-01,2026-03,135,
+394648,76,"Greensboro, NC",NC,24660,"Greensboro-High Point, NC",fhfa-at-nsa-24660,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q4,2026Q1,190,2015-01,2026-03,135,2015-01,2026-03,135,
+395134,77,"Stockton, CA",CA,44700,"Stockton-Lodi, CA",fhfa-at-nsa-44700,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q2,2026Q1,196,2015-01,2026-03,135,2015-01,2026-03,135,
+394440,78,"Cape Coral, FL",FL,15980,"Cape Coral-Fort Myers, FL",fhfa-at-nsa-15980,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1981Q3,2026Q1,179,2015-01,2026-03,135,2015-01,2026-03,135,
+394399,79,"Boise City, ID",ID,14260,"Boise City, ID",fhfa-at-nsa-14260,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2001-01,2026-06,303,1979Q2,2026Q1,188,2015-01,2026-03,135,2015-01,2026-03,135,
+394484,80,"Colorado Springs, CO",CO,17820,"Colorado Springs, CO",fhfa-at-nsa-17820,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q1,2026Q1,189,2015-01,2026-03,135,2015-01,2026-03,135,
+394798,81,"Little Rock, AR",AR,30780,"Little Rock-North Little Rock-Conway, AR",fhfa-at-nsa-30780,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,317,1977Q4,2026Q1,194,2015-01,2026-03,135,2015-01,2026-03,135,
+394766,82,"Lakeland, FL",FL,29460,"Lakeland-Winter Haven, FL",fhfa-at-nsa-29460,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,317,1981Q2,2026Q1,180,2015-01,2026-03,135,2015-01,2026-03,135,
+394304,83,"Akron, OH",OH,10420,"Akron, OH",fhfa-at-nsa-10420,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q3,2026Q1,199,2015-01,2026-03,135,2015-01,2026-03,135,
+394531,84,"Des Moines, IA",IA,19780,"Des Moines-West Des Moines, IA",fhfa-at-nsa-19780,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q2,2026Q1,196,2015-01,2026-03,135,2015-01,2026-03,135,
+395115,85,"Springfield, MA",MA,44140,"Springfield, MA",fhfa-at-nsa-44140,matched,same display state + normalized official-name leading core city,2015-02,2026-06,137,2000-01,2026-06,318,1979Q3,2026Q1,187,2015-02,2026-03,134,2015-02,2026-03,134,
+845159,86,"Poughkeepsie, NY",NY,28880,"Kiryas Joel-Poughkeepsie-Newburgh, NY",fhfa-at-nsa-28880,matched,official FHFA 2023 CBSA alias,2015-01,2026-06,136,,,,1980Q2,2026Q1,183,2015-01,2026-03,135,,,,
+394931,87,"Ogden, UT",UT,36260,"Ogden, UT",fhfa-at-nsa-36260,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q1,2026Q1,193,2015-01,2026-03,135,2015-01,2026-03,135,
+394816,88,"Madison, WI",WI,31540,"Madison, WI",fhfa-at-nsa-31540,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q4,2026Q1,197,2015-01,2026-03,135,2015-01,2026-03,135,
+395235,89,"Winston, NC",NC,49180,"Winston-Salem, NC",fhfa-at-nsa-49180,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q2,2026Q1,188,2015-01,2026-03,135,2015-01,2026-03,135,
+394528,90,"Deltona, FL",FL,19660,"Deltona-Daytona Beach-Ormond Beach, FL",fhfa-at-nsa-19660,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q1,2026Q1,193,2015-01,2026-03,135,2015-01,2026-03,135,
+395143,91,"Syracuse, NY",NY,45060,"Syracuse, NY",fhfa-at-nsa-45060,matched,same display state + normalized official-name leading core city,2016-01,2026-06,126,2000-01,2026-06,318,1977Q4,2026Q1,192,2016-01,2026-03,123,2016-01,2026-03,123,
+395006,92,"Provo, UT",UT,39340,"Provo-Orem-Lehi, UT",fhfa-at-nsa-39340,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-05,2026-06,314,1982Q2,2026Q1,176,2015-01,2026-03,135,2015-01,2026-03,135,
+395160,93,"Toledo, OH",OH,45780,"Toledo, OH",fhfa-at-nsa-45780,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q4,2026Q1,190,2015-01,2026-03,135,2015-01,2026-03,135,
+395224,94,"Wichita, KS",KS,48620,"Wichita, KS",fhfa-at-nsa-48620,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2002-04,2026-06,291,1976Q3,2026Q1,199,2015-01,2026-03,135,2015-01,2026-03,135,
+394549,95,"Durham, NC",NC,20500,"Durham-Chapel Hill, NC",fhfa-at-nsa-20500,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,317,1978Q3,2026Q1,190,2015-01,2026-03,135,2015-01,2026-03,135,
+394352,96,"Augusta, GA",GA,12260,"Augusta-Richmond County, GA-SC",fhfa-at-nsa-12260,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q3,2026Q1,187,2015-01,2026-03,135,2015-01,2026-03,135,
+394957,97,"Palm Bay, FL",FL,37340,"Palm Bay-Melbourne-Titusville, FL",fhfa-at-nsa-37340,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q4,2026Q1,186,2015-01,2026-03,135,2015-01,2026-03,135,
+394711,98,"Jackson, MS",MS,27140,"Jackson, MS",fhfa-at-nsa-27140,matched,same display state + normalized official-name leading core city,2016-05,2026-06,122,2003-04,2026-06,279,1980Q2,2026Q1,184,2016-05,2026-03,119,2016-05,2026-03,119,
+394666,99,"Harrisburg, PA",PA,25420,"Harrisburg-Carlisle, PA",fhfa-at-nsa-25420,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q2,2026Q1,188,2015-01,2026-03,135,2015-01,2026-03,135,
+395113,100,"Spokane, WA",WA,44060,"Spokane-Spokane Valley, WA",fhfa-at-nsa-44060,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q3,2026Q1,195,2015-01,2026-03,135,2015-01,2026-03,135,
+395075,101,"Scranton, PA",PA,42540,"Scranton--Wilkes-Barre, PA",fhfa-at-nsa-42540,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1983Q3,2026Q1,171,2015-01,2026-03,135,2015-01,2026-03,135,
+394460,102,"Chattanooga, TN",TN,16860,"Chattanooga, TN-GA",fhfa-at-nsa-16860,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1980Q4,2026Q1,182,2015-01,2026-03,135,2015-01,2026-03,135,
+394871,103,"Modesto, CA",CA,33700,"Modesto, CA",fhfa-at-nsa-33700,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q2,2026Q1,196,2015-01,2026-03,135,2015-01,2026-03,135,
+394768,104,"Lancaster, PA",PA,29540,"Lancaster, PA",fhfa-at-nsa-29540,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2002-08,2026-06,287,1979Q1,2026Q1,189,2015-01,2026-03,135,2015-01,2026-03,135,
+394997,105,"Portland, ME",ME,38860,"Portland-South Portland, ME",fhfa-at-nsa-38860,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1982Q2,2026Q1,176,2015-01,2026-03,135,2015-01,2026-03,135,
+395245,106,"Youngstown, OH",OH,49660,"Youngstown-Warren, OH",fhfa-at-nsa-49660,matched,same display state + normalized official-name leading core city,2015-03,2026-06,135,2000-01,2026-06,318,1985Q3,2026Q1,163,2015-03,2026-03,133,2015-03,2026-03,133,
+394770,107,"Lansing, MI",MI,29620,"Lansing-East Lansing, MI",fhfa-at-nsa-29620,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q1,2026Q1,193,2015-01,2026-03,135,2015-01,2026-03,135,
+394590,108,"Fayetteville, AR",AR,22220,"Fayetteville-Springdale-Rogers, AR",fhfa-at-nsa-22220,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,314,1979Q3,2026Q1,183,2015-01,2026-03,135,2015-01,2026-03,135,
+394589,109,"Fayetteville, NC",NC,22180,"Fayetteville, NC",fhfa-at-nsa-22180,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1987Q1,2026Q1,157,2015-01,2026-03,135,2015-01,2026-03,135,
+394792,110,"Lexington, KY",KY,30460,"Lexington-Fayette, KY",fhfa-at-nsa-30460,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q1,2026Q1,189,2015-01,2026-03,135,2015-01,2026-03,135,
+394971,111,"Pensacola, FL",FL,37860,"Pensacola-Ferry Pass-Brent, FL",fhfa-at-nsa-37860,matched,same display state + normalized official-name leading core city,2015-01,2026-06,137,2000-01,2026-06,318,1983Q2,2026Q1,172,2015-01,2026-03,135,2015-01,2026-03,135,
+395068,112,"Santa Rosa, CA",CA,42220,"Santa Rosa-Petaluma, CA",fhfa-at-nsa-42220,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1976Q4,2026Q1,198,2015-01,2026-03,135,2015-01,2026-03,135,
+395019,113,"Reno, NV",NV,39900,"Reno, NV",fhfa-at-nsa-39900,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q2,2026Q1,192,2015-01,2026-03,135,2015-01,2026-03,135,
+394698,114,"Huntsville, AL",AL,26620,"Huntsville, AL",fhfa-at-nsa-26620,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-08,2026-06,306,1984Q3,2026Q1,167,2015-01,2026-03,135,2015-01,2026-03,135,
+394995,115,"Port St. Lucie, FL",FL,38940,"Port St. Lucie, FL",fhfa-at-nsa-38940,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q1,2026Q1,189,2015-01,2026-03,135,2015-01,2026-03,135,
+394761,116,"Lafayette, LA",LA,29180,"Lafayette, LA",fhfa-at-nsa-29180,matched,same display state + normalized official-name leading core city,2016-05,2026-06,122,2003-09,2026-06,274,1980Q3,2026Q1,183,2016-05,2026-03,119,2016-05,2026-03,119,
+394898,117,"Myrtle Beach, SC",SC,34820,"Myrtle Beach-Conway-North Myrtle Beach, SC",fhfa-at-nsa-34820,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2001-11,2026-06,296,1987Q1,2026Q1,157,2015-01,2026-03,135,2015-01,2026-03,135,
+395116,118,"Springfield, MO",MO,44180,"Springfield, MO",fhfa-at-nsa-44180,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2007-08,2026-06,227,1984Q1,2026Q1,169,2015-01,2026-03,135,2015-01,2026-03,135,
+395195,119,"Visalia, CA",CA,47300,"Visalia, CA",fhfa-at-nsa-47300,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q1,2026Q1,192,2015-01,2026-03,135,2015-01,2026-03,135,
+394746,120,"Killeen, TX",TX,28660,"Killeen-Temple, TX",fhfa-at-nsa-28660,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2008-10,2026-06,213,1985Q2,2026Q1,164,2015-01,2026-03,135,2015-01,2026-03,135,
+394338,121,"Asheville, NC",NC,11700,"Asheville, NC",fhfa-at-nsa-11700,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1984Q4,2026Q1,166,2015-01,2026-03,135,2015-01,2026-03,135,
+395244,122,"York, PA",PA,49620,"York-Hanover, PA",fhfa-at-nsa-49620,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,317,1983Q3,2026Q1,171,2015-01,2026-03,135,2015-01,2026-03,135,
+395183,123,"Vallejo, CA",CA,46700,"Vallejo, CA",fhfa-at-nsa-46700,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q1,2026Q1,193,2015-01,2026-03,135,2015-01,2026-03,135,
+753917,124,"Santa Maria, CA",CA,42200,"Santa Maria-Santa Barbara, CA",fhfa-at-nsa-42200,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q3,2026Q1,195,2015-01,2026-03,135,2015-01,2026-03,135,
+395050,125,"Salinas, CA",CA,41500,"Salinas, CA",fhfa-at-nsa-41500,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q3,2026Q1,195,2015-01,2026-03,135,2015-01,2026-03,135,
+395048,126,"Salem, OR",OR,41420,"Salem, OR",fhfa-at-nsa-41420,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q1,2026Q1,187,2015-01,2026-03,135,2015-01,2026-03,135,
+394870,127,"Mobile, AL",AL,33660,"Mobile, AL",fhfa-at-nsa-33660,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1983Q3,2026Q1,171,2015-01,2026-03,135,2015-01,2026-03,135,
+395015,128,"Reading, PA",PA,39740,"Reading, PA",fhfa-at-nsa-39740,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q4,2026Q1,186,2015-01,2026-03,135,2015-01,2026-03,135,
+394502,129,"Corpus Christi, TX",TX,18580,"Corpus Christi, TX",fhfa-at-nsa-18580,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2004-11,2026-06,260,1979Q1,2026Q1,189,2015-01,2026-03,135,2015-01,2026-03,135,
+394421,130,"Brownsville, TX",TX,15180,"Brownsville-Harlingen, TX",fhfa-at-nsa-15180,matched,same display state + normalized official-name leading core city,2015-06,2026-06,133,2001-01,2026-06,306,1988Q2,2026Q1,152,2015-06,2026-03,130,2015-06,2026-03,130,
+394820,131,"Manchester, NH",NH,31700,"Manchester-Nashua, NH",fhfa-at-nsa-31700,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1980Q2,2026Q1,183,2015-01,2026-03,135,2015-01,2026-03,135,
+394612,132,"Fort Wayne, IN",IN,23060,"Fort Wayne, IN",fhfa-at-nsa-23060,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2003-08,2026-06,275,1977Q4,2026Q1,194,2015-01,2026-03,135,2015-01,2026-03,135,
+394658,133,"Gulfport, MS",MS,25060,"Gulfport-Biloxi, MS",fhfa-at-nsa-25060,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2010-07,2026-06,192,1986Q2,2026Q1,160,2015-01,2026-03,135,2015-01,2026-03,135,
+395051,134,"Salisbury, MD",DE,41540,"Salisbury, MD",fhfa-at-nsa-41540,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1991Q2,2026Q1,140,2015-01,2026-03,135,2015-01,2026-03,135,
+394596,135,"Flint, MI",MI,22420,"Flint, MI",fhfa-at-nsa-22420,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,317,1977Q3,2026Q1,195,2015-01,2026-03,135,2015-01,2026-03,135,
+394972,136,"Peoria, IL",IL,37900,"Peoria, IL",fhfa-at-nsa-37900,matched,same display state + normalized official-name leading core city,2015-05,2026-06,133,2002-04,2026-06,291,1979Q2,2026Q1,188,2015-05,2026-03,131,2015-05,2026-03,131,
+394439,137,"Canton, OH",OH,15940,"Canton-Massillon, OH",fhfa-at-nsa-15940,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q2,2026Q1,196,2015-01,2026-03,135,2015-01,2026-03,135,
+395070,138,"Savannah, GA",GA,42340,"Savannah, GA",fhfa-at-nsa-42340,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1984Q1,2026Q1,169,2015-01,2026-03,135,2015-01,2026-03,135,
+394327,139,"Anchorage, AK",AK,11260,"Anchorage, AK",fhfa-at-nsa-11260,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,316,1978Q2,2026Q1,184,2015-01,2026-03,135,2015-01,2026-03,135,
+394372,140,"Beaumont, TX",TX,13140,"Beaumont-Port Arthur, TX",fhfa-at-nsa-13140,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2005-01,2026-06,258,1978Q2,2026Q1,192,2015-01,2026-03,135,2015-01,2026-03,135,
+395096,141,"Shreveport, LA",LA,43340,"Shreveport-Bossier City, LA",fhfa-at-nsa-43340,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2005-04,2026-06,255,1984Q1,2026Q1,169,2015-01,2026-03,135,2015-01,2026-03,135,
+395164,142,"Trenton, NJ",NJ,45940,"Trenton-Princeton, NJ",fhfa-at-nsa-45940,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q1,2026Q1,189,2015-01,2026-03,135,2015-01,2026-03,135,
+394875,143,"Montgomery, AL",AL,33860,"Montgomery, AL",fhfa-at-nsa-33860,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1986Q1,2026Q1,161,2015-01,2026-03,135,2015-01,2026-03,135,
+394520,144,"Davenport, IA",IL,19340,"Davenport-Moline-Rock Island, IA-IL",fhfa-at-nsa-19340,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2004-07,2026-06,264,1978Q2,2026Q1,191,2015-01,2026-03,135,2015-01,2026-03,135,
+395146,145,"Tallahassee, FL",FL,45220,"Tallahassee, FL",fhfa-at-nsa-45220,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1980Q2,2026Q1,184,2015-01,2026-03,135,2015-01,2026-03,135,
+394576,146,"Eugene, OR",OR,21660,"Eugene-Springfield, OR",fhfa-at-nsa-21660,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q3,2026Q1,195,2015-01,2026-03,135,2015-01,2026-03,135,
+394901,147,"Naples, FL",FL,34940,"Naples-Marco Island, FL",fhfa-at-nsa-34940,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,317,1984Q2,2026Q1,168,2015-01,2026-03,135,2015-01,2026-03,135,
+394332,148,"Ann Arbor, MI",MI,11460,"Ann Arbor, MI",fhfa-at-nsa-11460,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q2,2026Q1,191,2015-01,2026-03,135,2015-01,2026-03,135,
+394927,149,"Ocala, FL",FL,36100,"Ocala, FL",fhfa-at-nsa-36100,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2004-01,2026-06,270,1986Q2,2026Q1,160,2015-01,2026-03,135,2015-01,2026-03,135,
+394679,150,"Hickory, NC",NC,25860,"Hickory-Lenoir-Morganton, NC",fhfa-at-nsa-25860,matched,same display state + normalized official-name leading core city,2021-02,2026-06,65,2000-01,2026-06,318,1986Q4,2026Q1,158,2021-02,2026-03,62,2021-02,2026-03,62,
+394697,151,"Huntington, WV",OH,26580,"Huntington-Ashland, WV-KY-OH",fhfa-at-nsa-26580,matched,same display state + normalized official-name leading core city,2016-11,2026-06,116,2000-01,2026-06,314,1986Q4,2026Q1,158,2016-11,2026-03,113,2016-11,2026-03,113,
+394602,152,"Fort Collins, CO",CO,22660,"Fort Collins-Loveland, CO",fhfa-at-nsa-22660,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q3,2026Q1,195,2015-01,2026-03,135,2015-01,2026-03,135,
+395033,153,"Rockford, IL",IL,40420,"Rockford, IL",fhfa-at-nsa-40420,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q3,2026Q1,190,2015-01,2026-03,135,2015-01,2026-03,135,
+394796,154,"Lincoln, NE",NE,30700,"Lincoln, NE",fhfa-at-nsa-30700,matched,same display state + normalized official-name leading core city,2016-01,2026-06,126,2000-01,2026-06,318,1979Q1,2026Q1,183,2016-01,2026-03,123,2016-01,2026-03,123,
+394622,155,"Gainesville, FL",FL,23540,"Gainesville, FL",fhfa-at-nsa-23540,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1984Q1,2026Q1,169,2015-01,2026-03,135,2015-01,2026-03,135,
+394405,156,"Boulder, CO",CO,14500,"Boulder, CO",fhfa-at-nsa-14500,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q1,2026Q1,193,2015-01,2026-03,135,2015-01,2026-03,135,
+394646,157,"Green Bay, WI",WI,24580,"Green Bay, WI",fhfa-at-nsa-24580,matched,same display state + normalized official-name leading core city,2021-01,2026-06,66,2001-10,2026-06,296,1985Q3,2026Q1,163,2021-01,2026-03,63,2021-01,2026-03,63,
+394488,158,"Columbus, GA",GA,17980,"Columbus, GA-AL",fhfa-at-nsa-17980,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,313,1985Q4,2026Q1,162,2015-01,2026-03,135,2015-01,2026-03,135,
+395107,159,"South Bend, IN",IN,43780,"South Bend-Mishawaka, IN-MI",fhfa-at-nsa-43780,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2007-08,2026-06,227,1982Q1,2026Q1,177,2015-01,2026-03,135,2015-01,2026-03,135,
+395109,160,"Spartanburg, SC",SC,43900,"Spartanburg, SC",fhfa-at-nsa-43900,matched,same display state + normalized official-name leading core city,2015-12,2026-06,127,2003-03,2026-06,280,1986Q3,2026Q1,159,2015-12,2026-03,124,2015-12,2026-03,124,
+394645,161,"Greeley, CO",CO,24540,"Greeley, CO",fhfa-at-nsa-24540,matched,same display state + normalized official-name leading core city,2015-03,2026-06,136,2000-01,2026-06,318,1983Q2,2026Q1,172,2015-03,2026-03,133,2015-03,2026-03,133,
+394808,162,"Lubbock, TX",TX,31180,"Lubbock, TX",fhfa-at-nsa-31180,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,316,1979Q1,2026Q1,189,2015-01,2026-03,135,2015-01,2026-03,135,
+394471,163,"Clarksville, TN",TN,17300,"Clarksville, TN-KY",fhfa-at-nsa-17300,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1992Q3,2026Q1,135,2015-01,2026-03,135,2015-01,2026-03,135,
+395028,164,"Roanoke, VA",VA,40220,"Roanoke, VA",fhfa-at-nsa-40220,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2004-11,2026-06,260,1979Q4,2026Q1,185,2015-01,2026-03,135,2015-01,2026-03,135,
+394579,165,"Evansville, IN",IN,21780,"Evansville, IN",fhfa-at-nsa-21780,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1981Q1,2026Q1,177,2015-01,2026-03,135,2015-01,2026-03,135,
+394747,167,"Kingsport, TN",TN,28700,"Kingsport-Bristol, TN-VA",fhfa-at-nsa-28700,matched,same display state + normalized official-name leading core city,2021-12,2026-06,55,2000-01,2026-06,318,1987Q1,2026Q1,157,2021-12,2026-03,52,2021-12,2026-03,52,
+394741,168,"Kennewick, WA",WA,28420,"Kennewick-Richland, WA",fhfa-at-nsa-28420,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,314,1979Q1,2026Q1,189,2015-01,2026-03,135,2015-01,2026-03,135,
+395179,169,"Utica, NY",NY,46540,"Utica-Rome, NY",fhfa-at-nsa-46540,matched,same display state + normalized official-name leading core city,2021-05,2026-06,62,2000-01,2026-06,318,1985Q4,2026Q1,162,2021-05,2026-03,59,2021-05,2026-03,59,
+394660,170,"Hagerstown, MD",MD,25180,"Hagerstown-Martinsburg, MD-WV",fhfa-at-nsa-25180,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1988Q4,2026Q1,150,2015-01,2026-03,135,2015-01,2026-03,135,
+394543,171,"Duluth, MN",MN,20260,"Duluth, MN-WI",fhfa-at-nsa-20260,matched,same display state + normalized official-name leading core city,2015-09,2026-06,130,2004-08,2026-06,263,1986Q2,2026Q1,160,2015-09,2026-03,127,2015-09,2026-03,127,
+394937,172,"Olympia, WA",WA,36500,"Olympia-Lacey-Tumwater, WA",fhfa-at-nsa-36500,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,317,1980Q4,2026Q1,182,2015-01,2026-03,135,2015-01,2026-03,135,
+394803,173,"Longview, TX",TX,30980,"Longview, TX",fhfa-at-nsa-30980,matched,same display state + normalized official-name leading core city,2016-07,2026-06,120,2000-01,2026-06,317,1981Q3,2026Q1,179,2016-07,2026-03,117,2016-07,2026-03,117,
+395229,174,"Wilmington, NC",NC,48900,"Wilmington, NC",fhfa-at-nsa-48900,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2003-05,2026-06,278,1984Q1,2026Q1,169,2015-01,2026-03,135,2015-01,2026-03,135,
+395061,175,"San Luis Obispo, CA",CA,42020,"San Luis Obispo-Paso Robles, CA",fhfa-at-nsa-42020,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1977Q4,2026Q1,194,2015-01,2026-03,135,2015-01,2026-03,135,
+753875,176,"Crestview, FL",FL,18880,"Crestview-Fort Walton Beach-Destin, FL",fhfa-at-nsa-18880,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1986Q4,2026Q1,158,2015-01,2026-03,135,2015-01,2026-03,135,
+394851,177,"Merced, CA",CA,32900,"Merced, CA",fhfa-at-nsa-32900,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2001-01,2026-06,305,1979Q1,2026Q1,187,2015-01,2026-03,135,2015-01,2026-03,135,
+395197,178,"Waco, TX",TX,47380,"Waco, TX",fhfa-at-nsa-47380,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2009-01,2026-06,210,1986Q2,2026Q1,160,2015-01,2026-03,135,2015-01,2026-03,135,
+394447,179,"Cedar Rapids, IA",IA,16300,"Cedar Rapids, IA",fhfa-at-nsa-16300,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q1,2026Q1,180,2015-01,2026-03,135,2015-01,2026-03,135,
+394348,180,"Atlantic City, NJ",NJ,12100,"Atlantic City-Hammonton, NJ",fhfa-at-nsa-12100,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q4,2026Q1,186,2015-01,2026-03,135,2015-01,2026-03,135,
+394412,181,"Bremerton, WA",WA,14740,"Bremerton-Silverdale-Port Orchard, WA",fhfa-at-nsa-14740,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q2,2026Q1,188,2015-01,2026-03,135,2015-01,2026-03,135,
+395103,182,"Sioux Falls, SD",SD,43620,"Sioux Falls, SD-MN",fhfa-at-nsa-43620,matched,same display state + normalized official-name leading core city,2016-01,2026-06,126,2006-09,2026-06,238,1986Q2,2026Q1,160,2016-01,2026-03,123,2016-01,2026-03,123,
+395065,183,"Santa Cruz, CA",CA,42100,"Santa Cruz-Watsonville, CA",fhfa-at-nsa-42100,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q1,2026Q1,193,2015-01,2026-03,135,2015-01,2026-03,135,
+394572,184,"Erie, PA",PA,21500,"Erie, PA",fhfa-at-nsa-21500,matched,same display state + normalized official-name leading core city,2016-05,2026-06,121,2000-01,2026-06,318,1984Q3,2026Q1,167,2016-05,2026-03,119,2016-05,2026-03,119,
+394924,185,"Norwich, CT",CT,35980,"Norwich-New London-Willimantic, CT",fhfa-at-nsa-35980,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1985Q3,2026Q1,163,2015-01,2026-03,135,2015-01,2026-03,135,
+394323,186,"Amarillo, TX",TX,11100,"Amarillo, TX",fhfa-at-nsa-11100,matched,same display state + normalized official-name leading core city,2016-04,2026-06,123,2009-01,2026-06,210,1979Q4,2026Q1,186,2016-04,2026-03,120,2016-04,2026-03,120,
+394772,187,"Laredo, TX",TX,29700,"Laredo, TX",fhfa-at-nsa-29700,matched,same display state + normalized official-name leading core city,2017-01,2026-06,113,2009-01,2026-06,210,1992Q3,2026Q1,135,2017-01,2026-03,111,2017-01,2026-03,111,
+395171,188,"Tuscaloosa, AL",AL,46220,"Tuscaloosa, AL",fhfa-at-nsa-46220,matched,same display state + normalized official-name leading core city,2016-05,2026-06,122,2000-01,2026-06,318,1990Q2,2026Q1,144,2016-05,2026-03,119,2016-05,2026-03,119,
+394483,189,"College Station, TX",TX,17780,"College Station-Bryan, TX",fhfa-at-nsa-17780,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2009-01,2026-06,210,1983Q3,2026Q1,171,2015-01,2026-03,135,2015-01,2026-03,135,
+394732,190,"Kalamazoo, MI",MI,28020,"Kalamazoo-Portage, MI",fhfa-at-nsa-28020,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q2,2026Q1,187,2015-01,2026-03,135,2015-01,2026-03,135,
+394811,191,"Lynchburg, VA",VA,31340,"Lynchburg, VA",fhfa-at-nsa-31340,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1986Q2,2026Q1,160,2015-01,2026-03,135,2015-01,2026-03,135,
+394455,192,"Charleston, WV",WV,16620,"Charleston, WV",fhfa-at-nsa-16620,matched,same display state + normalized official-name leading core city,2016-12,2026-06,114,2000-01,2026-06,318,1986Q2,2026Q1,160,2016-12,2026-03,112,2016-12,2026-03,112,
+395240,193,"Yakima, WA",WA,49420,"Yakima, WA",fhfa-at-nsa-49420,matched,same display state + normalized official-name leading core city,2022-01,2026-06,54,2000-05,2026-06,314,1985Q3,2026Q1,163,2022-01,2026-03,51,2022-01,2026-03,51,
+394585,194,"Fargo, ND",ND,22020,"Fargo, ND-MN",fhfa-at-nsa-22020,matched,same display state + normalized official-name leading core city,2016-05,2026-06,122,2009-01,2026-06,210,1986Q3,2026Q1,159,2016-05,2026-03,119,2016-05,2026-03,119,
+394387,195,"Binghamton, NY",NY,13780,"Binghamton, NY",fhfa-at-nsa-13780,matched,same display state + normalized official-name leading core city,2018-01,2026-06,102,2000-01,2026-06,318,1983Q2,2026Q1,172,2018-01,2026-03,99,2018-01,2026-03,99,
+394609,196,"Fort Smith, AR",AR,22900,"Fort Smith, AR-OK",fhfa-at-nsa-22900,matched,same display state + normalized official-name leading core city,2015-04,2026-06,135,2000-01,2026-06,318,1984Q2,2026Q1,166,2015-04,2026-03,132,2015-04,2026-03,132,
+394334,197,"Appleton, WI",WI,11540,"Appleton, WI",fhfa-at-nsa-11540,matched,same display state + normalized official-name leading core city,2022-01,2026-06,54,2005-05,2026-06,254,1985Q2,2026Q1,164,2022-01,2026-03,51,2022-01,2026-03,51,
+845160,198,"Prescott Valley, AZ",AZ,39150,"Prescott Valley-Prescott, AZ",fhfa-at-nsa-39150,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,,,,1987Q1,2026Q1,157,2015-01,2026-03,135,,,,
+395161,199,"Topeka, KS",KS,45820,"Topeka, KS",fhfa-at-nsa-45820,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1978Q2,2026Q1,189,2015-01,2026-03,135,2015-01,2026-03,135,
+394813,200,"Macon, GA",GA,31420,"Macon-Bibb County, GA",fhfa-at-nsa-31420,matched,same display state + normalized official-name leading core city,2016-05,2026-06,122,2000-01,2026-06,318,1980Q2,2026Q1,184,2016-05,2026-03,119,2016-05,2026-03,119,
+395174,201,"Tyler, TX",TX,46340,"Tyler, TX",fhfa-at-nsa-46340,matched,same display state + normalized official-name leading core city,2016-05,2026-06,122,2009-01,2026-06,210,1985Q2,2026Q1,164,2016-05,2026-03,119,2016-05,2026-03,119,
+394361,202,"Barnstable Town, MA",MA,12700,"Barnstable Town, MA",fhfa-at-nsa-12700,matched,same display state + normalized official-name leading core city,2019-03,2026-06,87,2000-01,2026-06,318,1983Q4,2026Q1,170,2019-03,2026-03,85,2019-03,2026-03,85,
+394519,203,"Daphne, AL",AL,19300,"Daphne-Fairhope-Foley, AL",fhfa-at-nsa-19300,matched,same display state + normalized official-name leading core city,2015-01,2026-06,137,2000-01,2026-06,318,1989Q2,2026Q1,148,2015-01,2026-03,135,2015-01,2026-03,135,
+394378,205,"Bellingham, WA",WA,13380,"Bellingham, WA",fhfa-at-nsa-13380,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-12,2026-06,307,1978Q3,2026Q1,191,2015-01,2026-03,135,2015-01,2026-03,135,
+394429,206,"Burlington, VT",VT,15540,"Burlington-South Burlington, VT",fhfa-at-nsa-15540,matched,same display state + normalized official-name leading core city,2016-08,2026-06,119,2000-01,2026-06,318,1985Q1,2026Q1,165,2016-08,2026-03,116,2016-08,2026-03,116,
+395030,207,"Rochester, MN",MN,40340,"Rochester, MN",fhfa-at-nsa-40340,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1983Q2,2026Q1,172,2015-01,2026-03,135,2015-01,2026-03,135,
+753895,208,"Lafayette, IN",IN,29200,"Lafayette-West Lafayette, IN",fhfa-at-nsa-29200,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1984Q4,2026Q1,166,2015-01,2026-03,135,2015-01,2026-03,135,
+394454,209,"Champaign, IL",IL,16580,"Champaign-Urbana, IL",fhfa-at-nsa-16580,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-09,2026-06,310,1985Q3,2026Q1,163,2015-01,2026-03,135,2015-01,2026-03,135,
+394848,210,"Medford, OR",OR,32780,"Medford, OR",fhfa-at-nsa-32780,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q4,2026Q1,179,2015-01,2026-03,135,2015-01,2026-03,135,
+845164,211,"Lebanon, NH",NH,,,,unmatched,,2015-12,2026-06,126,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394459,212,"Charlottesville, VA",VA,16820,"Charlottesville, VA",fhfa-at-nsa-16820,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,316,1983Q3,2026Q1,171,2015-01,2026-03,135,2015-01,2026-03,135,
+394763,213,"Lake Charles, LA",LA,29340,"Lake Charles, LA",fhfa-at-nsa-29340,matched,same display state + normalized official-name leading core city,2016-04,2026-06,121,2016-02,2026-06,125,1987Q2,2026Q1,156,2016-04,2026-03,120,2016-04,2026-03,120,
+394773,214,"Las Cruces, NM",NM,29740,"Las Cruces, NM",fhfa-at-nsa-29740,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2002-04,2026-06,291,1984Q3,2026Q1,167,2015-01,2026-03,135,2015-01,2026-03,135,
+394464,215,"Chico, CA",CA,17020,"Chico, CA",fhfa-at-nsa-17020,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2001-01,2026-06,306,1979Q2,2026Q1,188,2015-01,2026-03,135,2015-01,2026-03,135,
+394681,216,"Hilton Head Island, SC",SC,25940,"Hilton Head Island-Bluffton-Port Royal, SC",fhfa-at-nsa-25940,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1986Q4,2026Q1,158,2015-01,2026-03,135,2015-01,2026-03,135,
+394346,217,"Athens, GA",GA,12020,"Athens-Clarke County, GA",fhfa-at-nsa-12020,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1985Q2,2026Q1,164,2015-01,2026-03,135,2015-01,2026-03,135,
+394765,218,"Lake Havasu City, AZ",AZ,29420,"Lake Havasu City-Kingman, AZ",fhfa-at-nsa-29420,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1986Q3,2026Q1,159,2015-01,2026-03,135,2015-01,2026-03,135,
+394485,219,"Columbia, MO",MO,17860,"Columbia, MO",fhfa-at-nsa-17860,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2005-08,2026-06,251,1984Q2,2026Q1,167,2015-01,2026-03,135,2015-01,2026-03,135,
+395114,220,"Springfield, IL",IL,44100,"Springfield, IL",fhfa-at-nsa-44100,matched,same display state + normalized official-name leading core city,2016-05,2026-06,121,2006-07,2026-06,240,1984Q3,2026Q1,167,2016-05,2026-03,119,2016-05,2026-03,119,
+394691,221,"Houma, LA",LA,26380,"Houma-Bayou Cane-Thibodaux, LA",fhfa-at-nsa-26380,matched,same display state + normalized official-name leading core city,2022-04,2026-06,51,2009-01,2026-06,210,1985Q3,2026Q1,163,2022-04,2026-03,48,2022-04,2026-03,48,
+394872,222,"Monroe, LA",LA,33740,"Monroe, LA",fhfa-at-nsa-33740,matched,same display state + normalized official-name leading core city,2022-04,2026-06,50,2000-01,2026-06,316,1984Q4,2026Q1,166,2022-04,2026-03,48,2022-04,2026-03,48,
+394565,223,"Elkhart, IN",IN,21140,"Elkhart-Goshen, IN",fhfa-at-nsa-21140,matched,same display state + normalized official-name leading core city,2021-09,2026-06,57,2005-01,2026-06,258,1983Q4,2026Q1,170,2021-09,2026-03,55,2021-09,2026-03,55,
+394726,224,"Johnson City, TN",TN,27740,"Johnson City, TN",fhfa-at-nsa-27740,matched,same display state + normalized official-name leading core city,2016-05,2026-06,122,2000-01,2026-06,318,1992Q1,2026Q1,137,2016-05,2026-03,119,2016-05,2026-03,119,
+395247,225,"Yuma, AZ",AZ,49740,"Yuma, AZ",fhfa-at-nsa-49740,matched,same display state + normalized official-name leading core city,2021-12,2026-06,55,2002-04,2026-06,290,1988Q3,2026Q1,151,2021-12,2026-03,52,2021-12,2026-03,52,
+394623,226,"Gainesville, GA",GA,23580,"Gainesville, GA",fhfa-at-nsa-23580,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1986Q4,2026Q1,158,2015-01,2026-03,135,2015-01,2026-03,135,
+394716,227,"Jacksonville, NC",NC,27340,"Jacksonville, NC",fhfa-at-nsa-27340,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2005-08,2026-06,251,1993Q2,2026Q1,132,2015-01,2026-03,135,2015-01,2026-03,135,
+394597,228,"Florence, SC",SC,22500,"Florence, SC",fhfa-at-nsa-22500,matched,same display state + normalized official-name leading core city,2019-04,2026-06,87,2005-09,2026-06,250,1986Q3,2026Q1,159,2019-04,2026-03,84,2019-04,2026-03,84,
+394680,229,"Hilo, HI",HI,,,,unmatched,,2021-08,2026-06,57,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395118,230,"St. Cloud, MN",MN,41060,"St. Cloud, MN",fhfa-at-nsa-41060,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2005-06,2026-06,253,1987Q4,2026Q1,154,2015-01,2026-03,135,2015-01,2026-03,135,
+395011,231,"Racine, WI",WI,39540,"Racine-Mount Pleasant, WI",fhfa-at-nsa-39540,matched,same display state + normalized official-name leading core city,2019-01,2026-06,89,2008-08,2026-06,215,1982Q2,2026Q1,176,2019-01,2026-03,87,2019-01,2026-03,87,
+394380,232,"Bend, OR",OR,13460,"Bend, OR",fhfa-at-nsa-13460,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,315,1985Q1,2026Q1,165,2015-01,2026-03,135,2015-01,2026-03,135,
+395047,233,"Saginaw, MI",MI,40980,"Saginaw, MI",fhfa-at-nsa-40980,matched,same display state + normalized official-name leading core city,2021-03,2026-06,64,2000-01,2026-06,318,1980Q3,2026Q1,178,2021-03,2026-03,61,2021-03,2026-03,61,
+395202,234,"Warner Robins, GA",GA,47580,"Warner Robins, GA",fhfa-at-nsa-47580,matched,same display state + normalized official-name leading core city,2015-02,2026-06,137,2000-01,2026-06,318,1986Q2,2026Q1,160,2015-02,2026-03,134,2015-02,2026-03,134,
+395151,235,"Terre Haute, IN",IN,45460,"Terre Haute, IN",fhfa-at-nsa-45460,matched,same display state + normalized official-name leading core city,2021-01,2026-06,66,2009-01,2026-06,210,1992Q2,2026Q1,136,2021-01,2026-03,63,2021-01,2026-03,63,
+395162,236,"Torrington, CT",CT,,,,unmatched,,2015-01,2026-06,138,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395009,237,"Punta Gorda, FL",FL,39460,"Punta Gorda, FL",fhfa-at-nsa-39460,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1987Q1,2026Q1,157,2015-01,2026-03,135,2015-01,2026-03,135,
+394386,239,"Billings, MT",MT,13740,"Billings, MT",fhfa-at-nsa-13740,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2009-01,2026-06,210,1985Q2,2026Q1,164,2015-01,2026-03,135,2015-01,2026-03,135,
+395018,240,"Redding, CA",CA,39820,"Redding, CA",fhfa-at-nsa-39820,matched,same display state + normalized official-name leading core city,2015-09,2026-06,130,2000-01,2026-06,318,1980Q1,2026Q1,185,2015-09,2026-03,127,2015-09,2026-03,127,
+394748,241,"Kingston, NY",NY,28740,"Kingston, NY",fhfa-at-nsa-28740,matched,same display state + normalized official-name leading core city,2016-05,2026-06,122,2000-01,2026-06,318,1986Q2,2026Q1,160,2016-05,2026-03,119,2016-05,2026-03,119,
+394960,242,"Panama City, FL",FL,37460,"Panama City-Panama City Beach, FL",fhfa-at-nsa-37460,matched,same display state + normalized official-name leading core city,2015-01,2026-06,136,2000-01,2026-06,318,1986Q1,2026Q1,161,2015-01,2026-03,135,2015-01,2026-03,135,
+394729,243,"Joplin, MO",MO,27900,"Joplin, MO-KS",fhfa-at-nsa-27900,matched,same display state + normalized official-name leading core city,2021-11,2026-06,56,2008-03,2026-06,220,1987Q3,2026Q1,155,2021-11,2026-03,53,2021-11,2026-03,53,
+394539,244,"Dover, DE",DE,20100,"Dover, DE",fhfa-at-nsa-20100,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2009-07,2026-06,204,1987Q3,2026Q1,155,2015-01,2026-03,135,2015-01,2026-03,135,
+394559,245,"El Centro, CA",CA,20940,"El Centro, CA",fhfa-at-nsa-20940,matched,same display state + normalized official-name leading core city,2023-05,2026-06,38,2001-01,2026-06,305,1989Q3,2026Q1,147,2023-05,2026-03,35,2023-05,2026-03,35,
+394712,246,"Jackson, TN",TN,27180,"Jackson, TN",fhfa-at-nsa-27180,matched,same display state + normalized official-name leading core city,2021-11,2026-06,56,2000-01,2026-06,318,1988Q3,2026Q1,151,2021-11,2026-03,53,2021-11,2026-03,53,
+395246,247,"Yuba City, CA",CA,49700,"Yuba City, CA",fhfa-at-nsa-49700,matched,same display state + normalized official-name leading core city,2015-12,2026-06,126,2004-01,2026-06,270,1986Q4,2026Q1,158,2015-12,2026-03,124,2015-12,2026-03,124,
+394406,248,"Bowling Green, KY",KY,14540,"Bowling Green, KY",fhfa-at-nsa-14540,matched,same display state + normalized official-name leading core city,2017-09,2026-06,105,2000-01,2026-06,318,1986Q3,2026Q1,159,2017-09,2026-03,103,2017-09,2026-03,103,
+395119,249,"St. George, UT",UT,41100,"St. George, UT",fhfa-at-nsa-41100,matched,same display state + normalized official-name leading core city,2015-03,2026-06,136,2008-12,2026-06,211,1986Q2,2026Q1,160,2015-03,2026-03,133,2015-03,2026-03,133,
+394896,250,"Muskegon, MI",MI,34740,"Muskegon-Norton Shores, MI",fhfa-at-nsa-34740,matched,same display state + normalized official-name leading core city,2021-06,2026-06,61,2000-01,2026-06,318,1985Q2,2026Q1,164,2021-06,2026-03,58,2021-06,2026-03,58,
+394299,251,"Abilene, TX",TX,10180,"Abilene, TX",fhfa-at-nsa-10180,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2009-01,2026-06,210,1986Q2,2026Q1,160,2015-01,2026-03,135,2015-01,2026-03,135,
+394707,252,"Iowa City, IA",IA,26980,"Iowa City, IA",fhfa-at-nsa-26980,matched,same display state + normalized official-name leading core city,2015-11,2026-06,128,2009-01,2026-06,210,1986Q2,2026Q1,160,2015-11,2026-03,125,2015-11,2026-03,125,
+394351,253,"Auburn, AL",AL,12220,"Auburn-Opelika, AL",fhfa-at-nsa-12220,matched,same display state + normalized official-name leading core city,2015-04,2026-06,133,2000-01,2026-06,317,1987Q3,2026Q1,155,2015-04,2026-03,132,2015-04,2026-03,132,
+394860,254,"Midland, TX",TX,33260,"Midland, TX",fhfa-at-nsa-33260,matched,same display state + normalized official-name leading core city,2016-06,2026-06,121,2009-01,2026-06,210,1980Q3,2026Q1,183,2016-06,2026-03,118,2016-06,2026-03,118,
+753869,255,"Bloomington, IL",IL,14010,"Bloomington, IL",fhfa-at-nsa-14010,matched,same display state + normalized official-name leading core city,2016-08,2026-06,118,2000-01,2026-06,318,1985Q1,2026Q1,165,2016-08,2026-03,116,2016-08,2026-03,116,
+394671,255,"Hattiesburg, MS",MS,25620,"Hattiesburg, MS",fhfa-at-nsa-25620,matched,same display state + normalized official-name leading core city,2022-01,2026-06,54,2012-01,2026-06,174,1986Q4,2026Q1,158,2022-01,2026-03,51,2022-01,2026-03,51,
+394944,257,"Oshkosh, WI",WI,36780,"Oshkosh-Neenah, WI",fhfa-at-nsa-36780,matched,same display state + normalized official-name leading core city,2016-12,2026-06,112,2009-01,2026-06,210,1985Q3,2026Q1,163,2016-12,2026-03,112,2016-12,2026-03,112,
+394555,258,"Eau Claire, WI",WI,20740,"Eau Claire, WI",fhfa-at-nsa-20740,matched,same display state + normalized official-name leading core city,2022-01,2026-06,54,2009-01,2026-06,210,1983Q2,2026Q1,172,2022-01,2026-03,51,2022-01,2026-03,51,
+394651,259,"Greenville, NC",NC,24780,"Greenville, NC",fhfa-at-nsa-24780,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2008-02,2026-06,221,1986Q1,2026Q1,161,2015-01,2026-03,135,2015-01,2026-03,135,
+394428,260,"Burlington, NC",NC,15500,"Burlington, NC",fhfa-at-nsa-15500,matched,same display state + normalized official-name leading core city,2015-12,2026-06,127,2016-02,2026-06,125,1987Q1,2026Q1,157,2015-12,2026-03,124,2016-02,2026-03,122,
+395210,261,"Waterloo, IA",IA,47940,"Waterloo-Cedar Falls, IA",fhfa-at-nsa-47940,matched,same display state + normalized official-name leading core city,2016-05,2026-06,122,2007-05,2026-06,230,1980Q3,2026Q1,173,2016-05,2026-03,119,2016-05,2026-03,119,
+394480,262,"Coeur d'Alene, ID",ID,17660,"Coeur d'Alene, ID",fhfa-at-nsa-17660,matched,same display state + normalized official-name leading core city,2017-02,2026-06,113,2007-07,2026-06,228,1990Q3,2026Q1,143,2017-02,2026-03,110,2017-02,2026-03,110,
+394553,263,"East Stroudsburg, PA",PA,,,,unmatched,,2015-01,2026-06,138,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395007,264,"Pueblo, CO",CO,39380,"Pueblo, CO",fhfa-at-nsa-39380,matched,same display state + normalized official-name leading core city,2015-04,2026-06,135,2000-01,2026-06,318,1978Q3,2026Q1,190,2015-04,2026-03,132,2015-04,2026-03,132,
+394392,265,"Blacksburg, VA",VA,13980,"Blacksburg-Christiansburg-Radford, VA",fhfa-at-nsa-13980,matched,same display state + normalized official-name leading core city,2018-07,2026-06,96,2000-01,2026-06,318,1987Q3,2026Q1,155,2018-07,2026-03,93,2018-07,2026-03,93,
+395215,266,"Wausau, WI",WI,48140,"Wausau, WI",fhfa-at-nsa-48140,matched,same display state + normalized official-name leading core city,2022-02,2026-06,53,2009-01,2026-06,210,1986Q2,2026Q1,160,2022-02,2026-03,50,2022-02,2026-03,50,
+394731,267,"Kahului, HI",HI,27980,"Kahului-Wailuku, HI",fhfa-at-nsa-27980,matched,same display state + normalized official-name leading core city,2020-12,2026-06,67,2000-01,2026-06,318,1988Q1,2026Q1,153,2020-12,2026-03,64,2020-12,2026-03,64,
+394720,268,"Janesville, WI",WI,27500,"Janesville-Beloit, WI",fhfa-at-nsa-27500,matched,same display state + normalized official-name leading core city,2022-01,2026-06,54,2012-01,2026-06,174,1983Q4,2026Q1,170,2022-01,2026-03,51,2022-01,2026-03,51,
+395170,269,"Tupelo, MS",MS,,,,unmatched,,2021-12,2026-06,55,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394393,270,"Bloomington, IN",IN,14020,"Bloomington, IN",fhfa-at-nsa-14020,matched,same display state + normalized official-name leading core city,2015-01,2026-06,137,2003-08,2026-06,275,1986Q3,2026Q1,159,2015-01,2026-03,135,2015-01,2026-03,135,
+394930,271,"Odessa, TX",TX,36220,"Odessa, TX",fhfa-at-nsa-36220,matched,same display state + normalized official-name leading core city,2017-10,2026-06,105,2009-01,2026-06,210,1982Q3,2026Q1,175,2017-10,2026-03,102,2017-10,2026-03,102,
+394710,272,"Jackson, MI",MI,27100,"Jackson, MI",fhfa-at-nsa-27100,matched,same display state + normalized official-name leading core city,2016-05,2026-06,121,2003-01,2026-06,281,1986Q2,2026Q1,160,2016-05,2026-03,119,2016-05,2026-03,119,
+395125,273,"State College, PA",PA,44300,"State College, PA",fhfa-at-nsa-44300,matched,same display state + normalized official-name leading core city,2019-03,2026-06,87,2005-07,2026-06,252,1989Q1,2026Q1,149,2019-03,2026-03,85,2019-03,2026-03,85,
+395079,274,"Sebastian, FL",FL,42680,"Sebastian-Vero Beach-West Vero Corridor, FL",fhfa-at-nsa-42680,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1983Q2,2026Q1,172,2015-01,2026-03,135,2015-01,2026-03,135,
+394814,275,"Madera, CA",CA,,,,unmatched,,2022-05,2026-06,50,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394523,276,"Decatur, AL",AL,19460,"Decatur, AL",fhfa-at-nsa-19460,matched,same display state + normalized official-name leading core city,2022-03,2026-06,52,2006-08,2026-06,239,1987Q1,2026Q1,157,2022-03,2026-03,49,2022-03,2026-03,49,
+394453,277,"Chambersburg, PA",PA,16540,"Chambersburg, PA",fhfa-at-nsa-16540,matched,same display state + normalized official-name leading core city,2015-01,2026-06,137,2001-05,2026-06,302,1989Q4,2026Q1,146,2015-01,2026-03,135,2015-01,2026-03,135,
+395193,278,"Vineland, NJ",NJ,47220,"Vineland, NJ",fhfa-at-nsa-47220,matched,same display state + normalized official-name leading core city,2023-11,2026-06,32,2000-01,2026-06,318,1986Q3,2026Q1,159,2023-11,2026-03,29,2023-11,2026-03,29,
+394703,279,"Idaho Falls, ID",ID,26820,"Idaho Falls, ID",fhfa-at-nsa-26820,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1986Q2,2026Q1,160,2015-01,2026-03,135,2015-01,2026-03,135,
+394639,280,"Grand Junction, CO",CO,24300,"Grand Junction, CO",fhfa-at-nsa-24300,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1979Q2,2026Q1,187,2015-01,2026-03,135,2015-01,2026-03,135,
+394563,281,"Elizabethtown, KY",KY,21060,"Elizabethtown, KY",fhfa-at-nsa-21060,matched,same display state + normalized official-name leading core city,2022-01,2026-06,54,2000-01,2026-06,316,1993Q4,2026Q1,130,2022-01,2026-03,51,2022-01,2026-03,51,
+394917,282,"Niles, MI",MI,35660,"Niles, MI",fhfa-at-nsa-35660,matched,same display state + normalized official-name leading core city,2018-05,2026-06,96,2000-01,2026-06,318,1980Q3,2026Q1,171,2018-05,2026-03,95,2018-05,2026-03,95,
+394873,283,"Monroe, MI",MI,33780,"Monroe, MI",fhfa-at-nsa-33780,matched,same display state + normalized official-name leading core city,2021-07,2026-06,60,2000-01,2026-06,318,1980Q2,2026Q1,181,2021-07,2026-03,57,2021-07,2026-03,57,
+395066,284,"Santa Fe, NM",NM,42140,"Santa Fe, NM",fhfa-at-nsa-42140,matched,same display state + normalized official-name leading core city,2016-02,2026-06,125,2002-05,2026-06,290,1983Q4,2026Q1,170,2016-02,2026-03,122,2016-02,2026-03,122,
+394493,285,"Concord, NH",NH,,,,unmatched,,2022-02,2026-06,53,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394314,286,"Alexandria, LA",LA,10780,"Alexandria, LA",fhfa-at-nsa-10780,matched,same display state + normalized official-name leading core city,2023-05,2026-06,38,2000-01,2026-06,313,1986Q2,2026Q1,160,2023-05,2026-03,35,2023-05,2026-03,35,
+395163,287,"Traverse City, MI",MI,45900,"Traverse City, MI",fhfa-at-nsa-45900,matched,same display state + normalized official-name leading core city,2022-04,2026-06,51,2000-01,2026-06,318,1985Q2,2026Q1,164,2022-04,2026-03,48,2022-04,2026-03,48,
+394359,288,"Bangor, ME",ME,12620,"Bangor, ME",fhfa-at-nsa-12620,matched,same display state + normalized official-name leading core city,2017-12,2026-06,103,2000-01,2026-06,318,1988Q4,2026Q1,150,2017-12,2026-03,100,2017-12,2026-03,100,
+394685,289,"Homosassa Springs, FL",FL,26140,"Homosassa Springs, FL",fhfa-at-nsa-26140,matched,same display state + normalized official-name leading core city,2016-04,2026-06,122,2000-01,2026-06,318,1987Q3,2026Q1,155,2016-04,2026-03,120,2016-04,2026-03,120,
+394662,290,"Hanford, CA",CA,25260,"Hanford-Corcoran, CA",fhfa-at-nsa-25260,matched,same display state + normalized official-name leading core city,2022-05,2026-06,50,2001-01,2026-06,306,1986Q4,2026Q1,158,2022-05,2026-03,47,2022-05,2026-03,47,
+394723,291,"Jefferson City, MO",MO,27620,"Jefferson City, MO",fhfa-at-nsa-27620,matched,same display state + normalized official-name leading core city,2023-03,2026-06,39,2008-04,2026-06,219,1986Q2,2026Q1,160,2023-03,2026-03,37,2023-03,2026-03,37,
+394598,292,"Florence, AL",AL,22520,"Florence-Muscle Shoals, AL",fhfa-at-nsa-22520,matched,same display state + normalized official-name leading core city,2020-12,2026-06,67,2010-03,2026-06,196,1992Q1,2026Q1,137,2020-12,2026-03,64,2020-12,2026-03,64,
+394537,293,"Dothan, AL",AL,20020,"Dothan, AL",fhfa-at-nsa-20020,matched,same display state + normalized official-name leading core city,2022-12,2026-06,42,2001-12,2026-06,295,1989Q3,2026Q1,147,2022-12,2026-03,40,2022-12,2026-03,40,
+394802,294,"London, KY",KY,,,,unmatched,,2025-12,2026-06,6,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394306,295,"Albany, GA",GA,10500,"Albany, GA",fhfa-at-nsa-10500,matched,same display state + normalized official-name leading core city,2017-01,2026-06,114,2000-01,2026-06,317,1985Q4,2026Q1,162,2017-01,2026-03,111,2017-01,2026-03,111,
+845167,296,"Ottawa, IL",IL,,,,unmatched,,2024-06,2026-06,25,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395102,297,"Sioux City, IA",IA,43580,"Sioux City, IA-NE-SD",fhfa-at-nsa-43580,matched,same display state + normalized official-name leading core city,2022-12,2026-06,43,2000-01,2026-06,317,1988Q3,2026Q1,151,2022-12,2026-03,40,2022-12,2026-03,40,
+395223,298,"Wichita Falls, TX",TX,48660,"Wichita Falls, TX",fhfa-at-nsa-48660,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2009-01,2026-06,210,1986Q3,2026Q1,159,2015-01,2026-03,135,2015-01,2026-03,135,
+395152,299,"Texarkana, TX",TX,45500,"Texarkana, TX-AR",fhfa-at-nsa-45500,matched,same display state + normalized official-name leading core city,2021-11,2026-06,56,2000-01,2026-06,317,1992Q2,2026Q1,136,2021-11,2026-03,53,2021-11,2026-03,53,
+395182,300,"Valdosta, GA",GA,46660,"Valdosta, GA",fhfa-at-nsa-46660,matched,same display state + normalized official-name leading core city,2020-04,2026-06,75,2000-01,2026-06,315,1993Q3,2026Q1,131,2020-04,2026-03,72,2020-04,2026-03,72,
+394800,301,"Logan, UT",UT,30860,"Logan, UT-ID",fhfa-at-nsa-30860,matched,same display state + normalized official-name leading core city,2022-02,2026-06,53,2005-02,2026-06,257,1986Q4,2026Q1,158,2022-02,2026-03,50,2022-02,2026-03,50,
+394595,302,"Flagstaff, AZ",AZ,22380,"Flagstaff, AZ",fhfa-at-nsa-22380,matched,same display state + normalized official-name leading core city,2018-02,2026-06,101,2000-01,2026-06,318,1986Q3,2026Q1,159,2018-02,2026-03,98,2018-02,2026-03,98,
+395036,303,"Rocky Mount, NC",NC,40580,"Rocky Mount, NC",fhfa-at-nsa-40580,matched,same display state + normalized official-name leading core city,2022-02,2026-06,52,2000-01,2026-06,318,1985Q2,2026Q1,164,2022-02,2026-03,50,2022-02,2026-03,50,
+395000,304,"Pottsville, PA",PA,,,,unmatched,,2022-05,2026-06,50,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394515,305,"Dalton, GA",GA,19140,"Dalton, GA",fhfa-at-nsa-19140,matched,same display state + normalized official-name leading core city,2023-11,2026-06,32,2000-01,2026-06,317,1984Q1,2026Q1,169,2023-11,2026-03,29,2023-11,2026-03,29,
+394783,306,"Lebanon, PA",PA,30140,"Lebanon, PA",fhfa-at-nsa-30140,matched,same display state + normalized official-name leading core city,2021-01,2026-06,66,2005-04,2026-06,254,1987Q2,2026Q1,156,2021-01,2026-03,63,2021-01,2026-03,63,
+394880,307,"Morristown, TN",TN,34100,"Morristown, TN",fhfa-at-nsa-34100,matched,same display state + normalized official-name leading core city,2022-11,2026-06,44,2000-01,2026-06,315,1993Q1,2026Q1,133,2022-11,2026-03,41,2022-11,2026-03,41,
+395232,308,"Winchester, VA",VA,49020,"Winchester, VA-WV",fhfa-at-nsa-49020,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,318,1989Q3,2026Q1,147,2015-01,2026-03,135,2015-01,2026-03,135,
+395221,309,"Wheeling, WV",OH,48540,"Wheeling, WV-OH",fhfa-at-nsa-48540,matched,same display state + normalized official-name leading core city,2018-05,2026-06,98,2000-01,2026-06,318,1993Q1,2026Q1,133,2018-05,2026-03,95,2018-05,2026-03,95,
+394879,310,"Morgantown, WV",WV,34060,"Morgantown, WV",fhfa-at-nsa-34060,matched,same display state + normalized official-name leading core city,2016-07,2026-06,120,2000-01,2026-06,315,1993Q2,2026Q1,132,2016-07,2026-03,117,2016-07,2026-03,117,
+394756,311,"La Crosse, WI",WI,29100,"La Crosse-Onalaska, WI-MN",fhfa-at-nsa-29100,matched,same display state + normalized official-name leading core city,2021-12,2026-06,55,2002-05,2026-06,290,1984Q1,2026Q1,169,2021-12,2026-03,52,2021-12,2026-03,52,
+394900,312,"Napa, CA",CA,34900,"Napa, CA",fhfa-at-nsa-34900,matched,same display state + normalized official-name leading core city,2016-04,2026-06,123,2000-01,2026-06,318,1978Q3,2026Q1,191,2016-04,2026-03,120,2016-04,2026-03,120,
+395013,313,"Rapid City, SD",SD,39660,"Rapid City, SD",fhfa-at-nsa-39660,matched,same display state + normalized official-name leading core city,2017-09,2026-06,106,2008-06,2026-06,217,1991Q4,2026Q1,138,2017-09,2026-03,103,2017-09,2026-03,103,
+395139,314,"Sumter, SC",SC,44940,"Sumter, SC",fhfa-at-nsa-44940,matched,same display state + normalized official-name leading core city,2015-04,2026-06,135,2008-07,2026-06,216,1990Q2,2026Q1,144,2015-04,2026-03,132,2015-04,2026-03,132,
+394577,315,"Eureka, CA",CA,,,,unmatched,,2022-04,2026-06,51,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395117,316,"Springfield, OH",OH,44220,"Springfield, OH",fhfa-at-nsa-44220,matched,same display state + normalized official-name leading core city,2022-05,2026-06,48,2000-01,2026-06,318,1980Q3,2026Q1,177,2022-05,2026-03,47,2022-05,2026-03,47,
+394668,317,"Harrisonburg, VA",VA,25500,"Harrisonburg, VA",fhfa-at-nsa-25500,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2009-09,2026-06,202,1987Q1,2026Q1,157,2015-01,2026-03,135,2015-01,2026-03,135,
+394368,318,"Battle Creek, MI",MI,12980,"Battle Creek, MI",fhfa-at-nsa-12980,matched,same display state + normalized official-name leading core city,2022-04,2026-06,50,2000-01,2026-06,318,1986Q2,2026Q1,160,2022-04,2026-03,48,2022-04,2026-03,48,
+395094,319,"Sherman, TX",TX,43300,"Sherman-Denison, TX",fhfa-at-nsa-43300,matched,same display state + normalized official-name leading core city,2019-01,2026-06,90,2012-01,2026-06,174,1986Q3,2026Q1,159,2019-01,2026-03,87,2019-01,2026-03,87,
+394821,320,"Manhattan, KS",KS,31740,"Manhattan, KS",fhfa-at-nsa-31740,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2008-12,2026-06,211,1986Q2,2026Q1,160,2015-01,2026-03,135,2015-01,2026-03,135,
+394442,321,"Carbondale, IL",IL,,,,unmatched,,2017-10,2026-06,105,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394727,322,"Johnstown, PA",PA,27780,"Johnstown, PA",fhfa-at-nsa-27780,matched,same display state + normalized official-name leading core city,2018-04,2026-06,99,2004-12,2026-06,259,1994Q4,2026Q1,126,2018-04,2026-03,96,2018-04,2026-03,96,
+394728,323,"Jonesboro, AR",AR,27860,"Jonesboro, AR",fhfa-at-nsa-27860,matched,same display state + normalized official-name leading core city,2016-03,2026-06,124,2000-01,2026-06,318,1990Q4,2026Q1,142,2016-03,2026-03,121,2016-03,2026-03,121,
+394390,324,"Bismarck, ND",ND,13900,"Bismarck, ND",fhfa-at-nsa-13900,matched,same display state + normalized official-name leading core city,2017-07,2026-06,108,2009-01,2026-06,210,1986Q3,2026Q1,159,2017-07,2026-03,105,2017-07,2026-03,105,
+394661,325,"Hammond, LA",LA,25220,"Hammond, LA",fhfa-at-nsa-25220,matched,same display state + normalized official-name leading core city,2021-10,2026-06,57,2007-08,2026-06,227,1993Q4,2026Q1,130,2021-10,2026-03,54,2021-10,2026-03,54,
+394983,326,"Pittsfield, MA",MA,38340,"Pittsfield, MA",fhfa-at-nsa-38340,matched,same display state + normalized official-name leading core city,2021-03,2026-06,63,2000-01,2026-06,318,1986Q2,2026Q1,160,2021-03,2026-03,61,2021-03,2026-03,61,
+394890,327,"Mount Vernon, WA",WA,34580,"Mount Vernon-Anacortes, WA",fhfa-at-nsa-34580,matched,same display state + normalized official-name leading core city,2018-05,2026-06,97,2000-01,2026-06,318,1985Q3,2026Q1,163,2018-05,2026-03,95,2018-05,2026-03,95,
+394719,328,"Jamestown, NY",NY,,,,unmatched,,2024-04,2026-06,25,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395153,329,"The Villages, FL",FL,,,,unmatched,,2022-01,2026-06,54,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394307,330,"Albany, OR",OR,10540,"Albany, OR",fhfa-at-nsa-10540,matched,same display state + normalized official-name leading core city,2021-02,2026-06,64,2008-01,2026-06,222,1987Q1,2026Q1,155,2021-02,2026-03,62,2021-02,2026-03,62,
+394633,331,"Glens Falls, NY",NY,24020,"Glens Falls, NY",fhfa-at-nsa-24020,matched,same display state + normalized official-name leading core city,2024-11,2026-06,20,2000-01,2026-06,317,1991Q2,2026Q1,140,2024-11,2026-03,17,2024-11,2026-03,17,
+394780,332,"Lawton, OK",OK,30020,"Lawton, OK",fhfa-at-nsa-30020,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,313,1992Q4,2026Q1,134,2015-01,2026-03,135,2015-01,2026-03,135,
+394474,334,"Cleveland, TN",TN,17420,"Cleveland, TN",fhfa-at-nsa-17420,matched,same display state + normalized official-name leading core city,2020-11,2026-06,67,2000-01,2026-06,318,1991Q4,2026Q1,138,2020-11,2026-03,65,2020-11,2026-03,65,
+395098,335,"Sierra Vista, AZ",AZ,43420,"Sierra Vista-Douglas, AZ",fhfa-at-nsa-43420,matched,same display state + normalized official-name leading core city,2021-12,2026-06,55,2008-02,2026-06,221,1992Q1,2026Q1,137,2021-12,2026-03,52,2021-12,2026-03,52,
+394325,336,"Ames, IA",IA,11180,"Ames, IA",fhfa-at-nsa-11180,matched,same display state + normalized official-name leading core city,2017-10,2026-06,105,2009-03,2026-06,208,1986Q4,2026Q1,158,2017-10,2026-03,102,2017-10,2026-03,102,
+394824,337,"Mansfield, OH",OH,31900,"Mansfield, OH",fhfa-at-nsa-31900,matched,same display state + normalized official-name leading core city,2023-05,2026-06,38,2000-01,2026-06,314,1983Q4,2026Q1,170,2023-05,2026-03,35,2023-05,2026-03,35,
+395128,338,"Staunton, VA",VA,44420,"Staunton-Stuarts Draft, VA",fhfa-at-nsa-44420,matched,same display state + normalized official-name leading core city,2018-03,2026-06,100,2009-06,2026-06,205,1989Q1,2026Q1,149,2018-03,2026-03,97,2018-03,2026-03,97,
+394353,339,"Augusta, ME",ME,,,,unmatched,,2016-05,2026-06,122,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394321,340,"Altoona, PA",PA,11020,"Altoona, PA",fhfa-at-nsa-11020,matched,same display state + normalized official-name leading core city,2023-03,2026-06,40,2000-01,2026-06,318,1993Q1,2026Q1,133,2023-03,2026-03,37,2023-03,2026-03,37,
+394905,341,"New Bern, NC",NC,,,,unmatched,,2021-05,2026-06,62,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394588,342,"Farmington, NM",NM,22140,"Farmington, NM",fhfa-at-nsa-22140,matched,same display state + normalized official-name leading core city,2023-04,2026-06,39,2009-11,2026-06,200,1984Q3,2026Q1,167,2023-04,2026-03,36,2023-04,2026-03,36,
+395120,343,"St. Joseph, MO",MO,41140,"St. Joseph, MO-KS",fhfa-at-nsa-41140,matched,same display state + normalized official-name leading core city,2021-08,2026-06,59,2003-11,2026-06,272,1986Q3,2026Q1,159,2021-08,2026-03,56,2021-08,2026-03,56,
+395054,344,"San Angelo, TX",TX,41660,"San Angelo, TX",fhfa-at-nsa-41660,matched,same display state + normalized official-name leading core city,2017-01,2026-06,114,2014-09,2026-06,142,1984Q3,2026Q1,167,2017-01,2026-03,111,2017-01,2026-03,111,
+395218,345,"Wenatchee, WA",WA,48300,"Wenatchee-East Wenatchee, WA",fhfa-at-nsa-48300,matched,same display state + normalized official-name leading core city,2021-03,2026-06,64,2001-07,2026-06,298,1978Q3,2026Q1,186,2021-03,2026-03,61,2021-03,2026-03,61,
+394949,346,"Owensboro, KY",KY,36980,"Owensboro, KY",fhfa-at-nsa-36980,matched,same display state + normalized official-name leading core city,2023-02,2026-06,41,2000-01,2026-06,316,1986Q4,2026Q1,158,2023-02,2026-03,38,2023-02,2026-03,38,
+753890,347,"Holland, MI",MI,,,,unmatched,,2025-01,2026-06,18,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394810,348,"Lumberton, NC",NC,,,,unmatched,,2024-07,2026-06,21,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394778,349,"Lawrence, KS",KS,29940,"Lawrence, KS",fhfa-at-nsa-29940,matched,same display state + normalized official-name leading core city,2016-12,2026-06,115,2004-08,2026-06,263,1985Q3,2026Q1,163,2016-12,2026-03,112,2016-12,2026-03,112,
+394635,350,"Goldsboro, NC",NC,24140,"Goldsboro, NC",fhfa-at-nsa-24140,matched,same display state + normalized official-name leading core city,2023-01,2026-06,42,2000-01,2026-06,318,1990Q2,2026Q1,144,2023-01,2026-03,39,2023-01,2026-03,39,
+395213,351,"Watertown, NY",NY,48060,"Watertown-Fort Drum, NY",fhfa-at-nsa-48060,matched,same display state + normalized official-name leading core city,2022-03,2026-06,52,2000-01,2026-06,316,1993Q3,2026Q1,131,2022-03,2026-03,49,2022-03,2026-03,49,
+395089,352,"Sheboygan, WI",WI,43100,"Sheboygan, WI",fhfa-at-nsa-43100,matched,same display state + normalized official-name leading core city,2022-07,2026-06,47,2008-03,2026-06,220,1986Q1,2026Q1,161,2022-07,2026-03,45,2022-07,2026-03,45,
+395217,353,"Weirton, WV",OH,48260,"Weirton-Steubenville, WV-OH",fhfa-at-nsa-48260,matched,same display state + normalized official-name leading core city,2022-06,2026-06,49,2008-06,2026-06,217,1993Q4,2026Q1,130,2022-06,2026-03,46,2022-06,2026-03,46,
+394867,354,"Missoula, MT",MT,33540,"Missoula, MT",fhfa-at-nsa-33540,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2005-02,2026-06,257,1987Q2,2026Q1,156,2015-01,2026-03,135,2015-01,2026-03,135,
+395237,355,"Wooster, OH",OH,,,,unmatched,,2022-06,2026-06,49,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394407,356,"Bozeman, MT",MT,14580,"Bozeman, MT",fhfa-at-nsa-14580,matched,same display state + normalized official-name leading core city,2021-01,2026-06,66,2009-01,2026-06,210,1991Q4,2026Q1,138,2021-01,2026-03,63,2021-01,2026-03,63,
+394333,357,"Anniston, AL",AL,11500,"Anniston-Oxford, AL",fhfa-at-nsa-11500,matched,same display state + normalized official-name leading core city,2023-04,2026-06,39,2010-11,2026-06,188,1992Q1,2026Q1,137,2023-04,2026-03,36,2023-04,2026-03,36,
+394374,358,"Beckley, WV",WV,13220,"Beckley, WV",fhfa-at-nsa-13220,matched,same display state + normalized official-name leading core city,2024-02,2026-06,28,2000-01,2026-06,315,1997Q1,2026Q1,117,2024-02,2026-03,26,2024-02,2026-03,26,
+395225,359,"Williamsport, PA",PA,48700,"Williamsport, PA",fhfa-at-nsa-48700,matched,same display state + normalized official-name leading core city,2023-05,2026-06,38,2000-01,2026-06,315,1990Q1,2026Q1,145,2023-05,2026-03,35,2023-05,2026-03,35,
+394423,360,"Brunswick, GA",GA,15260,"Brunswick-St. Simons, GA",fhfa-at-nsa-15260,matched,same display state + normalized official-name leading core city,2021-12,2026-06,55,2000-01,2026-06,318,1986Q2,2026Q1,160,2021-12,2026-03,52,2021-12,2026-03,52,
+753872,361,"California, MD",MD,,,,unmatched,,2015-01,2026-06,138,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395173,361,"Twin Falls, ID",ID,46300,"Twin Falls, ID",fhfa-at-nsa-46300,matched,same display state + normalized official-name leading core city,2022-05,2026-06,50,2005-05,2026-06,254,1992Q2,2026Q1,136,2022-05,2026-03,47,2022-05,2026-03,47,
+394495,363,"Cookeville, TN",TN,,,,unmatched,,2021-09,2026-06,58,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394893,364,"Muncie, IN",IN,34620,"Muncie, IN",fhfa-at-nsa-34620,matched,same display state + normalized official-name leading core city,2017-06,2026-06,109,2009-02,2026-06,209,1990Q4,2026Q1,142,2017-06,2026-03,106,2017-06,2026-03,106,
+394857,365,"Michigan City, IN",IN,33140,"Michigan City-La Porte, IN",fhfa-at-nsa-33140,matched,same display state + normalized official-name leading core city,2022-01,2026-06,53,2009-02,2026-06,209,1986Q2,2026Q1,160,2022-01,2026-03,51,2022-01,2026-03,51,
+395039,366,"Roseburg, OR",OR,,,,unmatched,,2022-12,2026-06,43,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394788,367,"Lewiston, ME",ME,30340,"Lewiston-Auburn, ME",fhfa-at-nsa-30340,matched,same display state + normalized official-name leading core city,2022-11,2026-06,43,2000-01,2026-06,318,1987Q1,2026Q1,157,2022-11,2026-03,41,2022-11,2026-03,41,
+394804,368,"Longview, WA",WA,31020,"Longview-Kelso, WA",fhfa-at-nsa-31020,matched,same display state + normalized official-name leading core city,2022-02,2026-06,53,2009-01,2026-06,210,1979Q4,2026Q1,185,2022-02,2026-03,50,2022-02,2026-03,50,
+394932,369,"Ogdensburg, NY",NY,,,,unmatched,,2025-05,2026-06,14,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394734,370,"Kankakee, IL",IL,28100,"Kankakee, IL",fhfa-at-nsa-28100,matched,same display state + normalized official-name leading core city,2021-03,2026-06,64,2009-01,2026-06,207,1987Q3,2026Q1,155,2021-03,2026-03,61,2021-03,2026-03,61,
+394396,371,"Bluefield, WV",VA,,,,unmatched,,2023-05,2026-06,38,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395095,372,"Show Low, AZ",AZ,,,,unmatched,,2025-03,2026-06,16,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395023,373,"Richmond, KY",KY,,,,unmatched,,2019-01,2026-06,90,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395168,374,"Tullahoma, TN",TN,,,,unmatched,,2022-01,2026-06,54,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395222,375,"Whitewater, WI",WI,,,,unmatched,,2021-12,2026-06,55,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394709,376,"Ithaca, NY",NY,27060,"Ithaca, NY",fhfa-at-nsa-27060,matched,same display state + normalized official-name leading core city,2019-01,2026-06,90,2000-01,2026-06,318,1987Q1,2026Q1,156,2019-01,2026-03,87,2019-01,2026-03,87,
+394637,377,"Grand Forks, ND",MN,24220,"Grand Forks, ND-MN",fhfa-at-nsa-24220,matched,same display state + normalized official-name leading core city,2017-12,2026-06,103,2013-04,2026-06,159,1987Q3,2026Q1,154,2017-12,2026-03,100,2017-12,2026-03,100,
+394524,378,"Decatur, IL",IL,19500,"Decatur, IL",fhfa-at-nsa-19500,matched,same display state + normalized official-name leading core city,2023-01,2026-06,42,2000-01,2026-06,315,1986Q3,2026Q1,159,2023-01,2026-03,39,2023-01,2026-03,39,
+394762,379,"LaGrange, GA",GA,,,,unmatched,,2021-11,2026-06,55,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394369,380,"Bay City, MI",MI,13020,"Bay City, MI",fhfa-at-nsa-13020,matched,same display state + normalized official-name leading core city,2022-05,2026-06,50,2000-01,2026-06,318,1986Q1,2026Q1,161,2022-05,2026-03,47,2022-05,2026-03,47,
+394599,381,"Fond du Lac, WI",WI,22540,"Fond du Lac, WI",fhfa-at-nsa-22540,matched,same display state + normalized official-name leading core city,2022-02,2026-06,51,2008-11,2026-06,212,1986Q2,2026Q1,160,2022-02,2026-03,50,2022-02,2026-03,50,
+394630,382,"Gettysburg, PA",PA,23900,"Gettysburg, PA",fhfa-at-nsa-23900,matched,same display state + normalized official-name leading core city,2022-01,2026-06,51,2000-01,2026-06,316,1989Q4,2026Q1,146,2022-01,2026-03,51,2022-01,2026-03,51,
+394620,383,"Gadsden, AL",AL,23460,"Gadsden, AL",fhfa-at-nsa-23460,matched,same display state + normalized official-name leading core city,2024-07,2026-06,22,2002-05,2026-06,290,1993Q4,2026Q1,130,2024-07,2026-03,21,2024-07,2026-03,21,
+394733,384,"Kalispell, MT",MT,,,,unmatched,,2022-01,2026-06,54,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394518,385,"Danville, VA",VA,,,,unmatched,,2023-12,2026-06,31,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394823,386,"Mankato, MN",MN,31860,"Mankato, MN",fhfa-at-nsa-31860,matched,same display state + normalized official-name leading core city,2022-11,2026-06,44,2003-07,2026-06,276,1986Q3,2026Q1,159,2022-11,2026-03,41,2022-11,2026-03,41,
+394794,387,"Lima, OH",OH,30620,"Lima, OH",fhfa-at-nsa-30620,matched,same display state + normalized official-name leading core city,2024-06,2026-06,25,2000-01,2026-06,316,1982Q2,2026Q1,175,2024-06,2026-03,22,2024-06,2026-03,22,
+753915,388,"Salem, OH",OH,,,,unmatched,,2026-05,2026-06,2,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395166,389,"Truckee, CA",CA,,,,unmatched,,2022-01,2026-06,54,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395080,390,"Sebring, FL",FL,42700,"Sebring, FL",fhfa-at-nsa-42700,matched,same display state + normalized official-name leading core city,2017-10,2026-06,105,2004-01,2026-06,270,1993Q4,2026Q1,130,2017-10,2026-03,102,2017-10,2026-03,102,
+394462,391,"Cheyenne, WY",WY,16940,"Cheyenne, WY",fhfa-at-nsa-16940,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2002-04,2026-06,290,1979Q1,2026Q1,185,2015-01,2026-03,135,2015-01,2026-03,135,
+394689,392,"Hot Springs, AR",AR,26300,"Hot Springs, AR",fhfa-at-nsa-26300,matched,same display state + normalized official-name leading core city,2021-06,2026-06,61,2000-01,2026-06,318,1992Q1,2026Q1,137,2021-06,2026-03,58,2021-06,2026-03,58,
+394302,393,"Adrian, MI",MI,,,,unmatched,,2025-12,2026-06,7,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395090,394,"Shelby, NC",NC,,,,unmatched,,2023-02,2026-06,41,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394542,396,"Dubuque, IA",IA,20220,"Dubuque, IA",fhfa-at-nsa-20220,matched,same display state + normalized official-name leading core city,2021-12,2026-06,55,2009-02,2026-06,209,1986Q2,2026Q1,160,2021-12,2026-03,52,2021-12,2026-03,52,
+394852,397,"Meridian, MS",MS,,,,unmatched,,2024-04,2026-06,27,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753912,398,"Pinehurst, NC",NC,38240,"Pinehurst-Southern Pines, NC",fhfa-at-nsa-38240,matched,same display state + normalized official-name leading core city,2015-04,2026-06,135,2008-03,2026-06,220,1992Q4,2026Q1,134,2015-04,2026-03,132,2015-04,2026-03,132,
+394953,399,"Paducah, KY",KY,37140,"Paducah, KY-IL",fhfa-at-nsa-37140,matched,same display state + normalized official-name leading core city,2024-12,2026-06,19,2000-01,2026-06,314,1990Q2,2026Q1,144,2024-12,2026-03,16,2024-12,2026-03,16,
+395190,400,"Victoria, TX",TX,47020,"Victoria, TX",fhfa-at-nsa-47020,matched,same display state + normalized official-name leading core city,2022-03,2026-06,52,2016-02,2026-06,125,1991Q1,2026Q1,141,2022-03,2026-03,49,2022-03,2026-03,49,
+395038,401,"Rome, GA",GA,40660,"Rome, GA",fhfa-at-nsa-40660,matched,same display state + normalized official-name leading core city,2022-06,2026-06,49,2000-01,2026-06,316,1987Q2,2026Q1,156,2022-06,2026-03,46,2022-06,2026-03,46,
+395086,402,"Sevierville, TN",TN,,,,unmatched,,2023-07,2026-06,36,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394882,403,"Moses Lake, WA",WA,,,,unmatched,,2015-12,2026-06,127,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394340,404,"Ashtabula, OH",OH,,,,unmatched,,2026-04,2026-06,3,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394441,405,"Cape Girardeau, MO",MO,16020,"Cape Girardeau, MO-IL",fhfa-at-nsa-16020,matched,same display state + normalized official-name leading core city,2022-05,2026-06,49,2009-02,2026-06,207,1987Q1,2026Q1,156,2022-05,2026-03,47,2022-05,2026-03,47,
+394311,406,"Albertville, AL",AL,,,,unmatched,,2025-01,2026-06,17,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394580,407,"Fairbanks, AK",AK,21820,"Fairbanks-College, AK",fhfa-at-nsa-21820,matched,same display state + normalized official-name leading core city,2021-05,2026-06,61,2005-02,2026-06,257,1986Q4,2026Q1,158,2021-05,2026-03,59,2021-05,2026-03,59,
+394410,408,"Brainerd, MN",MN,,,,unmatched,,2025-01,2026-06,17,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394513,409,"Cumberland, MD",MD,,,,unmatched,,2023-01,2026-06,41,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394928,410,"Ocean City, NJ",NJ,,,,unmatched,,2025-01,2026-06,18,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394505,411,"Corvallis, OR",OR,18700,"Corvallis, OR",fhfa-at-nsa-18700,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,317,1983Q2,2026Q1,172,2015-01,2026-03,135,2015-01,2026-03,135,
+394988,412,"Pocatello, ID",ID,38540,"Pocatello, ID",fhfa-at-nsa-38540,matched,same display state + normalized official-name leading core city,2022-01,2026-06,54,2009-01,2026-06,210,1988Q3,2026Q1,150,2022-01,2026-03,51,2022-01,2026-03,51,
+394501,413,"Corning, NY",NY,,,,unmatched,,2024-01,2026-06,30,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395140,415,"Sunbury, PA",PA,,,,unmatched,,2024-02,2026-06,28,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395175,416,"Ukiah, CA",CA,,,,unmatched,,2024-07,2026-06,24,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753887,417,"Hermiston, OR",OR,,,,unmatched,,2022-11,2026-06,44,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394469,418,"Clarksburg, WV",WV,,,,unmatched,,2021-08,2026-06,59,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394964,419,"Parkersburg, WV",WV,37620,"Parkersburg-Vienna, WV",fhfa-at-nsa-37620,matched,same display state + normalized official-name leading core city,2023-03,2026-06,39,2000-01,2026-06,316,1990Q4,2026Q1,142,2023-03,2026-03,37,2023-03,2026-03,37,
+394373,420,"Beaver Dam, WI",WI,,,,unmatched,,2024-03,2026-06,28,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394980,421,"Pine Bluff, AR",AR,,,,unmatched,,2025-09,2026-06,10,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394641,422,"Grants Pass, OR",OR,24420,"Grants Pass, OR",fhfa-at-nsa-24420,matched,same display state + normalized official-name leading core city,2022-11,2026-06,44,2000-01,2026-06,317,1989Q4,2026Q1,146,2022-11,2026-03,41,2022-11,2026-03,41,
+394511,424,"Cullman, AL",AL,,,,unmatched,,2024-01,2026-06,30,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394809,425,"Lufkin, TX",TX,,,,unmatched,,2024-10,2026-06,21,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395248,426,"Zanesville, OH",OH,,,,unmatched,,2023-04,2026-06,39,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394907,427,"New Castle, PA",PA,,,,unmatched,,2023-05,2026-06,38,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394925,428,"Oak Harbor, WA",WA,,,,unmatched,,2015-01,2026-06,138,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394942,429,"Orangeburg, SC",SC,,,,unmatched,,2023-12,2026-06,31,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395212,430,"Watertown, WI",WI,,,,unmatched,,2022-03,2026-06,51,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394847,431,"Meadville, PA",PA,,,,unmatched,,2026-01,2026-06,5,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394568,432,"Elmira, NY",NY,21300,"Elmira, NY",fhfa-at-nsa-21300,matched,same display state + normalized official-name leading core city,2024-05,2026-06,25,2000-01,2026-06,315,1990Q3,2026Q1,143,2024-05,2026-03,23,2024-05,2026-03,23,
+394644,433,"Great Falls, MT",MT,24500,"Great Falls, MT",fhfa-at-nsa-24500,matched,same display state + normalized official-name leading core city,2017-07,2026-06,108,2007-06,2026-06,228,1992Q4,2026Q1,134,2017-07,2026-03,105,2017-07,2026-03,105,
+394776,434,"Laurel, MS",MS,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395042,435,"Russellville, AR",AR,,,,unmatched,,2023-02,2026-06,41,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394704,436,"Indiana, PA",PA,,,,unmatched,,2025-03,2026-06,15,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394859,437,"Midland, MI",MI,33220,"Midland, MI",fhfa-at-nsa-33220,matched,same display state + normalized official-name leading core city,2022-04,2026-06,49,2000-01,2026-06,318,1986Q2,2026Q1,160,2022-04,2026-03,48,2022-04,2026-03,48,
+394755,438,"Kokomo, IN",IN,29020,"Kokomo, IN",fhfa-at-nsa-29020,matched,same display state + normalized official-name leading core city,2017-06,2026-06,107,2009-01,2026-06,210,1986Q2,2026Q1,160,2017-06,2026-03,106,2017-06,2026-03,106,
+394395,439,"Bloomsburg, PA",PA,,,,unmatched,,2022-02,2026-06,53,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394941,440,"Opelousas, LA",LA,,,,unmatched,,2025-12,2026-06,7,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394675,441,"Helena, MT",MT,25740,"Helena, MT",fhfa-at-nsa-25740,matched,same display state + normalized official-name leading core city,2023-04,2026-06,39,2009-02,2026-06,209,1992Q2,2026Q1,136,2023-04,2026-03,36,2023-04,2026-03,36,
+394744,442,"Key West, FL",FL,,,,unmatched,,2017-10,2026-06,105,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395145,443,"Talladega, AL",AL,,,,unmatched,,2023-01,2026-06,42,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395133,444,"Stillwater, OK",OK,,,,unmatched,,2020-10,2026-06,69,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394489,445,"Columbus, IN",IN,18020,"Columbus, IN",fhfa-at-nsa-18020,matched,same display state + normalized official-name leading core city,2018-05,2026-06,98,2001-06,2026-06,300,1985Q4,2026Q1,162,2018-05,2026-03,95,2018-05,2026-03,95,
+394345,446,"Athens, TX",TX,,,,unmatched,,2022-11,2026-06,44,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394452,447,"Centralia, WA",WA,,,,unmatched,,2023-05,2026-06,38,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394822,448,"Manitowoc, WI",WI,,,,unmatched,,2025-08,2026-06,11,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394682,449,"Hinesville, GA",GA,25980,"Hinesville, GA",fhfa-at-nsa-25980,matched,same display state + normalized official-name leading core city,2015-01,2026-06,138,2000-01,2026-06,314,1999Q3,2026Q1,107,2015-01,2026-03,135,2015-01,2026-03,135,
+394541,450,"DuBois, PA",PA,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395205,451,"Warsaw, IN",IN,,,,unmatched,,2022-12,2026-06,43,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395126,453,"Statesboro, GA",GA,,,,unmatched,,2021-12,2026-06,55,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394445,454,"Casper, WY",WY,16220,"Casper, WY",fhfa-at-nsa-16220,matched,same display state + normalized official-name leading core city,2015-12,2026-06,127,2010-09,2026-06,190,1981Q3,2026Q1,179,2015-12,2026-03,124,2015-12,2026-03,124,
+395231,455,"Wilson, NC",NC,,,,unmatched,,2023-05,2026-06,36,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753881,456,"Glenwood Springs, CO",CO,,,,unmatched,,2016-03,2026-06,123,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395085,457,"Seneca, SC",SC,,,,unmatched,,2023-03,2026-06,40,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394866,458,"Minot, ND",ND,33500,"Minot, ND",fhfa-at-nsa-33500,matched,same display state + normalized official-name leading core city,2020-12,2026-06,67,2009-03,2026-06,208,1992Q1,2026Q1,137,2020-12,2026-03,64,2020-12,2026-03,64,
+394936,459,"Olean, NY",NY,,,,unmatched,,2026-02,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395077,461,"Searcy, AR",AR,,,,unmatched,,2024-02,2026-06,29,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394638,462,"Grand Island, NE",NE,24260,"Grand Island, NE",fhfa-at-nsa-24260,matched,same display state + normalized official-name leading core city,2024-07,2026-06,24,2004-05,2026-06,266,1991Q4,2026Q1,138,2024-07,2026-03,21,2024-07,2026-03,21,
+394994,463,"Port Angeles, WA",WA,,,,unmatched,,2023-04,2026-06,39,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394350,464,"Auburn, NY",NY,,,,unmatched,,2026-01,2026-06,5,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394699,465,"Huntsville, TX",TX,,,,unmatched,,2022-11,2026-06,44,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394738,466,"Keene, NH",NH,,,,unmatched,,2022-01,2026-06,54,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394674,467,"Heber, UT",UT,,,,unmatched,,2019-01,2026-06,88,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395010,468,"Quincy, IL",IL,,,,unmatched,,2024-06,2026-06,25,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395062,469,"Sandusky, OH",OH,41780,"Sandusky, OH",fhfa-at-nsa-41780,matched,same display state + normalized official-name leading core city,2025-06,2026-06,12,2000-01,2026-06,317,1986Q2,2026Q1,160,2025-06,2026-03,10,2025-06,2026-03,10,
+394593,470,"Findlay, OH",OH,,,,unmatched,,2022-07,2026-06,48,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394614,471,"Frankfort, KY",KY,,,,unmatched,,2020-08,2026-06,71,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394516,472,"Danville, IL",IL,,,,unmatched,,2022-07,2026-06,48,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394298,473,"Aberdeen, WA",WA,,,,unmatched,,2022-06,2026-06,48,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753928,476,"Wisconsin Rapids, WI",WI,,,,unmatched,,2024-12,2026-06,17,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753893,477,"Jefferson, GA",GA,,,,unmatched,,2022-03,2026-06,52,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394736,478,"Kapaa, HI",HI,,,,unmatched,,2025-02,2026-06,16,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394683,481,"Hobbs, NM",NM,,,,unmatched,,2023-04,2026-06,39,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395088,482,"Shawnee, OK",OK,,,,unmatched,,2023-03,2026-06,40,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395132,485,"Stevens Point, WI",WI,,,,unmatched,,2022-02,2026-06,52,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394647,486,"Greeneville, TN",TN,,,,unmatched,,2023-11,2026-06,32,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394655,488,"Greenwood, SC",SC,,,,unmatched,,2024-02,2026-06,29,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394764,489,"Lake City, FL",FL,,,,unmatched,,2023-05,2026-06,37,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394752,490,"Klamath Falls, OR",OR,,,,unmatched,,2023-04,2026-06,39,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394877,491,"Morehead City, NC",NC,,,,unmatched,,2021-10,2026-06,57,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394472,492,"Clearlake, CA",CA,,,,unmatched,,2022-02,2026-06,52,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394305,493,"Alamogordo, NM",NM,,,,unmatched,,2022-05,2026-06,50,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395027,494,"Roanoke Rapids, NC",NC,,,,unmatched,,2026-01,2026-06,6,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394587,495,"Farmington, MO",MO,,,,unmatched,,2026-01,2026-06,5,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394897,496,"Muskogee, OK",OK,,,,unmatched,,2022-10,2026-06,45,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394826,497,"Marion, IN",IN,,,,unmatched,,2025-05,2026-06,13,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394586,498,"Faribault, MN",MN,,,,unmatched,,2024-01,2026-06,30,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395021,499,"Richmond, IN",IN,,,,unmatched,,2022-12,2026-06,42,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394829,500,"Marquette, MI",MI,,,,unmatched,,2023-10,2026-06,33,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394922,501,"North Wilkesboro, NC",NC,,,,unmatched,,2026-03,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394885,502,"Mount Pleasant, MI",MI,,,,unmatched,,2023-08,2026-06,34,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394827,504,"Marion, OH",OH,,,,unmatched,,2025-11,2026-06,8,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394360,505,"Baraboo, WI",WI,,,,unmatched,,2024-01,2026-06,30,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395016,506,"Red Bluff, CA",CA,,,,unmatched,,2023-02,2026-06,41,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394825,507,"Marinette, WI",WI,,,,unmatched,,2026-02,2026-06,5,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+845163,508,"Jasper, AL",AL,,,,unmatched,,2023-07,2026-06,36,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395040,509,"Roswell, NM",NM,,,,unmatched,,2022-05,2026-06,49,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395092,510,"Shelton, WA",WA,,,,unmatched,,2024-03,2026-06,28,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394540,511,"Dublin, GA",GA,,,,unmatched,,2024-07,2026-06,23,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394899,512,"Nacogdoches, TX",TX,,,,unmatched,,2024-02,2026-06,29,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395105,513,"Somerset, KY",KY,,,,unmatched,,2026-02,2026-06,5,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394496,514,"Coos Bay, OR",OR,,,,unmatched,,2024-10,2026-06,21,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394836,516,"Martinsville, VA",VA,,,,unmatched,,2025-08,2026-06,11,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395020,517,"Rexburg, ID",ID,,,,unmatched,,2021-02,2026-06,65,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394787,518,"Lewiston, ID",ID,30300,"Lewiston, ID-WA",fhfa-at-nsa-30300,matched,same display state + normalized official-name leading core city,2025-12,2026-06,7,2009-03,2026-06,208,1991Q2,2026Q1,140,2025-12,2026-03,4,2025-12,2026-03,4,
+394759,519,"Laconia, NH",NH,,,,unmatched,,2023-03,2026-06,40,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394629,520,"Georgetown, SC",SC,,,,unmatched,,2024-04,2026-06,27,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394343,521,"Athens, OH",OH,,,,unmatched,,2023-04,2026-06,39,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395063,522,"Sanford, NC",NC,,,,unmatched,,2023-06,2026-06,37,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394570,523,"Enid, OK",OK,21420,"Enid, OK",fhfa-at-nsa-21420,matched,same display state + normalized official-name leading core city,2022-05,2026-06,50,2000-01,2026-06,311,1983Q3,2026Q1,170,2022-05,2026-03,47,2022-05,2026-03,47,
+394889,524,"Mount Vernon, OH",OH,,,,unmatched,,2025-11,2026-06,8,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395199,525,"Walla Walla, WA",WA,47460,"Walla Walla, WA",fhfa-at-nsa-47460,matched,same display state + normalized official-name leading core city,2022-02,2026-06,53,2000-01,2026-06,316,1989Q3,2026Q1,147,2022-02,2026-03,50,2022-02,2026-03,50,
+394309,526,"Albemarle, NC",NC,,,,unmatched,,2024-12,2026-06,19,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394701,527,"Hutchinson, KS",KS,,,,unmatched,,2017-05,2026-06,109,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394693,528,"Hudson, NY",NY,,,,unmatched,,2022-01,2026-06,54,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395124,529,"Starkville, MS",MS,,,,unmatched,,2023-10,2026-06,33,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394443,530,"Carlsbad, NM",NM,,,,unmatched,,2024-02,2026-06,28,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394631,531,"Gillette, WY",WY,,,,unmatched,,2023-05,2026-06,38,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395044,533,"Rutland, VT",VT,,,,unmatched,,2026-03,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394509,534,"Crossville, TN",TN,,,,unmatched,,2026-03,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+845162,535,"Granbury, TX",TX,,,,unmatched,,2016-03,2026-06,124,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395071,536,"Sayre, PA",PA,,,,unmatched,,2026-03,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395049,537,"Salina, KS",KS,,,,unmatched,,2023-05,2026-06,38,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394591,539,"Fergus Falls, MN",MN,,,,unmatched,,2026-03,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394362,540,"Barre, VT",VT,,,,unmatched,,2024-06,2026-06,25,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394939,542,"Oneonta, NY",NY,,,,unmatched,,2024-05,2026-06,26,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394490,543,"Columbus, MS",MS,,,,unmatched,,2023-08,2026-06,34,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394365,545,"Batavia, NY",NY,,,,unmatched,,2026-03,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394336,546,"Ardmore, OK",OK,,,,unmatched,,2024-05,2026-06,26,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394956,547,"Palestine, TX",TX,,,,unmatched,,2026-03,2026-06,3,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394605,548,"Fort Madison, IA",IA,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394456,549,"Charleston, IL",IL,,,,unmatched,,2026-01,2026-06,6,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394592,550,"Fernley, NV",NV,,,,unmatched,,2017-04,2026-06,111,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394444,551,"Carson City, NV",NV,16180,"Carson City, NV",fhfa-at-nsa-16180,matched,same display state + normalized official-name leading core city,2022-10,2026-06,45,2000-01,2026-06,318,1987Q3,2026Q1,155,2022-10,2026-03,42,2022-10,2026-03,42,
+394551,552,"Eagle Pass, TX",TX,,,,unmatched,,2025-12,2026-06,6,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394432,553,"Calhoun, GA",GA,,,,unmatched,,2024-03,2026-06,27,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753877,554,"Cullowhee, NC",NC,,,,unmatched,,2023-12,2026-06,29,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394737,555,"Kearney, NE",NE,,,,unmatched,,2024-02,2026-06,29,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394582,556,"Fairmont, WV",WV,,,,unmatched,,2023-10,2026-06,30,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394940,557,"Ontario, OR",OR,,,,unmatched,,2024-08,2026-06,21,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394621,558,"Gaffney, SC",SC,,,,unmatched,,2024-01,2026-06,29,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395131,560,"Sterling, IL",IL,,,,unmatched,,2026-05,2026-06,2,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394411,561,"Branson, MO",MO,,,,unmatched,,2023-05,2026-06,38,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394446,562,"Cedar City, UT",UT,,,,unmatched,,2022-03,2026-06,52,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395216,563,"Waycross, GA",GA,,,,unmatched,,2026-05,2026-06,2,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394951,564,"Oxford, MS",MS,,,,unmatched,,2021-10,2026-06,57,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394721,565,"Jasper, IN",IN,,,,unmatched,,2026-03,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394556,566,"Edwards, CO",CO,,,,unmatched,,2023-01,2026-06,42,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394547,567,"Durango, CO",CO,,,,unmatched,,2021-01,2026-06,66,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394750,568,"Kinston, NC",NC,,,,unmatched,,2025-09,2026-06,10,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753920,569,"Sonora, CA",CA,,,,unmatched,,2024-12,2026-06,19,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394366,571,"Batesville, AR",AR,,,,unmatched,,2026-01,2026-06,5,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394989,572,"Point Pleasant, WV",OH,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394566,573,"Elko, NV",NV,,,,unmatched,,2024-07,2026-06,24,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394517,574,"Danville, KY",KY,,,,unmatched,,2026-02,2026-06,5,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395122,576,"St. Marys, GA",GA,,,,unmatched,,2022-05,2026-06,50,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394402,577,"Boone, NC",NC,,,,unmatched,,2025-10,2026-06,9,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395204,578,"Warrensburg, MO",MO,,,,unmatched,,2018-01,2026-06,102,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394634,579,"Gloversville, NY",NY,,,,unmatched,,2025-08,2026-06,11,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394604,580,"Fort Leonard Wood, MO",MO,,,,unmatched,,2023-04,2026-06,39,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394562,582,"Elizabeth City, NC",NC,,,,unmatched,,2022-07,2026-06,47,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394967,583,"Payson, AZ",AZ,,,,unmatched,,2025-03,2026-06,16,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394344,584,"Athens, TN",TN,,,,unmatched,,2023-05,2026-06,37,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394571,585,"Enterprise, AL",AL,,,,unmatched,,2015-01,2026-06,138,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394339,586,"Ashland, OH",OH,,,,unmatched,,2024-08,2026-06,23,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395073,587,"Scottsboro, AL",AL,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394861,588,"Milledgeville, GA",GA,,,,unmatched,,2024-08,2026-06,22,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394742,589,"Kerrville, TX",TX,,,,unmatched,,2023-03,2026-06,40,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394363,590,"Bartlesville, OK",OK,,,,unmatched,,2023-02,2026-06,41,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394985,591,"Platteville, WI",WI,,,,unmatched,,2026-03,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394503,592,"Corsicana, TX",TX,,,,unmatched,,2022-01,2026-06,54,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394652,593,"Greenville, OH",OH,,,,unmatched,,2026-04,2026-06,3,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394933,597,"Oil City, PA",PA,,,,unmatched,,2026-04,2026-06,3,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394838,598,"Mason City, IA",IA,,,,unmatched,,2026-04,2026-06,3,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394717,599,"Jacksonville, TX",TX,,,,unmatched,,2026-02,2026-06,5,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394954,601,"Pahrump, NV",NV,,,,unmatched,,2022-12,2026-06,42,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395234,603,"Winona, MN",MN,,,,unmatched,,2022-07,2026-06,48,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753905,604,"Newport, OR",OR,,,,unmatched,,2023-05,2026-06,37,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394878,605,"Morgan City, LA",LA,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395091,606,"Shelbyville, TN",TN,,,,unmatched,,2025-12,2026-06,6,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394326,607,"Amsterdam, NY",NY,,,,unmatched,,2026-04,2026-06,3,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753911,608,"Ozark, AL",AL,,,,unmatched,,2023-04,2026-06,39,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394628,610,"Gardnerville Ranchos, NV",NV,,,,unmatched,,2023-01,2026-06,42,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394608,611,"Fort Polk South, LA",LA,,,,unmatched,,2023-03,2026-06,39,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394437,612,"Ca±on City, CO",CO,,,,unmatched,,2023-09,2026-06,34,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394906,614,"New Castle, IN",IN,,,,unmatched,,2025-01,2026-06,18,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394478,615,"Clovis, NM",NM,,,,unmatched,,2022-01,2026-06,53,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394919,616,"Norfolk, NE",NE,,,,unmatched,,2025-01,2026-06,18,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394431,617,"Cadillac, MI",MI,,,,unmatched,,2026-05,2026-06,2,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395043,618,"Ruston, LA",LA,,,,unmatched,,2021-04,2026-06,62,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395097,619,"Sidney, OH",OH,,,,unmatched,,2025-07,2026-06,12,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395008,620,"Pullman, WA",WA,,,,unmatched,,2022-08,2026-06,47,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394527,622,"Del Rio, TX",TX,,,,unmatched,,2025-01,2026-06,17,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394391,623,"Blackfoot, ID",ID,,,,unmatched,,2024-05,2026-06,25,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395017,624,"Red Wing, MN",MN,,,,unmatched,,2025-12,2026-06,7,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394918,625,"Nogales, AZ",AZ,,,,unmatched,,2026-03,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395144,626,"Tahlequah, OK",OK,,,,unmatched,,2024-08,2026-06,23,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394876,628,"Montrose, CO",CO,,,,unmatched,,2023-04,2026-06,39,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394504,629,"Cortland, NY",NY,,,,unmatched,,2023-02,2026-06,41,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394477,631,"Clinton, IA",IA,,,,unmatched,,2026-01,2026-06,6,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753916,632,"Sandpoint, ID",ID,,,,unmatched,,2025-03,2026-06,16,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753865,633,"Bardstown, KY",KY,,,,unmatched,,2025-06,2026-06,13,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395201,634,"Wapakoneta, OH",OH,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394379,637,"Bemidji, MN",MN,,,,unmatched,,2025-01,2026-06,18,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394377,638,"Bellefontaine, OH",OH,,,,unmatched,,2026-05,2026-06,2,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395087,639,"Seymour, IN",IN,,,,unmatched,,2026-05,2026-06,2,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394426,640,"Burley, ID",ID,,,,unmatched,,2025-12,2026-06,7,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394548,641,"Durant, OK",OK,,,,unmatched,,2024-04,2026-06,27,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753889,645,"Hillsdale, MI",MI,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395155,646,"Thomasville, GA",GA,,,,unmatched,,2024-04,2026-06,27,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394961,647,"Paragould, AR",AR,,,,unmatched,,2024-06,2026-06,25,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394427,649,"Burlington, IA",IA,,,,unmatched,,2026-05,2026-06,2,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394850,651,"Menomonie, WI",WI,,,,unmatched,,2023-01,2026-06,42,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753918,652,"Shawano, WI",WI,,,,unmatched,,2026-03,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394616,657,"Freeport, IL",IL,,,,unmatched,,2024-06,2026-06,24,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395037,659,"Rolla, MO",MO,,,,unmatched,,2023-02,2026-06,40,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394482,660,"Coldwater, MI",MI,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753904,661,"Marion, NC",NC,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394567,663,"Ellensburg, WA",WA,,,,unmatched,,2022-03,2026-06,52,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394990,664,"Ponca City, OK",OK,,,,unmatched,,2025-03,2026-06,15,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394886,667,"Mount Pleasant, TX",TX,,,,unmatched,,2025-12,2026-06,7,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394785,671,"Lewisburg, PA",PA,,,,unmatched,,2025-10,2026-06,9,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394349,672,"Auburn, IN",IN,,,,unmatched,,2026-03,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394545,673,"Duncan, OK",OK,,,,unmatched,,2025-10,2026-06,9,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395081,674,"Sedalia, MO",MO,,,,unmatched,,2024-06,2026-06,23,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394448,675,"Cedartown, GA",GA,,,,unmatched,,2026-04,2026-06,3,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394677,676,"Henderson, NC",NC,,,,unmatched,,2025-04,2026-06,15,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394297,677,"Aberdeen, SD",SD,,,,unmatched,,2025-05,2026-06,14,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395032,678,"Rock Springs, WY",WY,,,,unmatched,,2020-05,2026-06,72,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395129,680,"Stephenville, TX",TX,,,,unmatched,,2023-03,2026-06,40,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395230,682,"Wilmington, OH",OH,,,,unmatched,,2026-05,2026-06,2,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394424,683,"Bucyrus, OH",OH,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394558,685,"El Campo, TX",TX,,,,unmatched,,2026-01,2026-06,6,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394891,686,"Mountain Home, AR",AR,,,,unmatched,,2025-10,2026-06,9,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394624,687,"Gainesville, TX",TX,,,,unmatched,,2025-01,2026-06,16,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395158,688,"Tifton, GA",GA,,,,unmatched,,2026-02,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394845,690,"McMinnville, TN",TN,,,,unmatched,,2026-01,2026-06,5,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394341,691,"Astoria, OR",OR,,,,unmatched,,2023-05,2026-06,38,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394833,696,"Marshalltown, IA",IA,,,,unmatched,,2025-01,2026-06,18,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394354,698,"Austin, MN",MN,,,,unmatched,,2023-01,2026-06,41,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395082,699,"Selinsgrove, PA",PA,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394934,701,"Okeechobee, FL",FL,,,,unmatched,,2026-03,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394690,702,"Houghton, MI",MI,,,,unmatched,,2025-12,2026-06,6,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394881,703,"Moscow, ID",ID,,,,unmatched,,2024-01,2026-06,30,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394476,704,"Clewiston, FL",FL,,,,unmatched,,2026-02,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395026,705,"Riverton, WY",WY,,,,unmatched,,2024-03,2026-06,28,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394981,708,"Pittsburg, KS",KS,,,,unmatched,,2025-01,2026-06,17,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395203,710,"Warren, PA",PA,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394315,711,"Alexandria, MN",MN,,,,unmatched,,2026-01,2026-06,6,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395178,712,"Urbana, OH",OH,,,,unmatched,,2026-04,2026-06,3,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394434,714,"Cambridge, OH",OH,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395227,715,"Williston, ND",ND,,,,unmatched,,2020-11,2026-06,68,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395046,718,"Safford, AZ",AZ,,,,unmatched,,2026-01,2026-06,6,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394300,720,"Ada, OK",OK,,,,unmatched,,2022-08,2026-06,45,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394507,722,"Crawfordsville, IN",IN,,,,unmatched,,2024-02,2026-06,29,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394801,723,"Logansport, IN",IN,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394914,726,"Newberry, SC",SC,,,,unmatched,,2026-05,2026-06,2,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394799,727,"Lock Haven, PA",PA,,,,unmatched,,2023-05,2026-06,38,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394554,729,"Easton, MD",MD,,,,unmatched,,2025-02,2026-06,17,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394948,730,"Owatonna, MN",MN,,,,unmatched,,2025-12,2026-06,7,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394771,733,"Laramie, WY",WY,,,,unmatched,,2021-11,2026-06,56,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394894,734,"Murray, KY",KY,,,,unmatched,,2024-11,2026-06,20,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394617,735,"Fremont, NE",NE,,,,unmatched,,2024-02,2026-06,28,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394382,736,"Bennington, VT",VT,,,,unmatched,,2025-09,2026-06,10,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394603,737,"Fort Dodge, IA",IA,,,,unmatched,,2025-08,2026-06,11,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395069,738,"Sault Ste. Marie, MI",MI,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394550,740,"Dyersburg, TN",TN,,,,unmatched,,2025-03,2026-06,14,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394745,744,"Kill Devil Hills, NC",NC,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395137,745,"Sulphur Springs, TX",TX,,,,unmatched,,2025-10,2026-06,9,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394696,748,"Huntington, IN",IN,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394522,749,"DeRidder, LA",LA,,,,unmatched,,2026-04,2026-06,3,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394370,751,"Bay City, TX",TX,,,,unmatched,,2023-11,2026-06,31,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394920,752,"North Platte, NE",NE,,,,unmatched,,2026-02,2026-06,5,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395191,758,"Vidalia, GA",GA,,,,unmatched,,2026-05,2026-06,2,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394413,759,"Brenham, TX",TX,,,,unmatched,,2025-05,2026-06,14,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395187,760,"Vernal, UT",UT,,,,unmatched,,2025-02,2026-06,16,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+786252,761,"Bonham, TX",TX,,,,unmatched,,2025-10,2026-06,9,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394430,764,"Butte, MT",MT,,,,unmatched,,2023-04,2026-06,39,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394569,767,"Emporia, KS",KS,,,,unmatched,,2023-10,2026-06,33,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394713,768,"Jackson, WY",WY,,,,unmatched,,2024-04,2026-06,27,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+845172,769,"Winfield, KS",KS,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395211,773,"Watertown, SD",SD,,,,unmatched,,2026-02,2026-06,5,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394331,774,"Angola, IN",IN,,,,unmatched,,2026-01,2026-06,6,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394535,775,"Dixon, IL",IL,,,,unmatched,,2026-05,2026-06,2,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395149,777,"Taos, NM",NM,,,,unmatched,,2026-01,2026-06,6,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394419,778,"Brookings, SD",SD,,,,unmatched,,2022-10,2026-06,45,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394491,780,"Columbus, NE",NE,,,,unmatched,,2026-01,2026-06,5,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394786,783,"Lewisburg, TN",TN,,,,unmatched,,2026-03,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394533,785,"Dickinson, ND",ND,,,,unmatched,,2025-02,2026-06,17,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+786262,786,"Pella, IA",IA,,,,unmatched,,2024-06,2026-06,24,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395165,788,"Troy, AL",AL,,,,unmatched,,2025-10,2026-06,9,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394613,790,"Frankfort, IN",IN,,,,unmatched,,2026-04,2026-06,2,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394414,792,"Brevard, NC",NC,,,,unmatched,,2025-05,2026-06,14,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394835,794,"Martin, TN",TN,,,,unmatched,,2026-01,2026-06,5,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394984,795,"Plainview, TX",TX,,,,unmatched,,2026-05,2026-06,2,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753878,797,"Dayton, TN",TN,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394433,799,"Cambridge, MD",MD,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394962,800,"Paris, TN",TN,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394730,802,"Juneau, AK",AK,,,,unmatched,,2026-03,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394481,803,"Coffeyville, KS",KS,,,,unmatched,,2026-04,2026-06,3,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394383,805,"Berlin, NH",NH,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394376,808,"Beeville, TX",TX,,,,unmatched,,2026-05,2026-06,2,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394749,809,"Kingsville, TX",TX,,,,unmatched,,2024-08,2026-06,23,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753871,811,"Breckenridge, CO",CO,,,,unmatched,,2024-02,2026-06,29,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394310,814,"Albert Lea, MN",MN,,,,unmatched,,2026-03,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395176,816,"Union City, TN",TN,,,,unmatched,,2026-05,2026-06,2,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394725,819,"Jesup, GA",GA,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394846,820,"McPherson, KS",KS,,,,unmatched,,2026-01,2026-06,5,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394751,821,"Kirksville, MO",MO,,,,unmatched,,2023-08,2026-06,33,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394606,827,"Fort Morgan, CO",CO,,,,unmatched,,2026-04,2026-06,3,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753926,831,"Weatherford, OK",OK,,,,unmatched,,2026-04,2026-06,3,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394892,832,"Mountain Home, ID",ID,,,,unmatched,,2024-10,2026-06,20,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395100,835,"Silver City, NM",NM,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394812,838,"Macomb, IL",IL,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394615,847,"Fredericksburg, TX",TX,,,,unmatched,,2025-10,2026-06,9,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753923,849,"The Dalles, OR",OR,,,,unmatched,,2025-01,2026-06,18,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394758,852,"La Grande, OR",OR,,,,unmatched,,2024-12,2026-06,19,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394791,856,"Lexington, NE",NE,,,,unmatched,,2026-05,2026-06,2,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395110,858,"Spearfish, SD",SD,,,,unmatched,,2026-06,2026-06,1,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394322,864,"Altus, OK",OK,,,,unmatched,,2026-04,2026-06,3,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753884,866,"Hailey, ID",ID,,,,unmatched,,2026-04,2026-06,3,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753921,867,"Steamboat Springs, CO",CO,,,,unmatched,,2025-02,2026-06,17,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395236,871,"Woodward, OK",OK,,,,unmatched,,2026-04,2026-06,3,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395004,872,"Prineville, OR",OR,,,,unmatched,,2024-10,2026-06,21,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+845169,874,"Rockport, TX",TX,,,,unmatched,,2025-01,2026-06,18,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394687,875,"Hood River, OR",OR,,,,unmatched,,2025-02,2026-05,15,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394868,878,"Mitchell, SD",SD,,,,unmatched,,2025-12,2026-06,7,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395198,882,"Wahpeton, ND",ND,,,,unmatched,,2024-10,2026-06,21,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+395130,890,"Sterling, CO",CO,,,,unmatched,,2025-10,2026-06,9,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394371,891,"Beatrice, NE",NE,,,,unmatched,,2026-02,2026-06,5,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394718,892,"Jamestown, ND",ND,,,,unmatched,,2022-11,2026-06,43,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394403,899,"Borger, TX",TX,,,,unmatched,,2026-05,2026-06,2,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394979,900,"Pierre, SD",SD,,,,unmatched,,2026-03,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+786263,913,"Ruidoso, NM",NM,,,,unmatched,,2026-03,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394996,915,"Portales, NM",NM,,,,unmatched,,2023-05,2026-06,38,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394805,916,"Los Alamos, NM",NM,,,,unmatched,,2026-03,2026-06,4,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+394330,920,"Andrews, TX",TX,,,,unmatched,,2026-05,2026-06,2,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+786253,921,"Brownsville, TN",TN,,,,unmatched,,2025-11,2026-06,8,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city
+753880,930,"Fairfield, IA",IA,,,,unmatched,,2026-04,2026-06,3,,,,,,,,,,,,,no same-display-state FHFA series containing the Zillow core city

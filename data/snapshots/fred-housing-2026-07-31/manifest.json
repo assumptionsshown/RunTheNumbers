@@ -1,0 +1,144 @@
+{
+  "source": {
+    "MORTGAGE30US": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE30US",
+    "MORTGAGE15US": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE15US",
+    "CPIAUCSL": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL"
+  },
+  "supplementalSources": {
+    "CPIAUCSL2025OctoberGap": "https://www.bls.gov/cpi/additional-resources/2025-federal-government-shutdown-impact-cpi-faq.htm"
+  },
+  "fetchedAt": "2026-07-31",
+  "retrievalMode": "download",
+  "sha256": "f0ed75612d766156dc7c91a163219875388e35e1045512ade96e1392c7741d10",
+  "rawBytes": 93707,
+  "rawFiles": {
+    "MORTGAGE30US": {
+      "filename": "MORTGAGE30US.csv",
+      "source": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE30US",
+      "citation": "https://fred.stlouisfed.org/series/MORTGAGE30US",
+      "sourceName": "Freddie Mac Primary Mortgage Market Survey via FRED",
+      "frequency": "Weekly, ending Thursday",
+      "units": "Percent, not seasonally adjusted",
+      "sha256": "f01527e9fe649cb181531ce985c77a0a1e7b0ee5b1283ee58a1ad77bf22ba96d",
+      "rawBytes": 46803,
+      "rows": 2888,
+      "numericRows": 2888,
+      "missingObservations": [],
+      "firstObservation": "1971-04-02",
+      "lastObservation": "2026-07-30"
+    },
+    "MORTGAGE15US": {
+      "filename": "MORTGAGE15US.csv",
+      "source": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE15US",
+      "citation": "https://fred.stlouisfed.org/series/MORTGAGE15US",
+      "sourceName": "Freddie Mac Primary Mortgage Market Survey via FRED",
+      "frequency": "Weekly, ending Thursday",
+      "units": "Percent, not seasonally adjusted",
+      "sha256": "3c502cad9523e85f96549335b3d1708896a98a7e8b1c1acc344273590cdea21b",
+      "rawBytes": 29198,
+      "rows": 1823,
+      "numericRows": 1823,
+      "missingObservations": [],
+      "firstObservation": "1991-08-30",
+      "lastObservation": "2026-07-30"
+    },
+    "CPIAUCSL": {
+      "filename": "CPIAUCSL.csv",
+      "source": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL",
+      "citation": "https://fred.stlouisfed.org/series/CPIAUCSL",
+      "sourceName": "U.S. Bureau of Labor Statistics via FRED",
+      "frequency": "Monthly",
+      "units": "Index 1982-1984=100, seasonally adjusted",
+      "sha256": "2efffad3305f5adef58e84b06f268811123534805d5d7358f633cdb7e8c1aedb",
+      "rawBytes": 17706,
+      "rows": 954,
+      "numericRows": 953,
+      "missingObservations": [
+        "2025-10-01"
+      ],
+      "firstObservation": "1947-01-01",
+      "lastObservation": "2026-06-01"
+    }
+  },
+  "coverage": {
+    "firstPeriod": "1971-04",
+    "lastPeriod": "2026-06",
+    "rows": 663,
+    "MORTGAGE30US": {
+      "firstPeriod": "1971-04",
+      "lastPeriod": "2026-06",
+      "months": 663
+    },
+    "MORTGAGE15US": {
+      "firstPeriod": "1991-09",
+      "lastPeriod": "2026-06",
+      "months": 418
+    },
+    "CPIAUCSL": {
+      "firstPeriod": "1971-04",
+      "lastPeriod": "2026-06",
+      "months": 663,
+      "numericMonths": 662,
+      "missingPeriods": [
+        "2025-10"
+      ],
+      "rawFirstPeriod": "1947-01"
+    }
+  },
+  "columnMapping": {
+    "rawDate": "observation_date",
+    "rawValues": {
+      "MORTGAGE30US": "MORTGAGE30US",
+      "MORTGAGE15US": "MORTGAGE15US",
+      "CPIAUCSL": "CPIAUCSL"
+    },
+    "normalised": {
+      "month": 0,
+      "mortgage30usPercent": 1,
+      "mortgage30usObservations": 2,
+      "mortgage15usPercent": 3,
+      "mortgage15usObservations": 4,
+      "cpiaucsl": 5
+    }
+  },
+  "aggregation": {
+    "mortgageRates": "arithmetic mean of all weekly observations dated in the calendar month",
+    "cpi": "monthly source observation copied without aggregation",
+    "missingValueRule": "preserve source blanks; do not interpolate",
+    "finalMonthRule": "exclude the current calendar month and end at the latest month available in all three sources",
+    "lastClosedMonth": "2026-06",
+    "latestSourceMonths": {
+      "MORTGAGE30US": "2026-07",
+      "MORTGAGE15US": "2026-07",
+      "CPIAUCSL": "2026-06"
+    }
+  },
+  "dropped": [
+    {
+      "series": "MORTGAGE15US",
+      "period": "1991-08",
+      "observations": 1,
+      "reason": "source begins on 1991-08-30; too little of the month to average"
+    },
+    {
+      "series": "MORTGAGE30US",
+      "period": "2026-07",
+      "observations": 5,
+      "reason": "current calendar month is never normalised"
+    },
+    {
+      "series": "MORTGAGE15US",
+      "period": "2026-07",
+      "observations": 5,
+      "reason": "current calendar month is never normalised"
+    }
+  ],
+  "knownGaps": [
+    "MORTGAGE15US is unavailable before 1991-08; its lone 1991-08-30 observation is retained raw but excluded from the monthly average, so normalised coverage starts 1991-09.",
+    "The normalised file ends 2026-06. Later raw mortgage observations are retained but excluded by the final-month alignment rule.",
+    "Freddie Mac changed the Primary Mortgage Market Survey methodology on 2022-11-17; pre/post observations are not perfectly method-homogeneous.",
+    "Mortgage rates are not seasonally adjusted; CPIAUCSL is seasonally adjusted.",
+    "CPIAUCSL has a blank source observation for 2025-10 because BLS did not publish the all-items October 2025 index after the lapse in appropriations; the normalised cell is intentionally blank and is not interpolated.",
+    "Freddie Mac mortgage-rate data carried by FRED is copyrighted and requires source citation; keep the manifest citations with any redistributed snapshot."
+  ]
+}

@@ -31,6 +31,20 @@ if (episode == "ep03")
     return;
 }
 
+if (episode == "ep04")
+{
+    var fredFlag = Array.IndexOf(args, "--fred");
+    var fredDir = fredFlag >= 0 && fredFlag + 1 < args.Length
+        ? args[fredFlag + 1]
+        : Path.Combine("data", "snapshots", "fred-housing-2026-07-31");
+    var housingFlag = Array.IndexOf(args, "--housing");
+    var housingDir = housingFlag >= 0 && housingFlag + 1 < args.Length
+        ? args[housingFlag + 1]
+        : Path.Combine("data", "snapshots", "housing-metro-crosswalk-2026-08-01");
+    Ep04.Run(snapshotDir, fredDir, housingDir, outputPath);
+    return;
+}
+
 var series = ShillerSeries.Load(Path.Combine(snapshotDir, "shiller-monthly.csv"));
 var manifest = JsonSerializer.Deserialize<JsonElement>(
     File.ReadAllText(Path.Combine(snapshotDir, "manifest.json")));

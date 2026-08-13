@@ -302,11 +302,23 @@ export function multiLine(series, opts = {}) {
 
 /** Vertical bars with a reference line, used for the CAPE decile slide. */
 export function verticalBars(items, opts = {}) {
-  const f = frame({ width: 1712, height: 520, margin: { top: 50, right: 50, bottom: 120, left: 110 } });
+  // With sublabels present, the old 520px frame put the axis caption's cap
+  // height exactly on the sublabel baseline (y=476 on both), so long captions
+  // visibly collided with the sublabel row (founder caught it on ep03 slide 7).
+  // The taller frame moves only the caption; bar geometry is untouched because
+  // innerHeight stays 350 either way.
+  const hasSub = items.some((i) => i.sublabel);
+  const marginLeft = opts.marginLeft ?? 110;
+  const edgePadding = opts.edgePadding ?? 60;
+  const f = frame({
+    width: 1712,
+    height: hasSub ? 560 : 520,
+    margin: { top: 50, right: 50, bottom: hasSub ? 160 : 120, left: marginLeft },
+  });
   const max = opts.max ?? Math.max(...items.map((i) => i.value)) * 1.3;
-  const x = scale([0, items.length - 1], [f.margin.left + 60, f.margin.left + f.innerWidth - 60]);
+  const x = scale([0, items.length - 1], [f.margin.left + edgePadding, f.margin.left + f.innerWidth - edgePadding]);
   const y = scale([0, max], [f.margin.top + f.innerHeight, f.margin.top]);
-  const bw = (f.innerWidth - 120) / items.length * 0.62;
+  const bw = (f.innerWidth - edgePadding * 2) / items.length * 0.62;
 
   let out = "";
   const ticks = 4;
@@ -329,11 +341,21 @@ export function verticalBars(items, opts = {}) {
     out += line(f.margin.left, y(opts.reference), f.margin.left + f.innerWidth, y(opts.reference), {
       stroke: COLORS.warn, width: 3, dash: "12 8",
     });
-    // Anchored left: the right end of the line is where the final bar and its
-    // value label already sit.
-    out += text(f.margin.left + 8, y(opts.reference) - 16, opts.referenceLabel ?? "", {
-      anchor: "start", size: 24, fill: COLORS.warn,
-    });
+    // The reference label sits at the line's own height, which is exactly where
+    // the value label of any bar level with the reference also sits. Anchoring
+    // it left unconditionally put "everybody survives" on top of the first
+    // bar's 100% in ep06. So pick the end whose bar is NOT level with the line;
+    // if both are, drop to just under the line, where only bar fill can be.
+    const level = (v) => Math.abs(y(v) - y(opts.reference)) < 44;
+    const firstClear = !level(items[0].value);
+    const lastClear = !level(items[items.length - 1].value);
+    const above = firstClear || lastClear;
+    out += text(
+      firstClear ? f.margin.left + 8 : f.margin.left + f.innerWidth - 8,
+      y(opts.reference) + (above ? -16 : 34),
+      opts.referenceLabel ?? "",
+      { anchor: firstClear ? "start" : "end", size: 24, fill: COLORS.warn },
+    );
   }
 
   out += text(f.margin.left + f.innerWidth / 2, f.height - 18, opts.xLabel ?? "", { size: 26 });

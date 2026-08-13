@@ -1,0 +1,3753 @@
+{
+  "meta": {
+    "episode": "ep04-rent-vs-buy",
+    "generatedAt": "2026-08-02T17:58:35Z",
+    "snapshot": {
+      "source": "https://img1.wsimg.com/blobby/go/e5e77e0b-59d1-44d9-ab25-4763ac982e53/downloads/165d8a6e-26bf-44ec-a26c-a35f7f993480/ie_data.xls",
+      "note": "econ.yale.edu/~shiller/data/ie_data.xls is a stale mirror (frozen at 2023-09). Use shillerdata.com.",
+      "fetchedAt": "2026-07-26",
+      "sha256": "0e3d716f83f51c14f40c5ab5662e767cde4f83fcb7305db24ab003df2c9ee6c5",
+      "rawBytes": 1651712,
+      "months": 1866,
+      "firstMonth": "1871-01",
+      "lastMonth": "2026-06",
+      "droppedPartialMonth": "2026-07",
+      "rowsWithoutTotalReturn": 0,
+      "columnsUsed": {
+        "date": 0,
+        "price": 1,
+        "dividend": 2,
+        "earnings": 3,
+        "cpi": 4,
+        "dateFraction": 5,
+        "gs10": 6,
+        "realPrice": 7,
+        "realDividend": 8,
+        "realTotalReturnPrice": 9,
+        "realEarnings": 10,
+        "cape": 12
+      }
+    },
+    "rateSnapshot": {
+      "source": {
+        "MORTGAGE30US": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE30US",
+        "MORTGAGE15US": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE15US",
+        "CPIAUCSL": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL"
+      },
+      "supplementalSources": {
+        "CPIAUCSL2025OctoberGap": "https://www.bls.gov/cpi/additional-resources/2025-federal-government-shutdown-impact-cpi-faq.htm"
+      },
+      "fetchedAt": "2026-07-31",
+      "retrievalMode": "download",
+      "sha256": "f0ed75612d766156dc7c91a163219875388e35e1045512ade96e1392c7741d10",
+      "rawBytes": 93707,
+      "rawFiles": {
+        "MORTGAGE30US": {
+          "filename": "MORTGAGE30US.csv",
+          "source": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE30US",
+          "citation": "https://fred.stlouisfed.org/series/MORTGAGE30US",
+          "sourceName": "Freddie Mac Primary Mortgage Market Survey via FRED",
+          "frequency": "Weekly, ending Thursday",
+          "units": "Percent, not seasonally adjusted",
+          "sha256": "f01527e9fe649cb181531ce985c77a0a1e7b0ee5b1283ee58a1ad77bf22ba96d",
+          "rawBytes": 46803,
+          "rows": 2888,
+          "numericRows": 2888,
+          "missingObservations": [],
+          "firstObservation": "1971-04-02",
+          "lastObservation": "2026-07-30"
+        },
+        "MORTGAGE15US": {
+          "filename": "MORTGAGE15US.csv",
+          "source": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE15US",
+          "citation": "https://fred.stlouisfed.org/series/MORTGAGE15US",
+          "sourceName": "Freddie Mac Primary Mortgage Market Survey via FRED",
+          "frequency": "Weekly, ending Thursday",
+          "units": "Percent, not seasonally adjusted",
+          "sha256": "3c502cad9523e85f96549335b3d1708896a98a7e8b1c1acc344273590cdea21b",
+          "rawBytes": 29198,
+          "rows": 1823,
+          "numericRows": 1823,
+          "missingObservations": [],
+          "firstObservation": "1991-08-30",
+          "lastObservation": "2026-07-30"
+        },
+        "CPIAUCSL": {
+          "filename": "CPIAUCSL.csv",
+          "source": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL",
+          "citation": "https://fred.stlouisfed.org/series/CPIAUCSL",
+          "sourceName": "U.S. Bureau of Labor Statistics via FRED",
+          "frequency": "Monthly",
+          "units": "Index 1982-1984=100, seasonally adjusted",
+          "sha256": "2efffad3305f5adef58e84b06f268811123534805d5d7358f633cdb7e8c1aedb",
+          "rawBytes": 17706,
+          "rows": 954,
+          "numericRows": 953,
+          "missingObservations": [
+            "2025-10-01"
+          ],
+          "firstObservation": "1947-01-01",
+          "lastObservation": "2026-06-01"
+        }
+      },
+      "coverage": {
+        "firstPeriod": "1971-04",
+        "lastPeriod": "2026-06",
+        "rows": 663,
+        "MORTGAGE30US": {
+          "firstPeriod": "1971-04",
+          "lastPeriod": "2026-06",
+          "months": 663
+        },
+        "MORTGAGE15US": {
+          "firstPeriod": "1991-09",
+          "lastPeriod": "2026-06",
+          "months": 418
+        },
+        "CPIAUCSL": {
+          "firstPeriod": "1971-04",
+          "lastPeriod": "2026-06",
+          "months": 663,
+          "numericMonths": 662,
+          "missingPeriods": [
+            "2025-10"
+          ],
+          "rawFirstPeriod": "1947-01"
+        }
+      },
+      "columnMapping": {
+        "rawDate": "observation_date",
+        "rawValues": {
+          "MORTGAGE30US": "MORTGAGE30US",
+          "MORTGAGE15US": "MORTGAGE15US",
+          "CPIAUCSL": "CPIAUCSL"
+        },
+        "normalised": {
+          "month": 0,
+          "mortgage30usPercent": 1,
+          "mortgage30usObservations": 2,
+          "mortgage15usPercent": 3,
+          "mortgage15usObservations": 4,
+          "cpiaucsl": 5
+        }
+      },
+      "aggregation": {
+        "mortgageRates": "arithmetic mean of all weekly observations dated in the calendar month",
+        "cpi": "monthly source observation copied without aggregation",
+        "missingValueRule": "preserve source blanks; do not interpolate",
+        "finalMonthRule": "exclude the current calendar month and end at the latest month available in all three sources",
+        "lastClosedMonth": "2026-06",
+        "latestSourceMonths": {
+          "MORTGAGE30US": "2026-07",
+          "MORTGAGE15US": "2026-07",
+          "CPIAUCSL": "2026-06"
+        }
+      },
+      "dropped": [
+        {
+          "series": "MORTGAGE15US",
+          "period": "1991-08",
+          "observations": 1,
+          "reason": "source begins on 1991-08-30; too little of the month to average"
+        },
+        {
+          "series": "MORTGAGE30US",
+          "period": "2026-07",
+          "observations": 5,
+          "reason": "current calendar month is never normalised"
+        },
+        {
+          "series": "MORTGAGE15US",
+          "period": "2026-07",
+          "observations": 5,
+          "reason": "current calendar month is never normalised"
+        }
+      ],
+      "knownGaps": [
+        "MORTGAGE15US is unavailable before 1991-08; its lone 1991-08-30 observation is retained raw but excluded from the monthly average, so normalised coverage starts 1991-09.",
+        "The normalised file ends 2026-06. Later raw mortgage observations are retained but excluded by the final-month alignment rule.",
+        "Freddie Mac changed the Primary Mortgage Market Survey methodology on 2022-11-17; pre/post observations are not perfectly method-homogeneous.",
+        "Mortgage rates are not seasonally adjusted; CPIAUCSL is seasonally adjusted.",
+        "CPIAUCSL has a blank source observation for 2025-10 because BLS did not publish the all-items October 2025 index after the lapse in appropriations; the normalised cell is intentionally blank and is not interpolated.",
+        "Freddie Mac mortgage-rate data carried by FRED is copyrighted and requires source citation; keep the manifest citations with any redistributed snapshot."
+      ]
+    },
+    "housingSnapshot": {
+      "fetchedAt": "2026-08-01",
+      "retrievalMode": "pinned raw files; build is offline",
+      "source": {
+        "zillowZori": "https://files.zillowstatic.com/research/public_csvs/zori/Metro_zori_uc_sfrcondomfr_sm_month.csv",
+        "zillowCitation": "https://www.zillow.com/research/data/",
+        "zillowZhvi": "https://files.zillowstatic.com/research/public_csvs/zhvi/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv",
+        "zillowZhviGuide": "https://www.zillow.com/research/zhvi-user-guide/",
+        "fhfaAllTransactionsMetro": "https://www.fhfa.gov/hpi/download/quarterly_datasets/hpi_at_metro.csv",
+        "fhfa2023MetroLookup": "https://www.fhfa.gov/document/d/hpi/2025q1_hpi_technical_note_tables.xlsx",
+        "fhfaCitation": "https://www.fhfa.gov/house-price-index?tab=HPI%20Datasets",
+        "nationalRates": "../fred-housing-2026-07-31/manifest.json"
+      },
+      "sha256": "edec98cca09cd119a0e193e067ed63cb4ab8a959e74247a30aa3148a38814380",
+      "rawBytes": 9713136,
+      "rawFiles": {
+        "zillowZori": {
+          "filename": "zillow-zori-metro.csv",
+          "sha256": "a403fbff7aa8745b01f749490dd200a4a767e89b1088923790f08d8ac8a12ff1",
+          "rawBytes": 1038495,
+          "metroRows": 733,
+          "firstSourceMonth": "2015-01",
+          "lastSourceMonth": "2026-06"
+        },
+        "zillowZhvi": {
+          "filename": "zillow-zhvi-metro.csv",
+          "sha256": "efdb741b6cd798aa688ba004adcddb9d1c2ca39107d972bbeb6603eac0baa527",
+          "rawBytes": 4444528,
+          "metroRows": 894,
+          "firstSourceMonth": "2000-01",
+          "lastSourceMonth": "2026-06",
+          "cut": "all homes, middle tier, smoothed and seasonally adjusted"
+        },
+        "fhfaAllTransactionsMetro": {
+          "filename": "fhfa-hpi-at-metro.csv",
+          "sha256": "ef7c59e99c4cfd5474ff2c20cf3236843e64dbf72bfaffd4d59e374d98214a27",
+          "rawBytes": 4165719,
+          "rawRows": 84050,
+          "series": 410,
+          "divisionSeries": 37
+        },
+        "fhfa2023MetroLookup": {
+          "filename": "fhfa-2023-metro-lookup.xlsx",
+          "sha256": "32e7feca6531714eca6657d3f171b2a3723cbde4167477b7b82e8b14acee10ba",
+          "rawBytes": 64394,
+          "documentedAllTransactionsSeries": 410
+        }
+      },
+      "normalisedFiles": {
+        "zori": {
+          "filename": "zori-normalised.csv",
+          "sha256": "2e7ce361a5996b71f1e4fa61267292e6ed1a9aa013f440eb13d82e3320d1acc0",
+          "rawBytes": 1599394,
+          "rows": 40484,
+          "metros": 367,
+          "firstPeriod": "2015-01",
+          "lastPeriod": "2026-06"
+        },
+        "zhvi": {
+          "filename": "zhvi-normalised.csv",
+          "sha256": "c67ae230a35bacefd71a6f9f74b0ae7197cb04d5a309eb4bd3a21a0825552f00",
+          "rawBytes": 4162458,
+          "rows": 105193,
+          "metros": 364,
+          "firstPeriod": "2000-01",
+          "lastPeriod": "2026-06"
+        },
+        "fhfaHpi": {
+          "filename": "fhfa-hpi-normalised.csv",
+          "sha256": "b70012eb5de09449c28cf4d988e7689040691dc5b139a34097ce3f3d670e9716",
+          "rawBytes": 1224121,
+          "rows": 62379,
+          "metros": 367,
+          "firstPeriod": "1975Q3",
+          "lastPeriod": "2026Q1"
+        }
+      },
+      "coverage": {
+        "zillowMetroRows": 733,
+        "fhfaSeries": 410,
+        "statusCounts": {
+          "excluded-msad-mismatch": 13,
+          "matched": 367,
+          "unmatched": 353
+        },
+        "matchedMetros": 367,
+        "commonEnd": "2026-03",
+        "earliestOverlapStart": "2015-01",
+        "latestOverlapStart": "2025-12",
+        "longestOverlapMonths": 135,
+        "shortestOverlapMonths": 4,
+        "completeWindows": {
+          "2015-01..2026-03": 193,
+          "2016-01..2026-03": 215,
+          "2018-01..2026-03": 258,
+          "2020-01..2026-03": 272,
+          "2022-01..2026-03": 313
+        },
+        "zhviMetros": 364,
+        "zhviCompleteWindows": {
+          "2015-01..2026-03": 190,
+          "2016-01..2026-03": 211,
+          "2018-01..2026-03": 255,
+          "2020-01..2026-03": 269,
+          "2022-01..2026-03": 310
+        }
+      },
+      "columnMapping": {
+        "zillow_region_id": 0,
+        "zillow_size_rank": 1,
+        "zillow_metro_name": 2,
+        "zillow_primary_state": 3,
+        "fhfa_cbsa": 4,
+        "fhfa_metro_name": 5,
+        "fhfa_series_id": 6,
+        "match_status": 7,
+        "match_method": 8,
+        "zori_first_month": 9,
+        "zori_last_month": 10,
+        "zori_numeric_months": 11,
+        "zhvi_first_month": 12,
+        "zhvi_last_month": 13,
+        "zhvi_numeric_months": 14,
+        "fhfa_first_quarter": 15,
+        "fhfa_last_quarter": 16,
+        "fhfa_numeric_quarters": 17,
+        "overlap_start": 18,
+        "overlap_end": 19,
+        "overlap_months": 20,
+        "value_overlap_start": 21,
+        "value_overlap_end": 22,
+        "value_overlap_months": 23,
+        "notes": 24
+      },
+      "normalisedColumnMapping": {
+        "zori": {
+          "zillow_region_id": 0,
+          "fhfa_cbsa": 1,
+          "period": 2,
+          "zori_usd_month": 3
+        },
+        "zhvi": {
+          "zillow_region_id": 0,
+          "fhfa_cbsa": 1,
+          "period": 2,
+          "zhvi_usd": 3
+        },
+        "fhfaHpi": {
+          "fhfa_cbsa": 0,
+          "period": 1,
+          "hpi_all_transactions_nsa": 2
+        }
+      },
+      "matchingRule": "match only when the state displayed in Zillow\u0027s metro name is included in FHFA states and the normalized Zillow core city is the leading official-name core (including a leading slash alias); one explicit official lookup override maps Poughkeepsie to CBSA 28880; exclude any MSAD candidate rather than pair whole-MSA rent with division price",
+      "knownGaps": [
+        "Zillow ZORI begins in 2015 and starts later for many metros, so it sets the overlap horizon even though FHFA and mortgage-rate data are older.",
+        "FHFA publishes Metropolitan Division series instead of a whole-MSA series for split MSAs. Zillow whole-MSA rows for those places are excluded until an explicit, weighted aggregation is sourced.",
+        "The conservative automatic matcher leaves name changes and non-leading-city aliases unmatched instead of guessing. Any future manual override must cite an official geography source.",
+        "The normalised value files contain only the 367 matched whole-MSA geographies. metros.csv retains every excluded and unmatched Zillow row so dropped geography remains auditable.",
+        "FHFA all-transactions HPI is quarterly, not seasonally adjusted, and measures price change rather than a price level. ZORI is monthly and smoothed but not seasonally adjusted in this snapshot.",
+        "ZHVI supplies a monthly dollar home-value level and is smoothed and seasonally adjusted. It is a modeled typical value, not a transaction median, and its seasonality treatment differs from this ZORI cut.",
+        "National 30-year mortgage-rate coverage is 1971-04..2026-06; it does not constrain any matched overlap window here."
+      ]
+    },
+    "window": {
+      "start": "2018-01",
+      "end": "2026-03",
+      "metros": 241
+    },
+    "longWindow": {
+      "start": "2015-01",
+      "end": "2026-03",
+      "metros": 181
+    },
+    "assumptions": [
+      "Matched whole-MSA metros only, 2018-01 through 2026-03: 241 metros carry every month of rent, home value, price index and mortgage rate. Thirteen split metros, including many of the largest, are excluded rather than mismatched; fourteen more clear C4\u0027s span-based bar but have missing months inside the span, and are excluded rather than interpolated.",
+      "Home value is Zillow\u0027s ZHVI (modelled typical home, middle tier); rent is Zillow\u0027s ZORI (modelled typical asking rent). They are not the same physical property, and their seasonal treatments differ.",
+      "Both households spend exactly the same cash every month. Whoever pays less that month invests the difference in the S\u0026P Composite with dividends reinvested. The buyer\u0027s surplus account exists for the months a locked payment beats rising rents.",
+      "The buyer puts 20% down, pays 2.5% closing on the way in and 7% selling costs on the way out. Sale costs land only at exit, which is what makes the holding period load-bearing.",
+      "Ownership costs run monthly against the current home value: 1% property tax, 0.5% insurance, 1% maintenance per year. The C5 memo carries the cited ranges; the sensitivity bundles rerun them.",
+      "30-year fixed at that month\u0027s Freddie Mac survey rate. No points, no PMI, no refinancing ever - a 20% down borrower who never refinances through 2020-21 is a conservative construction for buying.",
+      "No federal tax benefit in the base case: most filers take the standard deduction. An itemizer scenario is a panel item, not a base assumption.",
+      "Everything runs in nominal dollars; the verdict is the wealth gap as a share of the starting home price, which is unit-free.",
+      "Start months overlap heavily within a metro and metros move together, so thousands of runs are far fewer independent trials than they look."
+    ]
+  },
+  "baseCase": {
+    "holdYears": 5,
+    "downPct": 0.2,
+    "assumptionBundle": "base"
+  },
+  "byHold": [
+    {
+      "holdYears": 2,
+      "runs": 18075,
+      "cohortMonths": 75,
+      "buyWinRate": 0.4158782849239281,
+      "medianGapShare": -0.02893150937295732,
+      "p10GapShare": -0.23792278337312886,
+      "p90GapShare": 0.1587972115110562
+    },
+    {
+      "holdYears": 3,
+      "runs": 15183,
+      "cohortMonths": 63,
+      "buyWinRate": 0.6228676809589673,
+      "medianGapShare": 0.05390567900192867,
+      "p10GapShare": -0.24395374778731582,
+      "p90GapShare": 0.26808177709094594
+    },
+    {
+      "holdYears": 4,
+      "runs": 12291,
+      "cohortMonths": 51,
+      "buyWinRate": 0.8017248393133187,
+      "medianGapShare": 0.14523113525941161,
+      "p10GapShare": -0.08313236551399916,
+      "p90GapShare": 0.35805477457126184
+    },
+    {
+      "holdYears": 5,
+      "runs": 9399,
+      "cohortMonths": 39,
+      "buyWinRate": 0.8187041174593042,
+      "medianGapShare": 0.17242281062972256,
+      "p10GapShare": -0.08106173835245761,
+      "p90GapShare": 0.40643181357908087
+    },
+    {
+      "holdYears": 6,
+      "runs": 6507,
+      "cohortMonths": 27,
+      "buyWinRate": 0.7536499154756416,
+      "medianGapShare": 0.15055488984285792,
+      "p10GapShare": -0.1587950232816883,
+      "p90GapShare": 0.4297251321027688
+    },
+    {
+      "holdYears": 7,
+      "runs": 3615,
+      "cohortMonths": 15,
+      "buyWinRate": 0.6724757952973721,
+      "medianGapShare": 0.11446237002034898,
+      "p10GapShare": -0.2583406335350649,
+      "p90GapShare": 0.4440539174232043
+    },
+    {
+      "holdYears": 8,
+      "runs": 723,
+      "cohortMonths": 3,
+      "buyWinRate": 0.6915629322268326,
+      "medianGapShare": 0.14550571513145155,
+      "p10GapShare": -0.3002760036707498,
+      "p90GapShare": 0.5398461385642868
+    }
+  ],
+  "byMetro": [
+    {
+      "regionId": 394692,
+      "metro": "Houston, TX",
+      "state": "TX",
+      "sizeRank": 5,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.1343953307665418,
+      "startRentYield": 0.06986375996940906
+    },
+    {
+      "regionId": 394976,
+      "metro": "Phoenix, AZ",
+      "state": "AZ",
+      "sizeRank": 11,
+      "cohorts": 39,
+      "buyWinRate": 0.8461538461538461,
+      "medianGapShare": 0.21572277806061993,
+      "startRentYield": 0.04987831244496022
+    },
+    {
+      "regionId": 395025,
+      "metro": "Riverside, CA",
+      "state": "CA",
+      "sizeRank": 13,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.1736285601653322,
+      "startRentYield": 0.051771550198479344
+    },
+    {
+      "regionId": 394865,
+      "metro": "Minneapolis, MN",
+      "state": "MN",
+      "sizeRank": 16,
+      "cohorts": 39,
+      "buyWinRate": 0.23076923076923078,
+      "medianGapShare": -0.0821173741601906,
+      "startRentYield": 0.055277105192729256
+    },
+    {
+      "regionId": 395056,
+      "metro": "San Diego, CA",
+      "state": "CA",
+      "sizeRank": 17,
+      "cohorts": 39,
+      "buyWinRate": 0.8461538461538461,
+      "medianGapShare": 0.053750598616669344,
+      "startRentYield": 0.04016852928155971
+    },
+    {
+      "regionId": 394530,
+      "metro": "Denver, CO",
+      "state": "CO",
+      "sizeRank": 19,
+      "cohorts": 39,
+      "buyWinRate": 0.1794871794871795,
+      "medianGapShare": -0.09425442429230375,
+      "startRentYield": 0.04285215164849524
+    },
+    {
+      "regionId": 394358,
+      "metro": "Baltimore, MD",
+      "state": "MD",
+      "sizeRank": 20,
+      "cohorts": 39,
+      "buyWinRate": 0.3333333333333333,
+      "medianGapShare": -0.010610586246216382,
+      "startRentYield": 0.05751600656344792
+    },
+    {
+      "regionId": 395121,
+      "metro": "St. Louis, MO",
+      "state": "MO",
+      "sizeRank": 21,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.1385334538931633,
+      "startRentYield": 0.06350735623038807
+    },
+    {
+      "regionId": 394943,
+      "metro": "Orlando, FL",
+      "state": "FL",
+      "sizeRank": 22,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.30996107903826725,
+      "startRentYield": 0.06513914921105166
+    },
+    {
+      "regionId": 394458,
+      "metro": "Charlotte, NC",
+      "state": "NC",
+      "sizeRank": 23,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.31385640990209845,
+      "startRentYield": 0.062454306708819865
+    },
+    {
+      "regionId": 395055,
+      "metro": "San Antonio, TX",
+      "state": "TX",
+      "sizeRank": 24,
+      "cohorts": 39,
+      "buyWinRate": 0.7948717948717948,
+      "medianGapShare": 0.09948699909497126,
+      "startRentYield": 0.06659680305834233
+    },
+    {
+      "regionId": 394998,
+      "metro": "Portland, OR",
+      "state": "OR",
+      "sizeRank": 25,
+      "cohorts": 39,
+      "buyWinRate": 0.02564102564102564,
+      "medianGapShare": -0.14549277909799863,
+      "startRentYield": 0.04005852875406723
+    },
+    {
+      "regionId": 395045,
+      "metro": "Sacramento, CA",
+      "state": "CA",
+      "sizeRank": 26,
+      "cohorts": 39,
+      "buyWinRate": 0.07692307692307693,
+      "medianGapShare": -0.07722893034112834,
+      "startRentYield": 0.045424887306143795
+    },
+    {
+      "regionId": 394982,
+      "metro": "Pittsburgh, PA",
+      "state": "PA",
+      "sizeRank": 27,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.15736783942277585,
+      "startRentYield": 0.07736802810260916
+    },
+    {
+      "regionId": 394466,
+      "metro": "Cincinnati, OH",
+      "state": "OH",
+      "sizeRank": 28,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.2122965341118418,
+      "startRentYield": 0.0648006136714012
+    },
+    {
+      "regionId": 394355,
+      "metro": "Austin, TX",
+      "state": "TX",
+      "sizeRank": 29,
+      "cohorts": 39,
+      "buyWinRate": 0.5384615384615384,
+      "medianGapShare": 0.03918450647618509,
+      "startRentYield": 0.050995854206227965
+    },
+    {
+      "regionId": 394775,
+      "metro": "Las Vegas, NV",
+      "state": "NV",
+      "sizeRank": 30,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.0893846210952916,
+      "startRentYield": 0.05088944460018706
+    },
+    {
+      "regionId": 394735,
+      "metro": "Kansas City, MO",
+      "state": "MO",
+      "sizeRank": 31,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.14885398045308096,
+      "startRentYield": 0.0589043679570308
+    },
+    {
+      "regionId": 394492,
+      "metro": "Columbus, OH",
+      "state": "OH",
+      "sizeRank": 32,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.20240332157119748,
+      "startRentYield": 0.06047418311099731
+    },
+    {
+      "regionId": 394705,
+      "metro": "Indianapolis, IN",
+      "state": "IN",
+      "sizeRank": 34,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.2750063051515042,
+      "startRentYield": 0.06670361989082722
+    },
+    {
+      "regionId": 394475,
+      "metro": "Cleveland, OH",
+      "state": "OH",
+      "sizeRank": 35,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.28176904534742303,
+      "startRentYield": 0.07323843934914666
+    },
+    {
+      "regionId": 394902,
+      "metro": "Nashville, TN",
+      "state": "TN",
+      "sizeRank": 37,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.13618734570171334,
+      "startRentYield": 0.05398539877656977
+    },
+    {
+      "regionId": 395194,
+      "metro": "Virginia Beach, VA",
+      "state": "VA",
+      "sizeRank": 38,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.1117462380823163,
+      "startRentYield": 0.05745863265042598
+    },
+    {
+      "regionId": 395005,
+      "metro": "Providence, RI",
+      "state": "RI",
+      "sizeRank": 39,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.14434873330327755,
+      "startRentYield": 0.0492949174450134
+    },
+    {
+      "regionId": 394714,
+      "metro": "Jacksonville, FL",
+      "state": "FL",
+      "sizeRank": 40,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.25303882583396625,
+      "startRentYield": 0.06129657361835116
+    },
+    {
+      "regionId": 394862,
+      "metro": "Milwaukee, WI",
+      "state": "WI",
+      "sizeRank": 41,
+      "cohorts": 39,
+      "buyWinRate": 0.9743589743589743,
+      "medianGapShare": 0.047364138911347525,
+      "startRentYield": 0.05232017409875313
+    },
+    {
+      "regionId": 394935,
+      "metro": "Oklahoma City, OK",
+      "state": "OK",
+      "sizeRank": 42,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.23531575359499265,
+      "startRentYield": 0.0724026848333912
+    },
+    {
+      "regionId": 395012,
+      "metro": "Raleigh, NC",
+      "state": "NC",
+      "sizeRank": 43,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.14974947457612744,
+      "startRentYield": 0.05175680698764559
+    },
+    {
+      "regionId": 394849,
+      "metro": "Memphis, TN",
+      "state": "TN",
+      "sizeRank": 44,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3128078782583239,
+      "startRentYield": 0.07251103312942286
+    },
+    {
+      "regionId": 395022,
+      "metro": "Richmond, VA",
+      "state": "VA",
+      "sizeRank": 45,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.12986390813954937,
+      "startRentYield": 0.055505001699555745
+    },
+    {
+      "regionId": 394807,
+      "metro": "Louisville, KY",
+      "state": "KY",
+      "sizeRank": 46,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.0892971243684921,
+      "startRentYield": 0.06051101219691154
+    },
+    {
+      "regionId": 394910,
+      "metro": "New Orleans, LA",
+      "state": "LA",
+      "sizeRank": 47,
+      "cohorts": 39,
+      "buyWinRate": 0.02564102564102564,
+      "medianGapShare": -0.20451260354412512,
+      "startRentYield": 0.06084303381177574
+    },
+    {
+      "regionId": 395053,
+      "metro": "Salt Lake City, UT",
+      "state": "UT",
+      "sizeRank": 48,
+      "cohorts": 39,
+      "buyWinRate": 0.5641025641025641,
+      "medianGapShare": 0.012750020216243064,
+      "startRentYield": 0.03963859700359937
+    },
+    {
+      "regionId": 394669,
+      "metro": "Hartford, CT",
+      "state": "CT",
+      "sizeRank": 49,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.2909634047176331,
+      "startRentYield": 0.06530724133350585
+    },
+    {
+      "regionId": 394425,
+      "metro": "Buffalo, NY",
+      "state": "NY",
+      "sizeRank": 50,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.2680328542557197,
+      "startRentYield": 0.06643956419040836
+    },
+    {
+      "regionId": 394388,
+      "metro": "Birmingham, AL",
+      "state": "AL",
+      "sizeRank": 51,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.1823460410493787,
+      "startRentYield": 0.07039557849146787
+    },
+    {
+      "regionId": 395031,
+      "metro": "Rochester, NY",
+      "state": "NY",
+      "sizeRank": 52,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3923608669586803,
+      "startRentYield": 0.07581449719477767
+    },
+    {
+      "regionId": 394640,
+      "metro": "Grand Rapids, MI",
+      "state": "MI",
+      "sizeRank": 53,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.1876465854234893,
+      "startRentYield": 0.05988623803106665
+    },
+    {
+      "regionId": 395167,
+      "metro": "Tucson, AZ",
+      "state": "AZ",
+      "sizeRank": 54,
+      "cohorts": 39,
+      "buyWinRate": 0.9230769230769231,
+      "medianGapShare": 0.198854320570911,
+      "startRentYield": 0.052872333519305
+    },
+    {
+      "regionId": 753924,
+      "metro": "Urban Honolulu, HI",
+      "state": "HI",
+      "sizeRank": 55,
+      "cohorts": 39,
+      "buyWinRate": 0,
+      "medianGapShare": -0.19859413549401012,
+      "startRentYield": 0.039242114652617344
+    },
+    {
+      "regionId": 395169,
+      "metro": "Tulsa, OK",
+      "state": "OK",
+      "sizeRank": 56,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.27252272148575857,
+      "startRentYield": 0.06890100737207991
+    },
+    {
+      "regionId": 394619,
+      "metro": "Fresno, CA",
+      "state": "CA",
+      "sizeRank": 57,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.14873325141962368,
+      "startRentYield": 0.056984505410249915
+    },
+    {
+      "regionId": 395238,
+      "metro": "Worcester, MA",
+      "state": "MA",
+      "sizeRank": 58,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.1908773267285373,
+      "startRentYield": 0.054932627663668555
+    },
+    {
+      "regionId": 394938,
+      "metro": "Omaha, NE",
+      "state": "NE",
+      "sizeRank": 59,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.14743050606741614,
+      "startRentYield": 0.059296064328583774
+    },
+    {
+      "regionId": 394415,
+      "metro": "Bridgeport, CT",
+      "state": "CT",
+      "sizeRank": 60,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.14154013200832663,
+      "startRentYield": 0.05392772325389461
+    },
+    {
+      "regionId": 394653,
+      "metro": "Greenville, SC",
+      "state": "SC",
+      "sizeRank": 61,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.2499639448300977,
+      "startRentYield": 0.0657893330927371
+    },
+    {
+      "regionId": 394312,
+      "metro": "Albuquerque, NM",
+      "state": "NM",
+      "sizeRank": 62,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.2689167748205777,
+      "startRentYield": 0.05591655122913897
+    },
+    {
+      "regionId": 394357,
+      "metro": "Bakersfield, CA",
+      "state": "CA",
+      "sizeRank": 63,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.22616071525137657,
+      "startRentYield": 0.057709735748766075
+    },
+    {
+      "regionId": 394308,
+      "metro": "Albany, NY",
+      "state": "NY",
+      "sizeRank": 64,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.09942155272869434,
+      "startRentYield": 0.0574783402787111
+    },
+    {
+      "regionId": 394753,
+      "metro": "Knoxville, TN",
+      "state": "TN",
+      "sizeRank": 65,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.5183117275473028,
+      "startRentYield": 0.06387044819993476
+    },
+    {
+      "regionId": 394367,
+      "metro": "Baton Rouge, LA",
+      "state": "LA",
+      "sizeRank": 66,
+      "cohorts": 39,
+      "buyWinRate": 0.28205128205128205,
+      "medianGapShare": -0.019003579115927823,
+      "startRentYield": 0.06715704247146105
+    },
+    {
+      "regionId": 394843,
+      "metro": "McAllen, TX",
+      "state": "TX",
+      "sizeRank": 67,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.508399422216974,
+      "startRentYield": 0.0875628230603346
+    },
+    {
+      "regionId": 394908,
+      "metro": "New Haven, CT",
+      "state": "CT",
+      "sizeRank": 68,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3653763458249463,
+      "startRentYield": 0.06977085719973554
+    },
+    {
+      "regionId": 394561,
+      "metro": "El Paso, TX",
+      "state": "TX",
+      "sizeRank": 69,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.4472452328690082,
+      "startRentYield": 0.08412287009606306
+    },
+    {
+      "regionId": 394318,
+      "metro": "Allentown, PA",
+      "state": "PA",
+      "sizeRank": 70,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.27182283222751796,
+      "startRentYield": 0.06468077770453792
+    },
+    {
+      "regionId": 394952,
+      "metro": "Oxnard, CA",
+      "state": "CA",
+      "sizeRank": 71,
+      "cohorts": 39,
+      "buyWinRate": 0,
+      "medianGapShare": -0.07363813034662754,
+      "startRentYield": 0.03974876085587159
+    },
+    {
+      "regionId": 394486,
+      "metro": "Columbia, SC",
+      "state": "SC",
+      "sizeRank": 72,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3477313835620381,
+      "startRentYield": 0.07597025270353784
+    },
+    {
+      "regionId": 753906,
+      "metro": "North Port, FL",
+      "state": "FL",
+      "sizeRank": 73,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3653703713634195,
+      "startRentYield": 0.06248238717006559
+    },
+    {
+      "regionId": 394457,
+      "metro": "Charleston, SC",
+      "state": "SC",
+      "sizeRank": 75,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.23913182435894392,
+      "startRentYield": 0.05739329460760665
+    },
+    {
+      "regionId": 394648,
+      "metro": "Greensboro, NC",
+      "state": "NC",
+      "sizeRank": 76,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.2777133065973836,
+      "startRentYield": 0.06433103360958628
+    },
+    {
+      "regionId": 395134,
+      "metro": "Stockton, CA",
+      "state": "CA",
+      "sizeRank": 77,
+      "cohorts": 39,
+      "buyWinRate": 0.6923076923076923,
+      "medianGapShare": 0.019400686957494136,
+      "startRentYield": 0.05206169969054074
+    },
+    {
+      "regionId": 394440,
+      "metro": "Cape Coral, FL",
+      "state": "FL",
+      "sizeRank": 78,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.37712378457645773,
+      "startRentYield": 0.06316566577991849
+    },
+    {
+      "regionId": 394399,
+      "metro": "Boise City, ID",
+      "state": "ID",
+      "sizeRank": 79,
+      "cohorts": 39,
+      "buyWinRate": 0.8205128205128205,
+      "medianGapShare": 0.16012513964041394,
+      "startRentYield": 0.047368039511014016
+    },
+    {
+      "regionId": 394484,
+      "metro": "Colorado Springs, CO",
+      "state": "CO",
+      "sizeRank": 80,
+      "cohorts": 39,
+      "buyWinRate": 0.38461538461538464,
+      "medianGapShare": -0.00451623254284441,
+      "startRentYield": 0.04659549192924154
+    },
+    {
+      "regionId": 394798,
+      "metro": "Little Rock, AR",
+      "state": "AR",
+      "sizeRank": 81,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.10562976879803362,
+      "startRentYield": 0.06602622100253135
+    },
+    {
+      "regionId": 394766,
+      "metro": "Lakeland, FL",
+      "state": "FL",
+      "sizeRank": 82,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.4629417984476742,
+      "startRentYield": 0.07710483652307422
+    },
+    {
+      "regionId": 394304,
+      "metro": "Akron, OH",
+      "state": "OH",
+      "sizeRank": 83,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.18965675624183315,
+      "startRentYield": 0.06273568306097321
+    },
+    {
+      "regionId": 394531,
+      "metro": "Des Moines, IA",
+      "state": "IA",
+      "sizeRank": 84,
+      "cohorts": 39,
+      "buyWinRate": 0.6153846153846154,
+      "medianGapShare": 0.004532708902008833,
+      "startRentYield": 0.058222867413263615
+    },
+    {
+      "regionId": 395115,
+      "metro": "Springfield, MA",
+      "state": "MA",
+      "sizeRank": 85,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.17159537236646705,
+      "startRentYield": 0.05973228487686515
+    },
+    {
+      "regionId": 394931,
+      "metro": "Ogden, UT",
+      "state": "UT",
+      "sizeRank": 87,
+      "cohorts": 39,
+      "buyWinRate": 0.7948717948717948,
+      "medianGapShare": 0.08179286251970998,
+      "startRentYield": 0.042136822890338856
+    },
+    {
+      "regionId": 394816,
+      "metro": "Madison, WI",
+      "state": "WI",
+      "sizeRank": 88,
+      "cohorts": 39,
+      "buyWinRate": 0.8461538461538461,
+      "medianGapShare": 0.024911046767245815,
+      "startRentYield": 0.047866867520617876
+    },
+    {
+      "regionId": 395235,
+      "metro": "Winston, NC",
+      "state": "NC",
+      "sizeRank": 89,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3395322760509674,
+      "startRentYield": 0.06868138162564064
+    },
+    {
+      "regionId": 394528,
+      "metro": "Deltona, FL",
+      "state": "FL",
+      "sizeRank": 90,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3251644921988163,
+      "startRentYield": 0.0657932420148749
+    },
+    {
+      "regionId": 395143,
+      "metro": "Syracuse, NY",
+      "state": "NY",
+      "sizeRank": 91,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.4622846760317519,
+      "startRentYield": 0.08185779562867156
+    },
+    {
+      "regionId": 395006,
+      "metro": "Provo, UT",
+      "state": "UT",
+      "sizeRank": 92,
+      "cohorts": 39,
+      "buyWinRate": 0.6666666666666666,
+      "medianGapShare": 0.026741794819657834,
+      "startRentYield": 0.044640937475790315
+    },
+    {
+      "regionId": 395160,
+      "metro": "Toledo, OH",
+      "state": "OH",
+      "sizeRank": 93,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.2671410072111773,
+      "startRentYield": 0.07566058780648778
+    },
+    {
+      "regionId": 395224,
+      "metro": "Wichita, KS",
+      "state": "KS",
+      "sizeRank": 94,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.27144907313308614,
+      "startRentYield": 0.07075256963729469
+    },
+    {
+      "regionId": 394352,
+      "metro": "Augusta, GA",
+      "state": "GA",
+      "sizeRank": 96,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3143493240556485,
+      "startRentYield": 0.07303421273120808
+    },
+    {
+      "regionId": 394957,
+      "metro": "Palm Bay, FL",
+      "state": "FL",
+      "sizeRank": 97,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3499754354484207,
+      "startRentYield": 0.06738933127154449
+    },
+    {
+      "regionId": 394711,
+      "metro": "Jackson, MS",
+      "state": "MS",
+      "sizeRank": 98,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.21422944738784178,
+      "startRentYield": 0.08289665092236277
+    },
+    {
+      "regionId": 394666,
+      "metro": "Harrisburg, PA",
+      "state": "PA",
+      "sizeRank": 99,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.15639412542073372,
+      "startRentYield": 0.059638080840989434
+    },
+    {
+      "regionId": 395113,
+      "metro": "Spokane, WA",
+      "state": "WA",
+      "sizeRank": 100,
+      "cohorts": 39,
+      "buyWinRate": 0.6923076923076923,
+      "medianGapShare": 0.11381642972792994,
+      "startRentYield": 0.0459542616000317
+    },
+    {
+      "regionId": 395075,
+      "metro": "Scranton, PA",
+      "state": "PA",
+      "sizeRank": 101,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.2825256726330328,
+      "startRentYield": 0.06976311066412595
+    },
+    {
+      "regionId": 394460,
+      "metro": "Chattanooga, TN",
+      "state": "TN",
+      "sizeRank": 102,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.28240108396080355,
+      "startRentYield": 0.06156163081852931
+    },
+    {
+      "regionId": 394871,
+      "metro": "Modesto, CA",
+      "state": "CA",
+      "sizeRank": 103,
+      "cohorts": 39,
+      "buyWinRate": 0.7948717948717948,
+      "medianGapShare": 0.045476352780068126,
+      "startRentYield": 0.05111808195427271
+    },
+    {
+      "regionId": 394768,
+      "metro": "Lancaster, PA",
+      "state": "PA",
+      "sizeRank": 104,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.09124434066905686,
+      "startRentYield": 0.04853247786880025
+    },
+    {
+      "regionId": 394997,
+      "metro": "Portland, ME",
+      "state": "ME",
+      "sizeRank": 105,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.2828398627142349,
+      "startRentYield": 0.05578825980365284
+    },
+    {
+      "regionId": 395245,
+      "metro": "Youngstown, OH",
+      "state": "OH",
+      "sizeRank": 106,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.357237749659082,
+      "startRentYield": 0.07508982043123619
+    },
+    {
+      "regionId": 394770,
+      "metro": "Lansing, MI",
+      "state": "MI",
+      "sizeRank": 107,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.14953401327384663,
+      "startRentYield": 0.0623373902370893
+    },
+    {
+      "regionId": 394590,
+      "metro": "Fayetteville, AR",
+      "state": "AR",
+      "sizeRank": 108,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3406147872138382,
+      "startRentYield": 0.06122214771628018
+    },
+    {
+      "regionId": 394589,
+      "metro": "Fayetteville, NC",
+      "state": "NC",
+      "sizeRank": 109,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.44073107807410977,
+      "startRentYield": 0.06970449651150348
+    },
+    {
+      "regionId": 394792,
+      "metro": "Lexington, KY",
+      "state": "KY",
+      "sizeRank": 110,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.19418804596775543,
+      "startRentYield": 0.05910805998172408
+    },
+    {
+      "regionId": 395068,
+      "metro": "Santa Rosa, CA",
+      "state": "CA",
+      "sizeRank": 112,
+      "cohorts": 39,
+      "buyWinRate": 0,
+      "medianGapShare": -0.2680203247055118,
+      "startRentYield": 0.03699398276244223
+    },
+    {
+      "regionId": 395019,
+      "metro": "Reno, NV",
+      "state": "NV",
+      "sizeRank": 113,
+      "cohorts": 39,
+      "buyWinRate": 0.2564102564102564,
+      "medianGapShare": -0.037921521981687564,
+      "startRentYield": 0.04281068712299023
+    },
+    {
+      "regionId": 394698,
+      "metro": "Huntsville, AL",
+      "state": "AL",
+      "sizeRank": 114,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.23089534316237795,
+      "startRentYield": 0.05506164085206256
+    },
+    {
+      "regionId": 394995,
+      "metro": "Port St. Lucie, FL",
+      "state": "FL",
+      "sizeRank": 115,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.4791714767608641,
+      "startRentYield": 0.07199997872527494
+    },
+    {
+      "regionId": 394761,
+      "metro": "Lafayette, LA",
+      "state": "LA",
+      "sizeRank": 116,
+      "cohorts": 39,
+      "buyWinRate": 0,
+      "medianGapShare": -0.15163818853353192,
+      "startRentYield": 0.06639152672054341
+    },
+    {
+      "regionId": 394898,
+      "metro": "Myrtle Beach, SC",
+      "state": "SC",
+      "sizeRank": 117,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3150291832466427,
+      "startRentYield": 0.06369562419901775
+    },
+    {
+      "regionId": 395116,
+      "metro": "Springfield, MO",
+      "state": "MO",
+      "sizeRank": 118,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.2657280856688514,
+      "startRentYield": 0.05889112053471496
+    },
+    {
+      "regionId": 395195,
+      "metro": "Visalia, CA",
+      "state": "CA",
+      "sizeRank": 119,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.1809118780599933,
+      "startRentYield": 0.05908577974857968
+    },
+    {
+      "regionId": 394746,
+      "metro": "Killeen, TX",
+      "state": "TX",
+      "sizeRank": 120,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3041687694239017,
+      "startRentYield": 0.06675553702869941
+    },
+    {
+      "regionId": 394338,
+      "metro": "Asheville, NC",
+      "state": "NC",
+      "sizeRank": 121,
+      "cohorts": 39,
+      "buyWinRate": 0.9487179487179487,
+      "medianGapShare": 0.15424930528453706,
+      "startRentYield": 0.04897588078373458
+    },
+    {
+      "regionId": 395183,
+      "metro": "Vallejo, CA",
+      "state": "CA",
+      "sizeRank": 123,
+      "cohorts": 39,
+      "buyWinRate": 0.07692307692307693,
+      "medianGapShare": -0.10932060490103482,
+      "startRentYield": 0.048849019774449914
+    },
+    {
+      "regionId": 753917,
+      "metro": "Santa Maria, CA",
+      "state": "CA",
+      "sizeRank": 124,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.1078660968149736,
+      "startRentYield": 0.04125936626059727
+    },
+    {
+      "regionId": 395050,
+      "metro": "Salinas, CA",
+      "state": "CA",
+      "sizeRank": 125,
+      "cohorts": 39,
+      "buyWinRate": 0.20512820512820512,
+      "medianGapShare": -0.0539077661337446,
+      "startRentYield": 0.039428490538760255
+    },
+    {
+      "regionId": 395048,
+      "metro": "Salem, OR",
+      "state": "OR",
+      "sizeRank": 126,
+      "cohorts": 39,
+      "buyWinRate": 0.3076923076923077,
+      "medianGapShare": -0.021387146577853604,
+      "startRentYield": 0.04382746843557595
+    },
+    {
+      "regionId": 394870,
+      "metro": "Mobile, AL",
+      "state": "AL",
+      "sizeRank": 127,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.28502879632788525,
+      "startRentYield": 0.07641229481489241
+    },
+    {
+      "regionId": 395015,
+      "metro": "Reading, PA",
+      "state": "PA",
+      "sizeRank": 128,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.23515103463302733,
+      "startRentYield": 0.0593293009619608
+    },
+    {
+      "regionId": 394502,
+      "metro": "Corpus Christi, TX",
+      "state": "TX",
+      "sizeRank": 129,
+      "cohorts": 39,
+      "buyWinRate": 0.6666666666666666,
+      "medianGapShare": 0.062415311823543394,
+      "startRentYield": 0.0734526307101277
+    },
+    {
+      "regionId": 394421,
+      "metro": "Brownsville, TX",
+      "state": "TX",
+      "sizeRank": 130,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.4459032421138107,
+      "startRentYield": 0.08536124623276652
+    },
+    {
+      "regionId": 394820,
+      "metro": "Manchester, NH",
+      "state": "NH",
+      "sizeRank": 131,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.2526804351131735,
+      "startRentYield": 0.05257659138269358
+    },
+    {
+      "regionId": 394612,
+      "metro": "Fort Wayne, IN",
+      "state": "IN",
+      "sizeRank": 132,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.2935997609491901,
+      "startRentYield": 0.06312308423564955
+    },
+    {
+      "regionId": 394658,
+      "metro": "Gulfport, MS",
+      "state": "MS",
+      "sizeRank": 133,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.2163710360963978,
+      "startRentYield": 0.07110590632547986
+    },
+    {
+      "regionId": 395051,
+      "metro": "Salisbury, MD",
+      "state": "DE",
+      "sizeRank": 134,
+      "cohorts": 39,
+      "buyWinRate": 0.9743589743589743,
+      "medianGapShare": 0.1308640404095489,
+      "startRentYield": 0.052611745606188046
+    },
+    {
+      "regionId": 394596,
+      "metro": "Flint, MI",
+      "state": "MI",
+      "sizeRank": 135,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.27887470780973733,
+      "startRentYield": 0.07010968200654986
+    },
+    {
+      "regionId": 394972,
+      "metro": "Peoria, IL",
+      "state": "IL",
+      "sizeRank": 136,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.2124772595828397,
+      "startRentYield": 0.07856006088253897
+    },
+    {
+      "regionId": 394439,
+      "metro": "Canton, OH",
+      "state": "OH",
+      "sizeRank": 137,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.1887962186501818,
+      "startRentYield": 0.06211880312390176
+    },
+    {
+      "regionId": 395070,
+      "metro": "Savannah, GA",
+      "state": "GA",
+      "sizeRank": 138,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.4102957630072289,
+      "startRentYield": 0.0661340948541707
+    },
+    {
+      "regionId": 394372,
+      "metro": "Beaumont, TX",
+      "state": "TX",
+      "sizeRank": 140,
+      "cohorts": 39,
+      "buyWinRate": 0.2564102564102564,
+      "medianGapShare": -0.0945722141191424,
+      "startRentYield": 0.06961199749175088
+    },
+    {
+      "regionId": 395096,
+      "metro": "Shreveport, LA",
+      "state": "LA",
+      "sizeRank": 141,
+      "cohorts": 39,
+      "buyWinRate": 0.02564102564102564,
+      "medianGapShare": -0.07244518253551537,
+      "startRentYield": 0.07223988263339963
+    },
+    {
+      "regionId": 395164,
+      "metro": "Trenton, NJ",
+      "state": "NJ",
+      "sizeRank": 142,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.35550166551818874,
+      "startRentYield": 0.07505692820986887
+    },
+    {
+      "regionId": 394875,
+      "metro": "Montgomery, AL",
+      "state": "AL",
+      "sizeRank": 143,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.23002618781788098,
+      "startRentYield": 0.07721574676200299
+    },
+    {
+      "regionId": 394520,
+      "metro": "Davenport, IA",
+      "state": "IL",
+      "sizeRank": 144,
+      "cohorts": 39,
+      "buyWinRate": 0.15384615384615385,
+      "medianGapShare": -0.04394513554969404,
+      "startRentYield": 0.060590301258670175
+    },
+    {
+      "regionId": 395146,
+      "metro": "Tallahassee, FL",
+      "state": "FL",
+      "sizeRank": 145,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.17126666329380097,
+      "startRentYield": 0.06151264209225862
+    },
+    {
+      "regionId": 394576,
+      "metro": "Eugene, OR",
+      "state": "OR",
+      "sizeRank": 146,
+      "cohorts": 39,
+      "buyWinRate": 0.6410256410256411,
+      "medianGapShare": 0.026092887798573366,
+      "startRentYield": 0.04653950264300129
+    },
+    {
+      "regionId": 394901,
+      "metro": "Naples, FL",
+      "state": "FL",
+      "sizeRank": 147,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.37805751509663443,
+      "startRentYield": 0.05721837521397127
+    },
+    {
+      "regionId": 394332,
+      "metro": "Ann Arbor, MI",
+      "state": "MI",
+      "sizeRank": 148,
+      "cohorts": 39,
+      "buyWinRate": 0.3076923076923077,
+      "medianGapShare": -0.01685913235074959,
+      "startRentYield": 0.05657086094238741
+    },
+    {
+      "regionId": 394927,
+      "metro": "Ocala, FL",
+      "state": "FL",
+      "sizeRank": 149,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.5080454080756902,
+      "startRentYield": 0.07411268798502674
+    },
+    {
+      "regionId": 394697,
+      "metro": "Huntington, WV",
+      "state": "OH",
+      "sizeRank": 151,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.11325486299663803,
+      "startRentYield": 0.07610219504608536
+    },
+    {
+      "regionId": 394602,
+      "metro": "Fort Collins, CO",
+      "state": "CO",
+      "sizeRank": 152,
+      "cohorts": 39,
+      "buyWinRate": 0.07692307692307693,
+      "medianGapShare": -0.1320481245701143,
+      "startRentYield": 0.040092235450463254
+    },
+    {
+      "regionId": 395033,
+      "metro": "Rockford, IL",
+      "state": "IL",
+      "sizeRank": 153,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.40146313159386193,
+      "startRentYield": 0.0762658944524387
+    },
+    {
+      "regionId": 394796,
+      "metro": "Lincoln, NE",
+      "state": "NE",
+      "sizeRank": 154,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.05742888527648861,
+      "startRentYield": 0.056325002112857354
+    },
+    {
+      "regionId": 394622,
+      "metro": "Gainesville, FL",
+      "state": "FL",
+      "sizeRank": 155,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.28148534157220395,
+      "startRentYield": 0.06706692619677496
+    },
+    {
+      "regionId": 394405,
+      "metro": "Boulder, CO",
+      "state": "CO",
+      "sizeRank": 156,
+      "cohorts": 39,
+      "buyWinRate": 0.07692307692307693,
+      "medianGapShare": -0.16307708067161428,
+      "startRentYield": 0.036302017895972004
+    },
+    {
+      "regionId": 394488,
+      "metro": "Columbus, GA",
+      "state": "GA",
+      "sizeRank": 158,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3252487752346163,
+      "startRentYield": 0.07522637506315097
+    },
+    {
+      "regionId": 395107,
+      "metro": "South Bend, IN",
+      "state": "IN",
+      "sizeRank": 159,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3129142133388234,
+      "startRentYield": 0.06764964191115388
+    },
+    {
+      "regionId": 395109,
+      "metro": "Spartanburg, SC",
+      "state": "SC",
+      "sizeRank": 160,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3793679527125964,
+      "startRentYield": 0.07432684011255998
+    },
+    {
+      "regionId": 394645,
+      "metro": "Greeley, CO",
+      "state": "CO",
+      "sizeRank": 161,
+      "cohorts": 39,
+      "buyWinRate": 0.1282051282051282,
+      "medianGapShare": -0.12091211323428769,
+      "startRentYield": 0.04256670211257389
+    },
+    {
+      "regionId": 394808,
+      "metro": "Lubbock, TX",
+      "state": "TX",
+      "sizeRank": 162,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.1908512340582494,
+      "startRentYield": 0.0819181606418874
+    },
+    {
+      "regionId": 394471,
+      "metro": "Clarksville, TN",
+      "state": "TN",
+      "sizeRank": 163,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.30843849878598834,
+      "startRentYield": 0.06059213516292676
+    },
+    {
+      "regionId": 395028,
+      "metro": "Roanoke, VA",
+      "state": "VA",
+      "sizeRank": 164,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.19669470580538623,
+      "startRentYield": 0.05636323958022751
+    },
+    {
+      "regionId": 394579,
+      "metro": "Evansville, IN",
+      "state": "IN",
+      "sizeRank": 165,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.12701805052921186,
+      "startRentYield": 0.057306995220182684
+    },
+    {
+      "regionId": 394741,
+      "metro": "Kennewick, WA",
+      "state": "WA",
+      "sizeRank": 168,
+      "cohorts": 39,
+      "buyWinRate": 0.5128205128205128,
+      "medianGapShare": 0.010674430222294124,
+      "startRentYield": 0.046599217596001115
+    },
+    {
+      "regionId": 394660,
+      "metro": "Hagerstown, MD",
+      "state": "MD",
+      "sizeRank": 170,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.18757203176768472,
+      "startRentYield": 0.05896963281415158
+    },
+    {
+      "regionId": 394543,
+      "metro": "Duluth, MN",
+      "state": "MN",
+      "sizeRank": 171,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.17857337947011448,
+      "startRentYield": 0.06629121498710736
+    },
+    {
+      "regionId": 394937,
+      "metro": "Olympia, WA",
+      "state": "WA",
+      "sizeRank": 172,
+      "cohorts": 39,
+      "buyWinRate": 0.8205128205128205,
+      "medianGapShare": 0.12253708326776043,
+      "startRentYield": 0.04891263280063767
+    },
+    {
+      "regionId": 394803,
+      "metro": "Longview, TX",
+      "state": "TX",
+      "sizeRank": 173,
+      "cohorts": 39,
+      "buyWinRate": 0.9743589743589743,
+      "medianGapShare": 0.06185481909126962,
+      "startRentYield": 0.06370342634476898
+    },
+    {
+      "regionId": 395229,
+      "metro": "Wilmington, NC",
+      "state": "NC",
+      "sizeRank": 174,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.24413668320716914,
+      "startRentYield": 0.049806940013746616
+    },
+    {
+      "regionId": 395061,
+      "metro": "San Luis Obispo, CA",
+      "state": "CA",
+      "sizeRank": 175,
+      "cohorts": 39,
+      "buyWinRate": 0.02564102564102564,
+      "medianGapShare": -0.06200085327783194,
+      "startRentYield": 0.037190906238326486
+    },
+    {
+      "regionId": 753875,
+      "metro": "Crestview, FL",
+      "state": "FL",
+      "sizeRank": 176,
+      "cohorts": 39,
+      "buyWinRate": 0.9230769230769231,
+      "medianGapShare": 0.18142640161247636,
+      "startRentYield": 0.051830483363244674
+    },
+    {
+      "regionId": 394851,
+      "metro": "Merced, CA",
+      "state": "CA",
+      "sizeRank": 177,
+      "cohorts": 39,
+      "buyWinRate": 0.9487179487179487,
+      "medianGapShare": 0.11325532503494636,
+      "startRentYield": 0.05422645163584382
+    },
+    {
+      "regionId": 395197,
+      "metro": "Waco, TX",
+      "state": "TX",
+      "sizeRank": 178,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3412078638966909,
+      "startRentYield": 0.07193141819970622
+    },
+    {
+      "regionId": 394447,
+      "metro": "Cedar Rapids, IA",
+      "state": "IA",
+      "sizeRank": 179,
+      "cohorts": 39,
+      "buyWinRate": 0.8205128205128205,
+      "medianGapShare": 0.02798548375463866,
+      "startRentYield": 0.05962253304794394
+    },
+    {
+      "regionId": 394348,
+      "metro": "Atlantic City, NJ",
+      "state": "NJ",
+      "sizeRank": 180,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.5186752512262528,
+      "startRentYield": 0.06791143674850296
+    },
+    {
+      "regionId": 394412,
+      "metro": "Bremerton, WA",
+      "state": "WA",
+      "sizeRank": 181,
+      "cohorts": 39,
+      "buyWinRate": 0.3076923076923077,
+      "medianGapShare": -0.03164969226378677,
+      "startRentYield": 0.04307325165416835
+    },
+    {
+      "regionId": 395103,
+      "metro": "Sioux Falls, SD",
+      "state": "SD",
+      "sizeRank": 182,
+      "cohorts": 39,
+      "buyWinRate": 0.9487179487179487,
+      "medianGapShare": 0.048688216290344935,
+      "startRentYield": 0.04902772683770612
+    },
+    {
+      "regionId": 395065,
+      "metro": "Santa Cruz, CA",
+      "state": "CA",
+      "sizeRank": 183,
+      "cohorts": 39,
+      "buyWinRate": 0.02564102564102564,
+      "medianGapShare": -0.1254244473354185,
+      "startRentYield": 0.03707257055642327
+    },
+    {
+      "regionId": 394572,
+      "metro": "Erie, PA",
+      "state": "PA",
+      "sizeRank": 184,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.19545470079942323,
+      "startRentYield": 0.06298152678744835
+    },
+    {
+      "regionId": 394924,
+      "metro": "Norwich, CT",
+      "state": "CT",
+      "sizeRank": 185,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.25807663510040907,
+      "startRentYield": 0.057737640207631426
+    },
+    {
+      "regionId": 394323,
+      "metro": "Amarillo, TX",
+      "state": "TX",
+      "sizeRank": 186,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.210526058099859,
+      "startRentYield": 0.0728230491062549
+    },
+    {
+      "regionId": 395171,
+      "metro": "Tuscaloosa, AL",
+      "state": "AL",
+      "sizeRank": 188,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.17234839802901292,
+      "startRentYield": 0.07631921553675043
+    },
+    {
+      "regionId": 394483,
+      "metro": "College Station, TX",
+      "state": "TX",
+      "sizeRank": 189,
+      "cohorts": 39,
+      "buyWinRate": 0.10256410256410256,
+      "medianGapShare": -0.015189518809649263,
+      "startRentYield": 0.0549051115228946
+    },
+    {
+      "regionId": 394732,
+      "metro": "Kalamazoo, MI",
+      "state": "MI",
+      "sizeRank": 190,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.09620059229689382,
+      "startRentYield": 0.05859845039960154
+    },
+    {
+      "regionId": 394811,
+      "metro": "Lynchburg, VA",
+      "state": "VA",
+      "sizeRank": 191,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.1777106839562738,
+      "startRentYield": 0.056648154095740956
+    },
+    {
+      "regionId": 394585,
+      "metro": "Fargo, ND",
+      "state": "ND",
+      "sizeRank": 194,
+      "cohorts": 39,
+      "buyWinRate": 0,
+      "medianGapShare": -0.20300581553721023,
+      "startRentYield": 0.04070053377454572
+    },
+    {
+      "regionId": 394387,
+      "metro": "Binghamton, NY",
+      "state": "NY",
+      "sizeRank": 195,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.35603013083385104,
+      "startRentYield": 0.07365278150289792
+    },
+    {
+      "regionId": 394609,
+      "metro": "Fort Smith, AR",
+      "state": "AR",
+      "sizeRank": 196,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.1333739685318791,
+      "startRentYield": 0.060817053677411
+    },
+    {
+      "regionId": 395161,
+      "metro": "Topeka, KS",
+      "state": "KS",
+      "sizeRank": 199,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3472850185082861,
+      "startRentYield": 0.07335788927120258
+    },
+    {
+      "regionId": 394813,
+      "metro": "Macon, GA",
+      "state": "GA",
+      "sizeRank": 200,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.42721965751789454,
+      "startRentYield": 0.08027488426434434
+    },
+    {
+      "regionId": 395174,
+      "metro": "Tyler, TX",
+      "state": "TX",
+      "sizeRank": 201,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.27161795386298043,
+      "startRentYield": 0.0709572862104675
+    },
+    {
+      "regionId": 394519,
+      "metro": "Daphne, AL",
+      "state": "AL",
+      "sizeRank": 203,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.20068152441855586,
+      "startRentYield": 0.05609314563874568
+    },
+    {
+      "regionId": 394378,
+      "metro": "Bellingham, WA",
+      "state": "WA",
+      "sizeRank": 205,
+      "cohorts": 39,
+      "buyWinRate": 0.46153846153846156,
+      "medianGapShare": -0.004654453157701034,
+      "startRentYield": 0.03930560045288119
+    },
+    {
+      "regionId": 394429,
+      "metro": "Burlington, VT",
+      "state": "VT",
+      "sizeRank": 206,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.10984971566852239,
+      "startRentYield": 0.055454515326445554
+    },
+    {
+      "regionId": 395030,
+      "metro": "Rochester, MN",
+      "state": "MN",
+      "sizeRank": 207,
+      "cohorts": 39,
+      "buyWinRate": 0.9743589743589743,
+      "medianGapShare": 0.0638241303316542,
+      "startRentYield": 0.06399432451879898
+    },
+    {
+      "regionId": 753895,
+      "metro": "Lafayette, IN",
+      "state": "IN",
+      "sizeRank": 208,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.24394519979503698,
+      "startRentYield": 0.06352181628116338
+    },
+    {
+      "regionId": 394454,
+      "metro": "Champaign, IL",
+      "state": "IL",
+      "sizeRank": 209,
+      "cohorts": 39,
+      "buyWinRate": 0.9230769230769231,
+      "medianGapShare": 0.05533896671459837,
+      "startRentYield": 0.06550296509856883
+    },
+    {
+      "regionId": 394848,
+      "metro": "Medford, OR",
+      "state": "OR",
+      "sizeRank": 210,
+      "cohorts": 39,
+      "buyWinRate": 0.07692307692307693,
+      "medianGapShare": -0.0922237910055828,
+      "startRentYield": 0.04749434249195638
+    },
+    {
+      "regionId": 394459,
+      "metro": "Charlottesville, VA",
+      "state": "VA",
+      "sizeRank": 212,
+      "cohorts": 39,
+      "buyWinRate": 0.9487179487179487,
+      "medianGapShare": 0.042862629526801144,
+      "startRentYield": 0.05208190863769049
+    },
+    {
+      "regionId": 394773,
+      "metro": "Las Cruces, NM",
+      "state": "NM",
+      "sizeRank": 214,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.306151994675354,
+      "startRentYield": 0.06316336389308792
+    },
+    {
+      "regionId": 394464,
+      "metro": "Chico, CA",
+      "state": "CA",
+      "sizeRank": 215,
+      "cohorts": 39,
+      "buyWinRate": 0.07692307692307693,
+      "medianGapShare": -0.26007685909697853,
+      "startRentYield": 0.04286996392938357
+    },
+    {
+      "regionId": 394681,
+      "metro": "Hilton Head Island, SC",
+      "state": "SC",
+      "sizeRank": 216,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.25664940563520994,
+      "startRentYield": 0.04788121107493337
+    },
+    {
+      "regionId": 394346,
+      "metro": "Athens, GA",
+      "state": "GA",
+      "sizeRank": 217,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.338914200799246,
+      "startRentYield": 0.058981502360665
+    },
+    {
+      "regionId": 394765,
+      "metro": "Lake Havasu City, AZ",
+      "state": "AZ",
+      "sizeRank": 218,
+      "cohorts": 39,
+      "buyWinRate": 0.8974358974358975,
+      "medianGapShare": 0.17120115618326678,
+      "startRentYield": 0.05314000685504139
+    },
+    {
+      "regionId": 394485,
+      "metro": "Columbia, MO",
+      "state": "MO",
+      "sizeRank": 219,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.11659674456274313,
+      "startRentYield": 0.050916865693293005
+    },
+    {
+      "regionId": 395114,
+      "metro": "Springfield, IL",
+      "state": "IL",
+      "sizeRank": 220,
+      "cohorts": 39,
+      "buyWinRate": 0.8205128205128205,
+      "medianGapShare": 0.024204721178188487,
+      "startRentYield": 0.06694142427876527
+    },
+    {
+      "regionId": 394726,
+      "metro": "Johnson City, TN",
+      "state": "TN",
+      "sizeRank": 224,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3592000170780101,
+      "startRentYield": 0.06205218805912041
+    },
+    {
+      "regionId": 394623,
+      "metro": "Gainesville, GA",
+      "state": "GA",
+      "sizeRank": 226,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3173130740925996,
+      "startRentYield": 0.057251291543917365
+    },
+    {
+      "regionId": 394716,
+      "metro": "Jacksonville, NC",
+      "state": "NC",
+      "sizeRank": 227,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3609454028493117,
+      "startRentYield": 0.06767213397966247
+    },
+    {
+      "regionId": 395118,
+      "metro": "St. Cloud, MN",
+      "state": "MN",
+      "sizeRank": 230,
+      "cohorts": 39,
+      "buyWinRate": 0.9743589743589743,
+      "medianGapShare": 0.046423829794721795,
+      "startRentYield": 0.052123646857377554
+    },
+    {
+      "regionId": 394380,
+      "metro": "Bend, OR",
+      "state": "OR",
+      "sizeRank": 232,
+      "cohorts": 39,
+      "buyWinRate": 0.7692307692307693,
+      "medianGapShare": 0.08951014140212724,
+      "startRentYield": 0.03977384916269573
+    },
+    {
+      "regionId": 395202,
+      "metro": "Warner Robins, GA",
+      "state": "GA",
+      "sizeRank": 234,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3987923260289805,
+      "startRentYield": 0.07677687748735813
+    },
+    {
+      "regionId": 395009,
+      "metro": "Punta Gorda, FL",
+      "state": "FL",
+      "sizeRank": 237,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3739688089134084,
+      "startRentYield": 0.06779880366082236
+    },
+    {
+      "regionId": 394386,
+      "metro": "Billings, MT",
+      "state": "MT",
+      "sizeRank": 239,
+      "cohorts": 39,
+      "buyWinRate": 0.9487179487179487,
+      "medianGapShare": 0.041377856485181524,
+      "startRentYield": 0.04225372246852065
+    },
+    {
+      "regionId": 395018,
+      "metro": "Redding, CA",
+      "state": "CA",
+      "sizeRank": 240,
+      "cohorts": 39,
+      "buyWinRate": 0.28205128205128205,
+      "medianGapShare": -0.07203497305580989,
+      "startRentYield": 0.046678585411589736
+    },
+    {
+      "regionId": 394748,
+      "metro": "Kingston, NY",
+      "state": "NY",
+      "sizeRank": 241,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.44242805435502264,
+      "startRentYield": 0.06345034789979422
+    },
+    {
+      "regionId": 394539,
+      "metro": "Dover, DE",
+      "state": "DE",
+      "sizeRank": 244,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.2186488363322798,
+      "startRentYield": 0.05902880975620373
+    },
+    {
+      "regionId": 395246,
+      "metro": "Yuba City, CA",
+      "state": "CA",
+      "sizeRank": 247,
+      "cohorts": 39,
+      "buyWinRate": 0.7692307692307693,
+      "medianGapShare": 0.06935126442410147,
+      "startRentYield": 0.05183982771178994
+    },
+    {
+      "regionId": 395119,
+      "metro": "St. George, UT",
+      "state": "UT",
+      "sizeRank": 249,
+      "cohorts": 39,
+      "buyWinRate": 0.8974358974358975,
+      "medianGapShare": 0.13811437512800423,
+      "startRentYield": 0.04750391634721571
+    },
+    {
+      "regionId": 394299,
+      "metro": "Abilene, TX",
+      "state": "TX",
+      "sizeRank": 251,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.17952307068150108,
+      "startRentYield": 0.0736308456171485
+    },
+    {
+      "regionId": 394707,
+      "metro": "Iowa City, IA",
+      "state": "IA",
+      "sizeRank": 252,
+      "cohorts": 39,
+      "buyWinRate": 0.1282051282051282,
+      "medianGapShare": -0.052158151700279445,
+      "startRentYield": 0.055214355224874806
+    },
+    {
+      "regionId": 394351,
+      "metro": "Auburn, AL",
+      "state": "AL",
+      "sizeRank": 253,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.08942978771652214,
+      "startRentYield": 0.058265347033638566
+    },
+    {
+      "regionId": 394860,
+      "metro": "Midland, TX",
+      "state": "TX",
+      "sizeRank": 254,
+      "cohorts": 39,
+      "buyWinRate": 0.07692307692307693,
+      "medianGapShare": -0.1980708456205516,
+      "startRentYield": 0.06684503500839055
+    },
+    {
+      "regionId": 394651,
+      "metro": "Greenville, NC",
+      "state": "NC",
+      "sizeRank": 259,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.4325507554178302,
+      "startRentYield": 0.07424826050168444
+    },
+    {
+      "regionId": 394428,
+      "metro": "Burlington, NC",
+      "state": "NC",
+      "sizeRank": 260,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3238365920786025,
+      "startRentYield": 0.05713233765962213
+    },
+    {
+      "regionId": 395210,
+      "metro": "Waterloo, IA",
+      "state": "IA",
+      "sizeRank": 261,
+      "cohorts": 39,
+      "buyWinRate": 0.8717948717948718,
+      "medianGapShare": 0.05116642349678,
+      "startRentYield": 0.06165610095473407
+    },
+    {
+      "regionId": 394480,
+      "metro": "Coeur d\u0027Alene, ID",
+      "state": "ID",
+      "sizeRank": 262,
+      "cohorts": 39,
+      "buyWinRate": 0.8461538461538461,
+      "medianGapShare": 0.21064443578938224,
+      "startRentYield": 0.040792209588728846
+    },
+    {
+      "regionId": 395007,
+      "metro": "Pueblo, CO",
+      "state": "CO",
+      "sizeRank": 264,
+      "cohorts": 39,
+      "buyWinRate": 0.8461538461538461,
+      "medianGapShare": 0.17348680350886816,
+      "startRentYield": 0.05722043013136698
+    },
+    {
+      "regionId": 394393,
+      "metro": "Bloomington, IN",
+      "state": "IN",
+      "sizeRank": 270,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.15675157344884186,
+      "startRentYield": 0.0613020374650386
+    },
+    {
+      "regionId": 394930,
+      "metro": "Odessa, TX",
+      "state": "TX",
+      "sizeRank": 271,
+      "cohorts": 39,
+      "buyWinRate": 0.28205128205128205,
+      "medianGapShare": -0.04300013423871378,
+      "startRentYield": 0.08582026325195219
+    },
+    {
+      "regionId": 395079,
+      "metro": "Sebastian, FL",
+      "state": "FL",
+      "sizeRank": 274,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.3585641965974587,
+      "startRentYield": 0.0650415586496274
+    },
+    {
+      "regionId": 394453,
+      "metro": "Chambersburg, PA",
+      "state": "PA",
+      "sizeRank": 277,
+      "cohorts": 39,
+      "buyWinRate": 0.9743589743589743,
+      "medianGapShare": 0.04006927915142893,
+      "startRentYield": 0.05177802142088102
+    },
+    {
+      "regionId": 394703,
+      "metro": "Idaho Falls, ID",
+      "state": "ID",
+      "sizeRank": 279,
+      "cohorts": 39,
+      "buyWinRate": 0.8461538461538461,
+      "medianGapShare": 0.1869123807596286,
+      "startRentYield": 0.044822982377854884
+    },
+    {
+      "regionId": 394639,
+      "metro": "Grand Junction, CO",
+      "state": "CO",
+      "sizeRank": 280,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.11215030425281639,
+      "startRentYield": 0.0486442768386119
+    },
+    {
+      "regionId": 395066,
+      "metro": "Santa Fe, NM",
+      "state": "NM",
+      "sizeRank": 284,
+      "cohorts": 39,
+      "buyWinRate": 0.5128205128205128,
+      "medianGapShare": 0.0019218831656705954,
+      "startRentYield": 0.041604306733570504
+    },
+    {
+      "regionId": 394359,
+      "metro": "Bangor, ME",
+      "state": "ME",
+      "sizeRank": 288,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.43763005497314533,
+      "startRentYield": 0.07262769046016013
+    },
+    {
+      "regionId": 394685,
+      "metro": "Homosassa Springs, FL",
+      "state": "FL",
+      "sizeRank": 289,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.5392656760386563,
+      "startRentYield": 0.07703426290083712
+    },
+    {
+      "regionId": 394306,
+      "metro": "Albany, GA",
+      "state": "GA",
+      "sizeRank": 295,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.41898654210984587,
+      "startRentYield": 0.07743521517382808
+    },
+    {
+      "regionId": 395223,
+      "metro": "Wichita Falls, TX",
+      "state": "TX",
+      "sizeRank": 298,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.45396195380201304,
+      "startRentYield": 0.08523673719587778
+    },
+    {
+      "regionId": 395232,
+      "metro": "Winchester, VA",
+      "state": "VA",
+      "sizeRank": 308,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.13436342298512274,
+      "startRentYield": 0.05801108999467914
+    },
+    {
+      "regionId": 394879,
+      "metro": "Morgantown, WV",
+      "state": "WV",
+      "sizeRank": 310,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.08883628001058791,
+      "startRentYield": 0.07619340233834497
+    },
+    {
+      "regionId": 394900,
+      "metro": "Napa, CA",
+      "state": "CA",
+      "sizeRank": 312,
+      "cohorts": 39,
+      "buyWinRate": 0,
+      "medianGapShare": -0.21142645977427563,
+      "startRentYield": 0.03678986829939712
+    },
+    {
+      "regionId": 395013,
+      "metro": "Rapid City, SD",
+      "state": "SD",
+      "sizeRank": 313,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.16064290221574676,
+      "startRentYield": 0.05102203913364189
+    },
+    {
+      "regionId": 395139,
+      "metro": "Sumter, SC",
+      "state": "SC",
+      "sizeRank": 314,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.1545109973472912,
+      "startRentYield": 0.07332884653821843
+    },
+    {
+      "regionId": 394668,
+      "metro": "Harrisonburg, VA",
+      "state": "VA",
+      "sizeRank": 317,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.12428236258464667,
+      "startRentYield": 0.05870562746982695
+    },
+    {
+      "regionId": 394821,
+      "metro": "Manhattan, KS",
+      "state": "KS",
+      "sizeRank": 320,
+      "cohorts": 39,
+      "buyWinRate": 0.48717948717948717,
+      "medianGapShare": -0.00574314253337153,
+      "startRentYield": 0.05927445808984091
+    },
+    {
+      "regionId": 394728,
+      "metro": "Jonesboro, AR",
+      "state": "AR",
+      "sizeRank": 323,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.2286398895195965,
+      "startRentYield": 0.08158780735896709
+    },
+    {
+      "regionId": 394390,
+      "metro": "Bismarck, ND",
+      "state": "ND",
+      "sizeRank": 324,
+      "cohorts": 39,
+      "buyWinRate": 0,
+      "medianGapShare": -0.1496826248605048,
+      "startRentYield": 0.04465409532290373
+    },
+    {
+      "regionId": 394780,
+      "metro": "Lawton, OK",
+      "state": "OK",
+      "sizeRank": 332,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.30860102093976605,
+      "startRentYield": 0.08364088830045131
+    },
+    {
+      "regionId": 394325,
+      "metro": "Ames, IA",
+      "state": "IA",
+      "sizeRank": 336,
+      "cohorts": 39,
+      "buyWinRate": 0.02564102564102564,
+      "medianGapShare": -0.09279103729980055,
+      "startRentYield": 0.04858714838915016
+    },
+    {
+      "regionId": 395054,
+      "metro": "San Angelo, TX",
+      "state": "TX",
+      "sizeRank": 344,
+      "cohorts": 39,
+      "buyWinRate": 0.9743589743589743,
+      "medianGapShare": 0.0967484216708261,
+      "startRentYield": 0.06812550740355912
+    },
+    {
+      "regionId": 394778,
+      "metro": "Lawrence, KS",
+      "state": "KS",
+      "sizeRank": 349,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.044568667872510945,
+      "startRentYield": 0.04697043546612749
+    },
+    {
+      "regionId": 394867,
+      "metro": "Missoula, MT",
+      "state": "MT",
+      "sizeRank": 354,
+      "cohorts": 39,
+      "buyWinRate": 0.9230769230769231,
+      "medianGapShare": 0.18873739556174013,
+      "startRentYield": 0.0344598114895876
+    },
+    {
+      "regionId": 394893,
+      "metro": "Muncie, IN",
+      "state": "IN",
+      "sizeRank": 364,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.4184701600495991,
+      "startRentYield": 0.07371237342569197
+    },
+    {
+      "regionId": 394637,
+      "metro": "Grand Forks, ND",
+      "state": "MN",
+      "sizeRank": 377,
+      "cohorts": 39,
+      "buyWinRate": 0,
+      "medianGapShare": -0.1798714585871572,
+      "startRentYield": 0.046737598719500624
+    },
+    {
+      "regionId": 395080,
+      "metro": "Sebring, FL",
+      "state": "FL",
+      "sizeRank": 390,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.6099305847247342,
+      "startRentYield": 0.0806341203193832
+    },
+    {
+      "regionId": 394462,
+      "metro": "Cheyenne, WY",
+      "state": "WY",
+      "sizeRank": 391,
+      "cohorts": 39,
+      "buyWinRate": 0.02564102564102564,
+      "medianGapShare": -0.20295478923430205,
+      "startRentYield": 0.042084748210686605
+    },
+    {
+      "regionId": 753912,
+      "metro": "Pinehurst, NC",
+      "state": "NC",
+      "sizeRank": 398,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.38973821648621476,
+      "startRentYield": 0.06500381915836372
+    },
+    {
+      "regionId": 394505,
+      "metro": "Corvallis, OR",
+      "state": "OR",
+      "sizeRank": 411,
+      "cohorts": 39,
+      "buyWinRate": 0.23076923076923078,
+      "medianGapShare": -0.08690751667255416,
+      "startRentYield": 0.03688198773473752
+    },
+    {
+      "regionId": 394644,
+      "metro": "Great Falls, MT",
+      "state": "MT",
+      "sizeRank": 433,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.23081754153013093,
+      "startRentYield": 0.05001872297446098
+    },
+    {
+      "regionId": 394682,
+      "metro": "Hinesville, GA",
+      "state": "GA",
+      "sizeRank": 449,
+      "cohorts": 39,
+      "buyWinRate": 1,
+      "medianGapShare": 0.5758497153386933,
+      "startRentYield": 0.08253149694038886
+    },
+    {
+      "regionId": 394445,
+      "metro": "Casper, WY",
+      "state": "WY",
+      "sizeRank": 454,
+      "cohorts": 39,
+      "buyWinRate": 0.9743589743589743,
+      "medianGapShare": 0.029673704073727103,
+      "startRentYield": 0.05580781022825774
+    }
+  ],
+  "byCohort": [
+    {
+      "month": "2018-01",
+      "ratePercent": 4.0325,
+      "metros": 241,
+      "buyWinRate": 0.966804979253112,
+      "medianGapShare": 0.3114477279856835
+    },
+    {
+      "month": "2018-02",
+      "ratePercent": 4.33,
+      "metros": 241,
+      "buyWinRate": 0.9336099585062241,
+      "medianGapShare": 0.26867574609531697
+    },
+    {
+      "month": "2018-03",
+      "ratePercent": 4.444,
+      "metros": 241,
+      "buyWinRate": 0.9377593360995851,
+      "medianGapShare": 0.26797285024928763
+    },
+    {
+      "month": "2018-04",
+      "ratePercent": 4.4675,
+      "metros": 241,
+      "buyWinRate": 0.8838174273858921,
+      "medianGapShare": 0.2401932292978754
+    },
+    {
+      "month": "2018-05",
+      "ratePercent": 4.586,
+      "metros": 241,
+      "buyWinRate": 0.8921161825726142,
+      "medianGapShare": 0.23974173985201974
+    },
+    {
+      "month": "2018-06",
+      "ratePercent": 4.57,
+      "metros": 241,
+      "buyWinRate": 0.8796680497925311,
+      "medianGapShare": 0.2258375666584525
+    },
+    {
+      "month": "2018-07",
+      "ratePercent": 4.5275,
+      "metros": 241,
+      "buyWinRate": 0.8713692946058091,
+      "medianGapShare": 0.2177384652427906
+    },
+    {
+      "month": "2018-08",
+      "ratePercent": 4.55,
+      "metros": 241,
+      "buyWinRate": 0.8838174273858921,
+      "medianGapShare": 0.23122162541476715
+    },
+    {
+      "month": "2018-09",
+      "ratePercent": 4.6275,
+      "metros": 241,
+      "buyWinRate": 0.8962655601659751,
+      "medianGapShare": 0.23886111275614455
+    },
+    {
+      "month": "2018-10",
+      "ratePercent": 4.83,
+      "metros": 241,
+      "buyWinRate": 0.8921161825726142,
+      "medianGapShare": 0.23396103154753087
+    },
+    {
+      "month": "2018-11",
+      "ratePercent": 4.866,
+      "metros": 241,
+      "buyWinRate": 0.8506224066390041,
+      "medianGapShare": 0.20392805307542294
+    },
+    {
+      "month": "2018-12",
+      "ratePercent": 4.6375,
+      "metros": 241,
+      "buyWinRate": 0.8132780082987552,
+      "medianGapShare": 0.1630102769416993
+    },
+    {
+      "month": "2019-01",
+      "ratePercent": 4.464,
+      "metros": 241,
+      "buyWinRate": 0.8049792531120332,
+      "medianGapShare": 0.16320753698683887
+    },
+    {
+      "month": "2019-02",
+      "ratePercent": 4.37,
+      "metros": 241,
+      "buyWinRate": 0.8091286307053942,
+      "medianGapShare": 0.16632537278399692
+    },
+    {
+      "month": "2019-03",
+      "ratePercent": 4.265,
+      "metros": 241,
+      "buyWinRate": 0.8008298755186722,
+      "medianGapShare": 0.1618274788678488
+    },
+    {
+      "month": "2019-04",
+      "ratePercent": 4.1425,
+      "metros": 241,
+      "buyWinRate": 0.8423236514522822,
+      "medianGapShare": 0.1863989257876205
+    },
+    {
+      "month": "2019-05",
+      "ratePercent": 4.072,
+      "metros": 241,
+      "buyWinRate": 0.8257261410788381,
+      "medianGapShare": 0.17858387958459815
+    },
+    {
+      "month": "2019-06",
+      "ratePercent": 3.8025,
+      "metros": 241,
+      "buyWinRate": 0.8298755186721992,
+      "medianGapShare": 0.1863323647509322
+    },
+    {
+      "month": "2019-07",
+      "ratePercent": 3.765,
+      "metros": 241,
+      "buyWinRate": 0.8298755186721992,
+      "medianGapShare": 0.18693151256146578
+    },
+    {
+      "month": "2019-08",
+      "ratePercent": 3.616,
+      "metros": 241,
+      "buyWinRate": 0.8298755186721992,
+      "medianGapShare": 0.1823460410493787
+    },
+    {
+      "month": "2019-09",
+      "ratePercent": 3.605,
+      "metros": 241,
+      "buyWinRate": 0.8215767634854771,
+      "medianGapShare": 0.176906534804707
+    },
+    {
+      "month": "2019-10",
+      "ratePercent": 3.688,
+      "metros": 241,
+      "buyWinRate": 0.7842323651452282,
+      "medianGapShare": 0.1570612300242407
+    },
+    {
+      "month": "2019-11",
+      "ratePercent": 3.695,
+      "metros": 241,
+      "buyWinRate": 0.8008298755186722,
+      "medianGapShare": 0.15581030514467084
+    },
+    {
+      "month": "2019-12",
+      "ratePercent": 3.72,
+      "metros": 241,
+      "buyWinRate": 0.8049792531120332,
+      "medianGapShare": 0.14981661050718822
+    },
+    {
+      "month": "2020-01",
+      "ratePercent": 3.624,
+      "metros": 241,
+      "buyWinRate": 0.8215767634854771,
+      "medianGapShare": 0.16545612306943613
+    },
+    {
+      "month": "2020-02",
+      "ratePercent": 3.465,
+      "metros": 241,
+      "buyWinRate": 0.8174273858921162,
+      "medianGapShare": 0.16599982368102384
+    },
+    {
+      "month": "2020-03",
+      "ratePercent": 3.45,
+      "metros": 241,
+      "buyWinRate": 0.7095435684647303,
+      "medianGapShare": 0.08799479391736324
+    },
+    {
+      "month": "2020-04",
+      "ratePercent": 3.306,
+      "metros": 241,
+      "buyWinRate": 0.8049792531120332,
+      "medianGapShare": 0.133360502849834
+    },
+    {
+      "month": "2020-05",
+      "ratePercent": 3.2325,
+      "metros": 241,
+      "buyWinRate": 0.7842323651452282,
+      "medianGapShare": 0.11841350691044004
+    },
+    {
+      "month": "2020-06",
+      "ratePercent": 3.1625,
+      "metros": 241,
+      "buyWinRate": 0.7925311203319502,
+      "medianGapShare": 0.13032427167652788
+    },
+    {
+      "month": "2020-07",
+      "ratePercent": 3.016,
+      "metros": 241,
+      "buyWinRate": 0.7883817427385892,
+      "medianGapShare": 0.13558109074128905
+    },
+    {
+      "month": "2020-08",
+      "ratePercent": 2.935,
+      "metros": 241,
+      "buyWinRate": 0.8049792531120332,
+      "medianGapShare": 0.152072609790857
+    },
+    {
+      "month": "2020-09",
+      "ratePercent": 2.89,
+      "metros": 241,
+      "buyWinRate": 0.7593360995850622,
+      "medianGapShare": 0.12266172594160618
+    },
+    {
+      "month": "2020-10",
+      "ratePercent": 2.834,
+      "metros": 241,
+      "buyWinRate": 0.7261410788381742,
+      "medianGapShare": 0.10454411244660328
+    },
+    {
+      "month": "2020-11",
+      "ratePercent": 2.765,
+      "metros": 241,
+      "buyWinRate": 0.7385892116182573,
+      "medianGapShare": 0.10453246749470946
+    },
+    {
+      "month": "2020-12",
+      "ratePercent": 2.684,
+      "metros": 241,
+      "buyWinRate": 0.7385892116182573,
+      "medianGapShare": 0.10897897406906167
+    },
+    {
+      "month": "2021-01",
+      "ratePercent": 2.735,
+      "metros": 241,
+      "buyWinRate": 0.7178423236514523,
+      "medianGapShare": 0.10234376779912767
+    },
+    {
+      "month": "2021-02",
+      "ratePercent": 2.81,
+      "metros": 241,
+      "buyWinRate": 0.7261410788381742,
+      "medianGapShare": 0.09955039752924624
+    },
+    {
+      "month": "2021-03",
+      "ratePercent": 3.0825,
+      "metros": 241,
+      "buyWinRate": 0.7136929460580913,
+      "medianGapShare": 0.08907043856142406
+    }
+  ],
+  "scenarioTable": [
+    {
+      "scenario": "base",
+      "propertyTax": 0.01,
+      "insurance": 0.005,
+      "maintenance": 0.01,
+      "buyCost": 0.025,
+      "sellCost": 0.07,
+      "byHold": [
+        {
+          "holdYears": 2,
+          "runs": 18075,
+          "cohortMonths": 75,
+          "buyWinRate": 0.4158782849239281,
+          "medianGapShare": -0.02893150937295732,
+          "p10GapShare": -0.23792278337312886,
+          "p90GapShare": 0.1587972115110562
+        },
+        {
+          "holdYears": 3,
+          "runs": 15183,
+          "cohortMonths": 63,
+          "buyWinRate": 0.6228676809589673,
+          "medianGapShare": 0.05390567900192867,
+          "p10GapShare": -0.24395374778731582,
+          "p90GapShare": 0.26808177709094594
+        },
+        {
+          "holdYears": 4,
+          "runs": 12291,
+          "cohortMonths": 51,
+          "buyWinRate": 0.8017248393133187,
+          "medianGapShare": 0.14523113525941161,
+          "p10GapShare": -0.08313236551399916,
+          "p90GapShare": 0.35805477457126184
+        },
+        {
+          "holdYears": 5,
+          "runs": 9399,
+          "cohortMonths": 39,
+          "buyWinRate": 0.8187041174593042,
+          "medianGapShare": 0.17242281062972256,
+          "p10GapShare": -0.08106173835245761,
+          "p90GapShare": 0.40643181357908087
+        },
+        {
+          "holdYears": 6,
+          "runs": 6507,
+          "cohortMonths": 27,
+          "buyWinRate": 0.7536499154756416,
+          "medianGapShare": 0.15055488984285792,
+          "p10GapShare": -0.1587950232816883,
+          "p90GapShare": 0.4297251321027688
+        },
+        {
+          "holdYears": 7,
+          "runs": 3615,
+          "cohortMonths": 15,
+          "buyWinRate": 0.6724757952973721,
+          "medianGapShare": 0.11446237002034898,
+          "p10GapShare": -0.2583406335350649,
+          "p90GapShare": 0.4440539174232043
+        },
+        {
+          "holdYears": 8,
+          "runs": 723,
+          "cohortMonths": 3,
+          "buyWinRate": 0.6915629322268326,
+          "medianGapShare": 0.14550571513145155,
+          "p10GapShare": -0.3002760036707498,
+          "p90GapShare": 0.5398461385642868
+        }
+      ]
+    },
+    {
+      "scenario": "low-owner-cost",
+      "propertyTax": 0.005,
+      "insurance": 0.0025,
+      "maintenance": 0.01,
+      "buyCost": 0.02,
+      "sellCost": 0.05,
+      "byHold": [
+        {
+          "holdYears": 2,
+          "runs": 18075,
+          "cohortMonths": 75,
+          "buyWinRate": 0.5516459197786998,
+          "medianGapShare": 0.018990568003907252,
+          "p10GapShare": -0.19174253148880843,
+          "p90GapShare": 0.2086862598859231
+        },
+        {
+          "holdYears": 3,
+          "runs": 15183,
+          "cohortMonths": 63,
+          "buyWinRate": 0.7237041427912797,
+          "medianGapShare": 0.11883612999970185,
+          "p10GapShare": -0.18303270493185342,
+          "p90GapShare": 0.3341452759888471
+        },
+        {
+          "holdYears": 4,
+          "runs": 12291,
+          "cohortMonths": 51,
+          "buyWinRate": 0.8941501911968107,
+          "medianGapShare": 0.22722503940141311,
+          "p10GapShare": -0.005700564420850095,
+          "p90GapShare": 0.44429297246781513
+        },
+        {
+          "holdYears": 5,
+          "runs": 9399,
+          "cohortMonths": 39,
+          "buyWinRate": 0.9167996595382487,
+          "medianGapShare": 0.27680300678036324,
+          "p10GapShare": 0.019576379342854798,
+          "p90GapShare": 0.5132811968992503
+        },
+        {
+          "holdYears": 6,
+          "runs": 6507,
+          "cohortMonths": 27,
+          "buyWinRate": 0.8765944367604118,
+          "medianGapShare": 0.282200459921658,
+          "p10GapShare": -0.034119654375632,
+          "p90GapShare": 0.5657605149880118
+        },
+        {
+          "holdYears": 7,
+          "runs": 3615,
+          "cohortMonths": 15,
+          "buyWinRate": 0.8378976486860304,
+          "medianGapShare": 0.27584045645709476,
+          "p10GapShare": -0.10785610228345145,
+          "p90GapShare": 0.6082750178166852
+        },
+        {
+          "holdYears": 8,
+          "runs": 723,
+          "cohortMonths": 3,
+          "buyWinRate": 0.8630705394190872,
+          "medianGapShare": 0.33828240497383194,
+          "p10GapShare": -0.12500653514914056,
+          "p90GapShare": 0.7405183044800101
+        }
+      ]
+    },
+    {
+      "scenario": "high-owner-cost",
+      "propertyTax": 0.019,
+      "insurance": 0.01,
+      "maintenance": 0.02,
+      "buyCost": 0.05,
+      "sellCost": 0.1,
+      "byHold": [
+        {
+          "holdYears": 2,
+          "runs": 18075,
+          "cohortMonths": 75,
+          "buyWinRate": 0.14340248962655602,
+          "medianGapShare": -0.15626735188962676,
+          "p10GapShare": -0.36548803661974466,
+          "p90GapShare": 0.032581552253294475
+        },
+        {
+          "holdYears": 3,
+          "runs": 15183,
+          "cohortMonths": 63,
+          "buyWinRate": 0.23486794441151287,
+          "medianGapShare": -0.12413320899934427,
+          "p10GapShare": -0.41806662025703767,
+          "p90GapShare": 0.09230071860116774
+        },
+        {
+          "holdYears": 4,
+          "runs": 12291,
+          "cohortMonths": 51,
+          "buyWinRate": 0.2987551867219917,
+          "medianGapShare": -0.08404196750935086,
+          "p10GapShare": -0.3064512110404324,
+          "p90GapShare": 0.12325327415419284
+        },
+        {
+          "holdYears": 5,
+          "runs": 9399,
+          "cohortMonths": 39,
+          "buyWinRate": 0.23715288860517075,
+          "medianGapShare": -0.13061080571171682,
+          "p10GapShare": -0.3732476123159987,
+          "p90GapShare": 0.10150485632212482
+        },
+        {
+          "holdYears": 6,
+          "runs": 6507,
+          "cohortMonths": 27,
+          "buyWinRate": 0.13170431842631014,
+          "medianGapShare": -0.23870474802341676,
+          "p10GapShare": -0.5343016247852295,
+          "p90GapShare": 0.02989605472694796
+        },
+        {
+          "holdYears": 7,
+          "runs": 3615,
+          "cohortMonths": 15,
+          "buyWinRate": 0.07302904564315353,
+          "medianGapShare": -0.3691127551964447,
+          "p10GapShare": -0.717605730222069,
+          "p90GapShare": -0.04557170976676833
+        },
+        {
+          "holdYears": 8,
+          "runs": 723,
+          "cohortMonths": 3,
+          "buyWinRate": 0.05394190871369295,
+          "medianGapShare": -0.4468506451081835,
+          "p10GapShare": -0.8445072465691348,
+          "p90GapShare": -0.07049695383170484
+        }
+      ]
+    },
+    {
+      "scenario": "old-home-stress",
+      "propertyTax": 0.01,
+      "insurance": 0.005,
+      "maintenance": 0.04,
+      "buyCost": 0.025,
+      "sellCost": 0.07,
+      "byHold": [
+        {
+          "holdYears": 2,
+          "runs": 18075,
+          "cohortMonths": 75,
+          "buyWinRate": 0.23358229598893498,
+          "medianGapShare": -0.10434907312512509,
+          "p10GapShare": -0.3120200361241006,
+          "p90GapShare": 0.0866560354018399
+        },
+        {
+          "holdYears": 3,
+          "runs": 15183,
+          "cohortMonths": 63,
+          "buyWinRate": 0.33241124942369754,
+          "medianGapShare": -0.07492052129489633,
+          "p10GapShare": -0.36870374104263365,
+          "p90GapShare": 0.1463931919432866
+        },
+        {
+          "holdYears": 4,
+          "runs": 12291,
+          "cohortMonths": 51,
+          "buyWinRate": 0.40712716621918477,
+          "medianGapShare": -0.038895582238318106,
+          "p10GapShare": -0.2664690219741194,
+          "p90GapShare": 0.1733964322233267
+        },
+        {
+          "holdYears": 5,
+          "runs": 9399,
+          "cohortMonths": 39,
+          "buyWinRate": 0.30971379934035537,
+          "medianGapShare": -0.09046735524702323,
+          "p10GapShare": -0.3363929940485844,
+          "p90GapShare": 0.14401304070872153
+        },
+        {
+          "holdYears": 6,
+          "runs": 6507,
+          "cohortMonths": 27,
+          "buyWinRate": 0.1648993391731981,
+          "medianGapShare": -0.2078849067670955,
+          "p10GapShare": -0.5039049290942808,
+          "p90GapShare": 0.061950483386183926
+        },
+        {
+          "holdYears": 7,
+          "runs": 3615,
+          "cohortMonths": 15,
+          "buyWinRate": 0.08520055325034578,
+          "medianGapShare": -0.348464943740042,
+          "p10GapShare": -0.6992708557713162,
+          "p90GapShare": -0.025112379141893487
+        },
+        {
+          "holdYears": 8,
+          "runs": 723,
+          "cohortMonths": 3,
+          "buyWinRate": 0.056708160442600276,
+          "medianGapShare": -0.4432837846349814,
+          "p10GapShare": -0.8404601532230479,
+          "p90GapShare": -0.07013738232336043
+        }
+      ]
+    }
+  ],
+  "sellAxis": [
+    {
+      "sellCost": 0.05,
+      "atBaseHold": {
+        "holdYears": 5,
+        "runs": 9399,
+        "cohortMonths": 39,
+        "buyWinRate": 0.8513671667198638,
+        "medianGapShare": 0.201106816575359,
+        "p10GapShare": -0.05521155034394069,
+        "p90GapShare": 0.43889994106144353
+      }
+    },
+    {
+      "sellCost": 0.07,
+      "atBaseHold": {
+        "holdYears": 5,
+        "runs": 9399,
+        "cohortMonths": 39,
+        "buyWinRate": 0.8187041174593042,
+        "medianGapShare": 0.17242281062972256,
+        "p10GapShare": -0.08106173835245761,
+        "p90GapShare": 0.40643181357908087
+      }
+    },
+    {
+      "sellCost": 0.1,
+      "atBaseHold": {
+        "holdYears": 5,
+        "runs": 9399,
+        "cohortMonths": 39,
+        "buyWinRate": 0.7575273965315459,
+        "medianGapShare": 0.1288882213940004,
+        "p10GapShare": -0.12003221104292017,
+        "p90GapShare": 0.3578150035827835
+      }
+    },
+    {
+      "sellCost": 0.12,
+      "atBaseHold": {
+        "holdYears": 5,
+        "runs": 9399,
+        "cohortMonths": 39,
+        "buyWinRate": 0.7123098201936376,
+        "medianGapShare": 0.09974512047216497,
+        "p10GapShare": -0.14612317640819572,
+        "p90GapShare": 0.3257746353421797
+      }
+    }
+  ],
+  "fhfaSensitivity": {
+    "holdYears": 5,
+    "zhviBuyWinRate": 0.8187041174593042,
+    "fhfaBuyWinRate": 0.8967975316523035,
+    "verdictAgreementRate": 0.9210554314288755,
+    "disagreeingRuns": 742,
+    "metrosWithAnyDisagreement": 81
+  },
+  "longByHold": [
+    {
+      "holdYears": 2,
+      "runs": 20091,
+      "cohortMonths": 111,
+      "buyWinRate": 0.3670797869692897,
+      "medianGapShare": -0.03205719778263984,
+      "p10GapShare": -0.21296074030258408,
+      "p90GapShare": 0.12568522899717907
+    },
+    {
+      "holdYears": 3,
+      "runs": 17919,
+      "cohortMonths": 99,
+      "buyWinRate": 0.5869189128857637,
+      "medianGapShare": 0.026681513675557742,
+      "p10GapShare": -0.18615648350090472,
+      "p90GapShare": 0.22596153622622
+    },
+    {
+      "holdYears": 4,
+      "runs": 15747,
+      "cohortMonths": 87,
+      "buyWinRate": 0.7481425033339684,
+      "medianGapShare": 0.09885498101197077,
+      "p10GapShare": -0.08956125660361307,
+      "p90GapShare": 0.3107143493758545
+    },
+    {
+      "holdYears": 5,
+      "runs": 13575,
+      "cohortMonths": 75,
+      "buyWinRate": 0.8067771639042357,
+      "medianGapShare": 0.15963099814277532,
+      "p10GapShare": -0.0753421797879385,
+      "p90GapShare": 0.3972223225186169
+    },
+    {
+      "holdYears": 6,
+      "runs": 11403,
+      "cohortMonths": 63,
+      "buyWinRate": 0.8230290274489169,
+      "medianGapShare": 0.21338978013942772,
+      "p10GapShare": -0.08285610456857452,
+      "p90GapShare": 0.4949794931498332
+    },
+    {
+      "holdYears": 7,
+      "runs": 9231,
+      "cohortMonths": 51,
+      "buyWinRate": 0.8349041273968151,
+      "medianGapShare": 0.27235794738881025,
+      "p10GapShare": -0.08445974857333523,
+      "p90GapShare": 0.5996786392495251
+    },
+    {
+      "holdYears": 8,
+      "runs": 7059,
+      "cohortMonths": 39,
+      "buyWinRate": 0.8294375973933985,
+      "medianGapShare": 0.2930112860561537,
+      "p10GapShare": -0.09895253474499748,
+      "p90GapShare": 0.6590513437716566
+    },
+    {
+      "holdYears": 9,
+      "runs": 4887,
+      "cohortMonths": 27,
+      "buyWinRate": 0.7845303867403315,
+      "medianGapShare": 0.2780753340839716,
+      "p10GapShare": -0.1775253251384575,
+      "p90GapShare": 0.6982198785327866
+    },
+    {
+      "holdYears": 10,
+      "runs": 2715,
+      "cohortMonths": 15,
+      "buyWinRate": 0.7469613259668508,
+      "medianGapShare": 0.27562681465365757,
+      "p10GapShare": -0.24840768893860346,
+      "p90GapShare": 0.7605997205575363
+    },
+    {
+      "holdYears": 11,
+      "runs": 543,
+      "cohortMonths": 3,
+      "buyWinRate": 0.7716390423572744,
+      "medianGapShare": 0.346090440357123,
+      "p10GapShare": -0.2522625120931393,
+      "p90GapShare": 0.8630501116325618
+    }
+  ],
+  "breakEven": [
+    {
+      "ratePercent": 3,
+      "holdYears": 3,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.06611460711396147
+    },
+    {
+      "ratePercent": 3,
+      "holdYears": 5,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.054754762395449505
+    },
+    {
+      "ratePercent": 3,
+      "holdYears": 7,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.0505782299902162
+    },
+    {
+      "ratePercent": 3,
+      "holdYears": 10,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.048254549754838186
+    },
+    {
+      "ratePercent": 3,
+      "holdYears": 15,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.047662179351268055
+    },
+    {
+      "ratePercent": 5,
+      "holdYears": 3,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.08088318512224069
+    },
+    {
+      "ratePercent": 5,
+      "holdYears": 5,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.06875016449989232
+    },
+    {
+      "ratePercent": 5,
+      "holdYears": 7,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.06385434364232315
+    },
+    {
+      "ratePercent": 5,
+      "holdYears": 10,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.060545599707807415
+    },
+    {
+      "ratePercent": 5,
+      "holdYears": 15,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.058536728498298024
+    },
+    {
+      "ratePercent": 6.5,
+      "holdYears": 3,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.09213458055647863
+    },
+    {
+      "ratePercent": 6.5,
+      "holdYears": 5,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.07952266023493179
+    },
+    {
+      "ratePercent": 6.5,
+      "holdYears": 7,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.07417409341780531
+    },
+    {
+      "ratePercent": 6.5,
+      "holdYears": 10,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.07023200263940363
+    },
+    {
+      "ratePercent": 6.5,
+      "holdYears": 15,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.06727825215508515
+    },
+    {
+      "ratePercent": 7,
+      "holdYears": 3,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.09591041986029852
+    },
+    {
+      "ratePercent": 7,
+      "holdYears": 5,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.08315412998219082
+    },
+    {
+      "ratePercent": 7,
+      "holdYears": 7,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.07766823074897392
+    },
+    {
+      "ratePercent": 7,
+      "holdYears": 10,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.07353234704049266
+    },
+    {
+      "ratePercent": 7,
+      "holdYears": 15,
+      "homeGrowthAnnual": 0.03,
+      "marketReturnAnnual": 0.07,
+      "rentGrowthAnnual": 0.03,
+      "requiredRentYield": 0.07028471812333759
+    }
+  ],
+  "headline": {
+    "runs": 9399,
+    "metros": 241,
+    "cohortMonths": 39,
+    "buyWinRate": 0.8187041174593042,
+    "medianGapShare": 0.17242281062972256,
+    "p10GapShare": -0.08106173835245761,
+    "p90GapShare": 0.40643181357908087,
+    "best": {
+      "metro": "Homosassa Springs, FL",
+      "month": "2018-01",
+      "gapShare": 0.7964552916864587
+    },
+    "worst": {
+      "metro": "Chico, CA",
+      "month": "2020-03",
+      "gapShare": -0.33047280756558656
+    },
+    "topMetro": {
+      "metro": "Houston, TX",
+      "state": "TX",
+      "buyWinRate": 1
+    },
+    "bottomMetro": {
+      "metro": "Urban Honolulu, HI",
+      "state": "HI",
+      "buyWinRate": 0
+    }
+  }
+}

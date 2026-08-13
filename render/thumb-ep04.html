@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ep04 thumbnails</title>
+<link rel="stylesheet" href="lib/slides.css">
+<style>
+/* Episode 1 ran the packaging test and the answer was unambiguous: the variant
+   that needed reading at feed size returned 0.2% CTR on 1.3K impressions. So
+   this episode leads with the reduced grammar rather than keeping it in reserve.
+   No chart, no table, no axis, nothing to decode. One decision, one reversal.
+   Every variant here is three text blocks and nothing else. */
+.thumb {
+  position: relative;
+  width: 1280px;
+  height: 720px;
+  background: var(--bg);
+  overflow: hidden;
+  margin: 0 auto 40px;
+}
+
+.thumb__content {
+  position: absolute;
+  inset: 0;
+  padding: 64px 72px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.thumb__kicker {
+  font-size: 46px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 650;
+  color: var(--ink);
+}
+
+.thumb__huge {
+  font-size: 168px;
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  margin: 18px 0 12px;
+  white-space: nowrap;
+}
+
+.thumb__under {
+  font-size: 40px;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.thumb__foot {
+  position: absolute;
+  left: 0; right: 0;
+  bottom: 46px;
+  text-align: center;
+  font-size: 27px;
+  color: var(--muted);
+}
+
+.was { color: var(--ok); }
+.now { color: var(--warn); }
+.arrow { color: var(--muted); font-weight: 600; padding: 0 18px; }
+</style>
+</head>
+<body>
+<main id="deck"></main>
+
+<script type="module">
+const r = await (await fetch("../episodes/ep04-rent-vs-buy/results.json")).json();
+
+const pct0 = (v) => `${Math.round(v * 100)}%`;
+
+const h = r.headline;
+const hold = (y) => r.byHold.find((x) => x.holdYears === y);
+const oldHome = r.scenarioTable
+  .find((s) => s.scenario === "old-home-stress")
+  .byHold.find((x) => x.holdYears === 5);
+
+const variants = [];
+
+// A - the flip. This is the episode's own spine ("not which side won, what made
+// it flip"), and it is the only claim here that needs two numbers to be true at
+// all. Leading with it rather than holding it as a fallback is the whole change
+// from the episode 1 packaging failure.
+variants.push(`
+  <section class="thumb">
+    <div class="thumb__content">
+      <div class="thumb__kicker">Rent vs buy</div>
+      <div class="thumb__huge">
+        <span class="was">${pct0(h.buyWinRate)}</span><span class="arrow">&rarr;</span><span class="now">${pct0(oldHome.buyWinRate)}</span>
+      </div>
+      <div class="thumb__under">one assumption</div>
+    </div>
+    <div class="thumb__foot">${h.metros} metros, ${h.runs.toLocaleString()} five-year tests</div>
+  </section>`);
+
+// B - the geography contrast. Two cities, one number each, no map and no chart.
+variants.push(`
+  <section class="thumb">
+    <div class="thumb__content">
+      <div class="thumb__kicker">Same years, same math</div>
+      <div class="thumb__huge">
+        <span class="was">${pct0(h.topMetro.buyWinRate)}</span><span class="arrow">vs</span><span class="now">${pct0(h.bottomMetro.buyWinRate)}</span>
+      </div>
+      <div class="thumb__under">Houston &nbsp;/&nbsp; Honolulu</div>
+    </div>
+    <div class="thumb__foot">buying won every cohort in one and none in the other</div>
+  </section>`);
+
+// C - the holding period, which is the most searched form of this question and
+// the one a viewer can act on without knowing their own local costs.
+variants.push(`
+  <section class="thumb">
+    <div class="thumb__content">
+      <div class="thumb__kicker">Buying wins</div>
+      <div class="thumb__huge">
+        <span class="now">${pct0(hold(2).buyWinRate)}</span><span class="arrow">&rarr;</span><span class="was">${pct0(hold(5).buyWinRate)}</span>
+      </div>
+      <div class="thumb__under">stay 2 years &nbsp;/&nbsp; stay 5</div>
+    </div>
+    <div class="thumb__foot">nothing about the mortgage changed</div>
+  </section>`);
+
+const only = Number(new URLSearchParams(location.search).get("only"));
+document.getElementById("deck").innerHTML =
+  only >= 1 && only <= variants.length
+    ? variants[only - 1].replace('class="thumb', 'style="margin:0" class="thumb')
+    : variants.join("");
+
+document.documentElement.dataset.ready = "1";
+</script>
+</body>
+</html>

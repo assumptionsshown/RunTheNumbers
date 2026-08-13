@@ -1,0 +1,164 @@
+{
+  "fetchedAt": "2026-08-01",
+  "retrievalMode": "pinned raw files; build is offline",
+  "source": {
+    "zillowZori": "https://files.zillowstatic.com/research/public_csvs/zori/Metro_zori_uc_sfrcondomfr_sm_month.csv",
+    "zillowCitation": "https://www.zillow.com/research/data/",
+    "zillowZhvi": "https://files.zillowstatic.com/research/public_csvs/zhvi/Metro_zhvi_uc_sfrcondo_tier_0.33_0.67_sm_sa_month.csv",
+    "zillowZhviGuide": "https://www.zillow.com/research/zhvi-user-guide/",
+    "fhfaAllTransactionsMetro": "https://www.fhfa.gov/hpi/download/quarterly_datasets/hpi_at_metro.csv",
+    "fhfa2023MetroLookup": "https://www.fhfa.gov/document/d/hpi/2025q1_hpi_technical_note_tables.xlsx",
+    "fhfaCitation": "https://www.fhfa.gov/house-price-index?tab=HPI%20Datasets",
+    "nationalRates": "../fred-housing-2026-07-31/manifest.json"
+  },
+  "sha256": "edec98cca09cd119a0e193e067ed63cb4ab8a959e74247a30aa3148a38814380",
+  "rawBytes": 9713136,
+  "rawFiles": {
+    "zillowZori": {
+      "filename": "zillow-zori-metro.csv",
+      "sha256": "a403fbff7aa8745b01f749490dd200a4a767e89b1088923790f08d8ac8a12ff1",
+      "rawBytes": 1038495,
+      "metroRows": 733,
+      "firstSourceMonth": "2015-01",
+      "lastSourceMonth": "2026-06"
+    },
+    "zillowZhvi": {
+      "filename": "zillow-zhvi-metro.csv",
+      "sha256": "efdb741b6cd798aa688ba004adcddb9d1c2ca39107d972bbeb6603eac0baa527",
+      "rawBytes": 4444528,
+      "metroRows": 894,
+      "firstSourceMonth": "2000-01",
+      "lastSourceMonth": "2026-06",
+      "cut": "all homes, middle tier, smoothed and seasonally adjusted"
+    },
+    "fhfaAllTransactionsMetro": {
+      "filename": "fhfa-hpi-at-metro.csv",
+      "sha256": "ef7c59e99c4cfd5474ff2c20cf3236843e64dbf72bfaffd4d59e374d98214a27",
+      "rawBytes": 4165719,
+      "rawRows": 84050,
+      "series": 410,
+      "divisionSeries": 37
+    },
+    "fhfa2023MetroLookup": {
+      "filename": "fhfa-2023-metro-lookup.xlsx",
+      "sha256": "32e7feca6531714eca6657d3f171b2a3723cbde4167477b7b82e8b14acee10ba",
+      "rawBytes": 64394,
+      "documentedAllTransactionsSeries": 410
+    }
+  },
+  "normalisedFiles": {
+    "zori": {
+      "filename": "zori-normalised.csv",
+      "sha256": "2e7ce361a5996b71f1e4fa61267292e6ed1a9aa013f440eb13d82e3320d1acc0",
+      "rawBytes": 1599394,
+      "rows": 40484,
+      "metros": 367,
+      "firstPeriod": "2015-01",
+      "lastPeriod": "2026-06"
+    },
+    "zhvi": {
+      "filename": "zhvi-normalised.csv",
+      "sha256": "c67ae230a35bacefd71a6f9f74b0ae7197cb04d5a309eb4bd3a21a0825552f00",
+      "rawBytes": 4162458,
+      "rows": 105193,
+      "metros": 364,
+      "firstPeriod": "2000-01",
+      "lastPeriod": "2026-06"
+    },
+    "fhfaHpi": {
+      "filename": "fhfa-hpi-normalised.csv",
+      "sha256": "b70012eb5de09449c28cf4d988e7689040691dc5b139a34097ce3f3d670e9716",
+      "rawBytes": 1224121,
+      "rows": 62379,
+      "metros": 367,
+      "firstPeriod": "1975Q3",
+      "lastPeriod": "2026Q1"
+    }
+  },
+  "coverage": {
+    "zillowMetroRows": 733,
+    "fhfaSeries": 410,
+    "statusCounts": {
+      "excluded-msad-mismatch": 13,
+      "matched": 367,
+      "unmatched": 353
+    },
+    "matchedMetros": 367,
+    "commonEnd": "2026-03",
+    "earliestOverlapStart": "2015-01",
+    "latestOverlapStart": "2025-12",
+    "longestOverlapMonths": 135,
+    "shortestOverlapMonths": 4,
+    "completeWindows": {
+      "2015-01..2026-03": 193,
+      "2016-01..2026-03": 215,
+      "2018-01..2026-03": 258,
+      "2020-01..2026-03": 272,
+      "2022-01..2026-03": 313
+    },
+    "zhviMetros": 364,
+    "zhviCompleteWindows": {
+      "2015-01..2026-03": 190,
+      "2016-01..2026-03": 211,
+      "2018-01..2026-03": 255,
+      "2020-01..2026-03": 269,
+      "2022-01..2026-03": 310
+    }
+  },
+  "columnMapping": {
+    "zillow_region_id": 0,
+    "zillow_size_rank": 1,
+    "zillow_metro_name": 2,
+    "zillow_primary_state": 3,
+    "fhfa_cbsa": 4,
+    "fhfa_metro_name": 5,
+    "fhfa_series_id": 6,
+    "match_status": 7,
+    "match_method": 8,
+    "zori_first_month": 9,
+    "zori_last_month": 10,
+    "zori_numeric_months": 11,
+    "zhvi_first_month": 12,
+    "zhvi_last_month": 13,
+    "zhvi_numeric_months": 14,
+    "fhfa_first_quarter": 15,
+    "fhfa_last_quarter": 16,
+    "fhfa_numeric_quarters": 17,
+    "overlap_start": 18,
+    "overlap_end": 19,
+    "overlap_months": 20,
+    "value_overlap_start": 21,
+    "value_overlap_end": 22,
+    "value_overlap_months": 23,
+    "notes": 24
+  },
+  "normalisedColumnMapping": {
+    "zori": {
+      "zillow_region_id": 0,
+      "fhfa_cbsa": 1,
+      "period": 2,
+      "zori_usd_month": 3
+    },
+    "zhvi": {
+      "zillow_region_id": 0,
+      "fhfa_cbsa": 1,
+      "period": 2,
+      "zhvi_usd": 3
+    },
+    "fhfaHpi": {
+      "fhfa_cbsa": 0,
+      "period": 1,
+      "hpi_all_transactions_nsa": 2
+    }
+  },
+  "matchingRule": "match only when the state displayed in Zillow's metro name is included in FHFA states and the normalized Zillow core city is the leading official-name core (including a leading slash alias); one explicit official lookup override maps Poughkeepsie to CBSA 28880; exclude any MSAD candidate rather than pair whole-MSA rent with division price",
+  "knownGaps": [
+    "Zillow ZORI begins in 2015 and starts later for many metros, so it sets the overlap horizon even though FHFA and mortgage-rate data are older.",
+    "FHFA publishes Metropolitan Division series instead of a whole-MSA series for split MSAs. Zillow whole-MSA rows for those places are excluded until an explicit, weighted aggregation is sourced.",
+    "The conservative automatic matcher leaves name changes and non-leading-city aliases unmatched instead of guessing. Any future manual override must cite an official geography source.",
+    "The normalised value files contain only the 367 matched whole-MSA geographies. metros.csv retains every excluded and unmatched Zillow row so dropped geography remains auditable.",
+    "FHFA all-transactions HPI is quarterly, not seasonally adjusted, and measures price change rather than a price level. ZORI is monthly and smoothed but not seasonally adjusted in this snapshot.",
+    "ZHVI supplies a monthly dollar home-value level and is smoothed and seasonally adjusted. It is a modeled typical value, not a transaction median, and its seasonality treatment differs from this ZORI cut.",
+    "National 30-year mortgage-rate coverage is 1971-04..2026-06; it does not constrain any matched overlap window here."
+  ]
+}

@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Ep04 - rent or buy</title>
+<link rel="stylesheet" href="lib/slides.css">
+<style>
+  .flow { display:grid; grid-template-columns:1fr 120px 1fr; align-items:center; gap:28px; }
+  .flow__card, .question-card, .limit-card { background:var(--panel); border:1px solid var(--rule); border-radius:12px; padding:38px 42px; }
+  .flow__card h2, .question-card h2 { font-size:40px; margin:0 0 18px; }
+  .flow__card p, .question-card p, .limit-card { color:var(--muted); font-size:28px; line-height:1.45; margin:0; }
+  .flow__arrow { color:var(--dca); font-size:70px; text-align:center; }
+  .question-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:28px; }
+  .question-card { min-height:310px; }
+  .question-card .n { color:var(--dca); font:700 62px/1 var(--mono); margin-bottom:28px; }
+  .limit-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:24px; }
+  .limit-card { min-height:178px; display:flex; align-items:center; }
+  .compare { display:grid; grid-template-columns:1fr 1fr; gap:50px; }
+  .compare > div { background:var(--panel); border:1px solid var(--rule); border-radius:12px; padding:44px 50px; }
+  .compare .place { color:var(--muted); font-size:29px; margin-bottom:20px; }
+  .compare .big { font-size:106px; font-weight:700; line-height:1; }
+  .compare .small { color:var(--muted); font-size:27px; line-height:1.4; margin-top:20px; }
+</style>
+</head>
+<body>
+<main id="deck"></main>
+
+<script type="module">
+import { horizontalBars, verticalBars, COLORS } from "./lib/charts.js";
+
+const r = await (await fetch("../episodes/ep04-rent-vs-buy/results.json")).json();
+const pct = (value, digits = 1) => `${(value * 100).toFixed(digits)}%`;
+const signed = (value, digits = 1) => `${value >= 0 ? "+" : ""}${(value * 100).toFixed(digits)}%`;
+const dollars = (value) => `$${Math.round(value).toLocaleString("en-US")}`;
+const hold = (years) => r.byHold.find((row) => row.holdYears === years);
+const scenario = (name) => r.scenarioTable.find((row) => row.scenario === name);
+const scenarioAtFive = (name) => scenario(name).byHold.find((row) => row.holdYears === r.baseCase.holdYears);
+const metro = (name) => r.byMetro.find((row) => row.metro === name);
+const cohort = (month) => r.byCohort.find((row) => row.month === month);
+const threshold = (rate, years) => r.breakEven.find((row) => row.ratePercent === rate && row.holdYears === years);
+
+const base = scenario("base");
+const headline = r.headline;
+const houston = metro("Houston, TX");
+const honolulu = metro("Urban Honolulu, HI");
+const first = cohort("2018-01");
+const cheap = cohort("2021-01");
+const splitExcluded = r.meta.housingSnapshot.coverage.statusCounts["excluded-msad-mismatch"];
+const spanComplete = r.meta.housingSnapshot.coverage.zhviCompleteWindows["2018-01..2026-03"];
+const internalHoles = spanComplete - r.meta.window.metros;
+
+const slides = [];
+const deck = document.getElementById("deck");
+const slide = ({ eyebrow, title, sub, body, foot, cls = "" }) => slides.push(`
+  <section class="slide ${cls}">
+    ${eyebrow ? `<div class="slide__eyebrow">${eyebrow}</div>` : ""}
+    ${title ? `<h1 class="slide__title">${title}</h1>` : ""}
+    ${sub ? `<p class="slide__sub">${sub}</p>` : ""}
+    <div class="slide__body">${body ?? ""}</div>
+    <div class="slide__foot">
+      <span>${foot ?? `Matched metros ${r.meta.window.start} to ${r.meta.window.end}. Equal-cash ledger. Nominal dollars.`}</span>
+      <span>THE ASSUMPTION PANEL</span>
+    </div>
+  </section>`);
+
+// 1 - Claim --------------------------------------------------------------------
+slide({
+  cls: "slide--title",
+  body: `
+    <div class="brand">The Assumption Panel</div>
+    <h1 class="slide__title" style="margin-top:28px;font-size:84px">Rent or buy?</h1>
+    <div style="display:flex;align-items:center;gap:44px;margin-top:36px">
+      <div><div class="stat__value is-dca">${pct(headline.buyWinRate, 0)}</div><div class="stat__label">buying won in the five-year base case</div></div>
+      <div style="font-size:76px;color:var(--muted)">→</div>
+      <div><div class="stat__value is-warn">${pct(scenarioAtFive("old-home-stress").buyWinRate, 0)}</div><div class="stat__label">after changing maintenance for an older home</div></div>
+    </div>
+    <p class="slide__sub" style="font-size:30px;margin-top:44px">The useful answer is what made it flip.</p>`,
+  foot: " ",
+});
+
+// 2 - Ledger -------------------------------------------------------------------
+slide({
+  eyebrow: "The fair comparison",
+  title: "Same cash. Every month. Two places to put it",
+  body: `<div class="flow">
+    <div class="flow__card"><h2 class="is-lumpsum">Buyer</h2><p>${pct(r.baseCase.downPct, 0)} down, purchase costs, mortgage, tax, insurance and maintenance.</p></div>
+    <div class="flow__arrow">⇄</div>
+    <div class="flow__card"><h2 class="is-dca">Renter</h2><p>Invests the avoided down payment and purchase cost, then any monthly savings.</p></div>
+  </div>
+  <p class="note" style="font-size:31px;margin-top:40px">At exit: sell the home, clear the loan, add both portfolios. Compare wealth, not lifestyle.</p>`,
+});
+
+// 3 - Sample -------------------------------------------------------------------
+slide({
+  eyebrow: "What the data can say",
+  title: "One complete panel. No invented months",
+  body: `<div class="stat-row">
+    <div><div class="stat__value">${r.meta.window.metros}</div><div class="stat__label">strict-complete matched metros</div></div>
+    <div><div class="stat__value is-dca">${r.meta.window.start.slice(0,4)}–${r.meta.window.end.slice(0,4)}</div><div class="stat__label">the available ZORI-era window</div></div>
+    <div><div class="stat__value is-warn">${splitExcluded}+${internalHoles}</div><div class="stat__label">split metros excluded + span-complete metros with internal holes</div></div>
+  </div>
+  <p class="note">A matched-metro result from one unusual housing cycle, not a national law or a forty-year rent history.</p>`,
+});
+
+// 4 - Headline -----------------------------------------------------------------
+slide({
+  eyebrow: "The five-year base case",
+  title: `${pct(headline.buyWinRate)} won. The spread is the story`,
+  body: `<div class="stat-row">
+    <div><div class="stat__value is-dca">${pct(headline.buyWinRate)}</div><div class="stat__label">buying wins across ${headline.runs.toLocaleString("en-US")} runs</div></div>
+    <div><div class="stat__value">${signed(headline.medianGapShare)}</div><div class="stat__label">median wealth gap / starting home price</div></div>
+    <div><div class="stat__value is-warn">${signed(headline.p10GapShare)}</div><div class="stat__label">10th percentile; 90th percentile is ${signed(headline.p90GapShare)}</div></div>
+  </div>
+  <p class="note">Same model and assumptions. Very different metro and start month. A win rate is not a promise.</p>`,
+});
+
+// 5 - Holding period ------------------------------------------------------------
+slide({
+  eyebrow: "Number one: time",
+  title: "Transaction costs need years to spread out",
+  body: `${verticalBars([2,3,4,5].map((years) => ({
+    label: `${years} years`,
+    value: hold(years).buyWinRate,
+    display: pct(hold(years).buyWinRate, 0),
+    sublabel: `median ${signed(hold(years).medianGapShare)}`,
+    color: hold(years).buyWinRate >= 0.5 ? COLORS.dca : COLORS.warn,
+  })), {
+    max: 1,
+    reference: 0.5,
+    referenceLabel: "",
+    xLabel: "planned holding period",
+    marginLeft: 170,
+    edgePadding: 110,
+  })}
+  <p class="note">If the timeline is uncertain, the verdict is uncertain too.</p>`,
+});
+
+// 6 - Selling cost --------------------------------------------------------------
+slide({
+  eyebrow: "One-time exit cost",
+  title: "Selling cost moves the result. It does not own it",
+  body: `${horizontalBars(r.sellAxis.map((row) => ({
+    label: `${pct(row.sellCost, 0)} to sell`,
+    value: row.atBaseHold.buyWinRate,
+    display: pct(row.atBaseHold.buyWinRate),
+    color: row.sellCost === base.sellCost ? COLORS.dca : COLORS.lumpsum,
+  })), { max: 1, labelWidth: 310, height: 390 })}
+  <p class="note">A recurring cost can do more damage than a closing cost paid once.</p>`,
+});
+
+// 7 - Owner cost ----------------------------------------------------------------
+slide({
+  eyebrow: "The assumption that flips it",
+  title: "Costs paid every year dominate the one-time fee",
+  body: `${verticalBars([
+    ["low cost", "low-owner-cost"], ["base", "base"], ["high cost", "high-owner-cost"], ["older home", "old-home-stress"],
+  ].map(([label, name]) => ({
+    label,
+    value: scenarioAtFive(name).buyWinRate,
+    display: pct(scenarioAtFive(name).buyWinRate, 0),
+    sublabel: `median ${signed(scenarioAtFive(name).medianGapShare)}`,
+    color: name === "base" ? COLORS.dca : name === "low-owner-cost" ? COLORS.ok : COLORS.warn,
+  })), {
+    max: 1,
+    reference: 0.5,
+    referenceLabel: "",
+    xLabel: "five-year assumption bundle",
+    marginLeft: 170,
+    edgePadding: 110,
+  })}
+  <p class="note">The older-home test changes only maintenance: ${pct(base.maintenance, 0)} becomes ${pct(scenario("old-home-stress").maintenance, 0)}.</p>`,
+});
+
+// 8 - Rent yield ----------------------------------------------------------------
+slide({
+  eyebrow: "Number two: rent divided by price",
+  title: "A ratio you can calculate from a listing",
+  body: `<div class="compare">
+    <div><div class="place">${houston.metro}</div><div class="big is-dca">${pct(houston.startRentYield)}</div><div class="small">starting annual rent / price<br>buying won ${Math.round(houston.buyWinRate * houston.cohorts)} of ${houston.cohorts} cohorts</div></div>
+    <div><div class="place">${honolulu.metro}</div><div class="big is-warn">${pct(honolulu.startRentYield)}</div><div class="small">starting annual rent / price<br>buying won ${Math.round(honolulu.buyWinRate * honolulu.cohorts)} of ${honolulu.cohorts} cohorts</div></div>
+  </div>
+  <p class="note">Not a city ranking. Local costs differ. The rent-to-price spread is the portable part.</p>`,
+});
+
+// 9 - Five-year threshold -------------------------------------------------------
+const tie3 = threshold(3, 5);
+const tie7 = threshold(7, 5);
+slide({
+  eyebrow: "Turn the ratio into a line",
+  title: "Same home. Same rent. The mortgage moves the tie",
+  sub: `${pct(tie3.homeGrowthAnnual,0)} home growth · ${pct(tie3.rentGrowthAnnual,0)} rent growth · ${pct(tie3.marketReturnAnnual,0)} market return`,
+  body: `<div class="compare">
+    <div><div class="place">${tie3.ratePercent}% mortgage</div><div class="big is-dca">${pct(tie3.requiredRentYield)}</div><div class="small">annual rent / price to tie<br>${dollars(tie3.requiredRentYield * 400000 / 12)}/month on a $400,000 home</div></div>
+    <div><div class="place">${tie7.ratePercent}% mortgage</div><div class="big is-warn">${pct(tie7.requiredRentYield)}</div><div class="small">annual rent / price to tie<br>${dollars(tie7.requiredRentYield * 400000 / 12)}/month on a $400,000 home</div></div>
+  </div>
+  <p class="note">Above the line, buying gains ground. Below it, renting does. Conditional threshold, not forecast.</p>`,
+});
+
+// 10 - Surface ------------------------------------------------------------------
+slide({
+  eyebrow: "Rate and time move the line",
+  title: "There is no magic rent ratio",
+  body: `<table><thead><tr><th>Mortgage</th><th>3-year stay</th><th>5-year stay</th><th>10-year stay</th></tr></thead><tbody>
+    ${[3,7].map((rate) => `<tr><td>${rate}%</td>${[3,5,10].map((years) => `<td>${pct(threshold(rate, years).requiredRentYield)}</td>`).join("")}</tr>`).join("")}
+  </tbody></table>
+  <p class="note" style="font-size:31px">Higher rates push the buying threshold up. More time pulls it down. The rate matters; it cannot decide alone.</p>`,
+});
+
+// 11 - Historical cohorts -------------------------------------------------------
+slide({
+  eyebrow: "The rate did not decide history",
+  title: "Lower mortgage rate. Weaker buying result",
+  body: `<div class="compare">
+    <div><div class="place">${first.month} · ${first.ratePercent.toFixed(1)}% mortgage</div><div class="big is-dca">${pct(first.buyWinRate)}</div><div class="small">metros where buying won<br>median gap ${signed(first.medianGapShare)}</div></div>
+    <div><div class="place">${cheap.month} · ${cheap.ratePercent.toFixed(1)}% mortgage</div><div class="big is-warn">${pct(cheap.buyWinRate)}</div><div class="small">metros where buying won<br>median gap ${signed(cheap.medianGapShare)}</div></div>
+  </div>
+  <p class="note">Prices, rents, market returns and the exit month moved too.</p>`,
+});
+
+// 12 - Construction -------------------------------------------------------------
+slide({
+  eyebrow: "Independent construction check",
+  title: "The headline survives. Every local answer does not",
+  body: `<div class="stat-row">
+    <div><div class="stat__value">${pct(r.fhfaSensitivity.zhviBuyWinRate)}</div><div class="stat__label">buying wins with Zillow's monthly value path</div></div>
+    <div><div class="stat__value is-dca">${pct(r.fhfaSensitivity.fhfaBuyWinRate)}</div><div class="stat__label">buying wins with stepped quarterly FHFA</div></div>
+    <div><div class="stat__value is-warn">${r.fhfaSensitivity.disagreeingRuns}</div><div class="stat__label">verdict disagreements across ${r.fhfaSensitivity.metrosWithAnyDisagreement} metros; ${pct(r.fhfaSensitivity.verdictAgreementRate)} agree</div></div>
+  </div>`,
+});
+
+// 13 - Limits -------------------------------------------------------------------
+slide({
+  eyebrow: "What the model does not contain",
+  title: "Use the result this narrowly",
+  body: `<div class="limit-grid">
+    <div class="limit-card">Typical rent and typical home value are not the same physical property.</div>
+    <div class="limit-card">No refinance, points, PMI or federal tax benefit in the base case.</div>
+    <div class="limit-card">Overlapping months and correlated metros are not independent trials.</div>
+    <div class="limit-card">The window starts in ${r.meta.window.start.slice(0,4)} and includes one unusual pandemic housing cycle.</div>
+  </div>`,
+});
+
+// 14 - Carry three numbers ------------------------------------------------------
+slide({
+  eyebrow: "What to carry to a listing",
+  title: "Three questions, not one headline",
+  body: `<div class="question-grid">
+    <div class="question-card"><div class="n">01</div><h2>How long?</h2><p>How many years will you really stay?</p></div>
+    <div class="question-card"><div class="n">02</div><h2>Rent ÷ price?</h2><p>One year of comparable rent divided by the purchase price.</p></div>
+    <div class="question-card"><div class="n">03</div><h2>Owner cost?</h2><p>Tax, insurance and maintenance for this specific home.</p></div>
+  </div>
+  <p class="note" style="font-size:31px">Then add the mortgage rate and selling cost. If the winner changes, the flip point is the answer.</p>`,
+});
+
+// 15 - Assumption panel ---------------------------------------------------------
+slide({
+  eyebrow: "The assumption panel",
+  title: "Everything the base result rests on",
+  body: `<div class="assumptions"><ul>
+    <li>${pct(r.baseCase.downPct,0)} down; 30-year fixed mortgage; no refinance</li>
+    <li>${pct(base.propertyTax,1)} property tax; ${pct(base.insurance,1)} insurance; ${pct(base.maintenance,1)} maintenance</li>
+    <li>${pct(base.buyCost,1)} purchase cost; ${pct(base.sellCost,0)} selling cost</li>
+    <li>No federal homeowner tax benefit in the base case</li>
+    <li>Equal monthly cash; lower-cost household invests the difference</li>
+    <li>ZHVI monthly base path; FHFA quarterly construction check</li>
+  </ul><div class="source">Zillow ZORI/ZHVI · Freddie Mac PMMS via FRED · FHFA HPI · Shiller S&amp;P Composite<br>pinned snapshots ${r.meta.housingSnapshot.fetchedAt} / ${r.meta.rateSnapshot.fetchedAt} / ${r.meta.snapshot.fetchedAt}</div></div>`,
+});
+
+const only = Number(new URLSearchParams(location.search).get("only"));
+deck.innerHTML = only >= 1 && only <= slides.length
+  ? slides[only - 1].replace('class="slide ', 'style="margin:0" class="slide ')
+  : slides.join("");
+
+document.title = `Ep04 - ${slides.length} slides`;
+document.documentElement.dataset.slideCount = String(slides.length);
+window.SLIDE_COUNT = slides.length;
+document.documentElement.dataset.ready = "1";
+</script>
+</body>
+</html>
