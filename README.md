@@ -1,28 +1,81 @@
 # The Assumption Panel
 
-Code and data behind the videos.
+Backtests of common personal finance arguments, with the dataset pinned by hash,
+the assumptions written down, and every published number reproducible from this
+repository with two commands.
 
-Every personal finance argument, settled with data. Assumptions on screen, code
-public. If you think one of the assumptions is wrong, change it and re-run it. That
-is what this repository is for.
+Four questions are answered so far: rent versus buy across 241 US metros, lump sum
+versus dollar-cost averaging on every start month since 1871, what a 1% fee costs
+over 30 years, and what happens if you only ever buy at a record high.
+
+Each one is also a video, linked in the table below, but the videos are downstream.
+Every number on screen is read from a `results.json` in this repo, so nothing is
+typed by hand and anything you disagree with can be changed and re-run.
 
 ## Why this exists
 
-Most finance content asks you to trust the person saying it. This channel is
+Most finance content asks you to trust the person saying it. The channel is
 anonymous, so that is not on offer. What is on offer instead is that every number
-in every video can be reproduced from this repository, from a dataset pinned by
-date and hash, using code you can read.
+can be reproduced from this repository, from a dataset pinned by date and hash,
+using code you can read.
 
 Don't trust it. Re-run it.
 
 ## Episodes
 
-| # | Question | Video | Data |
-|---|---|---|---|
-| 1 | Lump sum or spread it out? | [Lump Sum vs DCA: I Tested All 1,855 Months Since 1871](https://youtu.be/YV2cOHZvYcY) | `episodes/ep01-lumpsum-vs-dca/results.json` |
-| 2 | What does a 1% fee actually cost, and is it ever worth it? | [Paying 1% Costs More Than Panic Selling Every Crash for 30 Years](https://youtu.be/-v4_SQQyTNc) | `episodes/ep02-fees/results.json` |
-| 3 | What if you only ever bought at the market top? | [I Only Ever Bought at the Market Top. It Cost 10%.](https://youtu.be/X28aftmVfvM) | `episodes/ep03-buying-at-the-top/results.json` |
-| 4 | Which numbers flip rent versus buy? | [Rent vs Buy: One Assumption Flipped 82% to 31%](https://youtu.be/_AazljGWkgc) | `episodes/ep04-rent-vs-buy/results.json` |
+| # | Question | Headline result | Video | Data |
+|---|---|---|---|---|
+| 4 | Which numbers flip rent versus buy? | Buying won 81.9% of 9,399 five-year runs, or 31.0% with one input changed | [Rent vs Buy](https://youtu.be/_AazljGWkgc) | `episodes/ep04-rent-vs-buy/results.json` |
+| 3 | What if you only ever bought at the market top? | It cost about 10% against buying on any day | [Buying at the top](https://youtu.be/X28aftmVfvM) | `episodes/ep03-buying-at-the-top/results.json` |
+| 2 | What does a 1% fee actually cost? | More than panic selling every crash for 30 years | [Fees](https://youtu.be/-v4_SQQyTNc) | `episodes/ep02-fees/results.json` |
+| 1 | Lump sum or spread it out? | Lump sum won 67.2% of 1,855 start months | [Lump sum vs DCA](https://youtu.be/YV2cOHZvYcY) | `episodes/ep01-lumpsum-vs-dca/results.json` |
+
+## Episode 4: rent versus buy
+
+9,399 five-year comparisons across 241 matched US metros, 2018-01 through 2026-03.
+The comparison gives renter and buyer the same starting cash, invests whichever
+household spends less that month, sells the home at the end, clears the mortgage
+and compares total wealth.
+
+Under the base case buying won **81.9%**. That figure is close to meaningless on
+its own, which is the actual finding:
+
+- Change only maintenance, from 1% of value per year to 4% for an older home, and
+  81.9% becomes **31.0%**. One input, same data, opposite advice.
+- Swap the whole holding-cost bundle between its cited low and high cases and it
+  runs **91.7% to 23.7%**.
+- Hold two years instead of five and it is **41.6%**. Time does more work than the
+  mortgage rate does.
+- It is not a national answer at all. Houston 100%, Honolulu 0%.
+
+The portable version is three numbers: how long you stay, one year of comparable
+rent divided by the purchase price, and the recurring cost of tax plus insurance
+plus maintenance.
+
+**Assumptions.** 20% down, 30-year fixed with no refinance, 1% property tax, 0.5%
+insurance, 1% maintenance, 2.5% purchase and 7% selling cost, no federal tax
+benefit in the base case. The synthetic break-even table uses 3% home growth, 3%
+rent growth and 7% market return. Ranges and sources are in
+`episodes/ep04-rent-vs-buy/`.
+
+**Limits, in the order I would attack them.** Rent is Zillow ZORI and home value is
+Zillow ZHVI: these are modeled typical values for a metro, **not the same physical
+house**, and that is the weakest joint in the model. The ZORI era is short and
+contains an unusual housing cycle. Start months overlap and metros move together,
+so the effective sample is far smaller than 9,399.
+
+**Data.** Zillow ZORI and ZHVI, FHFA quarterly HPI, mortgage rates and CPI from
+FRED, market returns from the pinned Shiller series. Zillow metros do not map
+cleanly onto FHFA's: 367 match whole MSAs, but 13 are split into divisions,
+including several of the largest markets, and those are excluded rather than paired
+against one division's index. `CPIAUCSL` has an official blank at 2025-10 from the
+lapse in appropriations and is left blank rather than interpolated.
+
+As a construction check the whole thing re-runs on FHFA's quarterly HPI instead of
+ZHVI's monthly path. The two agree on **92.1%** of cases.
+
+`node tools/validate-ep04.mjs` reproduces every published number without reading
+the simulation source: 2,234 of 2,234 checks.
 
 ## Reproducing the episodes
 
@@ -77,7 +130,7 @@ node tools/serve.mjs 5173
 then open `http://localhost:5173/render/ep01.html`, `render/ep02.html`,
 `render/ep03.html`, or `render/ep04.html`.
 
-## The result
+## Episode 1: lump sum versus dollar-cost averaging
 
 Investing a lump sum immediately beat spreading it over 12 months in **67.2%** of
 1,855 starting months since 1871.
@@ -93,7 +146,7 @@ Three findings that matter more than the headline:
 - **In two of the eight worst starting months on record, the drip made the outcome
   worse.** Both were 1998, the two highest starting valuations in that group.
 
-## Assumptions
+### Episode 1 assumptions
 
 These decide the answer. Change any of them and the number changes.
 
@@ -106,7 +159,7 @@ These decide the answer. Change any of them and the number changes.
 - US large-cap index only (S&P Composite)
 - The holding period is measured from the month of the final purchase
 
-## Data
+### Episode 1 data
 
 Robert Shiller's monthly US stock market dataset, 1871-01 to 2026-06, from
 [shillerdata.com](https://shillerdata.com).
