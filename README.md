@@ -25,10 +25,37 @@ Don't trust it. Re-run it.
 
 | # | Question | Headline result | Video | Data |
 |---|---|---|---|---|
+| 6 | Is the 4% rule safe? | It lasted 30 years for 120 of 126 start years; all 6 failures retired 1964-69 | Walt and June | `episodes/ep06-four-percent-rule/results.json` |
 | 4 | Which numbers flip rent versus buy? | Buying won 81.9% of 9,399 five-year runs, or 31.0% with one input changed | [Rent vs Buy](https://youtu.be/_AazljGWkgc) | `episodes/ep04-rent-vs-buy/results.json` |
 | 3 | What if you only ever bought at the market top? | It cost about 10% against buying on any day | [Buying at the top](https://youtu.be/X28aftmVfvM) | `episodes/ep03-buying-at-the-top/results.json` |
 | 2 | What does a 1% fee actually cost? | More than panic selling every crash for 30 years | [Fees](https://youtu.be/-v4_SQQyTNc) | `episodes/ep02-fees/results.json` |
 | 1 | Lump sum or spread it out? | Lump sum won 67.2% of 1,855 start months | [Lump sum vs DCA](https://youtu.be/YV2cOHZvYcY) | `episodes/ep01-lumpsum-vs-dca/results.json` |
+
+## Episode 6: the 4% rule, every start year since 1871
+
+$1M, $40,000 in year one, the same amount every year after raised with CPI, 60%
+S&P total return and 40% 10-year Treasuries rebalanced every January. Run for every
+start year from 1871 to 1996 (126 of them, each with a full 30 years of data).
+
+- **120 of 126** lasted 30 years. All **6** failures retired between **1964 and 1969**.
+- Retiring into the 1929 crash survived: prices fell, bonds gained about 31% after
+  inflation from 1929 to 1932, and the market recovered while money was still in it.
+- 1966 ran out in 1989: 16 years of rising prices from day one, stocks down 20% and
+  bonds down almost half after inflation from 1966 to 1982.
+- Every failure saw prices rise by half or more in its first ten years. That is a
+  warning sign, not a cause: 1909-12 and 1970-73 started worse on that measure and
+  lasted.
+- The highest rate that survived every start year: **3.6%**.
+
+**Limits.** The bond leg is an approximation (a 10-year bond priced off the January
+yield). No taxes, fees, Social Security or cutting back in bad years. Start years
+overlap heavily, so 126 is not 126 independent trials. Walt and June are
+illustrations; the market history is real.
+
+`node tools/validate-ep06.mjs` re-runs every cohort from the raw CSV (9,200 checks).
+`node tools/validate-ep06-story.mjs` checks every number the narration speaks against
+the words of its line (213 checks). The renderer `render/ep06-walt-june.html` refuses
+to draw if its own re-derivation of the two story paths differs from `batch.json`.
 
 ## Episode 4: rent versus buy
 
@@ -116,6 +143,18 @@ dotnet run --project src/RunTheNumbers.Sim -- \
 
 # Independently reproduce and compare all episode 4 result fields
 node tools/validate-ep04.mjs
+
+# Episode 6 (results, then the renderer's batch input)
+dotnet run --project src/RunTheNumbers.Sim -- \
+  data/snapshots/shiller-2026-07-26 \
+  episodes/ep06-four-percent-rule/results.json \
+  --episode ep06
+dotnet run --project src/RunTheNumbers.Sim -- \
+  data/snapshots/shiller-2026-07-26 \
+  episodes/ep06-four-percent-rule/batch.json \
+  --episode ep06-batch
+node tools/validate-ep06.mjs
+node tools/validate-ep06-story.mjs
 ```
 
 `results.json` holds every number that appears on screen. The slides read from it
@@ -128,7 +167,7 @@ node tools/serve.mjs 5173
 ```
 
 then open `http://localhost:5173/render/ep01.html`, `render/ep02.html`,
-`render/ep03.html`, or `render/ep04.html`.
+`render/ep03.html`, `render/ep04.html`, or `render/ep06-walt-june.html`.
 
 ## Episode 1: lump sum versus dollar-cost averaging
 

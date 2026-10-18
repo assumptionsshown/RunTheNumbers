@@ -1,7 +1,7 @@
 // Assemble an episode: one still frame per slide, held for exactly as long as
 // that slide's voice over runs, plus a short breath between slides.
 //
-//   node tools/build-video.mjs [--episode ep01] [--gap 0.7] [--fps 30]
+//   node tools/build-video.mjs [--episode ep01] [--gap 0.7] [--fps 30] [--resume]
 //
 // Nothing is timed by hand. Re-record a line, re-run this, and the video stays
 // in sync by construction.
@@ -12,7 +12,7 @@
 // shares identical stream parameters and quietly mistimes the result when they
 // do not (for example TTS output at 22.05 kHz mixed with silence at 44.1 kHz).
 import { execFileSync } from "node:child_process";
-import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 const args = process.argv.slice(2);
@@ -24,6 +24,7 @@ const argOf = (name, fallback) => {
 const episode = argOf("--episode", "ep01");
 const gap = Number(argOf("--gap", "0.7"));
 const fps = Number(argOf("--fps", "30"));
+const resume = args.includes("--resume");
 
 // Every segment is normalised to these so the final join is a stream copy.
 const SAMPLE_RATE = 48000;
@@ -56,6 +57,17 @@ const duration = (file) =>
     ]).toString().trim(),
   );
 
+const isReusableSegment = (file, held) => {
+  if (!resume || !existsSync(file) || statSync(file).size === 0) return false;
+  try {
+    return Math.abs(duration(file) - held) <= (1 / fps + 0.01);
+  } catch {
+    // An interrupted ffmpeg run can leave a non-empty MP4 without its final
+    // metadata atom. Treat that file as incomplete and encode it again.
+    return false;
+  }
+};
+
 // Slides listed here play a frame sequence instead of a still.
 const animationsPath = join(episodeDir, "animations.json");
 const animations = existsSync(animationsPath)
@@ -69,16 +81,41 @@ console.log("slide   speech     held   source");
 for (const clip of clips) {
   const n = clip.match(/(\d+)/)[1];
   const speech = duration(join(audioDir, clip));
-  // Snap to a whole number of frames. A segment that ends part-way through a
-  // frame leaves a short final frame, and once sixteen of those are joined the
-  // result is no longer constant rate: players show it as a hitch at every
-  // slide change.
-  const held = Math.round((speech + gap) * fps) / fps;
-  expected += held;
 
   const animName = animations[String(Number(n))];
   const animDir = animName ? join(frameDir, `anim-${animName}`) : null;
   const hasAnimation = animDir && existsSync(animDir) && readdirSync(animDir).length > 0;
+  const animFrames = hasAnimation
+    ? readdirSync(animDir).filter((f) => f.endsWith(".png")).length
+    : 0;
+  const animSeconds = animFrames / fps;
+
+  // TIMING AUTHORITY, inverted 2026-09-04.
+  //
+  // This used to be `(speech + gap)` alone, which made the NARRATION the master
+  // clock: a slide ran for exactly as long as its WAV, and an animation longer
+  // than its narration was silently truncated by `-t held`. That is right for a
+  // deck read aloud and wrong for the format the founder authorised on 09-01,
+  // where the instrument carries load the words used to and the script gets
+  // SHORTER. Under the old rule every movement would have been cut off at the new,
+  // shorter narration length, and the beat that most wants to outrun its words
+  // would have been cut hardest.
+  //
+  // Now the longer of the two wins: narration is never clipped, and a movement is
+  // never clipped either. For every existing episode the animations are shorter
+  // than their narration, so this is a no-op on them and their durations do not
+  // move; the log line below fires only when an animation is actually the master.
+  //
+  // Snap to a whole number of frames. A segment that ends part-way through a
+  // frame leaves a short final frame, and once sixteen of those are joined the
+  // result is no longer constant rate: players show it as a hitch at every
+  // slide change.
+  const narrated = speech + gap;
+  const held = Math.round(Math.max(narrated, animSeconds) * fps) / fps;
+  if (hasAnimation && animSeconds > narrated) {
+    console.log(`  slide ${n}: movement is the master clock, ${animSeconds.toFixed(1)}s over ${narrated.toFixed(1)}s of narration`);
+  }
+  expected += held;
 
   const seg = join(segDir, `seg-${n}.mp4`);
   const audioArgs = [
@@ -89,7 +126,13 @@ for (const clip of clips) {
   ];
   const encodeArgs = [
     "-t", held.toFixed(4),
-    "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "medium", "-crf", "18",
+    // CRF lowered from 18 and tuned for still content on 2026-08-29. These slides
+    // are mostly a static frame held for half a minute, and at CRF 18 x264 was
+    // re-quantising the thin footer rule differently at each keyframe, which reads
+    // as a line that pulses every few seconds. The rule's contrast was raised in
+    // slides.css at the same time; both were needed.
+    "-c:v", "libx264", "-pix_fmt", "yuv420p", "-preset", "medium", "-crf", "16",
+    "-tune", "stillimage",
     // Force constant frame rate. Without it ffmpeg is free to drop or duplicate
     // frames to hit the target duration, which is the other half of the stutter.
     "-fps_mode", "cfr", "-r", String(fps),
@@ -98,11 +141,14 @@ for (const clip of clips) {
   ];
 
   let source;
-  if (hasAnimation) {
-    const frameCount = readdirSync(animDir).filter((f) => f.endsWith(".png")).length;
-    const animSeconds = frameCount / fps;
-    // The animation is almost always shorter than the narration, so clone the
-    // last frame for the remainder instead of looping or speeding it up.
+  const reusable = isReusableSegment(seg, held);
+
+  if (reusable) {
+    source = "existing segment";
+  } else if (hasAnimation) {
+    // Clone the last frame for any remainder rather than looping or speeding up.
+    // With the inverted authority above this is zero whenever the movement is the
+    // master, and the movement plays whole.
     const holdFor = Math.max(0, held - animSeconds);
     source = `${animName} (${animSeconds.toFixed(1)}s + ${holdFor.toFixed(1)}s hold)`;
 

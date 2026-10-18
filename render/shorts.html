@@ -23,7 +23,7 @@
 // at arm's length, and the payoff number is always visible rather than saved for
 // the end.
 //
-//   ?anim=path1998|feecurve|histogram [&fps=30] [&seconds=N]
+//   ?anim=path1998|feecurve|histogram|threemonths [&fps=30] [&seconds=N]
 
 const C = {
   bg: "#0d1117",
@@ -51,6 +51,18 @@ const clamp01 = (t) => Math.max(0, Math.min(1, t));
 
 const ep01 = await (await fetch("../episodes/ep01-lumpsum-vs-dca/results.json")).json();
 const ep02 = await (await fetch("../episodes/ep02-fees/results.json")).json();
+const ep03 = await (await fetch("../episodes/ep03-buying-at-the-top/results.json")).json();
+const ep04 = await (await fetch("../episodes/ep04-rent-vs-buy/results.json")).json();
+const ep05 = await (await fetch("../episodes/ep05-mortgage-or-invest/results.json")).json();
+const ep06 = await (await fetch("../episodes/ep06-four-percent-rule/results.json")).json();
+const ep07 = await (await fetch("../episodes/ep07-15-vs-30-year/results.json")).json();
+
+// Dialogue shorts change on the speaker turn, not on a fraction of the runtime,
+// so the turn boundaries are measured from the audio by tools/build-dialogue.mjs
+// and read back here. Typing these numbers is how the visuals drift.
+const timing = which === "threemonths"
+  ? await (await fetch("../episodes/shorts/timing-threemonths.json")).json()
+  : null;
 
 function clear() {
   ctx.fillStyle = C.bg;
@@ -72,6 +84,43 @@ function frameChrome(lines) {
     });
   });
   label("THE ASSUMPTION PANEL", W / 2, 1855, { size: 30, fill: C.rule, weight: 600 });
+}
+
+/** Greedy wrap. Returns the lines; the caller decides where to put them. */
+function wrap(text, maxWidth, { size = 60, weight = 400 } = {}) {
+  ctx.font = `${weight} ${size}px ${FONT}`;
+  const lines = [];
+  let line = "";
+  for (const word of text.split(" ")) {
+    const next = line ? `${line} ${word}` : word;
+    if (ctx.measureText(next).width > maxWidth && line) {
+      lines.push(line);
+      line = word;
+    } else {
+      line = next;
+    }
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
+// Speakers are told apart by weight, position and a rule, never by hue. The
+// palette's colours already mean something in the data (orange is lump sum,
+// teal is the drip), and borrowing them for "who is talking" would make the
+// chart lie the moment a question mentioned either one.
+function quoteCard(text, y, { size = 66, alpha = 1, source = "from the comments" } = {}) {
+  ctx.globalAlpha = alpha;
+  const lines = wrap(text, W - 240, { size, weight: 600 });
+
+  ctx.fillStyle = C.rule;
+  ctx.fillRect(70, y - size, 8, lines.length * (size + 22));
+
+  label("“", 118, y - size + 66, { size: 130, fill: C.rule, align: "left", weight: 700 });
+  lines.forEach((l, i) => {
+    label(l, 130, y + i * (size + 22), { size, fill: C.ink, align: "left", weight: 600 });
+  });
+  label(source, 130, y + lines.length * (size + 22) + 26, { size: 34, fill: C.muted, align: "left" });
+  ctx.globalAlpha = 1;
 }
 
 // ---------------------------------------------------------------------------
@@ -340,10 +389,911 @@ function histogramFrame(i, frames) {
   }
 }
 
+// ---------------------------------------------------------------------------
+// 4. Question and answer: does a shorter window fix it?
+// ---------------------------------------------------------------------------
+// Two speakers, so the screen has to say who is talking without a face and
+// without borrowing the data colours. A question is a quoted card behind a
+// rule; the answer is the chart itself.
+const Q1 = "I wouldn't spread it over a whole year. I'd do it in three months.";
+const Q2 = "But the market is expensive right now.";
+const ladder = ep01.baseCase.windows.map((w) => ({
+  months: w.Months, rate: w.LumpSumWinRate, behind: w.GapMedian,
+}));
+// The narration rounds this to "seventeen hundred"; the screen should not.
+const capeStarts = ep01.baseCase.capeDeciles.reduce((n, d) => n + d.Starts, 0);
+
+function threeMonthsFrame(i) {
+  const t = i / FPS;
+  const beat = (k) => timing.turns[k];
+  // Fade in `dur` seconds after beat k starts, then stay.
+  const since = (k, delay = 0, dur = 0.45) =>
+    clamp01((t - (beat(k).start + delay)) / dur);
+  // Progress across a beat, finishing a little early so the number has landed
+  // before the sentence about it ends.
+  const across = (k) => clamp01((t - beat(k).start) / ((beat(k).end - beat(k).start) * 0.72));
+
+  clear();
+  label("THE ASSUMPTION PANEL", W / 2, 1855, { size: 30, fill: C.rule, weight: 600 });
+
+  const opened = clamp01((t - (beat(1).start - 0.5)) / 0.5);
+  if (opened < 1) quoteCard(Q1, 780, { size: 78, alpha: 1 - opened });
+  if (opened === 0) return;
+
+  // The question stays pinned once it is being answered, so a viewer who
+  // arrives mid-Short still knows what the chart is arguing with.
+  ctx.globalAlpha = opened;
+  ctx.fillStyle = C.rule;
+  ctx.fillRect(60, 118, 6, 92);
+  label("“I'd do it in three months”", 96, 172, { size: 40, fill: C.muted, align: "left", weight: 600 });
+  label("every starting month since 1871", W / 2, 350, { size: 40, fill: C.muted });
+  ctx.globalAlpha = 1;
+
+  // Everything stays inside x 60..950 and above y 1600: on a phone the Shorts
+  // player puts its button rail down the right edge and the title across the
+  // bottom, and a number under either of those may as well not be drawn.
+  const plotLeft = 300, plotRight = 650;
+  const barX = (rate) => plotLeft + rate * (plotRight - plotLeft);
+  const rowY = (k) => 600 + k * 168;
+
+  const headers = since(2);
+  if (headers > 0) {
+    ctx.globalAlpha = headers;
+    label("all at once won", plotLeft, 505, { size: 32, align: "left" });
+    label("drip finished behind", 950, 505, { size: 32, align: "right" });
+    ctx.globalAlpha = 1;
+  }
+
+  ladder.forEach((w, k) => {
+    // Beat 1 names the four windows, so the rows arrive with the words.
+    const row = since(1, 0.5 + k * 0.55, 0.4);
+    if (row === 0) return;
+    ctx.globalAlpha = row;
+    label(`${w.months} months`, 60, rowY(k) + 14, { size: 44, fill: C.ink, align: "left", weight: 600 });
+
+    ctx.fillStyle = C.rule;
+    ctx.fillRect(plotLeft, rowY(k) - 30, plotRight - plotLeft, 52);
+    ctx.globalAlpha = 1;
+
+    // Beat 2 is the median shortfall, beat 3 is the win rate. Each number
+    // appears while it is being said, and not before.
+    const cost = since(2, 0.6 + k * 0.35, 0.4);
+    if (cost > 0) {
+      ctx.globalAlpha = cost;
+      label(`${(w.behind * 100 * across(2)).toFixed(1)}%`, 950, rowY(k) + 12, {
+        size: 38, fill: C.muted, align: "right", weight: 700, mono: true,
+      });
+      ctx.globalAlpha = 1;
+    }
+
+    const grown = since(3, 0.3 + k * 0.3, 0.4) * across(3);
+    if (grown > 0) {
+      ctx.fillStyle = C.lumpsum;
+      ctx.fillRect(plotLeft, rowY(k) - 30, (barX(w.rate) - plotLeft) * grown, 52);
+      ctx.globalAlpha = since(3, 0.3 + k * 0.3, 0.4);
+      label(`${(w.rate * 100 * grown).toFixed(1)}%`, 665, rowY(k) + 12, {
+        size: 42, fill: C.lumpsum, align: "left", weight: 700, mono: true,
+      });
+      ctx.globalAlpha = 1;
+    }
+  });
+
+  // The whole claim is that no bar reaches this line, so the line is drawn from
+  // the same scale as the bars rather than placed by eye.
+  const flip = since(3, 0, 0.5);
+  if (flip > 0) {
+    ctx.globalAlpha = flip;
+    ctx.strokeStyle = C.ink;
+    ctx.lineWidth = 3;
+    ctx.setLineDash([12, 10]);
+    ctx.beginPath();
+    ctx.moveTo(barX(0.5), rowY(0) - 72);
+    ctx.lineTo(barX(0.5), rowY(3) + 52);
+    ctx.stroke();
+    ctx.setLineDash([]);
+    label("a coin flip", barX(0.5), rowY(3) + 100, { size: 32, fill: C.ink });
+    ctx.globalAlpha = 1;
+  }
+
+  // Beat 4, the conclusion, sits below the chart instead of covering it. The
+  // viewer should be able to check the sentence against the bars while it is
+  // being said.
+  const dial = since(4, 0.2, 0.5);
+  if (dial > 0) {
+    ctx.globalAlpha = dial;
+    label("Not a third option.", W / 2, 1380, { size: 62, fill: C.ink, weight: 750 });
+    label("A dial.", W / 2, 1470, { size: 62, fill: C.warn, weight: 800 });
+    label("turn it down and you are back to all at once", W / 2, 1560, { size: 38, fill: C.muted });
+    ctx.globalAlpha = 1;
+  }
+
+  // Beat 5, the second question, and beat 6, where it is answered.
+  const asked = since(5, 0, 0.4);
+  if (asked > 0) {
+    // Nearly opaque, not a wash. At 0.9 the table reads straight through the
+    // quote and the two compete; the narration has moved on, so the chart
+    // should too.
+    ctx.globalAlpha = asked * 0.985;
+    ctx.fillStyle = C.bg;
+    ctx.fillRect(0, 96, W, 1664);
+    ctx.globalAlpha = 1;
+    quoteCard(Q2, 700, { size: 74, alpha: asked });
+
+    const cta = since(6, 0.2, 0.5);
+    if (cta > 0) {
+      ctx.globalAlpha = cta;
+      label("ten valuation buckets,", W / 2, 1120, { size: 52, fill: C.ink, weight: 700 });
+      label(`${capeStarts.toLocaleString("en-US")} starting months`, W / 2, 1190, { size: 52, fill: C.ink, weight: 700 });
+      label("the answer is in the full video", W / 2, 1360, { size: 50, fill: C.dca, weight: 750 });
+      label("link below", W / 2, 1430, { size: 36, fill: C.dca });
+      ctx.globalAlpha = 1;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 5. Forty years of buying nothing but the yearly high.
+// ---------------------------------------------------------------------------
+// Straight narration rather than the dialogue grammar above, deliberately: the
+// question-and-answer format is still an unpublished test, and running it on a
+// second Short at the same time would mean two variables moving at once.
+const savers = ["january", "peak", "cash"].map((s) => ({
+  key: s,
+  label: { january: "never thought about it", peak: "bought the yearly high", cash: "waited for a better price" }[s],
+  value: ep03.saverTiming40.find((x) => x.Strategy === s).MedianWealth,
+  colour: { january: C.dca, peak: C.lumpsum, cash: C.warn }[s],
+}));
+const saverMax = 210;
+const tenYear = ep03.forward.find((f) => f.HorizonMonths === 120);
+
+function topBuyerFrame(i, frames) {
+  const p = clamp01(i / (frames - 1));
+  // Beat boundaries follow the narration's paragraph lengths. Re-record the
+  // voice over and these need checking again.
+  const at = (from, dur = 0.06) => clamp01((p - from) / dur);
+
+  clear();
+  frameChrome([
+    { text: "Bought the top." },
+    { text: "Every year. 40 years.", fill: C.muted },
+  ]);
+
+  const plotLeft = 60, plotRight = 700;
+  const rowY = (k) => 620 + k * 200;
+
+  savers.forEach((s, k) => {
+    // Order of arrival matches the order the narration names them.
+    const start = [0.30, 0.18, 0.50][k];
+    const shown = at(start, 0.16);
+    if (shown === 0) return;
+
+    label(s.label, plotLeft, rowY(k) - 58, { size: 36, fill: C.muted, align: "left" });
+
+    ctx.fillStyle = C.rule;
+    ctx.fillRect(plotLeft, rowY(k) - 30, plotRight - plotLeft, 62);
+    ctx.fillStyle = s.colour;
+    ctx.fillRect(plotLeft, rowY(k) - 30, (plotRight - plotLeft) * (s.value / saverMax) * shown, 62);
+
+    label(`${Math.round(s.value * shown)}`, plotRight + 30, rowY(k) + 22, {
+      size: 62, fill: s.colour, align: "left", weight: 800, mono: true,
+    });
+  });
+
+  const put = at(0.24, 0.1);
+  if (put > 0) {
+    ctx.globalAlpha = put;
+    label("40 units went in", W / 2, 1300, { size: 42, fill: C.muted });
+    ctx.globalAlpha = 1;
+  }
+
+  // The bridge. The first claim is fully resolved above before anything opens.
+  const bridge = at(0.66, 0.07);
+  if (bridge > 0) {
+    ctx.globalAlpha = bridge * 0.985;
+    ctx.fillStyle = C.bg;
+    ctx.fillRect(0, 96, W, 1664);
+    ctx.globalAlpha = bridge;
+    label("Worst timing available:", W / 2, 620, { size: 52, fill: C.muted });
+    label("-10%", W / 2, 720, { size: 96, fill: C.lumpsum, weight: 800, mono: true });
+    label("But 10 years after a high,", W / 2, 900, { size: 54, fill: C.ink, weight: 700 });
+    // One decimal, not rounded to an integer. The gap is 26.6, which rounds UP to
+    // 27 while the narration says "twenty six", and a screen that contradicts the
+    // voice is worse than a screen with a decimal on it. Same convention as the
+    // 1,735 valuation months: speech approximates, the screen is exact.
+    label(`${(Math.abs(tenYear.MeanGap) * 100).toFixed(1)} points behind`, W / 2, 980, {
+      size: 66, fill: C.warn, weight: 800,
+    });
+    label("any other starting month", W / 2, 1050, { size: 44, fill: C.muted });
+
+    const cta = at(0.87, 0.06);
+    if (cta > 0) {
+      ctx.globalAlpha = cta;
+      label("the record, or the price?", W / 2, 1230, { size: 52, fill: C.dca, weight: 750 });
+      label("full video, link below", W / 2, 1300, { size: 40, fill: C.dca });
+    }
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 6. Two retirements, and the six years that broke the rule.
+// ---------------------------------------------------------------------------
+const ep06Fail = ep06.timeline.filter((c) => !c.survived);
+const ep06Cohorts = ep06.byRate.find((x) => Math.abs(x.Rate - 0.04) < 1e-9).Cohorts;
+const ret1929 = ep06.timeline.find((c) => c.startYear === 1929);
+const ret1966 = ep06.timeline.find((c) => c.startYear === 1966);
+
+function retireYearFrame(i, frames) {
+  const p = clamp01(i / (frames - 1));
+  const at = (from, dur = 0.06) => clamp01((p - from) / dur);
+
+  clear();
+  frameChrome([
+    { text: "Retired 1929." },
+    { text: "Into the crash.", fill: C.muted },
+  ]);
+
+  // The two retirements, stated as outcomes rather than as a chart: at this size
+  // a two-point chart is just two numbers wearing a costume.
+  const first = at(0.14, 0.08);
+  if (first > 0) {
+    ctx.globalAlpha = first;
+    label("1929", 60, 640, { size: 46, fill: C.muted, align: "left" });
+    label("survived", 60, 730, { size: 84, fill: C.dca, align: "left", weight: 800 });
+    label(`${ret1929.finalMultiple.toFixed(2)}x left after 30 years`, 60, 800, {
+      size: 40, fill: C.muted, align: "left",
+    });
+    ctx.globalAlpha = 1;
+  }
+
+  const second = at(0.34, 0.08);
+  if (second > 0) {
+    ctx.globalAlpha = second;
+    label("1966", 60, 990, { size: 46, fill: C.muted, align: "left" });
+    label("broke", 60, 1080, { size: 84, fill: C.warn, align: "left", weight: 800 });
+    label(`no crash, gone by ${ret1966.depletedInYear}`, 60, 1150, {
+      size: 40, fill: C.muted, align: "left",
+    });
+    ctx.globalAlpha = 1;
+  }
+
+  // The six failing years, drawn as blocks so the clustering is the picture.
+  const six = at(0.52, 0.1);
+  if (six > 0) {
+    ctx.globalAlpha = six;
+    label(`${ep06Fail.length} of ${ep06Cohorts} retirements ran out`, W / 2, 1300, {
+      size: 44, fill: C.ink, weight: 700,
+    });
+    const boxW = 130, gap = 16;
+    const total = ep06Fail.length * boxW + (ep06Fail.length - 1) * gap;
+    ep06Fail.forEach((f, k) => {
+      const x = (W - total) / 2 + k * (boxW + gap);
+      ctx.fillStyle = C.warn;
+      ctx.fillRect(x, 1350, boxW, 74);
+      label(String(f.startYear), x + boxW / 2, 1400, { size: 34, fill: C.bg, weight: 700, mono: true });
+    });
+    label("six years in a row", W / 2, 1490, { size: 38, fill: C.muted });
+    ctx.globalAlpha = 1;
+  }
+
+  const bridge = at(0.72, 0.07);
+  if (bridge > 0) {
+    ctx.globalAlpha = bridge * 0.985;
+    ctx.fillStyle = C.bg;
+    ctx.fillRect(0, 96, W, 1664);
+    ctx.globalAlpha = bridge;
+    label("So it was not the crash.", W / 2, 700, { size: 64, fill: C.ink, weight: 750 });
+    label("What killed them,", W / 2, 860, { size: 52, fill: C.muted });
+    label("and the rate that survives it,", W / 2, 930, { size: 52, fill: C.muted });
+
+    const cta = at(0.88, 0.06);
+    if (cta > 0) {
+      ctx.globalAlpha = cta;
+      label("full video, link below", W / 2, 1100, { size: 54, fill: C.dca, weight: 750 });
+      ctx.globalAlpha = 1;
+    }
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 7. Three hundred and three mortgages, coloured by the winning move.
+// ---------------------------------------------------------------------------
+// Straight narration again, same reason as topbuyer: the dialogue format is
+// still an unpublished test and must not gain a second moving variable.
+const sameRateT = (month) => {
+  const [yy, mm] = month.split("-").map(Number);
+  return (yy - 1971) * 12 + (mm - 4); // t=0 at 1971-04, the first cohort
+};
+const sameRateLoans = ep05.cohorts30.map((c) => ({
+  t: sameRateT(c.month), rate: c.ratePercent, invest: c.investWon,
+}));
+const sameRateEra = (fromYear) => {
+  const era = ep05.byEra.find((e) => e.fromYear === fromYear);
+  const rows = ep05.cohorts30.filter((c) => {
+    const yy = Number(c.month.slice(0, 4));
+    return yy >= era.fromYear && yy <= era.toYear;
+  });
+  return {
+    t0: sameRateT(rows[0].month), t1: sameRateT(rows[rows.length - 1].month),
+    rateLow: era.rateLow, rateHigh: era.rateHigh, n: era.cohorts,
+  };
+};
+const seventies = sameRateEra(1970);
+const nineties = sameRateEra(1990);
+
+function sameRateFrame(i, frames) {
+  const p = clamp01(i / (frames - 1));
+  const at = (from, dur = 0.06) => clamp01((p - from) / dur);
+
+  clear();
+  frameChrome([
+    { text: "Same mortgage rate." },
+    { text: "Opposite answer.", fill: C.muted },
+  ]);
+
+  const plot = { left: 130, right: 990, top: 470, bottom: 1240 };
+  const T1 = sameRateLoans[sameRateLoans.length - 1].t;
+  const x = (t) => plot.left + (t / T1) * (plot.right - plot.left);
+  const y = (r) => plot.bottom - ((r - 6) / 13) * (plot.bottom - plot.top);
+
+  // Axes. Rates 6-19%, the sample's actual span.
+  ctx.strokeStyle = C.rule;
+  ctx.lineWidth = 1;
+  for (const r of [6, 9, 12, 15, 18]) {
+    ctx.beginPath();
+    ctx.moveTo(plot.left, y(r));
+    ctx.lineTo(plot.right, y(r));
+    ctx.stroke();
+    label(`${r}%`, plot.left - 16, y(r) + 10, { align: "right", size: 28 });
+  }
+  for (const [yy, align] of [[1971, "left"], [1980, "center"], [1990, "center"], [1996, "right"]]) {
+    // 1996 pins to x=950, not its gridline: the Shorts button rail owns the
+    // right edge, and a label under it may as well not be drawn.
+    const lx = yy === 1996 ? 950 : x(sameRateT(`${yy}-${yy === 1971 ? "04" : "01"}`));
+    label(String(yy), lx, plot.bottom + 44, { size: 28, align, mono: true });
+  }
+
+  // Legend before the dots land: the colour IS the verdict, so it cannot wait.
+  const legend = at(0.03, 0.08);
+  if (legend > 0) {
+    ctx.globalAlpha = legend;
+    ctx.fillStyle = C.dca;
+    ctx.beginPath(); ctx.arc(150, 408, 11, 0, Math.PI * 2); ctx.fill();
+    label("investing won", 176, 420, { size: 32, fill: C.dca, align: "left" });
+    ctx.fillStyle = C.lumpsum;
+    ctx.beginPath(); ctx.arc(560, 408, 11, 0, Math.PI * 2); ctx.fill();
+    label("paying it down won", 586, 420, { size: 32, fill: C.lumpsum, align: "left" });
+    ctx.globalAlpha = 1;
+  }
+
+  // History streams in signing order, one dot per origination.
+  const shown = Math.round(clamp01((p - 0.04) / 0.26) * sameRateLoans.length);
+  ctx.globalAlpha = 0.9;
+  for (let k = 0; k < shown; k++) {
+    const d = sameRateLoans[k];
+    ctx.fillStyle = d.invest ? C.dca : C.lumpsum;
+    ctx.beginPath();
+    ctx.arc(x(d.t), y(d.rate), 7, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+
+  // Running year while history plays, then it hands the floor to the verdicts.
+  if (shown > 0 && p < 0.34) {
+    ctx.globalAlpha = 1 - at(0.30, 0.04);
+    const yr = 1971 + Math.floor((sameRateLoans[shown - 1].t + 3) / 12);
+    label(String(yr), W / 2, 1400, { size: 78, fill: C.muted, weight: 700, mono: true });
+    label("303 real mortgages, 30 years each", W / 2, 1470, { size: 36 });
+    ctx.globalAlpha = 1;
+  }
+
+  // The two eras the narration names, boxed on the same rate band.
+  const eraBox = (era, colour, alpha) => {
+    ctx.globalAlpha = alpha;
+    ctx.strokeStyle = colour;
+    ctx.lineWidth = 5;
+    ctx.strokeRect(
+      x(era.t0) - 14, y(era.rateHigh) - 14,
+      x(era.t1) - x(era.t0) + 28, y(era.rateLow) - y(era.rateHigh) + 28,
+    );
+    ctx.globalAlpha = 1;
+  };
+
+  const seventiesIn = at(0.30, 0.05);
+  if (seventiesIn > 0) {
+    eraBox(seventies, C.dca, seventiesIn);
+    ctx.globalAlpha = seventiesIn;
+    label("1970-74: all 45", 116, 920, { size: 40, fill: C.dca, align: "left", weight: 700 });
+    label("should have INVESTED", 116, 968, { size: 40, fill: C.dca, align: "left", weight: 700 });
+    ctx.globalAlpha = 1;
+  }
+
+  const ninetiesIn = at(0.40, 0.05);
+  if (ninetiesIn > 0) {
+    eraBox(nineties, C.lumpsum, ninetiesIn);
+    ctx.globalAlpha = ninetiesIn;
+    // Three short lines in the empty top-right corner: anywhere lower and the
+    // orange text sits on the orange 1980s rate spike it is the same colour as.
+    label("1990-94: all 60", 950, 590, { size: 40, fill: C.lumpsum, align: "right", weight: 700 });
+    label("should have", 950, 638, { size: 40, fill: C.lumpsum, align: "right", weight: 700 });
+    label("PAID DOWN", 950, 686, { size: 40, fill: C.lumpsum, align: "right", weight: 700 });
+    ctx.globalAlpha = 1;
+  }
+
+  // The overlap band: both boxes live on the same stretch of the rate axis.
+  const bandIn = at(0.50, 0.05);
+  if (bandIn > 0) {
+    const bandTop = Math.max(seventies.rateHigh, nineties.rateHigh);
+    const bandLow = Math.max(seventies.rateLow, nineties.rateLow);
+    ctx.globalAlpha = bandIn * 0.12;
+    ctx.fillStyle = C.ink;
+    ctx.fillRect(plot.left, y(bandTop), plot.right - plot.left, y(bandLow) - y(bandTop));
+    ctx.globalAlpha = 1;
+  }
+
+  if (bandIn > 0) {
+    ctx.globalAlpha = bandIn;
+    label("overlapping rates, opposite answers", W / 2, 1380, { size: 44, fill: C.ink, weight: 700 });
+    ctx.globalAlpha = 1;
+  }
+  const zeroIn = at(0.55, 0.05);
+  if (zeroIn > 0) {
+    ctx.globalAlpha = zeroIn;
+    label("zero exceptions on either side", W / 2, 1440, { size: 38, fill: C.muted });
+    ctx.globalAlpha = 1;
+  }
+
+  const verdict = at(0.59, 0.06);
+  if (verdict > 0) {
+    ctx.globalAlpha = verdict;
+    label("the 30 years AFTER signing decided it", W / 2, 1540, {
+      size: 44, fill: C.warn, weight: 750,
+    });
+    ctx.globalAlpha = 1;
+  }
+
+  // The bridge. The era claim is fully resolved above before anything opens.
+  const bridge = at(0.72, 0.07);
+  if (bridge > 0) {
+    ctx.globalAlpha = bridge * 0.985;
+    ctx.fillStyle = C.bg;
+    ctx.fillRect(0, 96, W, 1664);
+    ctx.globalAlpha = bridge;
+    label("Yours is at 3%?", W / 2, 640, { size: 76, fill: C.ink, weight: 750 });
+    label("History has never tested it.", W / 2, 760, { size: 58, fill: C.warn, weight: 800 });
+    label("no loan below 6.83% has ever", W / 2, 920, { size: 44, fill: C.muted });
+    label("finished its thirty years", W / 2, 980, { size: 44, fill: C.muted });
+
+    const cta = at(0.86, 0.06);
+    if (cta > 0) {
+      ctx.globalAlpha = cta;
+      label("what you CAN decide at signing", W / 2, 1160, { size: 48, fill: C.dca, weight: 750 });
+      label("two things. full video, link below", W / 2, 1230, { size: 40, fill: C.dca });
+    }
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 8. Fifty eight verdicts, flipped by smoothing the historical return path.
+// ---------------------------------------------------------------------------
+// pathVsSteady rows serialize PascalCase (records) on purpose; see ep07 notes.
+const steadyRows = ep07.pathVsSteady.map((r, k) => ({
+  k, realized: r.RealizedGapShare, steady: r.SteadyGapShare,
+}));
+const steadyHead = ep07.headline30y;
+const smooth = (t) => t * t * (3 - 2 * t);
+
+// Beat fractions follow the 2026-08-02 narration (55.9s), whose third
+// paragraph grew when the audit's wording gate landed. Re-record the voice
+// over and these need checking again.
+function steadyPathFrame(i, frames) {
+  const p = clamp01(i / (frames - 1));
+  const at = (from, dur = 0.06) => clamp01((p - from) / dur);
+
+  clear();
+  frameChrome([
+    { text: "The 30-year mortgage" },
+    { text: "lost 58 of 58", fill: C.muted },
+  ]);
+
+  const plot = { left: 150, right: 950, top: 470, bottom: 1250 };
+  const N = steadyRows.length;
+  const x = (k) => plot.left + (k / (N - 1)) * (plot.right - plot.left);
+  const y = (v) => plot.top + ((0.5 - v) / 1.5) * (plot.bottom - plot.top);
+
+  label("final gap, as a share of the loan", plot.left, 440, { size: 30, align: "left" });
+
+  ctx.strokeStyle = C.rule;
+  ctx.lineWidth = 1;
+  for (const v of [0.5, -0.5, -1]) {
+    ctx.beginPath();
+    ctx.moveTo(plot.left, y(v));
+    ctx.lineTo(plot.right, y(v));
+    ctx.stroke();
+    label(`${v > 0 ? "+" : ""}${Math.round(v * 100)}%`, plot.left - 16, y(v) + 10, { align: "right", size: 28 });
+  }
+  // The tie line is the whole story, so it is not a gridline.
+  ctx.strokeStyle = C.ink;
+  ctx.lineWidth = 3;
+  ctx.setLineDash([12, 10]);
+  ctx.beginPath();
+  ctx.moveTo(plot.left, y(0));
+  ctx.lineTo(plot.right, y(0));
+  ctx.stroke();
+  ctx.setLineDash([]);
+  label("tie", plot.left - 16, y(0) + 10, { align: "right", size: 28, fill: C.ink });
+  label("the 30 finishes ahead", 160, 506, { size: 30, fill: C.dca, align: "left" });
+  label("the 30 finishes behind", 160, 1232, { size: 30, fill: C.lumpsum, align: "left" });
+
+  for (const [yy, k] of [[1992, 4], [1993, 16], [1994, 28], [1995, 40], [1996, 52]]) {
+    label(String(yy), x(k), plot.bottom + 44, { size: 28, mono: true });
+  }
+
+  // Every completed signing, streamed in order, all finishing behind.
+  const shown = Math.round(clamp01((p - 0.03) / 0.24) * N);
+
+  // The replay: each verdict slides to where the same cumulative return,
+  // converted to one steady monthly rate, would have put it.
+  for (let k = 0; k < shown; k++) {
+    const d = steadyRows[k];
+    const m = smooth(at(0.47 + (k / (N - 1)) * 0.13, 0.05));
+    const v = d.realized + (d.steady - d.realized) * m;
+    if (m > 0) {
+      ctx.strokeStyle = C.lumpsum;
+      ctx.lineWidth = 2;
+      ctx.globalAlpha = 0.45;
+      ctx.beginPath();
+      ctx.arc(x(d.k), y(d.realized), 8, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+    }
+    ctx.fillStyle = v > 0 ? C.dca : C.lumpsum;
+    ctx.globalAlpha = 0.95;
+    ctx.beginPath();
+    ctx.arc(x(d.k), y(v), 8, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalAlpha = 1;
+  }
+
+  // Under the chart: the running score, then what the market delivered, then
+  // the score again with the colour flipped.
+  const flipped = at(0.60, 0.05);
+  if (shown > 0 && p < 0.52) {
+    // Gone the moment the replay starts moving dots: a scoreboard asserting
+    // 58-0 over a chart mid-flip would be false at that frame.
+    ctx.globalAlpha = 1 - at(0.45, 0.05);
+    label("the 15-year leads", W / 2, 1350, { size: 36 });
+    label(`${shown}-0`, W / 2, 1450, { size: 92, fill: C.lumpsum, weight: 800, mono: true });
+    ctx.globalAlpha = 1;
+  }
+  if (flipped > 0) {
+    ctx.globalAlpha = flipped;
+    label("same total return, spread evenly: the 30 leads", W / 2, 1350, { size: 36, fill: C.ink });
+    label(`${N}-0`, W / 2, 1450, { size: 92, fill: C.dca, weight: 800, mono: true });
+    ctx.globalAlpha = 1;
+  }
+
+  const delivered = at(0.30, 0.05);
+  if (delivered > 0 && p < 0.47) {
+    ctx.globalAlpha = Math.min(delivered, 1 - at(0.43, 0.03));
+    label(`delivered ${(steadyHead.medianRealizedCagr * 100).toFixed(2)}%/yr,`, W / 2 - 4, 1540, { size: 40, fill: C.dca, align: "right", weight: 700, mono: true });
+    label(`needed ${(steadyHead.medianRequiredReturn * 100).toFixed(2)}%`, W / 2 + 24, 1540, { size: 40, fill: C.muted, align: "left", weight: 700, mono: true });
+    ctx.globalAlpha = 1;
+  }
+
+  // The bridge. The flip is fully resolved above before anything opens.
+  const bridge = at(0.82, 0.07);
+  if (bridge > 0) {
+    ctx.globalAlpha = bridge * 0.985;
+    ctx.fillStyle = C.bg;
+    ctx.fillRect(0, 96, W, 1664);
+    ctx.globalAlpha = bridge;
+    label("Same total return,", W / 2, 600, { size: 68, fill: C.ink, weight: 750 });
+    label("steady monthly path.", W / 2, 690, { size: 62, fill: C.ink, weight: 750 });
+    label("opposite verdict, 58 times", W / 2, 800, { size: 48, fill: C.warn, weight: 800 });
+
+    // The question arrives with the voice asking it; the link lands with
+    // "is in the full video".
+    const qIn = at(0.84, 0.05);
+    if (qIn > 0) {
+      ctx.globalAlpha = qIn;
+      label("so is the 15 the right signature?", W / 2, 1000, { size: 48, fill: C.dca, weight: 750 });
+      label("and the escape hatch has a price", W / 2, 1070, { size: 42, fill: C.muted });
+    }
+    const linkIn = at(0.92, 0.05);
+    if (linkIn > 0) {
+      ctx.globalAlpha = linkIn;
+      label("full video, link below", W / 2, 1220, { size: 44, fill: C.dca });
+    }
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 9. One assumption, and the answer inverting under it.
+//
+// Deliberately breaks the mould the first eight were built to, per the
+// 2026-08-21 session: no chart, under twenty seconds, opens on the claim rather
+// than the setup, and no closing episode card. The ep04 retention curve says
+// this channel holds people on results and claims and loses them on method, so
+// there is no method on screen at all.
+//
+// The two numbers move on separate beats and in that order on purpose: the
+// assumption moves first, the answer follows. A chart would show both at once
+// and lose the causation, which is the whole point of the short.
+// ---------------------------------------------------------------------------
+const ep04Base = ep04.scenarioTable.find((s) => s.scenario === "base");
+const ep04Stress = ep04.scenarioTable.find((s) => s.scenario === "old-home-stress");
+const winAt5 = (s) => s.byHold.find((h) => h.holdYears === 5).buyWinRate;
+
+// Only maintenance differs between these two scenarios; property tax, insurance,
+// and both transaction costs are identical. That is what licenses the narration
+// to say "one assumption", so it is asserted here rather than trusted.
+for (const k of ["propertyTax", "insurance", "buyCost", "sellCost"]) {
+  if (ep04Base[k] !== ep04Stress[k]) {
+    throw new Error(`oneassumption: ${k} also differs, the short's central claim is false`);
+  }
+}
+
+// The narration carries a 600ms lead-in, added 2026-08-21 after the founder
+// reported losing the opening words on a slow connection. Every Short on this
+// channel starts speaking at t=0 (topbuyer has 0.107s of head silence), so the
+// first words are the first thing a buffering player eats, and here those words
+// are the hook. The visual clock has to skip the same lead or the screen changes
+// six tenths of a second before the voice explains it.
+const LEAD_FRAMES = Math.round(0.6 * FPS);
+
+function oneAssumptionFrame(i, frames) {
+  const p = clamp01((i - LEAD_FRAMES) / (frames - 1 - LEAD_FRAMES));
+  const at = (from, dur = 0.06) => clamp01((p - from) / dur);
+
+  clear();
+
+  // The hook is on screen from frame zero, because a short is abandoned in about
+  // a second and a setup slide spends that second on nothing.
+  frameChrome([
+    { text: "Buy or rent?" },
+    { text: `${ep04.headline.metros} US metros, 5 years`, fill: C.muted },
+  ]);
+
+  // NEITHER number is interpolated, and that is a correctness rule rather than a
+  // taste one. Tweening maintenance from 1% to 4% renders frames reading "3% of
+  // the home's value" beside "buying wins 82%", which is a pairing no run in
+  // results.json produces; 3% is not even a scenario. Tweening the win rate has
+  // the same defect in the other direction. So the readouts hold real values and
+  // cut, and the announced change is drawn as an explicit "1% -> 4%" rather than
+  // as a number passing through values nobody modelled.
+  // Beats measured from the narration with ffmpeg silencedetect, not estimated.
+  // The first pass was guessed and ran up to two seconds ahead of the voice: the
+  // readout flipped to 31% while the narrator was still saying "same houses, same
+  // cities", which is the line about what did NOT change. Spoken landmarks, in
+  // seconds into this audio: "Maintenance," 3.87, "to four." 5.5, "Same houses"
+  // 11.5, "thirty one percent" 14.5, "One assumption" 17.35.
+  const announced = p >= 0.255;
+  const flipped = p >= 0.713;
+
+  const win = flipped ? winAt5(ep04Stress) : winAt5(ep04Base);
+  const maintPct = (v) => `${(v * 100).toFixed(0)}%`;
+
+  label("buying wins", W / 2, 640, { size: 52, fill: C.muted });
+  label(`${Math.round(win * 100)}%`, W / 2, 880, {
+    size: 240, fill: flipped ? C.warn : C.dca, weight: 800, mono: true,
+  });
+  label("of the time", W / 2, 950, { size: 44, fill: C.muted });
+
+  const same = at(0.567, 0.05);
+  if (same > 0) {
+    ctx.globalAlpha = same;
+    label("same houses. same cities. same five years.", W / 2, 1090, { size: 40, fill: C.muted });
+    ctx.globalAlpha = 1;
+  }
+
+  // Brought forward from 0.172 on founder feedback, 2026-08-21. At the old timing
+  // the "1% of the home's value" state existed for 1.6 seconds before it became
+  // "1% -> 4%", which is not long enough to read what the number even is. It now
+  // lands at 2.33s, as the voice finishes "Then I changed one number", so the
+  // screen answers WHICH number while the ear is still holding the question. That
+  // gives 3.2 seconds on the unchanged value before anything moves.
+  const showMaint = at(0.09, 0.04);
+  if (showMaint > 0) {
+    ctx.globalAlpha = showMaint;
+    label("maintenance, per year", W / 2, 1260, { size: 44, fill: C.muted });
+    // Before the flip the screen states the change rather than a scenario, so it
+    // never claims a maintenance figure that the standing answer above was not
+    // computed under.
+    const text = flipped
+      ? `${maintPct(ep04Stress.maintenance)} of the home's value`
+      : announced
+        ? `${maintPct(ep04Base.maintenance)}  →  ${maintPct(ep04Stress.maintenance)}`
+        : `${maintPct(ep04Base.maintenance)} of the home's value`;
+    label(text, W / 2, 1340, {
+      size: 58, fill: announced ? C.lumpsum : C.ink, weight: 750,
+    });
+    ctx.globalAlpha = 1;
+  }
+
+  // Resolves one claim and opens no second question, so it carries no bridge
+  // CTA. Ruled compliant with 0005 by Codex on 2026-08-21.
+  const close = at(0.869, 0.05);
+  if (close > 0) {
+    ctx.globalAlpha = close;
+    label("one assumption", W / 2, 1530, { size: 62, fill: C.ink, weight: 800 });
+    label("changed the answer", W / 2, 1605, { size: 54, fill: C.warn, weight: 750 });
+    ctx.globalAlpha = 1;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// 10. Rate band: every modelled start at 7-8%, split exactly by decade.
+//
+// Built 2026-10-02 while the survey rate sits back above 7%, so the one claim
+// the narration makes about TODAY ("back above seven percent") is news context,
+// not a pinned figure, and no number on screen depends on it. Every figure drawn
+// comes from ep05's pinned cohorts30 and byRateBucket30.
+//
+// Naming rule: these are modelled start months, never borrowers or real
+// mortgages, and the frame says so in its footer for the whole runtime.
+// ---------------------------------------------------------------------------
+const rbBucket = ep05.byRateBucket30.find((b) => b.RateLow === 7 && b.RateHigh === 8);
+const rbRuns = ep05.cohorts30
+  .filter((c) => c.ratePercent >= rbBucket.RateLow && c.ratePercent < rbBucket.RateHigh)
+  .sort((a, b) => a.month.localeCompare(b.month));
+const rbInvest = rbRuns.filter((c) => c.investWon);
+const rbPrepay = rbRuns.filter((c) => !c.investWon);
+
+// The narration's claims, asserted against the pinned file rather than trusted.
+if (rbRuns.length !== rbBucket.Cohorts) throw new Error("rateband: filter disagrees with byRateBucket30");
+if (rbInvest.length !== rbPrepay.length) throw new Error("rateband: the split is not even");
+if (rbInvest.at(-1).month >= rbPrepay[0].month) throw new Error("rateband: outcomes are not separated by era");
+
+// Closest-rate opposite pair, found by search, not chosen by hand.
+let rbPair = null;
+for (const a of rbInvest) for (const b of rbPrepay) {
+  const d = Math.abs(a.ratePercent - b.ratePercent);
+  if (!rbPair || d < rbPair.d) rbPair = { d, a, b };
+}
+if (rbPair.a.month !== "1972-09" || rbPair.b.month !== "1993-06") {
+  throw new Error(`rateband: narration names 1972-09 / 1993-06, search found ${rbPair.a.month} / ${rbPair.b.month}`);
+}
+
+const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+const rbMonth = (m) => `${MONTHS[Number(m.slice(5)) - 1]} ${m.slice(0, 4)}`;
+const rbYears = (rows) => `${rows[0].month.slice(0, 4)}-${rows.at(-1).month.slice(0, 4)}`;
+
+function rateBandFrame(i) {
+  // Beats keyed to seconds measured in audio/rateband.wav with ffmpeg
+  // silencedetect, not to fractions of the runtime.
+  const t = i / FPS;
+  const at = (from, dur = 0.3) => clamp01((t - from) / dur);
+
+  clear();
+  frameChrome([
+    { text: `Rates back above ${rbBucket.RateLow}%.` },
+    { text: "Pay down or invest?", fill: C.muted },
+  ]);
+
+  const COLS = 9;
+  const gx = (k) => 300 + (k % COLS) * 80;
+  const gy = (k) => 560 + Math.floor(k / COLS) * 76;
+  const investRows = Math.ceil(rbInvest.length / COLS);
+
+  // The uncoloured grid is on screen from frame zero so the hook never sits over
+  // six seconds of empty frame; its label lands with "I modelled every month" 6.30s.
+  const gridIn = at(6.3, 0.5);
+  if (gridIn > 0) {
+    ctx.globalAlpha = gridIn;
+    label(`${rbRuns.length} modelled start months, rate ${rbBucket.RateLow}-${rbBucket.RateHigh}%`, W / 2, 470, { size: 38, fill: C.ink, weight: 650 });
+    ctx.globalAlpha = 1;
+  }
+  const colourInvest = t >= 14.2;
+  const colourPrepay = t >= 17.06;
+  rbRuns.forEach((c, k) => {
+    const lit = c.investWon ? colourInvest : colourPrepay;
+    ctx.fillStyle = lit ? (c.investWon ? C.dca : C.lumpsum) : C.rule;
+    ctx.beginPath();
+    ctx.arc(gx(k), gy(k), 24, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  // "Investing finished ahead twenty seven times" 14.20s, "twenty seven" 17.98s.
+  const invIn = at(14.2);
+  if (invIn > 0) {
+    ctx.globalAlpha = invIn;
+    label(`${rbInvest.length}  investing finished ahead`, 120, 1050, { size: 44, fill: C.dca, align: "left", weight: 750 });
+    ctx.globalAlpha = 1;
+  }
+  const preIn = at(17.06);
+  if (preIn > 0) {
+    ctx.globalAlpha = preIn;
+    label(`${rbPrepay.length}  paying it down finished ahead`, 120, 1112, { size: 44, fill: C.lumpsum, align: "left", weight: 750 });
+    ctx.globalAlpha = 1;
+  }
+
+  // "Every start in the early seventies" 20.66s, "in the nineties" 23.96s.
+  const eraA = at(20.66);
+  if (eraA > 0) {
+    ctx.globalAlpha = eraA;
+    label(rbYears(rbInvest), 240, gy(COLS) + 12, { size: 34, fill: C.dca, align: "right", weight: 700, mono: true });
+    ctx.globalAlpha = 1;
+  }
+  const eraB = at(23.96);
+  if (eraB > 0) {
+    ctx.globalAlpha = eraB;
+    label(rbYears(rbPrepay), 240, gy(COLS * (investRows + 1)) + 12, { size: 34, fill: C.lumpsum, align: "right", weight: 700, mono: true });
+    ctx.globalAlpha = 1;
+  }
+  // The era boundary itself, once both eras are named.
+  if (eraB > 0) {
+    ctx.globalAlpha = eraB;
+    ctx.fillStyle = C.ink;
+    ctx.fillRect(270, (gy(COLS * (investRows - 1)) + gy(COLS * investRows)) / 2 - 2, 670, 4);
+    ctx.globalAlpha = 1;
+  }
+
+  // "September seventy two" 27.08s, "June ninety three" 28.79s.
+  const ring = (c, colour) => {
+    const k = rbRuns.indexOf(c);
+    ctx.strokeStyle = colour;
+    ctx.lineWidth = 6;
+    ctx.beginPath();
+    ctx.arc(gx(k), gy(k), 36, 0, Math.PI * 2);
+    ctx.stroke();
+  };
+  // Both rates printed to four places, which is the precision the pinned monthly
+  // average carries for 1993-06; rounding either one would hide the gap.
+  const pairRow = (c, y, colour, verdict) => {
+    label(rbMonth(c.month), 120, y, { size: 46, fill: colour, align: "left", weight: 750, mono: true });
+    label(`${c.ratePercent.toFixed(4)}%`, 600, y, { size: 46, fill: colour, align: "right", weight: 750, mono: true });
+    label(verdict, 650, y, { size: 46, fill: colour, align: "left", weight: 750 });
+  };
+  const pairA = at(27.08);
+  if (pairA > 0) {
+    ctx.globalAlpha = pairA;
+    ring(rbPair.a, C.ink);
+    pairRow(rbPair.a, 1225, C.dca, "invest");
+    ctx.globalAlpha = 1;
+  }
+  const pairB = at(28.79);
+  if (pairB > 0) {
+    ctx.globalAlpha = pairB;
+    ring(rbPair.b, C.ink);
+    pairRow(rbPair.b, 1293, C.lumpsum, "pay down");
+    ctx.globalAlpha = 1;
+  }
+
+  // "The rate didn't decide it." 34.12s, "The next thirty years did." 35.95s.
+  const closeA = at(34.12);
+  if (closeA > 0) {
+    ctx.globalAlpha = closeA;
+    label("the rate didn't decide it", W / 2, 1410, { size: 54, fill: C.ink, weight: 750 });
+    ctx.globalAlpha = 1;
+  }
+  const closeB = at(35.95);
+  if (closeB > 0) {
+    ctx.globalAlpha = closeB;
+    label("the next 30 years did", W / 2, 1488, { size: 60, fill: C.warn, weight: 800 });
+    ctx.globalAlpha = 1;
+  }
+
+  // Assumption panel, compressed, on frame for the whole runtime, and above the
+  // band where the Shorts player overlays the title and channel name.
+  label("Model: 30-yr fixed at that month's Freddie Mac average.", W / 2, 1570, { size: 27, fill: C.muted });
+  label(`Spare cash ${ep05.baseCase.spareShare === 0.5 ? "half a payment" : ep05.baseCase.spareShare + " payment"}. S&P total return. No tax, no refinancing.`, W / 2, 1610, { size: 27, fill: C.muted });
+}
+
 const ANIMATIONS = {
+  rateband: { fallback: 37.51, draw: rateBandFrame },
+  oneassumption: { fallback: 19.81, draw: oneAssumptionFrame },
   path1998: { fallback: 34, draw: path1998Frame },
+  topbuyer: { fallback: 41.1, draw: topBuyerFrame },
+  retireyear: { fallback: 42.05, draw: retireYearFrame },
+  samerate: { fallback: 50, draw: sameRateFrame },
+  steadypath: { fallback: 55.9, draw: steadyPathFrame },
   feecurve: { fallback: 26, draw: feeCurveFrame },
   histogram: { fallback: 30, draw: histogramFrame },
+  threemonths: { fallback: timing?.seconds ?? 55, draw: threeMonthsFrame },
 };
 
 const animation = ANIMATIONS[which];

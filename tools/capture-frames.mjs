@@ -2,9 +2,9 @@
 // Chromium browser in headless mode. No npm automation library: the browser
 // binary already on the machine is enough.
 //
-//   node tools/capture-frames.mjs [--episode ep01] [--slides 10] [--port 5173]
+//   node tools/capture-frames.mjs [--episode ep01] [--slides 10] [--slide 7] [--port 5173]
 //
-// Requires the render server to be running: node tools/serve.mjs
+// Starts a temporary render server when one is not already running.
 import { spawn } from "node:child_process";
 import { mkdirSync, existsSync, rmSync } from "node:fs";
 import { join } from "node:path";
@@ -18,6 +18,7 @@ const argOf = (name, fallback) => {
 
 const episode = argOf("--episode", "ep01");
 const slides = Number(argOf("--slides", "10"));
+const onlySlide = args.includes("--slide") ? Number(argOf("--slide", "1")) : null;
 const port = argOf("--port", "5173");
 // --page lets the same capture loop serve thumbnails, which live on their own
 // page at their own size.
@@ -26,6 +27,7 @@ const [width, height] = argOf("--size", "1920,1080").split(",").map(Number);
 const outName = argOf("--out", episode);
 const root = join(import.meta.dirname, "..");
 const outDir = join(root, "render", "frames", outName);
+const serverUrl = `http://localhost:${port}`;
 
 const CANDIDATES = [
   "C:/Program Files/Google/Chrome/Application/chrome.exe",
@@ -39,6 +41,35 @@ if (!browser) throw new Error(`no Chromium browser found; looked in:\n  ${CANDID
 console.log(`using ${browser}`);
 
 mkdirSync(outDir, { recursive: true });
+
+// Own the local server when one is not already running. This keeps capture
+// self-contained on hosts that forbid detached background processes, and the
+// child is always stopped when capture finishes.
+const wait = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+const serverReady = async () => {
+  try {
+    const response = await fetch(`${serverUrl}/render/${page}.html`);
+    return response.ok;
+  } catch {
+    return false;
+  }
+};
+
+let server = null;
+if (!(await serverReady())) {
+  server = spawn(process.execPath, [join(root, "tools", "serve.mjs"), port], {
+    cwd: root,
+    stdio: "ignore",
+  });
+  for (let attempt = 0; attempt < 30 && !(await serverReady()); attempt += 1) {
+    await wait(200);
+  }
+  if (!(await serverReady())) {
+    server.kill();
+    throw new Error(`render server did not become ready at ${serverUrl}`);
+  }
+  console.log(`started temporary render server on ${serverUrl}`);
+}
 
 const capture = (slide) =>
   new Promise((resolve, reject) => {
@@ -73,5 +104,15 @@ const capture = (slide) =>
     });
   });
 
-for (let i = 1; i <= slides; i++) await capture(i);
-console.log(`\ncaptured ${slides} frames into ${outDir}`);
+try {
+  const selectedSlides = onlySlide == null
+    ? Array.from({ length: slides }, (_, index) => index + 1)
+    : [onlySlide];
+  for (const slide of selectedSlides) await capture(slide);
+  console.log(`\ncaptured ${selectedSlides.length} frame(s) into ${outDir}`);
+} finally {
+  if (server) {
+    server.kill();
+    console.log("stopped temporary render server");
+  }
+}

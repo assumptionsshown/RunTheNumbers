@@ -4,7 +4,7 @@ using RunTheNumbers.Sim;
 
 // Episode simulations.
 //
-//   dotnet run --project src/RunTheNumbers.Sim -- <snapshotDir> <outputJson> [--episode ep02|ep03]
+//   dotnet run --project src/RunTheNumbers.Sim -- <snapshotDir> <outputJson> [--episode ep02|ep03|ep04|ep06|ep06-batch]
 //
 // Episode 1 is the default and stays inline below. Later episodes live in their
 // own files, so adding one cannot disturb a published result.
@@ -28,6 +28,19 @@ if (episode == "ep02")
 if (episode == "ep03")
 {
     Ep03.Run(snapshotDir, outputPath);
+    return;
+}
+
+if (episode == "ep06")
+{
+    Ep06.Run(snapshotDir, outputPath);
+    return;
+}
+
+// Render inputs for ep06 "Walt and June"; never touches results.json.
+if (episode == "ep06-batch")
+{
+    Ep06.WriteBatch(snapshotDir, outputPath);
     return;
 }
 

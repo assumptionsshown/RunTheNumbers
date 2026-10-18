@@ -24,6 +24,12 @@ export function findBrowser() {
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
+// Profiles were keyed on the process id alone, which is fine for one browser and
+// silently fatal for several: parallel captures in ONE process all got the same
+// --user-data-dir, and Chrome refuses to start a second instance on a locked
+// profile. Each launch now gets its own.
+let profileSeq = 0;
+
 export class Browser {
   #proc;
   #ws;
@@ -36,7 +42,7 @@ export class Browser {
 
   static async launch({ url, width, height, port = 9333 }) {
     const browser = new Browser();
-    browser.#profile = join(tmpdir(), `rtn-cdp-${process.pid}`);
+    browser.#profile = join(tmpdir(), `rtn-cdp-${process.pid}-${profileSeq++}`);
 
     browser.#proc = spawn(findBrowser(), [
       "--headless=new",
@@ -143,6 +149,11 @@ export class Browser {
     const { data } = await this.send("Page.captureScreenshot", {
       format: "png",
       captureBeyondViewport: false,
+      // Chrome's fast PNG path. Still LOSSLESS, just less compressed, which
+      // costs disk we throw away anyway and buys most of the per-frame time
+      // back: PNG encoding was the single largest cost in a capture, and a
+      // 2-minute clip is 3,646 of them.
+      optimizeForSpeed: true,
     });
     return Buffer.from(data, "base64");
   }
@@ -151,6 +162,13 @@ export class Browser {
     try { this.#ws?.close(); } catch { /* already gone */ }
     this.#proc?.kill();
     await sleep(300);
-    rmSync(this.#profile, { recursive: true, force: true });
+    // Chrome releases its profile lock a beat after the process dies, and on
+    // Windows an rm that races it gets EPERM. A leftover temp profile is not
+    // worth failing a finished capture over, so retry, then warn and move on.
+    try {
+      rmSync(this.#profile, { recursive: true, force: true, maxRetries: 5, retryDelay: 300 });
+    } catch (err) {
+      console.warn(`profile cleanup failed (${err.code}): ${this.#profile} left behind`);
+    }
   }
 }

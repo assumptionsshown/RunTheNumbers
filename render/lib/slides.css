@@ -6,7 +6,11 @@
   --panel: #161b22;
   --ink: #f0f4f8;
   --muted: #8b98a5;
-  --rule: #263140;
+  /* Raised from #263140 on 2026-08-29. A 1px hairline that dark against the
+     #0d1117 background sits right at x264's quantisation threshold, so every
+     keyframe re-encoded it slightly differently and the footer rule visibly
+     pulsed through the video. Contrast is the fix; CRF alone is not. */
+  --rule: #3a4a63;
 
   /* One colour per strategy, held constant across every episode. */
   --lumpsum: #f0a35e;
@@ -96,7 +100,7 @@ body {
   justify-content: space-between;
   font-size: 22px;
   color: var(--muted);
-  border-top: 1px solid var(--rule);
+  border-top: 2px solid var(--rule);
   padding-top: 18px;
 }
 

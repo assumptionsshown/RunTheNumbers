@@ -1,0 +1,608 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ep06: Walt and June</title>
+<style>
+  html, body { margin: 0; background: #fbf3df; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// ep06 "Walt and June" (2026-10-09). The conversation grammar the founder asked
+// for: the neighbors look (cream paper, thick ink, numbers on objects, lead
+// meter), but the two characters SPEAK, each line its own clip
+// (tools/build-dialogue-track.mjs), and every beat here is keyed to the measured
+// start/end of a line in timing.json. Inside a line, a beat on a word is placed
+// by its character offset in the line text (an estimate, marked `est`).
+//
+// Walt retires January 1929, June January 1966: same $1M, same 4% rule, 60/40.
+// Paths are the pinned ep06 cohorts (batch.json, validate-ep06 + the independent
+// validate-ep06-story). Walt and June are illustrations, said so on every frame.
+// renderFrame(i) is a pure function of i (capture-animation runs it in parallel).
+import { drawAsterisk, CANON_TRAITS } from "./mascot-asterisk.js";
+
+const W = 1920, H = 1080;
+const ctx = document.getElementById("c").getContext("2d");
+const load = async (p) => (await fetch(p)).json();
+const EP = "../episodes/ep06-four-percent-rule";
+const [batch, timing, script, mouth] = await Promise.all([
+  load(`${EP}/batch.json`), load(`${EP}/walt-june/timing.json`),
+  load(`${EP}/walt-june/lines.json`), load(`${EP}/walt-june/mouth.json`),
+]);
+const FPS = mouth.fps;
+const csv = (await (await fetch("../data/snapshots/shiller-2026-07-26/shiller-monthly.csv")).text()).trim().split(/\r?\n/);
+const HDR = csv[0].split(",");
+const ROWS = new Map(csv.slice(1).map((l) => { const f = l.split(","); return [f[0], f]; }));
+const val = (date, name) => Number(ROWS.get(date)[HDR.indexOf(name)]);
+const jan = (y, name) => val(`${y}-01`, name);
+
+// ---- the story data
+const WALT = batch.cohorts.find((c) => c.startYear === 1929);
+const JUNE = batch.cohorts.find((c) => c.startYear === 1966);
+const RATE = batch.meta.rate, HZ = batch.meta.horizonYears, SHARE = batch.meta.stockShare;
+const K = (v) => Math.round(v * 1000);
+const fmtK = (v) => (v > 0 && v < 0.1 ? `$${(v * 1000).toFixed(1)}k` : `$${K(v).toLocaleString("en-US")}k`);
+const usd = (v) => `$${Math.round(v).toLocaleString("en-US")}`;
+const pct = (x) => `${x >= 0 ? "+" : "−"}${Math.abs(x * 100).toFixed(0)}%`;
+const cpiRatio = (a, b) => jan(b, "cpi") / jan(a, "cpi");
+const basket = (a, b) => 40000 * cpiRatio(a, b);
+
+// One year's real legs, the sim's (corrected 2026-10-09) arithmetic. Not a
+// second source of truth: the paths it implies are checked against batch.json
+// below, so if this ever drifts from the sim the page refuses to render.
+function legs(y) {
+  const infl = cpiRatio(y, y + 1);
+  const stock = jan(y + 1, "realTotalReturnPrice") / jan(y, "realTotalReturnPrice");
+  const y0 = jan(y, "gs10") / 100, y1 = jan(y + 1, "gs10") / 100;
+  const modified = (1 - (1 + y0) ** -10) / y0;
+  return { stock, bond: (1 + y0 - modified * (y1 - y0)) / infl };
+}
+const cum = (a, b, leg) => { let g = 1; for (let y = a; y < b; y++) g *= legs(y)[leg]; return g; };
+
+// ---- the narration's claims, asserted against the pinned data
+const claim = (ok, what) => { if (!ok) throw new Error(`ep06-walt-june: claim false: ${what}`); };
+for (const c of [WALT, JUNE]) {
+  let b = 1;
+  for (let i = 0; i < HZ && b > 0; i++) {
+    b -= RATE;
+    if (b <= 0) break;
+    b *= SHARE * legs(c.startYear + i).stock + (1 - SHARE) * legs(c.startYear + i).bond;
+    claim(Math.abs(b - c.path[i + 1]) < 1e-9, `${c.startYear} year ${i + 1} legs reproduce batch`);
+  }
+}
+claim(WALT.survived && !JUNE.survived && JUNE.depletedInYear === 1989, "Walt makes it, June out in 1989");
+claim(K(JUNE.path[3]) === 893 && Math.round(WALT.path[3] * 100) === 65, "year 3: June $893k, Walt ~$650k");
+claim(K(WALT.path[8]) === 1076 && K(JUNE.path[8]) === 615, "year 8: Walt $1,076k, June $615k");
+claim(K(JUNE.path[16]) === 204 && K(WALT.path[20]) === 533 && K(WALT.path[30]) === 749, "y16 June 204k, y20 Walt 533k, y30 Walt 749k");
+claim(WALT.path.indexOf(Math.min(...WALT.path)) === 20, "Walt's lowest is year 20 (1949)");
+claim(JUNE.path[23] > 0 && JUNE.path[23] < RATE, "June: less than one year left in Jan 1989");
+claim(Math.round(basket(1929, 1932) / 1000) === 33 && Math.round(basket(1966, 1974) / 100) === 586
+  && Math.round(basket(1966, 1982) / 100) === 1186, "baskets 33k / 58.6k / 118.6k");
+const crash = (() => {
+  let peak = 0, pk = "", trough = Infinity, tr = "";
+  for (const [d] of ROWS) {
+    if (d >= "1929-01" && d <= "1929-12" && val(d, "price") > peak) { peak = val(d, "price"); pk = d; }
+    if (d >= "1929-10" && d <= "1932-12" && val(d, "price") < trough) { trough = val(d, "price"); tr = d; }
+  }
+  return { peak, pk, trough, tr, drop: 1 - trough / peak };
+})();
+claim(Math.round(crash.drop * 100) === 85, "crash -85%");
+const WS = cum(1929, 1932, "stock"), WB = cum(1929, 1932, "bond");
+const JS = cum(1966, 1982, "stock"), JB = cum(1966, 1982, "bond");
+const BULL = cum(1982, 1989, "stock");
+claim(Math.round((WB - 1) * 100) === 31 && WS < 0.6, "Walt 1929-32 bonds +31%, stocks crashed");
+claim(Math.round((1 - JS) * 100) === 20 && JB > 0.5 && JB < 0.6, "June 1966-82 stocks -20%, bonds almost half");
+claim(BULL >= 2 && BULL < 2.8, "1982-89 stocks more than doubled");
+const failed = batch.cohorts.filter((c) => !c.survived);
+claim(batch.cohorts.length === 126 && failed.length === 6 && failed.every((c) => c.startYear >= 1964 && c.startYear <= 1969), "126 / 6, all 1964-69");
+const finals = batch.cohorts.map((c) => c.finalMultiple).sort((a, b) => a - b);
+const MEDIAN = (finals[62] + finals[63]) / 2;
+claim(Math.abs(MEDIAN - 1.25) < 0.05, "typical ending about a million and a quarter");
+claim(Math.round(batch.meta.safeRate * 1000) === 36, "safe rate 3.6%");
+let LEAD_FROM = HZ;
+for (let y = HZ; y >= 0 && WALT.path[y] > JUNE.path[y]; y--) LEAD_FROM = y;
+claim(LEAD_FROM === 7, "Walt ahead every year from year 7");
+
+// ---- timing
+const L = Object.fromEntries(timing.lines.map((l) => [l.id, l]));
+const TEXT = Object.fromEntries(script.lines.map((l) => [l.id, l.text.replace(/\*/g, "")]));
+// est: a word's moment inside a line, by its character offset in the text.
+const tw = (id, phrase, after = 0) => {
+  const l = L[id], txt = TEXT[id], k = txt.indexOf(phrase);
+  if (k < 0) throw new Error(`${id}: phrase not in line: ${phrase}`);
+  return l.start + (l.end - l.start) * ((k + (after ? phrase.length : 0)) / txt.length);
+};
+const sceneOf = (t) => { let s = timing.lines[0].scene; for (const l of timing.lines) if (t >= l.start - 0.3) s = l.scene; return s; };
+const speaking = (t) => timing.lines.find((l) => t >= l.start && t <= l.end + 0.05) ?? null;
+const lineAt = (t) => { let cur = null; for (const l of timing.lines) if (t >= l.start - 0.2) cur = l; return cur; };
+// Shared YEARS RETIRED counter: steps one year at a time from the previous
+// line's year to this line's, while the speaker says the date.
+const YEAR_KEYS = [];
+{
+  let prev = 0;
+  for (const l of timing.lines) {
+    if (l.year == null) continue;
+    if (l.year !== prev) YEAR_KEYS.push({ from: prev, to: l.year, at: l.start, dur: Math.min(2.4, 0.26 * (l.year - prev)) });
+    prev = l.year;
+  }
+}
+function yearAt(t) {
+  let y = 0;
+  for (const k of YEAR_KEYS) {
+    if (t < k.at) break;
+    y = t >= k.at + k.dur ? k.to : k.from + Math.min(k.to - k.from, Math.floor((t - k.at) / k.dur * (k.to - k.from + 1)));
+  }
+  return y;
+}
+
+// ---- drawing kit: cream paper, thick ink, flat fills (neighbors)
+const C = { paper: "#fbf3df", ink: "#1d1d1f", walt: "#d98b45", june: "#3fb8ae", waltDark: "#a85f1f", juneDark: "#1f8f86",
+  skin: "#f6c9a3", muted: "#7a7468", red: "#e5646e", green: "#5bb56a", gold: "#f2c14e", sepia: "#f3e2c2", mint: "#e3f1ea" };
+const FONT = '"Segoe UI", system-ui, sans-serif', MONO = '"Cascadia Mono", Consolas, monospace';
+let PRINTED = null;
+function text(s, x, y, { size = 48, fill = C.ink, align = "center", weight = 800, mono = false, alpha = 1 } = {}) {
+  if (alpha <= 0.01) return;
+  if (PRINTED) PRINTED.push(String(s));
+  ctx.globalAlpha = Math.min(1, alpha);
+  ctx.font = `${weight} ${size}px ${mono ? MONO : FONT}`;
+  ctx.fillStyle = fill; ctx.textAlign = align; ctx.fillText(s, x, y);
+  ctx.globalAlpha = 1;
+}
+function shape(fill, draw, lw = 7) {
+  ctx.beginPath(); draw();
+  if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+  if (lw) { ctx.lineWidth = lw; ctx.strokeStyle = C.ink; ctx.lineJoin = "round"; ctx.stroke(); }
+}
+const clamp01 = (t) => Math.max(0, Math.min(1, t));
+const fade = (t, at, d = 0.3) => clamp01((t - at) / d);
+const ease = (x) => x * x * (3 - 2 * x);
+
+function elder(cx, footY, o) {
+  ctx.save(); ctx.translate(cx, footY); ctx.scale(o.s ?? 0.85, o.s ?? 0.85);
+  shape("#5b5a66", () => { ctx.rect(-45, -112, 38, 112); ctx.rect(7, -112, 38, 112); }, 6);
+  shape(o.shirt, () => ctx.roundRect(-66, -258, 132, 156, 30));
+  shape(o.shirt, () => ctx.roundRect(-96, -244, 34, 114, 16), 6);
+  ctx.save(); ctx.translate(79, -238); ctx.rotate(-0.3 - (o.wave ?? 0));
+  shape(o.shirt, () => ctx.roundRect(-17, 0, 34, 110, 16), 6); ctx.restore();
+  // cardigan buttons
+  ctx.fillStyle = C.ink; for (const by of [-220, -185, -150]) { ctx.beginPath(); ctx.arc(0, by, 5, 0, Math.PI * 2); ctx.fill(); }
+  shape(C.skin, () => ctx.ellipse(0, -325, 62, 72, 0, 0, Math.PI * 2));
+  if (o.who === "W") {
+    shape("#c9c6c0", () => ctx.ellipse(-56, -338, 15, 28, 0.15, 0, Math.PI * 2), 5);
+    shape("#c9c6c0", () => ctx.ellipse(56, -338, 15, 28, -0.15, 0, Math.PI * 2), 5);
+    shape("#c9c6c0", () => ctx.roundRect(-26, -305, 52, 11, 5), 4);
+  } else {
+    shape("#ecebe7", () => ctx.ellipse(0, -372, 68, 38, 0, Math.PI, 0), 6);
+    shape("#ecebe7", () => ctx.ellipse(0, -410, 30, 24, 0, 0, Math.PI * 2), 6);
+    ctx.fillStyle = "#ffffff"; for (const px of [-30, -10, 10, 30]) { ctx.beginPath(); ctx.arc(px, -250 + Math.abs(px) * 0.2, 7, 0, Math.PI * 2); ctx.fill(); ctx.lineWidth = 3; ctx.stroke(); }
+  }
+  ctx.lineWidth = 5; ctx.strokeStyle = C.ink; ctx.beginPath();
+  ctx.arc(-24, -330, 16, 0, Math.PI * 2); ctx.moveTo(40, -330); ctx.arc(24, -330, 16, 0, Math.PI * 2);
+  ctx.moveTo(-8, -330); ctx.lineTo(8, -330); ctx.stroke();
+  ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(-24, -330, 6, 0, Math.PI * 2); ctx.arc(24, -330, 6, 0, Math.PI * 2); ctx.fill();
+  const my = o.who === "W" ? -283 : -292;
+  if ((o.mouth ?? 0) > 0.05) shape("#7a2e2e", () => ctx.ellipse(0, my + 4, 15, 4 + 15 * o.mouth, 0, 0, Math.PI * 2), 5);
+  else {
+    ctx.lineWidth = 6; ctx.beginPath();
+    if (o.mood > 0) ctx.arc(0, my - 12, 22, 0.15 * Math.PI, 0.85 * Math.PI);
+    else if (o.mood < 0) ctx.arc(0, my + 18, 20, 1.2 * Math.PI, 1.8 * Math.PI);
+    else { ctx.moveTo(-15, my); ctx.lineTo(15, my); }
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function moneyBag(cx, footY, v, label, alpha = 1) {
+  if (alpha <= 0) return;
+  ctx.globalAlpha = alpha;
+  if (v > 0.001) {
+    const r = 26 + 74 * Math.sqrt(Math.min(v, 1.4) / 1.4);
+    shape("#9ccf7e", () => ctx.ellipse(cx, footY - r, r, r, 0, 0, Math.PI * 2));
+    shape("#9ccf7e", () => { ctx.moveTo(cx - r * 0.3, footY - 2 * r + 6); ctx.lineTo(cx, footY - 2 * r - r * 0.35); ctx.lineTo(cx + r * 0.3, footY - 2 * r + 6); ctx.closePath(); }, 6);
+    text("$", cx, footY - r + r * 0.35, { size: Math.max(26, r), fill: "#2f6b2a", alpha });
+  }
+  ctx.globalAlpha = 1;
+  if (label) text(label, cx, footY + 50, { size: 44, alpha });
+}
+
+function bubble(cx, headY, s, colour, alpha) {
+  if (alpha <= 0.01) return;
+  ctx.font = `800 36px ${FONT}`;
+  const words = s.split(" "), rows = [];
+  let row = "";
+  for (const w of words) { const t = row ? `${row} ${w}` : w; if (ctx.measureText(t).width > 400 && row) { rows.push(row); row = w; } else row = t; }
+  rows.push(row);
+  const bw = Math.max(...rows.map((r) => ctx.measureText(r).width)) + 56, bh = rows.length * 46 + 34;
+  const bx = Math.max(16, Math.min(W - bw - 16, cx - bw / 2)), by = headY - bh - 34;
+  ctx.globalAlpha = alpha;
+  shape("#ffffff", () => { ctx.roundRect(bx, by, bw, bh, 24); }, 6);
+  shape("#ffffff", () => { ctx.moveTo(cx - 18, by + bh - 3); ctx.lineTo(cx, by + bh + 30); ctx.lineTo(cx + 18, by + bh - 3); }, 0);
+  ctx.lineWidth = 6; ctx.strokeStyle = C.ink; ctx.beginPath(); ctx.moveTo(cx - 18, by + bh); ctx.lineTo(cx, by + bh + 30); ctx.lineTo(cx + 18, by + bh); ctx.stroke();
+  ctx.globalAlpha = 1;
+  rows.forEach((r, k) => text(r, bx + bw / 2, by + 52 + k * 46, { size: 36, fill: colour, alpha }));
+}
+
+function basketProp(cx, footY, priceTop, priceBottom, alpha) {
+  if (alpha <= 0.01) return;
+  ctx.globalAlpha = alpha;
+  shape("#d9a46a", () => { ctx.moveTo(cx - 70, footY - 90); ctx.lineTo(cx + 70, footY - 90); ctx.lineTo(cx + 52, footY); ctx.lineTo(cx - 52, footY); ctx.closePath(); });
+  shape(null, () => { ctx.arc(cx, footY - 90, 58, Math.PI, 0); }, 7);
+  for (const [dx, col] of [[-30, "#e5646e"], [0, "#f2c14e"], [30, "#5bb56a"]]) shape(col, () => ctx.arc(cx + dx, footY - 100, 20, 0, Math.PI * 2), 5);
+  shape("#ffffff", () => ctx.roundRect(cx - 125, footY - 250, 250, 112, 14), 6);
+  ctx.globalAlpha = 1;
+  text(priceTop, cx, footY - 210, { size: 24, fill: C.muted, weight: 700, alpha });
+  text(priceBottom, cx, footY - 160, { size: 42, alpha });
+}
+
+function ticker(x, y, w, h, series, label, sub, colour, alpha) {
+  if (alpha <= 0.01 || series.length < 2) return;
+  ctx.globalAlpha = alpha;
+  shape("#22313b", () => ctx.roundRect(x, y, w, h, 18), 6);
+  const lo = Math.min(...series), hi = Math.max(...series);
+  ctx.lineWidth = 6; ctx.strokeStyle = colour; ctx.beginPath();
+  series.forEach((v, k) => {
+    const px = x + 30 + (w - 60) * k / (series.length - 1), py = y + h - 26 - (h - 134) * (v - lo) / (hi - lo || 1);
+    k ? ctx.lineTo(px, py) : ctx.moveTo(px, py);
+  });
+  ctx.stroke();
+  ctx.globalAlpha = 1;
+  text(label, x + 26, y + 44, { size: 26, fill: "#ffffff", align: "left", weight: 700, alpha });
+  if (sub) text(sub, x + 26, y + 88, { size: 34, fill: colour, align: "left", alpha });
+}
+
+function stamp(cx, cy, s, colour, rot, alpha, size = 54) {
+  if (alpha <= 0.01) return;
+  ctx.save(); ctx.translate(cx, cy); ctx.rotate(rot); ctx.globalAlpha = alpha;
+  ctx.font = `900 ${size}px ${FONT}`;
+  const w = ctx.measureText(s).width + size;
+  ctx.lineWidth = 8; ctx.strokeStyle = colour; ctx.strokeRect(-w / 2, -size * 0.82, w, size * 1.5);
+  ctx.restore();
+  ctx.save(); ctx.translate(cx, cy); ctx.rotate(rot);
+  text(s, 0, size * 0.3, { size, fill: colour, weight: 900, alpha });
+  ctx.restore();
+}
+
+function pill(cx, cy, w, h, alpha, fill = "#ffffff") {
+  if (alpha <= 0.01) return;
+  ctx.globalAlpha = alpha;
+  shape(fill, () => ctx.roundRect(cx - w / 2, cy - h / 2, w, h, h / 2), fill === "#ffffff" ? 4 : 0);
+  ctx.globalAlpha = 1;
+}
+
+function meter(gap, y, alpha) {
+  if (alpha <= 0.01) return;
+  ctx.globalAlpha = alpha;
+  shape(null, () => { ctx.moveTo(560, y); ctx.lineTo(1360, y); }, 8);
+  shape(null, () => { ctx.moveTo(960, y - 20); ctx.lineTo(960, y + 20); }, 5);
+  // Walt's panel is on the left, so a Walt lead pulls the flag left.
+  const fx = 960 - Math.sign(gap) * Math.min(1, Math.sqrt(Math.abs(gap))) * 390;
+  shape(gap >= 0 ? C.walt : C.june, () => { ctx.moveTo(fx, y); ctx.lineTo(fx, y - 56); ctx.lineTo(fx + (gap >= 0 ? -46 : 46), y - 44); ctx.lineTo(fx, y - 32); }, 6);
+  ctx.globalAlpha = 1;
+  const even = Math.abs(gap) < 0.005;
+  const s = even ? "even" : gap > 0 ? `WALT ahead ${fmtK(gap)}` : `JUNE ahead ${fmtK(-gap)}`;
+  pill(960, y + 42, 420, 50, alpha, C.paper);
+  text(s, 960, y + 55, { size: 36, fill: even ? C.muted : gap > 0 ? C.waltDark : C.juneDark, alpha });
+}
+
+// ---- the split world
+const PANEL = { W: { x0: 0, cx: 480, char: 370, bag: 720, basket: 150, tick: 600, tint: C.sepia, start: 1929, name: "WALT", col: C.walt, dark: C.waltDark, path: WALT.path },
+                J: { x0: 960, cx: 1440, char: 1330, bag: 1690, basket: 1110, tick: 1560, tint: C.mint, start: 1966, name: "JUNE", col: C.june, dark: C.juneDark, path: JUNE.path } };
+const FOOT = 800, HEAD = FOOT - 0.85 * 440, METER_Y = 962;
+
+const BUBBLE = {
+  W01: "Retiring, January 1929!", J01: "Retiring, January 1966!",
+  W02: "October 1929: the crash", W03: `Stocks ${pct(-crash.drop)}`,
+  W04: `Prices fell: $40,000 → ${usd(basket(1929, 1932))}`, J02: `Spent ${usd(3 * RATE * 1e6)}. Still ${fmtK(JUNE.path[3])}`,
+  W05: `${fmtK(WALT.path[3])} left`, W06: `${fmtK(WALT.path[8])}! Up from ${fmtK(WALT.path[0])}`,
+  J03: `$40,000 now costs ${usd(basket(1966, 1974))}`, J04: `Down to ${fmtK(JUNE.path[8])}`,
+  J05: `Prices ×${cpiRatio(1966, 1982).toFixed(2)}: ${usd(basket(1966, 1982))}`, J06: `${fmtK(JUNE.path[16])} left`,
+  W07: `${fmtK(WALT.path[20])}: my lowest ever`, J07: `×${BULL.toFixed(1)} on my last ${fmtK(JUNE.path[16])}`,
+  J08: "Less than a year left. I'm out.", W08: `${fmtK(WALT.path[30])} left. I made it!`,
+};
+const MOOD = { W02: -1, W03: -1, W04: 0, W05: -1, W06: 1, W07: -1, W08: 1, J02: 1, J03: 0, J04: -1, J05: -1, J06: -1, J07: -1, J08: -1 };
+const juneOutAt = tw("J08", "I'm out");
+
+function drawPanels(t, i, yr, dim, bare = false) {
+  const act = speaking(t), cur = lineAt(t);
+  const story = ["meet", "crash", "flip", "slide", "end"].includes(sceneOf(t));
+  for (const k of ["W", "J"]) {
+    const P = PANEL[k];
+    ctx.fillStyle = P.tint; ctx.fillRect(P.x0, 0, 960, H);
+    const out = k === "J" && t >= juneOutAt;
+    const v = out ? 0 : P.path[Math.min(yr, HZ)];
+    // calendar year and name (a bare panel is a backdrop: no labels to read through)
+    if (!bare) {
+      text(String(P.start + yr), P.cx, 186, { size: 110, mono: true, fill: out ? C.muted : C.ink });
+      text(`${P.name} · retired Jan ${P.start}`, P.cx, 236, { size: 32, fill: P.dark, weight: 700 });
+    }
+    // mood: who leads, unless the line says otherwise; final verdict after the story
+    const lead = WALT.path[yr] - (out ? 0 : JUNE.path[yr]);
+    let mood = Math.abs(lead) < 0.005 ? 1 : (k === "W" ? (lead > 0 ? 1 : -1) : (lead < 0 ? 1 : -1));
+    if (cur && cur.speaker === k && MOOD[cur.id] != null) mood = MOOD[cur.id];
+    if (!story) mood = k === "W" ? 1 : -1;
+    if (yr === 0 && t < L.W02.start) mood = 1;
+    const talking = act && act.speaker === k;
+    const wave = (k === "W" ? (t > L.W01.start && t < L.W01.start + 1.2) : (t > L.J01.start && t < L.J01.start + 1.2)) ? Math.sin(t * 9) * 0.35 : 0;
+    elder(P.char, FOOT, { who: k, shirt: P.col, mood, mouth: talking ? mouth.open[Math.min(i, mouth.open.length - 1)] : 0, wave });
+    if (!bare) text(P.name, P.char, FOOT + 56, { size: 44, fill: P.dark });
+    if (out) {
+      if (!bare) stamp(1690, FOOT - 250, `RAN OUT · ${JUNE.depletedInYear}`, C.red, -0.1, fade(t, juneOutAt, 0.25), 46);
+    } else {
+      moneyBag(P.bag, FOOT, v, bare ? "" : fmtK(v));
+    }
+    if (k === "J" && cur && cur.id === "J08" && !out) text(`a year needs ${usd(RATE * 1e6)}`, P.bag, FOOT - 150, { size: 30, fill: C.red, weight: 700 });
+    if (k === "W" && yr === 20 && cur && cur.id === "W07") text("▼ lowest point", P.bag, FOOT - 200, { size: 32, fill: C.red });
+    if (k === "W" && t >= L.W08.start + 1.5 && story) stamp(P.bag, FOOT - 260, "MADE IT", C.green, -0.08, fade(t, L.W08.start + 1.5, 0.25), 50);
+    if (talking && BUBBLE[act.id] && story) bubble(P.char, HEAD, BUBBLE[act.id], P.dark, fade(t, act.start, 0.2));
+  }
+  shape(null, () => { ctx.moveTo(960, 0); ctx.lineTo(960, H); }, 6);
+  if (dim > 0) { ctx.fillStyle = `rgba(251,243,223,${dim})`; ctx.fillRect(0, 0, W, H); }
+}
+
+function counter(yr, alpha) {
+  if (alpha <= 0.01) return;
+  ctx.globalAlpha = alpha;
+  shape("#ffffff", () => ctx.roundRect(840, 18, 240, 104, 22), 6);
+  ctx.globalAlpha = 1;
+  text("YEARS RETIRED", 960, 52, { size: 22, fill: C.muted, weight: 800, alpha });
+  text(String(yr), 960, 108, { size: 58, mono: true, alpha });
+}
+
+function honesty(alpha = 1) {
+  ctx.fillStyle = C.paper; ctx.fillRect(0, 1036, W, 44);
+  text("illustration · real US market history · bags in retirement-day dollars (after inflation)", 960, 1062, { size: 24, fill: C.muted, weight: 600, alpha });
+}
+
+function asterisk(x, y, size, t, i, expression = "talking") {
+  const act = speaking(t);
+  const open = act && act.speaker === "N" ? mouth.open[Math.min(i, mouth.open.length - 1)] : 0;
+  drawAsterisk(ctx, x, y, size, { expression: open > 0.05 ? "talking" : expression, speaking: open > 0.05, mouthOpen: open, traits: CANON_TRAITS });
+}
+
+// ---- scenes
+// A white card in the middle of the split world, for the narrator's plain-words
+// beats (v2: the viewer is assumed to know nothing).
+function card(rows, alpha, y = 290) {
+  if (alpha <= 0.01) return;
+  const h = 40 + rows.length * 56;
+  ctx.globalAlpha = alpha;
+  shape("#ffffff", () => ctx.roundRect(470, y, 980, h, 26), 6);
+  ctx.globalAlpha = 1;
+  rows.forEach(([s, fill], k) => text(s, 960, y + 66 + k * 56, { size: 38, fill: fill ?? C.ink, alpha }));
+}
+const during = (t, id) => { const cur = lineAt(t); return cur && cur.id === id ? fade(t, L[id].start, 0.25) : 0; };
+
+function sceneOpen(t, i) {
+  ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
+  const a0 = fade(t, L.N00.start + 0.2), q = fade(t, tw("N00", "How much")) * (1 - fade(t, L.N01.start));
+  const a1 = fade(t, L.N01.start + 0.2), a2 = fade(t, tw("N01", "forty thousand")), a3 = fade(t, L.N01P.start), a4 = fade(t, tw("N01P", "thirty years"));
+  text("How much can you spend each year,", 960, 130, { size: 62, alpha: q });
+  text("without running out?", 960, 210, { size: 62, fill: C.red, alpha: q });
+  text("THE 4% RULE", 760, 150, { size: 84, alpha: a1 });
+  moneyBag(470, 700, 1, "$1,000,000", a0);
+  // the check
+  if (a2 > 0) {
+    ctx.globalAlpha = a2;
+    shape("#ffffff", () => ctx.roundRect(720, 420, 520, 230, 18), 6);
+    ctx.globalAlpha = 1;
+    text("PAY TO: retirement", 750, 480, { size: 30, fill: C.muted, align: "left", weight: 700, alpha: a2 });
+    text(usd(RATE * 1e6), 980, 570, { size: 76, alpha: a2 });
+    text("year 1 = 4% of the million", 980, 625, { size: 28, fill: C.muted, weight: 700, alpha: a2 });
+  }
+  text("after that: same amount + extra when prices rise", 1010, 720, { size: 32, fill: C.ink, weight: 700, alpha: a3 });
+  text(`should last ${HZ} years`, 980, 790, { size: 46, fill: C.red, alpha: a4 });
+  asterisk(1560, 560, 190, t, i, "pointing");
+  text("most people fear: a market crash", 960, 890, { size: 44, fill: C.ink, alpha: fade(t, tw("N02", "Most people")) });
+  const a6 = fade(t, tw("N02", "So we tested"));
+  text("1929: the worst crash on record", 520, 975, { size: 40, fill: C.waltDark, alpha: a6 });
+  text("vs", 960, 975, { size: 40, fill: C.muted, alpha: a6 });
+  text("1966: a year nobody fears", 1400, 975, { size: 40, fill: C.juneDark, alpha: fade(t, tw("N02", "against a year")) });
+  honesty();
+}
+
+function sceneWhy(t, i) {
+  drawPanels(t, i, HZ, 0.86, true);
+  const verdict = fade(t, L.N05.start + 0.4);
+  text("retired into the Great Depression", 480, 200, { size: 40, fill: C.waltDark, alpha: verdict });
+  text("retired into the calm 1960s", 1440, 200, { size: 40, fill: C.juneDark, alpha: verdict });
+  stamp(480, 300, "MADE IT", C.green, -0.06, fade(t, tw("N05", "made it")));
+  stamp(1440, 300, "RAN OUT", C.red, -0.06, fade(t, tw("N05", "ran out")));
+  const bars = (cx, top, rows, alpha) => {
+    rows.forEach(([lab, x], k) => {
+      const y = top + k * 110, len = Math.abs(x - 1) * 520, col = x >= 1 ? C.green : C.red;
+      ctx.globalAlpha = alpha;
+      shape(col, () => ctx.rect(cx - 30, y, Math.max(4, len), 60), 5);
+      ctx.globalAlpha = 1;
+      text(lab, cx - 50, y + 44, { size: 38, align: "right", alpha });
+      text(pct(x - 1), cx - 30 + len + 20, y + 44, { size: 40, align: "left", fill: col, alpha });
+    });
+  };
+  const wa = fade(t, L.N06.start), ja = fade(t, L.N07.start);
+  text("1929 → 1932, after inflation", 480, 430, { size: 32, fill: C.muted, weight: 700, alpha: wa });
+  bars(330, 470, [["stocks", WS], ["bonds", WB]], wa);
+  text(`prices: $40,000 → ${usd(basket(1929, 1932))}`, 480, 760, { size: 38, fill: C.waltDark, alpha: fade(t, tw("N06", "prices fell")) });
+  text("1966 → 1982, after inflation", 1440, 430, { size: 32, fill: C.muted, weight: 700, alpha: ja });
+  bars(1290, 470, [["stocks", JS], ["bonds", JB]], ja);
+  text(`prices: $40,000 → ${usd(basket(1966, 1982))}`, 1440, 760, { size: 38, fill: C.juneDark, alpha: fade(t, tw("N07", "sixteen years")) });
+  const na = fade(t, L.N08.start);
+  text(`rising prices from year 12, with ${fmtK(WALT.path[12])} in the bag`, 480, 860, { size: 32, fill: C.ink, weight: 700, alpha: na });
+  text("rising prices from day one", 1440, 860, { size: 32, fill: C.ink, weight: 700, alpha: fade(t, tw("N08", "June met them")) });
+  asterisk(960, 950, 70, t, i);
+  honesty();
+}
+
+function sceneZoom(t, i) {
+  ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
+  const cols = 21, cw = 80, ch = 104, x0 = 960 - (cols * cw) / 2 + cw / 2, y0 = 250;
+  const reveal = clamp01((t - L.N09.start - 0.3) / 3.5);
+  const shown = Math.floor(reveal * batch.cohorts.length);
+  const hi = fade(t, L.N11.start);
+  batch.cohorts.forEach((c, k) => {
+    if (k >= shown) return;
+    const cx = x0 + (k % cols) * cw, cy = y0 + Math.floor(k / cols) * ch;
+    if (c.survived) {
+      const r = 8 + 22 * Math.sqrt(Math.min(c.finalMultiple, 5.5) / 5.5);
+      shape("#9ccf7e", () => ctx.arc(cx, cy, r, 0, Math.PI * 2), 4);
+    } else {
+      ctx.lineWidth = 6; ctx.strokeStyle = C.red; ctx.beginPath(); ctx.moveTo(cx - 14, cy - 14); ctx.lineTo(cx + 14, cy + 14); ctx.moveTo(cx + 14, cy - 14); ctx.lineTo(cx - 14, cy + 14); ctx.stroke();
+    }
+    if (k % cols === 0) text(String(c.startYear), cx - 62, cy + 10, { size: 24, fill: C.muted, weight: 700, align: "right" });
+    if (c.startYear === 1929 || c.startYear === 1966) {
+      const col = c.startYear === 1929 ? C.walt : C.june;
+      ctx.lineWidth = 6; ctx.strokeStyle = col; ctx.beginPath(); ctx.arc(cx, cy, 36, 0, Math.PI * 2); ctx.stroke();
+      text(c.startYear === 1929 ? "Walt" : "June", cx, cy - 44, { size: 26, fill: col });
+    }
+    if (!c.survived && hi > 0) { ctx.globalAlpha = hi * 0.25; ctx.fillStyle = C.red; ctx.fillRect(cx - cw / 2, cy - ch / 2, cw, ch); ctx.globalAlpha = 1; }
+  });
+  text(`every year you could have retired: ${batch.cohorts[0].startYear}–${batch.cohorts.at(-1).startYear}`, 960, 120, { size: 44, alpha: fade(t, L.N09.start) });
+  text("bag size = what was left after 30 years", 960, 175, { size: 28, fill: C.muted, weight: 700, alpha: fade(t, L.N09.start + 1) });
+  const ca = fade(t, L.N10.start);
+  text(`${batch.cohorts.length - failed.length} lasted 30 years`, 640, 930, { size: 58, fill: "#2f8a3a", alpha: ca });
+  text(`${failed.length} ran out`, 1280, 930, { size: 58, fill: C.red, alpha: fade(t, tw("N10", "Six")) });
+  text(`all ${failed.length} retired ${failed[0].startYear}–${failed.at(-1).startYear}`, 1280, 990, { size: 36, fill: C.red, alpha: hi });
+  text(`typical ending: ${fmtK(MEDIAN)}   ·   Walt: ${fmtK(WALT.finalMultiple)}`, 640, 990, { size: 32, fill: C.ink, weight: 700, alpha: fade(t, L.N12.start) });
+  asterisk(1800, 940, 70, t, i);
+  honesty();
+}
+
+// v2: three numbered lessons, each on screen while it is spoken.
+function sceneAnswer(t, i) {
+  ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
+  text("What this means for you", 960, 120, { size: 70, alpha: fade(t, L.N13.start) });
+  const num = (n, y, alpha) => {
+    if (alpha <= 0.01) return;
+    ctx.globalAlpha = alpha;
+    shape(C.gold, () => ctx.arc(230, y - 16, 40, 0, Math.PI * 2), 6);
+    ctx.globalAlpha = 1;
+    text(String(n), 230, y, { size: 50, alpha });
+  };
+  const l1 = fade(t, tw("N13", "Lesson one"));
+  num(1, 260, l1);
+  text("The 4% rule almost always worked", 300, 250, { size: 50, align: "left", alpha: l1 });
+  text(`${batch.cohorts.length - failed.length} of ${batch.cohorts.length} retirements lasted 30 years`, 300, 305, { size: 36, fill: "#2f8a3a", align: "left", weight: 700, alpha: fade(t, tw("N13", "a hundred twenty times")) });
+  const l2 = fade(t, tw("N13B", "Lesson two"));
+  num(2, 450, l2);
+  text("A crash is not what sinks you", 300, 440, { size: 50, align: "left", alpha: l2 });
+  text("warning sign: prices up by half or more in your first 10 years", 300, 495, { size: 36, fill: C.red, align: "left", weight: 700, alpha: fade(t, tw("N13B", "All six")) });
+  text("not a sure loss: some had it worse and still made it", 300, 545, { size: 32, fill: C.muted, align: "left", weight: 700, alpha: fade(t, tw("N13B", "That's not a sure loss")) });
+  const l3 = fade(t, tw("N14", "Lesson three"));
+  num(3, 690, l3);
+  text(`Want a plan that never failed? Take ${(batch.meta.safeRate * 100).toFixed(1)}%`, 300, 680, { size: 50, align: "left", alpha: fade(t, tw("N14", "If you want")) });
+  text(`${usd(Math.round(batch.meta.safeRate * 1e6 / 1000) * 1000)} a year instead of ${usd(RATE * 1e6)}, June's year included`, 300, 735, { size: 36, fill: C.ink, align: "left", weight: 700, alpha: fade(t, tw("N14", "Thirty-six thousand")) });
+  text("or keep 4%, and spend less when prices jump early", 300, 790, { size: 36, fill: "#2f8a3a", align: "left", weight: 700, alpha: fade(t, L.N14B.start) });
+  asterisk(1780, 930, 80, t, i, "smug");
+  honesty();
+}
+
+function scenePanel(t, i) {
+  ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
+  text("THE ASSUMPTION PANEL", 960, 110, { size: 64 });
+  const rows = [
+    `${Math.round(SHARE * 100)}% US stocks (S&P total return) · ${Math.round((1 - SHARE) * 100)}% 10-year Treasuries, rebalanced yearly`,
+    "bond leg is an approximation: 10-year bond priced off the yield each January",
+    "money taken out at the START of each year, raised with inflation",
+    "everything after inflation (CPI) · no taxes, no fees, no Social Security",
+    "no cutting back in bad years (real retirees do)",
+    `${batch.cohorts.length} start years ${batch.cohorts[0].startYear}–${batch.cohorts.at(-1).startYear} overlap: not ${batch.cohorts.length} independent trials`,
+    "Walt and June are illustrations · the market history is real",
+    "data: Shiller (Yale), pinned 2026-07-26 · code public · history, not advice",
+  ];
+  // The whole panel arrives in ONE slow fade and then holds still. Per-row reveals
+  // read as flicker (v1: empty boxes whose outline snapped on) and then as a stutter
+  // (v2: eight rows fading in 1.6 s apart); founder, 2026-10-17, both times.
+  const al = fade(t, L.N15.start - 0.2, 0.8);
+  if (al <= 0.01) return asterisk(1800, 960, 70, t, i, "pointing");
+  rows.forEach((r, k) => {
+    const y = 220 + k * 96;
+    ctx.globalAlpha = al;
+    shape("#ffffff", () => ctx.roundRect(170, y - 56, 1580, 80, 16), 5);
+    ctx.globalAlpha = 1;
+    text(r, 210, y, { size: 34, align: "left", weight: 700, alpha: al });
+  });
+  asterisk(1800, 960, 70, t, i, "pointing");
+}
+
+function sceneClose(t, i) {
+  drawPanels(t, i, HZ, 0.35, true);
+  shape("#ffffff", () => ctx.roundRect(460, 110, 1000, 230, 30), 7);
+  text("If you were June in 1974,", 960, 195, { size: 50, alpha: fade(t, L.N16.start) });
+  text("would you have cut back?", 960, 285, { size: 64, fill: C.red, alpha: fade(t, tw("N16", "would you")) });
+  asterisk(960, 620, 90, t, i, "smug");
+  honesty();
+}
+
+function renderFrame(i) {
+  const t = i / FPS;
+  const scene = sceneOf(t);
+  if (scene === "open") sceneOpen(t, i);
+  else if (["meet", "crash", "flip", "slide", "end"].includes(scene)) {
+    const yr = yearAt(t);
+    drawPanels(t, i, yr, 0);
+    counter(yr, 1);
+    meter(WALT.path[yr] - (t >= juneOutAt ? 0 : JUNE.path[yr]), METER_Y, fade(t, L.W02.start - 0.5));
+    // props, each on its own line
+    const cur = lineAt(t)?.id;
+    if (cur === "W02" || cur === "W03") {
+      // S&P monthly price, Jan 1929 to the trough; the readout is the fall from
+      // the highest month so far, so it ends on the spoken "-85% from the top".
+      const months = [...ROWS.keys()].filter((d) => d >= "1929-01" && d <= crash.tr);
+      const upto = cur === "W02" ? months.indexOf("1929-11") + 1 : Math.max(months.indexOf("1929-11") + 1, Math.round(months.length * clamp01((t - L.W03.start) / ((L.W03.end - L.W03.start) * 0.8))));
+      const series = months.slice(0, Math.max(2, upto)).map((d) => val(d, "price"));
+      ticker(PANEL.W.tick, 290, 340, 230, series, "STOCKS", `${pct(series.at(-1) / Math.max(...series) - 1)} from top`, C.red, 1);
+    }
+    if (cur === "W04") {
+      basketProp(PANEL.W.basket, FOOT, "same basket, 1932", usd(basket(1929, 1932)), fade(t, L.W04.start));
+      text("prices fell ▼", PANEL.W.basket, FOOT - 275, { size: 30, fill: "#2f8a3a", alpha: fade(t, L.W04.start + 0.3) });
+    }
+    if (cur === "J03" || cur === "J04") basketProp(PANEL.J.basket, FOOT, "same basket, 1974", usd(basket(1966, 1974)), fade(t, tw("J03", "Everything")));
+    if (cur === "J05" || cur === "J06") basketProp(PANEL.J.basket, FOOT, "same basket, 1982", usd(basket(1966, 1982)), fade(t, tw("J05", "My forty")));
+    if (cur === "J07") {
+      const months = [...ROWS.keys()].filter((d) => d >= "1982-01" && d <= "1989-01");
+      const upto = Math.max(2, Math.round(months.length * clamp01((t - L.J07.start) / ((L.J07.end - L.J07.start) * 0.6))));
+      const series = months.slice(0, upto).map((d) => val(d, "realTotalReturnPrice"));
+      ticker(PANEL.J.tick, 290, 340, 230, series, "STOCKS", upto >= months.length ? `×${BULL.toFixed(1)} real` : "", "#5bb56a", 1);
+    }
+    if (yr >= LEAD_FROM && t >= L.W06.start && t < L.N05.start - 0.3) {
+      const a = fade(t, L.W06.start + 1.5);
+      pill(960, 152, 560, 48, a);
+      text(`Walt ahead every year from year ${LEAD_FROM}`, 960, 164, { size: 28, fill: C.waltDark, weight: 800, alpha: a });
+    }
+    // narrator in the middle during the setup
+    if (scene === "meet") {
+      const a = fade(t, L.N03.start);
+      pill(960, 152, 600, 48, a);
+      text("same $1M · same 4% rule · 60% stocks, 40% bonds", 960, 162, { size: 23, fill: C.ink, weight: 800, alpha: a });
+      card([["stocks: grow, but can crash"], ["bonds: steadier loans to the government"]], during(t, "N03") * fade(t, tw("N03", "sixty percent")));
+      card([["money bag = what the money can buy"], ["prices up, money flat: the bag shrinks", C.red]], during(t, "N03B"));
+      if (t >= L.N03.start - 0.3) asterisk(960, 560, 85, t, i);
+      const q = tw("N04", "Who do you think");
+      if (t >= q) { pill(960, 420, 130, 130, fade(t, q)); text("?", 960, 470, { size: 120, fill: C.red, alpha: fade(t, q) }); }
+      if (t >= tw("N04", "the Great Depression")) text("the Great Depression is coming", 480, 320, { size: 34, fill: C.red, alpha: fade(t, tw("N04", "the Great Depression")) });
+    }
+    // narrator signposts inside the story (v2)
+    const nf = during(t, "NF1"), ns = during(t, "NS1");
+    card([["Walt's crash: already over", C.waltDark], ["June's trouble: PRICES", C.red]], nf);
+    card([["every year June needs more dollars"], ["so she sells stocks and bonds while they're down", C.red]], ns);
+    if (nf > 0 || ns > 0) asterisk(960, 560, 85, t, i);
+    honesty();
+  }
+  else if (scene === "why") sceneWhy(t, i);
+  else if (scene === "zoom") sceneZoom(t, i);
+  else if (scene === "answer") sceneAnswer(t, i);
+  else if (scene === "panel") scenePanel(t, i);
+  else sceneClose(t, i);
+  return true;
+}
+
+// Everything the frame printed, for probes and validators (the auditFrame contract).
+window.auditFrame = (i) => { PRINTED = []; renderFrame(i); const p = PRINTED; PRINTED = null; return { t: i / FPS, scene: sceneOf(i / FPS), year: yearAt(i / FPS), printed: p }; };
+window.FRAME_COUNT = mouth.frames;
+window.renderFrame = renderFrame;
+renderFrame(0);
+document.documentElement.dataset.ready = "1";
+</script>
+</body>
+</html>

@@ -1,0 +1,1066 @@
+{
+  "meta": {
+    "episode": "ep06-four-percent-rule",
+    "generatedAt": "2026-10-10T01:11:25Z",
+    "snapshot": {
+      "source": "https://img1.wsimg.com/blobby/go/e5e77e0b-59d1-44d9-ab25-4763ac982e53/downloads/165d8a6e-26bf-44ec-a26c-a35f7f993480/ie_data.xls",
+      "note": "econ.yale.edu/~shiller/data/ie_data.xls is a stale mirror (frozen at 2023-09). Use shillerdata.com.",
+      "fetchedAt": "2026-07-26",
+      "sha256": "0e3d716f83f51c14f40c5ab5662e767cde4f83fcb7305db24ab003df2c9ee6c5",
+      "rawBytes": 1651712,
+      "months": 1866,
+      "firstMonth": "1871-01",
+      "lastMonth": "2026-06",
+      "droppedPartialMonth": "2026-07",
+      "rowsWithoutTotalReturn": 0,
+      "columnsUsed": {
+        "date": 0,
+        "price": 1,
+        "dividend": 2,
+        "earnings": 3,
+        "cpi": 4,
+        "dateFraction": 5,
+        "gs10": 6,
+        "realPrice": 7,
+        "realDividend": 8,
+        "realTotalReturnPrice": 9,
+        "realEarnings": 10,
+        "cape": 12
+      }
+    },
+    "firstYear": 1871,
+    "lastYear": 2025,
+    "assumptions": [
+      "Real (inflation-adjusted) returns throughout. A withdrawal that rises with inflation is a constant real withdrawal, so spending is held constant in real terms by construction.",
+      "Base case is 60% stocks / 40% ten-year Treasuries, rebalanced once a year.",
+      "The bond leg is an approximation: a constant-maturity ten-year bond priced off Shiller\u0027s GS10 yield at each year end, ignoring roll-down along the curve. It is the weakest input in this episode.",
+      "The withdrawal is taken at the START of each year, before that year\u0027s return. This is the conservative ordering and the one the original studies used.",
+      "Annual steps, January to January. No mid-year rebalancing and no cash buffer.",
+      "No taxes, no fees, no Social Security, no pension, no spending flexibility of any kind.",
+      "US large-cap index only (S\u0026P Composite) for the stock leg.",
+      "Retirement cohorts overlap, so 100\u002B start years are not 100 independent trials."
+    ]
+  },
+  "baseCase": {
+    "stockShare": 0.6,
+    "horizonYears": 30
+  },
+  "byRate": [
+    {
+      "Rate": 0.03,
+      "Horizon": 30,
+      "StockShare": 0.6,
+      "Cohorts": 126,
+      "SuccessRate": 1,
+      "Failures": 0,
+      "MedianFinalMultiple": 2.0001373028570284,
+      "P10FinalMultiple": 1.0108795508665138
+    },
+    {
+      "Rate": 0.035,
+      "Horizon": 30,
+      "StockShare": 0.6,
+      "Cohorts": 126,
+      "SuccessRate": 1,
+      "Failures": 0,
+      "MedianFinalMultiple": 1.6363653193319774,
+      "P10FinalMultiple": 0.661753107852582
+    },
+    {
+      "Rate": 0.04,
+      "Horizon": 30,
+      "StockShare": 0.6,
+      "Cohorts": 126,
+      "SuccessRate": 0.9523809523809523,
+      "Failures": 6,
+      "MedianFinalMultiple": 1.2649831260956603,
+      "P10FinalMultiple": 0.328488272397105
+    },
+    {
+      "Rate": 0.045,
+      "Horizon": 30,
+      "StockShare": 0.6,
+      "Cohorts": 126,
+      "SuccessRate": 0.8888888888888888,
+      "Failures": 14,
+      "MedianFinalMultiple": 1.0004205926024305,
+      "P10FinalMultiple": 0
+    },
+    {
+      "Rate": 0.05,
+      "Horizon": 30,
+      "StockShare": 0.6,
+      "Cohorts": 126,
+      "SuccessRate": 0.753968253968254,
+      "Failures": 31,
+      "MedianFinalMultiple": 0.6853790663629147,
+      "P10FinalMultiple": 0
+    },
+    {
+      "Rate": 0.055,
+      "Horizon": 30,
+      "StockShare": 0.6,
+      "Cohorts": 126,
+      "SuccessRate": 0.6428571428571428,
+      "Failures": 45,
+      "MedianFinalMultiple": 0.4610895427099244,
+      "P10FinalMultiple": 0
+    },
+    {
+      "Rate": 0.06,
+      "Horizon": 30,
+      "StockShare": 0.6,
+      "Cohorts": 126,
+      "SuccessRate": 0.5317460317460317,
+      "Failures": 59,
+      "MedianFinalMultiple": 0.14262567552657357,
+      "P10FinalMultiple": 0
+    }
+  ],
+  "byMix": [
+    {
+      "StockShare": 0,
+      "Rate": 0.04,
+      "Horizon": 30,
+      "SuccessRate": 0.4841269841269841,
+      "MedianFinalMultiple": 0
+    },
+    {
+      "StockShare": 0.25,
+      "Rate": 0.04,
+      "Horizon": 30,
+      "SuccessRate": 0.7777777777777778,
+      "MedianFinalMultiple": 0.33346853201360827
+    },
+    {
+      "StockShare": 0.5,
+      "Rate": 0.04,
+      "Horizon": 30,
+      "SuccessRate": 0.9444444444444444,
+      "MedianFinalMultiple": 0.9406542064079193
+    },
+    {
+      "StockShare": 0.6,
+      "Rate": 0.04,
+      "Horizon": 30,
+      "SuccessRate": 0.9523809523809523,
+      "MedianFinalMultiple": 1.2649831260956603
+    },
+    {
+      "StockShare": 0.75,
+      "Rate": 0.04,
+      "Horizon": 30,
+      "SuccessRate": 0.9682539682539683,
+      "MedianFinalMultiple": 1.938198855479994
+    },
+    {
+      "StockShare": 1,
+      "Rate": 0.04,
+      "Horizon": 30,
+      "SuccessRate": 0.9761904761904762,
+      "MedianFinalMultiple": 2.9922452714910728
+    }
+  ],
+  "byHorizon": [
+    {
+      "Rate": 0.04,
+      "Horizon": 20,
+      "StockShare": 0.6,
+      "Cohorts": 136,
+      "SuccessRate": 1,
+      "Failures": 0,
+      "MedianFinalMultiple": 1.341681811193682,
+      "P10FinalMultiple": 0.43440124105337974
+    },
+    {
+      "Rate": 0.04,
+      "Horizon": 25,
+      "StockShare": 0.6,
+      "Cohorts": 131,
+      "SuccessRate": 0.9923664122137404,
+      "Failures": 1,
+      "MedianFinalMultiple": 1.4186469508449784,
+      "P10FinalMultiple": 0.3837170166821089
+    },
+    {
+      "Rate": 0.04,
+      "Horizon": 30,
+      "StockShare": 0.6,
+      "Cohorts": 126,
+      "SuccessRate": 0.9523809523809523,
+      "Failures": 6,
+      "MedianFinalMultiple": 1.2649831260956603,
+      "P10FinalMultiple": 0.328488272397105
+    },
+    {
+      "Rate": 0.04,
+      "Horizon": 40,
+      "StockShare": 0.6,
+      "Cohorts": 116,
+      "SuccessRate": 0.9051724137931034,
+      "Failures": 11,
+      "MedianFinalMultiple": 1.4277882981155479,
+      "P10FinalMultiple": 0.036368931762396015
+    }
+  ],
+  "timeline": [
+    {
+      "startYear": 1871,
+      "survived": true,
+      "finalMultiple": 5.3817,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1872,
+      "survived": true,
+      "finalMultiple": 5.3506,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1873,
+      "survived": true,
+      "finalMultiple": 4.984,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1874,
+      "survived": true,
+      "finalMultiple": 4.5704,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1875,
+      "survived": true,
+      "finalMultiple": 4.5403,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1876,
+      "survived": true,
+      "finalMultiple": 4.4168,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1877,
+      "survived": true,
+      "finalMultiple": 5.1628,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1878,
+      "survived": true,
+      "finalMultiple": 3.5426,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1879,
+      "survived": true,
+      "finalMultiple": 3.0331,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1880,
+      "survived": true,
+      "finalMultiple": 2.7128,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1881,
+      "survived": true,
+      "finalMultiple": 1.8461,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1882,
+      "survived": true,
+      "finalMultiple": 2.3954,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1883,
+      "survived": true,
+      "finalMultiple": 2.2282,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1884,
+      "survived": true,
+      "finalMultiple": 2.0489,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1885,
+      "survived": true,
+      "finalMultiple": 1.9104,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1886,
+      "survived": true,
+      "finalMultiple": 1.4397,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1887,
+      "survived": true,
+      "finalMultiple": 1.1911,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1888,
+      "survived": true,
+      "finalMultiple": 1.0728,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1889,
+      "survived": true,
+      "finalMultiple": 0.8767,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1890,
+      "survived": true,
+      "finalMultiple": 0.6679,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1891,
+      "survived": true,
+      "finalMultiple": 0.7813,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1892,
+      "survived": true,
+      "finalMultiple": 0.5968,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1893,
+      "survived": true,
+      "finalMultiple": 0.8439,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1894,
+      "survived": true,
+      "finalMultiple": 0.8266,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1895,
+      "survived": true,
+      "finalMultiple": 0.8042,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1896,
+      "survived": true,
+      "finalMultiple": 0.9214,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1897,
+      "survived": true,
+      "finalMultiple": 0.8961,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1898,
+      "survived": true,
+      "finalMultiple": 0.8473,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1899,
+      "survived": true,
+      "finalMultiple": 0.5102,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1900,
+      "survived": true,
+      "finalMultiple": 1.1315,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1901,
+      "survived": true,
+      "finalMultiple": 0.5916,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1902,
+      "survived": true,
+      "finalMultiple": 0.3037,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1903,
+      "survived": true,
+      "finalMultiple": 0.512,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1904,
+      "survived": true,
+      "finalMultiple": 1.0054,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1905,
+      "survived": true,
+      "finalMultiple": 0.471,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1906,
+      "survived": true,
+      "finalMultiple": 0.1838,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1907,
+      "survived": true,
+      "finalMultiple": 0.5197,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1908,
+      "survived": true,
+      "finalMultiple": 1.0801,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1909,
+      "survived": true,
+      "finalMultiple": 0.4816,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1910,
+      "survived": true,
+      "finalMultiple": 0.6309,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1911,
+      "survived": true,
+      "finalMultiple": 0.4756,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1912,
+      "survived": true,
+      "finalMultiple": 0.3502,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1913,
+      "survived": true,
+      "finalMultiple": 0.5496,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1914,
+      "survived": true,
+      "finalMultiple": 0.8049,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1915,
+      "survived": true,
+      "finalMultiple": 1.1442,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1916,
+      "survived": true,
+      "finalMultiple": 0.7603,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1917,
+      "survived": true,
+      "finalMultiple": 0.9399,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1918,
+      "survived": true,
+      "finalMultiple": 2.1794,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1919,
+      "survived": true,
+      "finalMultiple": 2.6892,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1920,
+      "survived": true,
+      "finalMultiple": 3.5176,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1921,
+      "survived": true,
+      "finalMultiple": 4.5589,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1922,
+      "survived": true,
+      "finalMultiple": 3.6756,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1923,
+      "survived": true,
+      "finalMultiple": 3.0787,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1924,
+      "survived": true,
+      "finalMultiple": 3.2008,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1925,
+      "survived": true,
+      "finalMultiple": 3.2036,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1926,
+      "survived": true,
+      "finalMultiple": 3.0904,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1927,
+      "survived": true,
+      "finalMultiple": 2.6114,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1928,
+      "survived": true,
+      "finalMultiple": 1.5442,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1929,
+      "survived": true,
+      "finalMultiple": 0.7488,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1930,
+      "survived": true,
+      "finalMultiple": 1.0453,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1931,
+      "survived": true,
+      "finalMultiple": 1.563,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1932,
+      "survived": true,
+      "finalMultiple": 3.1768,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1933,
+      "survived": true,
+      "finalMultiple": 2.7878,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1934,
+      "survived": true,
+      "finalMultiple": 1.611,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1935,
+      "survived": true,
+      "finalMultiple": 2.286,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1936,
+      "survived": true,
+      "finalMultiple": 1.0391,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1937,
+      "survived": true,
+      "finalMultiple": 0.429,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1938,
+      "survived": true,
+      "finalMultiple": 1.4869,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1939,
+      "survived": true,
+      "finalMultiple": 1.0718,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1940,
+      "survived": true,
+      "finalMultiple": 0.8996,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1941,
+      "survived": true,
+      "finalMultiple": 1.278,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1942,
+      "survived": true,
+      "finalMultiple": 2.3883,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1943,
+      "survived": true,
+      "finalMultiple": 2.4408,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1944,
+      "survived": true,
+      "finalMultiple": 1.7019,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1945,
+      "survived": true,
+      "finalMultiple": 1.1356,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1946,
+      "survived": true,
+      "finalMultiple": 0.794,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1947,
+      "survived": true,
+      "finalMultiple": 1.7106,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1948,
+      "survived": true,
+      "finalMultiple": 1.9078,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1949,
+      "survived": true,
+      "finalMultiple": 1.8223,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1950,
+      "survived": true,
+      "finalMultiple": 1.4416,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1951,
+      "survived": true,
+      "finalMultiple": 1.252,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1952,
+      "survived": true,
+      "finalMultiple": 0.972,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1953,
+      "survived": true,
+      "finalMultiple": 1.0696,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1954,
+      "survived": true,
+      "finalMultiple": 1.1527,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1955,
+      "survived": true,
+      "finalMultiple": 0.6318,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1956,
+      "survived": true,
+      "finalMultiple": 0.4283,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1957,
+      "survived": true,
+      "finalMultiple": 0.5963,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1958,
+      "survived": true,
+      "finalMultiple": 0.7511,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1959,
+      "survived": true,
+      "finalMultiple": 0.3649,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1960,
+      "survived": true,
+      "finalMultiple": 0.405,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1961,
+      "survived": true,
+      "finalMultiple": 0.2921,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1962,
+      "survived": true,
+      "finalMultiple": 0.1095,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1963,
+      "survived": true,
+      "finalMultiple": 0.2054,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1964,
+      "survived": false,
+      "finalMultiple": 0,
+      "depletedInYear": 1993
+    },
+    {
+      "startYear": 1965,
+      "survived": false,
+      "finalMultiple": 0,
+      "depletedInYear": 1990
+    },
+    {
+      "startYear": 1966,
+      "survived": false,
+      "finalMultiple": 0,
+      "depletedInYear": 1989
+    },
+    {
+      "startYear": 1967,
+      "survived": false,
+      "finalMultiple": 0,
+      "depletedInYear": 1994
+    },
+    {
+      "startYear": 1968,
+      "survived": false,
+      "finalMultiple": 0,
+      "depletedInYear": 1994
+    },
+    {
+      "startYear": 1969,
+      "survived": false,
+      "finalMultiple": 0,
+      "depletedInYear": 1995
+    },
+    {
+      "startYear": 1970,
+      "survived": true,
+      "finalMultiple": 0.7107,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1971,
+      "survived": true,
+      "finalMultiple": 0.5639,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1972,
+      "survived": true,
+      "finalMultiple": 0.3068,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1973,
+      "survived": true,
+      "finalMultiple": 0.109,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1974,
+      "survived": true,
+      "finalMultiple": 1.1741,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1975,
+      "survived": true,
+      "finalMultiple": 2.8421,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1976,
+      "survived": true,
+      "finalMultiple": 2.0698,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1977,
+      "survived": true,
+      "finalMultiple": 2.0664,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1978,
+      "survived": true,
+      "finalMultiple": 3.0202,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1979,
+      "survived": true,
+      "finalMultiple": 2.7086,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1980,
+      "survived": true,
+      "finalMultiple": 3.5614,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1981,
+      "survived": true,
+      "finalMultiple": 3.9421,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1982,
+      "survived": true,
+      "finalMultiple": 5.3856,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1983,
+      "survived": true,
+      "finalMultiple": 4.1522,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1984,
+      "survived": true,
+      "finalMultiple": 4.2155,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1985,
+      "survived": true,
+      "finalMultiple": 4.5381,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1986,
+      "survived": true,
+      "finalMultiple": 3.3204,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1987,
+      "survived": true,
+      "finalMultiple": 2.4203,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1988,
+      "survived": true,
+      "finalMultiple": 3.4066,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1989,
+      "survived": true,
+      "finalMultiple": 3.0119,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1990,
+      "survived": true,
+      "finalMultiple": 2.9377,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1991,
+      "survived": true,
+      "finalMultiple": 3.7107,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1992,
+      "survived": true,
+      "finalMultiple": 2.7456,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1993,
+      "survived": true,
+      "finalMultiple": 2.1648,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1994,
+      "survived": true,
+      "finalMultiple": 2.1064,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1995,
+      "survived": true,
+      "finalMultiple": 2.8523,
+      "depletedInYear": null
+    },
+    {
+      "startYear": 1996,
+      "survived": true,
+      "finalMultiple": 2.0427,
+      "depletedInYear": null
+    }
+  ],
+  "worstCohorts": [
+    {
+      "StartYear": 1964,
+      "Rate": 0.04,
+      "Horizon": 30,
+      "StockShare": 0.6,
+      "Survived": false,
+      "DepletedInYear": 1993,
+      "FinalRealMultiple": 0,
+      "WorstRealMultiple": 0
+    },
+    {
+      "StartYear": 1965,
+      "Rate": 0.04,
+      "Horizon": 30,
+      "StockShare": 0.6,
+      "Survived": false,
+      "DepletedInYear": 1990,
+      "FinalRealMultiple": 0,
+      "WorstRealMultiple": 0
+    },
+    {
+      "StartYear": 1966,
+      "Rate": 0.04,
+      "Horizon": 30,
+      "StockShare": 0.6,
+      "Survived": false,
+      "DepletedInYear": 1989,
+      "FinalRealMultiple": 0,
+      "WorstRealMultiple": 0
+    },
+    {
+      "StartYear": 1967,
+      "Rate": 0.04,
+      "Horizon": 30,
+      "StockShare": 0.6,
+      "Survived": false,
+      "DepletedInYear": 1994,
+      "FinalRealMultiple": 0,
+      "WorstRealMultiple": 0
+    },
+    {
+      "StartYear": 1968,
+      "Rate": 0.04,
+      "Horizon": 30,
+      "StockShare": 0.6,
+      "Survived": false,
+      "DepletedInYear": 1994,
+      "FinalRealMultiple": 0,
+      "WorstRealMultiple": 0
+    },
+    {
+      "StartYear": 1969,
+      "Rate": 0.04,
+      "Horizon": 30,
+      "StockShare": 0.6,
+      "Survived": false,
+      "DepletedInYear": 1995,
+      "FinalRealMultiple": 0,
+      "WorstRealMultiple": 0
+    },
+    {
+      "StartYear": 1973,
+      "Rate": 0.04,
+      "Horizon": 30,
+      "StockShare": 0.6,
+      "Survived": true,
+      "DepletedInYear": null,
+      "FinalRealMultiple": 0.10899180832203684,
+      "WorstRealMultiple": 0.10899180832203684
+    },
+    {
+      "StartYear": 1962,
+      "Rate": 0.04,
+      "Horizon": 30,
+      "StockShare": 0.6,
+      "Survived": true,
+      "DepletedInYear": null,
+      "FinalRealMultiple": 0.10946214808303854,
+      "WorstRealMultiple": 0.10946214808303854
+    }
+  ],
+  "safeRate": {
+    "rate": 0.035975275020146,
+    "horizonYears": 30,
+    "stockShare": 0.6,
+    "note": "Highest rate at which every cohort in the sample survived."
+  },
+  "sequenceRisk": {
+    "startYear": 1964,
+    "forwardFinalMultiple": 0,
+    "reversedFinalMultiple": 1.2765681460839422,
+    "note": "Identical years and identical average return; only the order differs."
+  },
+  "headline": {
+    "rate": 0.04,
+    "successRate": 0.9523809523809523,
+    "failures": 6,
+    "cohorts": 126,
+    "medianFinalMultiple": 1.2649831260956603,
+    "safeRate": 0.035975275020146
+  }
+}

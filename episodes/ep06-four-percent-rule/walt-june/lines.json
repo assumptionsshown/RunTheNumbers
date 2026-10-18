@@ -1,0 +1,61 @@
+{
+  "note": "ep06 'Walt and June' dialogue, the narration of record. Storyboard: discussions/2026-10-07-ep06-storyboard.md. v2 2026-10-17 (founder review: understood 70-80%, did not see why 1929 vs 1966, no clear takeaway): written for a viewer who knows NOTHING, opens on the viewer's own question, says why these two years, signposts the twist mid-story, ends on three numbered lessons. Every number spoken here is re-derived by tools/validate-ep06-story.mjs and asserted by render/ep06-walt-june.html. `year` = the shared YEARS RETIRED counter while the line plays. `*word*` = strong emphasis. Walt and June are illustrations.",
+  "leadIn": 0.6,
+  "gap": { "sameScene": 0.35, "sameSpeaker": 0.25, "sceneChange": 0.9 },
+  "tail": 1.2,
+  "voices": {
+    "N": { "name": "en-US-JasonNeural", "style": "friendly", "pitch": "+10%", "rate": "+8%" },
+    "W": { "name": "en-US-DavisNeural", "style": "friendly", "pitch": "-8%", "rate": "+10%" },
+    "J": { "name": "en-US-NancyNeural", "style": "friendly", "pitch": "-4%", "rate": "+12%" }
+  },
+  "lines": [
+    { "id": "N00", "speaker": "N", "scene": "open", "text": "Say you saved *a million dollars* for retirement. Your paycheck stops. How much can you spend every year, without ever running out?" },
+    { "id": "N01", "speaker": "N", "scene": "open", "text": "The most famous answer is called *the four percent rule*. In your first year, you take out four percent of your savings. That's *forty thousand dollars*." },
+    { "id": "N01P", "speaker": "N", "scene": "open", "text": "After that, you take the same amount every year, plus a little extra when prices go up, so it still buys the same things. The rule says your money should last *thirty years*." },
+    { "id": "N02", "speaker": "N", "scene": "open", "text": "But does it? Most people fear one thing: retiring right before *a market crash*. So we tested the worst crash on record, nineteen twenty-nine, against a year that nobody fears, nineteen sixty-six." },
+
+    { "id": "W01", "speaker": "W", "scene": "meet", "year": 0, "text": "I'm Walt. I retire in January, nineteen twenty-nine." },
+    { "id": "J01", "speaker": "J", "scene": "meet", "year": 0, "text": "I'm June. I retire in January, nineteen sixty-six." },
+    { "id": "N03", "speaker": "N", "scene": "meet", "year": 0, "text": "Same million. Same rule. Both keep their savings invested: sixty percent in *stocks*, which grow but can crash, and forty percent in *bonds*, steadier loans to the government. Only the year is different." },
+    { "id": "N03B", "speaker": "N", "scene": "meet", "year": 0, "text": "Watch their money bags. A bag shows what the money can really buy. When prices go up and the money doesn't, *the bag shrinks*." },
+    { "id": "N04", "speaker": "N", "scene": "meet", "year": 0, "after": 1.4, "text": "One of them runs out of money. Walt is retiring right into *the Great Depression*. Who do you think?" },
+
+    { "id": "W02", "speaker": "W", "scene": "crash", "year": 0, "style": "sad", "text": "October, nineteen twenty-nine. The market just *crashed*." },
+    { "id": "W03", "speaker": "W", "scene": "crash", "year": 3, "style": "sad", "text": "By nineteen thirty-two, stocks are down *eighty-five percent* from the top." },
+    { "id": "W04", "speaker": "W", "scene": "crash", "year": 3, "style": "hopeful", "text": "But prices fell too. Everything my forty thousand used to buy now costs *thirty-three thousand*." },
+    { "id": "J02", "speaker": "J", "scene": "crash", "year": 3, "style": "cheerful", "text": "Nineteen sixty-nine. Three years in. Honestly? Boring. I've spent three years of money, and I've still got *eight hundred ninety-three thousand*." },
+    { "id": "W05", "speaker": "W", "scene": "crash", "year": 3, "style": "sad", "text": "Three years in for me. *Six hundred fifty thousand* left." },
+
+    { "id": "W06", "speaker": "W", "scene": "flip", "year": 8, "style": "cheerful", "text": "Nineteen thirty-seven. Eight years in. The market came back. A million seventy-six. More than I started with." },
+    { "id": "J03", "speaker": "J", "scene": "flip", "year": 8, "text": "Nineteen seventy-four. Eight years in. Prices keep going up. Everything that cost forty thousand now costs *fifty-eight thousand six hundred*." },
+    { "id": "J04", "speaker": "J", "scene": "flip", "year": 8, "style": "sad", "text": "And I'm down to *six hundred fifteen thousand*." },
+    { "id": "NF1", "speaker": "N", "scene": "flip", "year": 8, "text": "Notice what just happened. Walt's crash is already over. June's trouble is only starting, and it isn't the stock market. It's *prices*." },
+
+    { "id": "J05", "speaker": "J", "scene": "slide", "year": 16, "style": "sad", "text": "Nineteen eighty-two. Sixteen years in. Prices have *nearly tripled* since I retired. My forty-thousand-dollar year now costs *a hundred eighteen thousand six hundred*." },
+    { "id": "J06", "speaker": "J", "scene": "slide", "year": 16, "style": "sad", "text": "I've got *two hundred four thousand* left." },
+    { "id": "NS1", "speaker": "N", "scene": "slide", "year": 16, "text": "Here's the trap. Every year, June needs more dollars just to buy the same things. So she keeps selling her stocks and bonds while they're *down*, and the money she sells can never come back." },
+    { "id": "W07", "speaker": "W", "scene": "slide", "year": 20, "text": "Nineteen forty-nine. Twenty years in. Prices jumped after the war. *Five hundred thirty-three thousand.* My lowest ever. Lower than the crash." },
+
+    { "id": "J07", "speaker": "J", "scene": "end", "year": 23, "style": "sad", "text": "Since eighty-two, a huge bull market. After inflation, stocks *more than doubled*. But I only had two hundred thousand left in it." },
+    { "id": "J08", "speaker": "J", "scene": "end", "year": 23, "style": "sad", "text": "January, nineteen eighty-nine. Twenty-three years in. *Less than one year of money left.* I'm out." },
+    { "id": "W08", "speaker": "W", "scene": "end", "year": 30, "style": "cheerful", "text": "Nineteen fifty-nine. Thirty years in. *Seven hundred forty-nine thousand* left. I made it." },
+
+    { "id": "N05", "speaker": "N", "scene": "why", "text": "So the man who retired into the Great Depression *made it*. The woman who retired into the calm sixties *ran out*. Why?" },
+    { "id": "N06", "speaker": "N", "scene": "why", "text": "In Walt's crash, prices *fell*, so his money stretched further. His stocks crashed, but his bonds *gained thirty-one percent*, after inflation. And the market came back while he still had money in it." },
+    { "id": "N07", "speaker": "N", "scene": "why", "text": "June got *sixteen years of rising prices*, starting the year she retired. After inflation, her stocks lost *twenty percent*, and her bonds lost *almost half*. Both halves of her money shrank, while what she had to take out kept growing." },
+    { "id": "N08", "speaker": "N", "scene": "why", "text": "Walt met rising prices too, in the forties. But that came twelve years in, and he still had over eight hundred thousand. *June met them on day one.*" },
+
+    { "id": "N09", "speaker": "N", "scene": "zoom", "text": "Walt and June are two of *a hundred twenty-six*. We ran the rule for every year you could have retired, from eighteen seventy-one to nineteen ninety-six." },
+    { "id": "N10", "speaker": "N", "scene": "zoom", "text": "*A hundred twenty* lasted thirty years. *Six* ran out." },
+    { "id": "N11", "speaker": "N", "scene": "zoom", "text": "And all six retired between *nineteen sixty-four and nineteen sixty-nine*. June's neighbors." },
+    { "id": "N12", "speaker": "N", "scene": "zoom", "text": "The typical one did far better than Walt. It ended with about *a million and a quarter*." },
+
+    { "id": "N13", "speaker": "N", "scene": "answer", "text": "So what does this mean for you? *Lesson one.* The four percent rule almost always worked: a hundred twenty times out of a hundred twenty-six." },
+    { "id": "N13B", "speaker": "N", "scene": "answer", "text": "*Lesson two.* A crash is not what sinks you. All six failures started with prices rising *by half or more* in their first ten years. That's not a sure loss. Some had it even worse and still made it, because a strong market came in time. But it's *the warning sign*." },
+    { "id": "N14", "speaker": "N", "scene": "answer", "text": "*Lesson three.* If you want a plan that survived every year on record, June's included, take *three point six percent*. Thirty-six thousand a year instead of forty." },
+    { "id": "N14B", "speaker": "N", "scene": "answer", "text": "Or keep four percent, and when prices jump in your first years, *spend less*. That's the one thing June never did." },
+
+    { "id": "N15", "speaker": "N", "scene": "panel", "text": "The fine print. Sixty-forty, rebalanced every year. Money taken out at the start of each year. Everything after inflation. No taxes, no fees, no Social Security. Walt and June are illustrations. The market history is real. This is history, not advice." },
+    { "id": "N16", "speaker": "N", "scene": "close", "text": "If you were June in nineteen seventy-four, would you have cut back? Tell me in the comments." }
+  ]
+}

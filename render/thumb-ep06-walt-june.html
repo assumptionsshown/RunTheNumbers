@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Thumbnail: ep06 Walt and June</title>
+<style>
+  html, body { margin: 0; background: #fbf3df; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1280" height="720"></canvas>
+<script type="module">
+// Thumbnails for ep06 "Walt and June", three variants for YouTube Test & Compare
+// (2026-10-09: the ep05 paid read put the weak link at the CLICK, organic CTR
+// 1.3%, so packaging gets three real options, not one).
+//   ?anim=a   verdict: 1929 MADE IT vs 1966 RAN OUT, both characters
+//   ?anim=b   curiosity: same two, a big "?" and "WHO RAN OUT?"
+//   ?anim=c   the record: 126 start years, 6 red X, "WHY 1966?"
+//   ?anim=sv  vertical 1080x1920 cover for the Short (variant b layout)
+// Same hand-drawn kit as render/ep06-walt-june.html. Every figure from batch.json.
+const which = new URLSearchParams(location.search).get("anim") ?? "a";
+const V = which === "sv";
+const W = V ? 1080 : 1280, H = V ? 1920 : 720;
+const cv = document.getElementById("c"); cv.width = W; cv.height = H;
+const ctx = cv.getContext("2d");
+const batch = await (await fetch("../episodes/ep06-four-percent-rule/batch.json")).json();
+const WALT = batch.cohorts.find((c) => c.startYear === 1929), JUNE = batch.cohorts.find((c) => c.startYear === 1966);
+if (!WALT.survived || JUNE.survived) throw new Error("thumbnail premise false: Walt must survive, June must not");
+const failed = batch.cohorts.filter((c) => !c.survived);
+
+const C = { paper: "#fbf3df", ink: "#1d1d1f", walt: "#d98b45", june: "#3fb8ae", waltDark: "#a85f1f", juneDark: "#1f8f86",
+  skin: "#f6c9a3", red: "#e5646e", green: "#4caf5c", sepia: "#f3e2c2", mint: "#e3f1ea", muted: "#7a7468" };
+const FONT = '"Segoe UI", system-ui, sans-serif', MONO = '"Cascadia Mono", Consolas, monospace';
+function text(s, x, y, { size = 48, fill = C.ink, align = "center", weight = 900, mono = false, stroke = 0 } = {}) {
+  ctx.font = `${weight} ${size}px ${mono ? MONO : FONT}`; ctx.textAlign = align;
+  if (stroke) { ctx.lineWidth = stroke; ctx.strokeStyle = "#ffffff"; ctx.lineJoin = "round"; ctx.strokeText(s, x, y); }
+  ctx.fillStyle = fill; ctx.fillText(s, x, y);
+}
+function shape(fill, draw, lw = 7) {
+  ctx.beginPath(); draw();
+  if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+  if (lw) { ctx.lineWidth = lw; ctx.strokeStyle = C.ink; ctx.lineJoin = "round"; ctx.stroke(); }
+}
+function elder(cx, footY, s, who, mood) {
+  ctx.save(); ctx.translate(cx, footY); ctx.scale(s, s);
+  const shirt = who === "W" ? C.walt : C.june;
+  shape("#5b5a66", () => { ctx.rect(-45, -112, 38, 112); ctx.rect(7, -112, 38, 112); }, 6);
+  shape(shirt, () => ctx.roundRect(-66, -258, 132, 156, 30));
+  shape(shirt, () => ctx.roundRect(-96, -244, 34, 114, 16), 6);
+  shape(shirt, () => ctx.roundRect(62, -244, 34, 114, 16), 6);
+  shape(C.skin, () => ctx.ellipse(0, -325, 62, 72, 0, 0, Math.PI * 2));
+  if (who === "W") {
+    shape("#c9c6c0", () => ctx.ellipse(-56, -338, 15, 28, 0.15, 0, Math.PI * 2), 5);
+    shape("#c9c6c0", () => ctx.ellipse(56, -338, 15, 28, -0.15, 0, Math.PI * 2), 5);
+    shape("#c9c6c0", () => ctx.roundRect(-26, -305, 52, 11, 5), 4);
+  } else {
+    shape("#ecebe7", () => ctx.ellipse(0, -372, 68, 38, 0, Math.PI, 0), 6);
+    shape("#ecebe7", () => ctx.ellipse(0, -410, 30, 24, 0, 0, Math.PI * 2), 6);
+  }
+  ctx.lineWidth = 5; ctx.strokeStyle = C.ink; ctx.beginPath();
+  ctx.arc(-24, -330, 16, 0, Math.PI * 2); ctx.moveTo(40, -330); ctx.arc(24, -330, 16, 0, Math.PI * 2);
+  ctx.moveTo(-8, -330); ctx.lineTo(8, -330); ctx.stroke();
+  ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(-24, -330, 6, 0, Math.PI * 2); ctx.arc(24, -330, 6, 0, Math.PI * 2); ctx.fill();
+  const my = who === "W" ? -283 : -292;
+  ctx.lineWidth = 7; ctx.beginPath();
+  if (mood > 0) ctx.arc(0, my - 14, 24, 0.12 * Math.PI, 0.88 * Math.PI);
+  else if (mood < 0) ctx.arc(0, my + 20, 22, 1.2 * Math.PI, 1.8 * Math.PI);
+  else { shape("#7a2e2e", () => ctx.ellipse(0, my + 4, 14, 18, 0, 0, Math.PI * 2), 5); }
+  ctx.stroke();
+  ctx.restore();
+}
+function stamp(cx, cy, s, colour, rot, size) {
+  ctx.save(); ctx.translate(cx, cy); ctx.rotate(rot);
+  ctx.font = `900 ${size}px ${FONT}`;
+  const w = ctx.measureText(s).width + size;
+  ctx.fillStyle = "#ffffff"; ctx.fillRect(-w / 2, -size * 0.82, w, size * 1.5);
+  ctx.lineWidth = 10; ctx.strokeStyle = colour; ctx.strokeRect(-w / 2, -size * 0.82, w, size * 1.5);
+  text(s, 0, size * 0.3, { size, fill: colour });
+  ctx.restore();
+}
+function split() {
+  ctx.fillStyle = C.sepia; ctx.fillRect(0, 0, W / 2, H);
+  ctx.fillStyle = C.mint; ctx.fillRect(W / 2, 0, W / 2, H);
+  shape(null, () => { ctx.moveTo(W / 2, 0); ctx.lineTo(W / 2, H); }, 8);
+}
+
+if (which === "a") {
+  split();
+  text(String(WALT.startYear), 320, 190, { size: 170, mono: true });
+  text(String(JUNE.startYear), 960, 190, { size: 170, mono: true });
+  elder(320, 760, 0.95, "W", 1);
+  elder(960, 760, 0.95, "J", -1);
+  // stamps sit on the bodies, never on the faces (the faces are the hook)
+  stamp(320, 590, "MADE IT", C.green, -0.08, 64);
+  stamp(960, 590, "RAN OUT", C.red, -0.08, 64);
+  // centre badge: what is the same
+  shape("#ffcf4a", () => ctx.roundRect(440, 236, 400, 84, 42), 7);
+  text("SAME 4% RULE", 640, 294, { size: 42 });
+} else if (which === "b" || which === "sv") {
+  if (V) {
+    ctx.fillStyle = C.sepia; ctx.fillRect(0, 0, W, H / 2);
+    ctx.fillStyle = C.mint; ctx.fillRect(0, H / 2, W, H / 2);
+    shape(null, () => { ctx.moveTo(0, H / 2); ctx.lineTo(W, H / 2); }, 8);
+    text("SAME $1M · SAME 4% RULE", 540, 140, { size: 60 });
+    text(`retired ${WALT.startYear}`, 690, 520, { size: 84, fill: C.waltDark });
+    text("(the Great Depression)", 690, 590, { size: 40, fill: C.waltDark, weight: 800 });
+    elder(260, 880, 1.15, "W", 0);
+    text(`retired ${JUNE.startYear}`, 690, 1420, { size: 84, fill: C.juneDark });
+    text("(the calm sixties)", 690, 1490, { size: 40, fill: C.juneDark, weight: 800 });
+    elder(260, 1780, 1.15, "J", 1);
+    shape("#ffffff", () => ctx.arc(540, H / 2, 120, 0, Math.PI * 2), 8);
+    text("?", 540, H / 2 + 60, { size: 180, fill: C.red });
+    text("WHO RAN OUT?", 540, 1860, { size: 76, fill: C.red, stroke: 12 });
+  } else {
+    split();
+    text(String(WALT.startYear), 320, 170, { size: 150, mono: true });
+    text(String(JUNE.startYear), 960, 170, { size: 150, mono: true });
+    text("the Great Depression", 320, 232, { size: 40, fill: C.waltDark, weight: 800 });
+    text("the calm sixties", 960, 232, { size: 40, fill: C.juneDark, weight: 800 });
+    elder(320, 700, 0.95, "W", 0);
+    elder(960, 700, 0.95, "J", 1);
+    shape("#ffffff", () => ctx.arc(640, 430, 110, 0, Math.PI * 2), 8);
+    text("?", 640, 488, { size: 170, fill: C.red });
+    text("WHO RAN OUT?", 640, 690, { size: 72, fill: C.red, stroke: 12 });
+  }
+} else if (which === "c") {
+  ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
+  text("THE 4% RULE, EVERY YEAR SINCE 1871", 640, 80, { size: 42 });
+  const cols = 21, cw = 54, ch = 64, x0 = 640 - (cols * cw) / 2 + cw / 2, y0 = 150;
+  batch.cohorts.forEach((c, k) => {
+    const cx = x0 + (k % cols) * cw, cy = y0 + Math.floor(k / cols) * ch;
+    if (c.survived) shape("#9ccf7e", () => ctx.arc(cx, cy, 17, 0, Math.PI * 2), 4);
+    else {
+      ctx.lineWidth = 9; ctx.strokeStyle = C.red; ctx.beginPath();
+      ctx.moveTo(cx - 17, cy - 17); ctx.lineTo(cx + 17, cy + 17); ctx.moveTo(cx + 17, cy - 17); ctx.lineTo(cx - 17, cy + 17); ctx.stroke();
+    }
+    if (c.startYear === JUNE.startYear) { ctx.lineWidth = 7; ctx.strokeStyle = C.ink; ctx.beginPath(); ctx.arc(cx, cy, 28, 0, Math.PI * 2); ctx.stroke(); }
+  });
+  text(`${failed.length} of ${batch.cohorts.length} ran out · all retired ${failed[0].startYear}–${failed.at(-1).startYear}`, 640, 536, { size: 34, fill: C.red, weight: 800 });
+  shape("#ffffff", () => ctx.roundRect(290, 565, 700, 135, 26), 8);
+  text(`WHY ${JUNE.startYear}?`, 640, 668, { size: 104, fill: C.red });
+}
+
+window.FRAME_COUNT = 1;
+window.renderFrame = () => true;
+document.documentElement.dataset.ready = "1";
+</script>
+</body>
+</html>

@@ -13,8 +13,12 @@ public sealed record Month(
     double? Cape,
     double? RealPrice,
     // The nominal index as published. Never reconstruct this as RealPrice x Cpi:
-    // the round trip can turn a genuine tie into a strict new high.
-    double? Price);
+    // the round trip differs from the pinned value in the fifteenth decimal, which
+    // is enough to turn a genuine tie into a strict new high. 1871-05 and 1872-01
+    // are both exactly 4.86 and the reconstruction separates them.
+    double? Price,
+    /// <summary>Ten-year Treasury yield, in percent. Shiller's GS10 column.</summary>
+    double? Gs10);
 
 public sealed class ShillerSeries
 {
@@ -43,6 +47,7 @@ public sealed class ShillerSeries
         int cape = Index("cape");
         int realPrice = Index("realPrice");
         int price = Index("price");
+        int gs10 = Index("gs10");
 
         var months = new List<Month>(lines.Length - 1);
         for (int i = 1; i < lines.Length; i++)
@@ -54,7 +59,8 @@ public sealed class ShillerSeries
                 Optional(f[cpi]),
                 Optional(f[cape]),
                 Optional(f[realPrice]),
-                Optional(f[price])));
+                Optional(f[price]),
+                Optional(f[gs10])));
         }
 
         // The snapshot builder already guarantees a contiguous monthly series,
