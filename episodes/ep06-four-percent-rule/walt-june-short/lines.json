@@ -1,0 +1,21 @@
+{
+  "note": "ep06 Short 'Walt and June' (2026-10-17), 9:16, published the same day as the long-form v2. Hook in the first line, no assumed knowledge. Every number is checked by tools/validate-ep06-story.mjs (short section) and asserted by render/short-walt-june.html. Walt and June are illustrations.",
+  "leadIn": 0.3,
+  "gap": { "sameScene": 0.3, "sameSpeaker": 0.2, "sceneChange": 0.5 },
+  "tail": 1.0,
+  "voices": {
+    "N": { "name": "en-US-JasonNeural", "style": "friendly", "pitch": "+10%", "rate": "+8%" },
+    "W": { "name": "en-US-DavisNeural", "style": "friendly", "pitch": "-8%", "rate": "+10%" },
+    "J": { "name": "en-US-NancyNeural", "style": "friendly", "pitch": "-4%", "rate": "+12%" }
+  },
+  "lines": [
+    { "id": "S01", "speaker": "N", "scene": "hook", "text": "Two people retire with *a million dollars*. Both take out forty thousand a year, plus inflation. One retires into the Great Depression. One into the calm sixties. *Who runs out?*" },
+    { "id": "S02", "speaker": "W", "scene": "story", "style": "sad", "text": "I'm Walt. Nineteen twenty-nine. Stocks crash *eighty-five percent*." },
+    { "id": "S03", "speaker": "W", "scene": "story", "style": "hopeful", "text": "But prices fell too. My money stretched further." },
+    { "id": "S04", "speaker": "J", "scene": "story", "style": "cheerful", "text": "I'm June. Nineteen sixty-six. No crash. Just prices going up, *year after year*." },
+    { "id": "S05", "speaker": "J", "scene": "story", "style": "sad", "text": "By nineteen eighty-two, prices had *nearly tripled*. I kept selling, just to keep up." },
+    { "id": "S06", "speaker": "W", "scene": "story", "style": "cheerful", "text": "Thirty years later, I still have *seven hundred forty-nine thousand*." },
+    { "id": "S07", "speaker": "J", "scene": "story", "style": "sad", "text": "I ran out in *nineteen eighty-nine*." },
+    { "id": "S08", "speaker": "N", "scene": "end", "text": "The crash didn't sink Walt. *Rising prices* sank June. The full story, and what it means for you, is on the channel." }
+  ]
+}

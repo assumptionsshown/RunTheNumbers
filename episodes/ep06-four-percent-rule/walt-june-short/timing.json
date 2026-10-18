@@ -1,0 +1,70 @@
+{
+  "seconds": 49.895,
+  "fps": 30,
+  "lines": [
+    {
+      "id": "S01",
+      "speaker": "N",
+      "scene": "hook",
+      "year": null,
+      "start": 0.3,
+      "end": 11.92
+    },
+    {
+      "id": "S02",
+      "speaker": "W",
+      "scene": "story",
+      "year": null,
+      "start": 12.42,
+      "end": 17.76
+    },
+    {
+      "id": "S03",
+      "speaker": "W",
+      "scene": "story",
+      "year": null,
+      "start": 17.96,
+      "end": 21.428
+    },
+    {
+      "id": "S04",
+      "speaker": "J",
+      "scene": "story",
+      "year": null,
+      "start": 21.728,
+      "end": 29.037
+    },
+    {
+      "id": "S05",
+      "speaker": "J",
+      "scene": "story",
+      "year": null,
+      "start": 29.237,
+      "end": 35.384
+    },
+    {
+      "id": "S06",
+      "speaker": "W",
+      "scene": "story",
+      "year": null,
+      "start": 35.684,
+      "end": 38.881
+    },
+    {
+      "id": "S07",
+      "speaker": "J",
+      "scene": "story",
+      "year": null,
+      "start": 39.181,
+      "end": 41.204
+    },
+    {
+      "id": "S08",
+      "speaker": "N",
+      "scene": "end",
+      "year": null,
+      "start": 41.704,
+      "end": 48.895
+    }
+  ]
+}

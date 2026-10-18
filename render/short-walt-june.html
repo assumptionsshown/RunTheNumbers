@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Short: Walt and June</title>
+<style>
+  html, body { margin: 0; background: #fbf3df; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script type="module">
+// ep06 Short "Walt and June" (2026-10-17), 1080x1920, published with the long-form
+// v2. Walt (1929) on top, June (1966) below; each half moves on its own clock as its
+// character speaks. Same drawing kit as render/ep06-walt-june.html. Every figure
+// comes from batch.json and the pinned Shiller CSV and is asserted at load; the
+// spoken words are checked by tools/validate-ep06-story.mjs (short section).
+// renderFrame(i) is a pure function of i.
+const W = 1080, H = 1920, HALF = 960;
+const ctx = document.getElementById("c").getContext("2d");
+const load = async (p) => (await fetch(p)).json();
+const EP = "../episodes/ep06-four-percent-rule";
+const [batch, timing, mouth] = await Promise.all([
+  load(`${EP}/batch.json`), load(`${EP}/walt-june-short/timing.json`), load(`${EP}/walt-june-short/mouth.json`),
+]);
+const FPS = mouth.fps;
+const csv = (await (await fetch("../data/snapshots/shiller-2026-07-26/shiller-monthly.csv")).text()).trim().split(/\r?\n/);
+const HDR = csv[0].split(",");
+const ROWS = new Map(csv.slice(1).map((l) => { const f = l.split(","); return [f[0], f]; }));
+const jan = (y, name) => Number(ROWS.get(`${y}-01`)[HDR.indexOf(name)]);
+const cpiRatio = (a, b) => jan(b, "cpi") / jan(a, "cpi");
+
+const WALT = batch.cohorts.find((c) => c.startYear === 1929);
+const JUNE = batch.cohorts.find((c) => c.startYear === 1966);
+const RATE = batch.meta.rate, HZ = batch.meta.horizonYears;
+const K = (v) => Math.round(v * 1000);
+const fmtK = (v) => `$${K(v).toLocaleString("en-US")}k`;
+const usd = (v) => `$${Math.round(v).toLocaleString("en-US")}`;
+const claim = (ok, what) => { if (!ok) throw new Error(`short-walt-june: claim false: ${what}`); };
+claim(WALT.survived && !JUNE.survived && JUNE.depletedInYear === 1989, "Walt makes it, June out 1989");
+claim(K(WALT.path[30]) === 749, "Walt y30 $749k");
+claim(cpiRatio(1929, 1932) < 1, "prices fell 1929-32");
+claim(cpiRatio(1966, 1982) >= 2.8 && cpiRatio(1966, 1982) < 3, "prices nearly tripled 1966-82");
+claim(RATE === 0.04 && HZ === 30, "4%, 30 years");
+
+const L = Object.fromEntries(timing.lines.map((l) => [l.id, l]));
+const speaking = (t) => timing.lines.find((l) => t >= l.start && t <= l.end + 0.05) ?? null;
+const lineAt = (t) => { let cur = null; for (const l of timing.lines) if (t >= l.start - 0.2) cur = l; return cur; };
+const clamp01 = (x) => Math.max(0, Math.min(1, x));
+const fade = (t, at, d = 0.3) => clamp01((t - at) / d);
+const ease = (x) => x * x * (3 - 2 * x);
+
+// ---- drawing kit (from render/ep06-walt-june.html)
+const C = { paper: "#fbf3df", ink: "#1d1d1f", walt: "#d98b45", june: "#3fb8ae", waltDark: "#a85f1f", juneDark: "#1f8f86",
+  skin: "#f6c9a3", muted: "#7a7468", red: "#e5646e", green: "#4caf5c", gold: "#ffcf4a", sepia: "#f3e2c2", mint: "#e3f1ea" };
+const FONT = '"Segoe UI", system-ui, sans-serif', MONO = '"Cascadia Mono", Consolas, monospace';
+function text(s, x, y, { size = 48, fill = C.ink, align = "center", weight = 800, mono = false, alpha = 1 } = {}) {
+  if (alpha <= 0.01) return;
+  ctx.globalAlpha = Math.min(1, alpha);
+  ctx.font = `${weight} ${size}px ${mono ? MONO : FONT}`;
+  ctx.fillStyle = fill; ctx.textAlign = align; ctx.fillText(s, x, y);
+  ctx.globalAlpha = 1;
+}
+function shape(fill, draw, lw = 7) {
+  ctx.beginPath(); draw();
+  if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+  if (lw) { ctx.lineWidth = lw; ctx.strokeStyle = C.ink; ctx.lineJoin = "round"; ctx.stroke(); }
+}
+function elder(cx, footY, o) {
+  ctx.save(); ctx.translate(cx, footY); ctx.scale(o.s, o.s);
+  shape("#5b5a66", () => { ctx.rect(-45, -112, 38, 112); ctx.rect(7, -112, 38, 112); }, 6);
+  shape(o.shirt, () => ctx.roundRect(-66, -258, 132, 156, 30));
+  shape(o.shirt, () => ctx.roundRect(-96, -244, 34, 114, 16), 6);
+  shape(o.shirt, () => ctx.roundRect(62, -244, 34, 114, 16), 6);
+  shape(C.skin, () => ctx.ellipse(0, -325, 62, 72, 0, 0, Math.PI * 2));
+  if (o.who === "W") {
+    shape("#c9c6c0", () => ctx.ellipse(-56, -338, 15, 28, 0.15, 0, Math.PI * 2), 5);
+    shape("#c9c6c0", () => ctx.ellipse(56, -338, 15, 28, -0.15, 0, Math.PI * 2), 5);
+    shape("#c9c6c0", () => ctx.roundRect(-26, -305, 52, 11, 5), 4);
+  } else {
+    shape("#ecebe7", () => ctx.ellipse(0, -372, 68, 38, 0, Math.PI, 0), 6);
+    shape("#ecebe7", () => ctx.ellipse(0, -410, 30, 24, 0, 0, Math.PI * 2), 6);
+  }
+  ctx.lineWidth = 5; ctx.strokeStyle = C.ink; ctx.beginPath();
+  ctx.arc(-24, -330, 16, 0, Math.PI * 2); ctx.moveTo(40, -330); ctx.arc(24, -330, 16, 0, Math.PI * 2);
+  ctx.moveTo(-8, -330); ctx.lineTo(8, -330); ctx.stroke();
+  ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(-24, -330, 6, 0, Math.PI * 2); ctx.arc(24, -330, 6, 0, Math.PI * 2); ctx.fill();
+  const my = o.who === "W" ? -283 : -292;
+  if (o.mouth > 0.05) shape("#7a2e2e", () => ctx.ellipse(0, my + 4, 15, 4 + 15 * o.mouth, 0, 0, Math.PI * 2), 5);
+  else {
+    ctx.lineWidth = 6; ctx.beginPath();
+    if (o.mood > 0) ctx.arc(0, my - 12, 22, 0.15 * Math.PI, 0.85 * Math.PI);
+    else if (o.mood < 0) ctx.arc(0, my + 18, 20, 1.2 * Math.PI, 1.8 * Math.PI);
+    else { ctx.moveTo(-15, my); ctx.lineTo(15, my); }
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+function moneyBag(cx, footY, v, label) {
+  if (v > 0.001) {
+    const r = 30 + 90 * Math.sqrt(Math.min(v, 1.4) / 1.4);
+    shape("#9ccf7e", () => ctx.ellipse(cx, footY - r, r, r, 0, 0, Math.PI * 2));
+    shape("#9ccf7e", () => { ctx.moveTo(cx - r * 0.3, footY - 2 * r + 6); ctx.lineTo(cx, footY - 2 * r - r * 0.35); ctx.lineTo(cx + r * 0.3, footY - 2 * r + 6); ctx.closePath(); }, 6);
+    text("$", cx, footY - r + r * 0.35, { size: Math.max(30, r), fill: "#2f6b2a" });
+  }
+  if (label) text(label, cx, footY + 58, { size: 54 });
+}
+function bubble(cx, bottomY, s, colour, alpha) {
+  if (alpha <= 0.01) return;
+  ctx.font = `800 40px ${FONT}`;
+  const words = s.split(" "), rows = [];
+  let row = "";
+  for (const w of words) { const t = row ? `${row} ${w}` : w; if (ctx.measureText(t).width > 470 && row) { rows.push(row); row = w; } else row = t; }
+  rows.push(row);
+  const bw = Math.max(...rows.map((r) => ctx.measureText(r).width)) + 60, bh = rows.length * 50 + 36;
+  const bx = Math.max(24, Math.min(W - bw - 24, cx - bw / 2)), by = bottomY - bh;
+  ctx.globalAlpha = alpha;
+  shape("#ffffff", () => ctx.roundRect(bx, by, bw, bh, 26), 6);
+  ctx.globalAlpha = 1;
+  rows.forEach((r, k) => text(r, bx + bw / 2, by + 56 + k * 50, { size: 40, fill: colour, alpha }));
+}
+function stamp(cx, cy, s, colour, rot, alpha, size = 60) {
+  if (alpha <= 0.01) return;
+  ctx.save(); ctx.translate(cx, cy); ctx.rotate(rot); ctx.globalAlpha = alpha;
+  ctx.font = `900 ${size}px ${FONT}`;
+  const w = ctx.measureText(s).width + size;
+  ctx.fillStyle = "#ffffff"; ctx.fillRect(-w / 2, -size * 0.82, w, size * 1.5);
+  ctx.lineWidth = 10; ctx.strokeStyle = colour; ctx.strokeRect(-w / 2, -size * 0.82, w, size * 1.5);
+  ctx.globalAlpha = 1;
+  text(s, 0, size * 0.3, { size, fill: colour, weight: 900, alpha });
+  ctx.restore();
+}
+function card(rows, y, alpha) {
+  if (alpha <= 0.01) return;
+  const h = 50 + rows.length * 74;
+  ctx.globalAlpha = alpha;
+  shape("#ffffff", () => ctx.roundRect(70, y, 940, h, 34), 8);
+  ctx.globalAlpha = 1;
+  rows.forEach(([s, fill, size], k) => text(s, 540, y + 82 + k * 74, { size: size ?? 52, fill: fill ?? C.ink, alpha }));
+}
+
+// ---- each half on its own clock: [line id, years retired] keyframes
+const STEPS = {
+  W: [["S02", 3], ["S06", HZ]],
+  J: [["S05", 16], ["S07", JUNE.depletedInYear - JUNE.startYear]],
+};
+function stateOf(k, t) {
+  const P = k === "W" ? WALT : JUNE;
+  let from = 0, to = 0, at = -1;
+  for (const [id, yr] of STEPS[k]) if (t >= L[id].start) { from = to; to = yr; at = L[id].start; }
+  const p = at < 0 ? 1 : ease(clamp01((t - at) / 1.0));
+  const yr = Math.round(from + (to - from) * p);
+  const out = k === "J" && t >= L.S07.start + 0.9;
+  const v = out ? 0 : P.path[from] + (P.path[Math.min(to, HZ)] - P.path[from]) * p;
+  return { yr, v, out };
+}
+
+const HALVES = {
+  W: { off: 0, tint: C.sepia, start: 1929, name: "WALT", tag: "retired into the Great Depression", col: C.walt, dark: C.waltDark },
+  J: { off: HALF, tint: C.mint, start: 1966, name: "JUNE", tag: "retired into the calm sixties", col: C.june, dark: C.juneDark },
+};
+const BUBBLE = {
+  S02: "1929: stocks −85%",
+  S03: `Prices fell: $40,000 → ${usd(40000 * cpiRatio(1929, 1932))}`,
+  S04: "No crash. Prices up, year after year",
+  S05: `Prices ×${cpiRatio(1966, 1982).toFixed(2)} by 1982`,
+  S06: `30 years later: ${fmtK(WALT.path[30])}`,
+  S07: "I ran out in 1989",
+};
+const MOOD = { S02: -1, S03: 0, S04: 1, S05: -1, S06: 1, S07: -1 };
+
+function drawHalf(k, t, i) {
+  const Hf = HALVES[k], o = Hf.off, s = stateOf(k, t);
+  ctx.fillStyle = Hf.tint; ctx.fillRect(0, o, W, HALF);
+  text(String(Hf.start + s.yr), 540, o + 170, { size: 130, mono: true, fill: s.out ? C.muted : C.ink });
+  const hook = t < L.S02.start - 0.1;
+  text(hook ? `${Hf.name} · $1M · $40,000 a year` : `${Hf.name} · ${Hf.tag}`, 540, o + 228, { size: 36, fill: Hf.dark, weight: 700 });
+  const act = speaking(t), cur = lineAt(t);
+  const talking = act && act.speaker === k;
+  let mood = k === "W" ? 0 : 1;
+  if (cur && cur.speaker === k && MOOD[cur.id] != null) mood = MOOD[cur.id];
+  if (t >= L.S06.start) mood = k === "W" ? 1 : -1;
+  elder(270, o + 880, { s: 0.95, who: k, shirt: Hf.col, mood, mouth: talking ? mouth.open[Math.min(i, mouth.open.length - 1)] : 0 });
+  if (s.out) stamp(800, o + 640, "RAN OUT · 1989", C.red, -0.08, 1, 54);
+  else moneyBag(800, o + 800, s.v, fmtK(s.v));
+  if (k === "W" && t >= L.S06.start + 0.9) stamp(800, o + 440, "MADE IT", C.green, -0.08, fade(t, L.S06.start + 0.9, 0.25));
+  if (talking && BUBBLE[act.id]) bubble(300, o + 432, BUBBLE[act.id], Hf.dark, fade(t, act.start, 0.2));
+}
+
+function renderFrame(i) {
+  const t = i / FPS;
+  drawHalf("W", t, i);
+  drawHalf("J", t, i);
+  shape(null, () => { ctx.moveTo(0, HALF); ctx.lineTo(W, HALF); }, 8);
+  // hook: what is the same, then the question on the divider
+  const hookOn = t < L.S02.start - 0.1;
+  if (hookOn) {
+    // the question sits on the divider from the first frame (the hook is the question)
+    shape(C.gold, () => ctx.roundRect(170, HALF - 58, 740, 116, 58), 8);
+    text("WHO RUNS OUT?", 540, HALF + 28, { size: 78, fill: C.ink, weight: 900 });
+  }
+  // end card
+  const e = fade(t, L.S08.start, 0.3);
+  card([["The crash didn't sink Walt."], ["Rising prices sank June.", C.red], ["Full story on the channel", C.muted, 42]], HALF - 170, e);
+  ctx.fillStyle = C.paper; ctx.fillRect(0, H - 40, W, 40);
+  text("illustration · real US market history · after inflation", 540, H - 12, { size: 24, fill: C.muted, weight: 600 });
+  return true;
+}
+
+window.FRAME_COUNT = mouth.frames;
+window.renderFrame = renderFrame;
+renderFrame(0);
+document.documentElement.dataset.ready = "1";
+</script>
+</body>
+</html>

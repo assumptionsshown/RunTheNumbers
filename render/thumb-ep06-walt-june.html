@@ -124,6 +124,45 @@ if (which === "a") {
     text("?", 640, 488, { size: 170, fill: C.red });
     text("WHO RAN OUT?", 640, 690, { size: 72, fill: C.red, stroke: 12 });
   }
+} else if (which === "d") {
+  // v2 title "Is the 4% Rule Safe?": the question on top, the two verdicts under it.
+  split();
+  shape("#ffcf4a", () => ctx.roundRect(150, 22, 980, 150, 36), 8);
+  text("IS 4% SAFE?", 640, 140, { size: 118 });
+  text(String(WALT.startYear), 320, 300, { size: 110, mono: true, fill: C.waltDark });
+  text(String(JUNE.startYear), 960, 300, { size: 110, mono: true, fill: C.juneDark });
+  elder(320, 860, 1.12, "W", 1);
+  elder(960, 860, 1.12, "J", -1);
+  stamp(320, 640, "MADE IT", C.green, -0.08, 60);
+  stamp(960, 640, "RAN OUT", C.red, -0.08, 60);
+} else if (which === "e") {
+  // v2: the record. Huge question left, every start year right, the six failures circled.
+  ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
+  text("IS 4%", 300, 250, { size: 150 });
+  text("SAFE?", 300, 410, { size: 150, fill: C.red });
+  text(`we tested every year`, 300, 500, { size: 40, weight: 800, fill: C.muted });
+  text(`since ${batch.cohorts[0].startYear}`, 300, 550, { size: 40, weight: 800, fill: C.muted });
+  const cols = 14, cw = 46, ch = 54, x0 = 640, y0 = 120;
+  batch.cohorts.forEach((c, k) => {
+    const cx = x0 + (k % cols) * cw, cy = y0 + Math.floor(k / cols) * ch;
+    if (c.survived) shape("#9ccf7e", () => ctx.arc(cx, cy, 15, 0, Math.PI * 2), 4);
+    else {
+      ctx.lineWidth = 9; ctx.strokeStyle = C.red; ctx.beginPath();
+      ctx.moveTo(cx - 16, cy - 16); ctx.lineTo(cx + 16, cy + 16); ctx.moveTo(cx + 16, cy - 16); ctx.lineTo(cx - 16, cy + 16); ctx.stroke();
+    }
+  });
+  shape("#ffffff", () => ctx.roundRect(640, 596, 620, 104, 24), 8);
+  text(`${failed.length} OF ${batch.cohorts.length} RAN OUT`, 950, 668, { size: 54, fill: C.red });
+} else if (which === "f") {
+  // v2: one face. June, big and worried, with the question beside her.
+  ctx.fillStyle = C.mint; ctx.fillRect(0, 0, W, H);
+  elder(330, 800, 1.35, "J", -1);
+  stamp(330, 620, `RAN OUT · ${JUNE.depletedInYear}`, C.red, -0.08, 46);
+  text("IS 4%", 900, 210, { size: 140 });
+  text("SAFE?", 900, 360, { size: 140, fill: C.red });
+  shape("#ffffff", () => ctx.roundRect(640, 430, 520, 170, 28), 7);
+  text(`she retired in ${JUNE.startYear}`, 900, 500, { size: 44, weight: 800, fill: C.juneDark });
+  text("the calm sixties", 900, 565, { size: 44, weight: 800, fill: C.muted });
 } else if (which === "c") {
   ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
   text("THE 4% RULE, EVERY YEAR SINCE 1871", 640, 80, { size: 42 });

@@ -201,6 +201,31 @@ for (const l of script.lines) {
   if (numberWords.test(l.text) && !claimed.has(l.id) && !datesOnly.has(l.id)) failures.push(`${l.id} speaks a number no claim checks: "${l.text}"`);
 }
 
+// ---- the 9:16 Short (walt-june-short/lines.json), same claims, its own words
+const shortScript = JSON.parse(await readFile(join(ep, "walt-june-short", "lines.json"), "utf8"));
+const sline = (id) => shortScript.lines.find((l) => l.id === id)?.text.replace(/\*/g, "") ?? "";
+const ssays = (id, phrase, ok, detail) => {
+  check(sline(id).includes(phrase), `short ${id} no longer says "${phrase}"`);
+  check(ok, `short ${id} "${phrase}" is false: ${detail}`);
+};
+ssays("S01", "a million dollars", walt.path[0] === 1 && june.path[0] === 1, "start $1M");
+ssays("S01", "forty thousand a year, plus inflation", RATE * 1e6 === 40000, "4% of $1M, real");
+ssays("S01", "One retires into the Great Depression", walt.start === 1929, "Walt 1929");
+ssays("S01", "One into the calm sixties", june.start === 1966, "June 1966");
+ssays("S02", "Nineteen twenty-nine", walt.start === 1929, "Walt 1929");
+ssays("S02", "eighty-five percent", Math.round(drop * 100) === 85, `${(drop * 100).toFixed(1)}%`);
+ssays("S03", "prices fell too", cpi(1929, 1932) < 1, `CPI x${cpi(1929, 1932).toFixed(3)}`);
+ssays("S04", "Nineteen sixty-six", june.start === 1966, "June 1966");
+ssays("S04", "year after year", risingEveryYear, "CPI rose every year 1966-82");
+ssays("S05", "nineteen eighty-two, prices had nearly tripled", c6682 >= 2.8 && c6682 < 3, `CPI x${c6682.toFixed(3)}`);
+ssays("S06", "Thirty years later", walt.survived, "Walt lasts 30 years");
+ssays("S06", "seven hundred forty-nine thousand", K(walt.path[30]) === 749, `${K(walt.path[30])}k`);
+ssays("S07", "nineteen eighty-nine", june.depleted === 1989, `out ${june.depleted}`);
+ssays("S08", "The crash didn't sink Walt", walt.survived, "Walt survived");
+for (const l of shortScript.lines) {
+  if (numberWords.test(l.text) && !["S01", "S02", "S04", "S05", "S06", "S07"].includes(l.id)) failures.push(`short ${l.id} speaks a number no claim checks: "${l.text}"`);
+}
+
 if (failures.length) {
   console.error(`validate-ep06-story: ${failures.length} FAIL of ${checks}`);
   for (const f of failures) console.error(`  - ${f}`);
