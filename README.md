@@ -25,7 +25,7 @@ Don't trust it. Re-run it.
 
 | # | Question | Headline result | Video | Data |
 |---|---|---|---|---|
-| 6 | Is the 4% rule safe? | It lasted 30 years for 120 of 126 start years; all 6 failures retired 1964-69 | Walt and June | `episodes/ep06-four-percent-rule/results.json` |
+| 6 | Is the 4% rule safe? | It lasted 30 years for 120 of 126 start years; all 6 failures retired 1964-69 | [Walt and June](https://youtu.be/picFtg1xwCY) | `episodes/ep06-four-percent-rule/results.json` |
 | 4 | Which numbers flip rent versus buy? | Buying won 81.9% of 9,399 five-year runs, or 31.0% with one input changed | [Rent vs Buy](https://youtu.be/_AazljGWkgc) | `episodes/ep04-rent-vs-buy/results.json` |
 | 3 | What if you only ever bought at the market top? | It cost about 10% against buying on any day | [Buying at the top](https://youtu.be/X28aftmVfvM) | `episodes/ep03-buying-at-the-top/results.json` |
 | 2 | What does a 1% fee actually cost? | More than panic selling every crash for 30 years | [Fees](https://youtu.be/-v4_SQQyTNc) | `episodes/ep02-fees/results.json` |
