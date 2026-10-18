@@ -55,8 +55,18 @@ function elder(cx, footY, s, who, mood) {
     shape("#c9c6c0", () => ctx.ellipse(56, -338, 15, 28, -0.15, 0, Math.PI * 2), 5);
     shape("#c9c6c0", () => ctx.roundRect(-26, -305, 52, 11, 5), 4);
   } else {
-    shape("#ecebe7", () => ctx.ellipse(0, -372, 68, 38, 0, Math.PI, 0), 6);
-    shape("#ecebe7", () => ctx.ellipse(0, -410, 30, 24, 0, 0, Math.PI * 2), 6);
+    // hair over the crown and sides, fringe, bun (same as render/ep06-walt-june.html)
+    shape("#ecebe7", () => ctx.ellipse(0, -432, 32, 26, 0, 0, Math.PI * 2), 6);
+    shape("#ecebe7", () => {
+      ctx.moveTo(-74, -300);
+      ctx.ellipse(0, -330, 74, 84, 0, Math.PI, 0);
+      ctx.lineTo(74, -300);
+      ctx.quadraticCurveTo(66, -352, 30, -366);
+      ctx.quadraticCurveTo(0, -352, -30, -366);
+      ctx.quadraticCurveTo(-66, -352, -74, -300);
+      ctx.closePath();
+    }, 6);
+    ctx.fillStyle = "#ffffff"; for (const px of [-30, -10, 10, 30]) { ctx.beginPath(); ctx.arc(px, -250 + Math.abs(px) * 0.2, 7, 0, Math.PI * 2); ctx.fill(); ctx.lineWidth = 3; ctx.stroke(); }
   }
   ctx.lineWidth = 5; ctx.strokeStyle = C.ink; ctx.beginPath();
   ctx.arc(-24, -330, 16, 0, Math.PI * 2); ctx.moveTo(40, -330); ctx.arc(24, -330, 16, 0, Math.PI * 2);

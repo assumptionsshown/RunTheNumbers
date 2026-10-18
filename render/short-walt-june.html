@@ -79,8 +79,18 @@ function elder(cx, footY, o) {
     shape("#c9c6c0", () => ctx.ellipse(56, -338, 15, 28, -0.15, 0, Math.PI * 2), 5);
     shape("#c9c6c0", () => ctx.roundRect(-26, -305, 52, 11, 5), 4);
   } else {
-    shape("#ecebe7", () => ctx.ellipse(0, -372, 68, 38, 0, Math.PI, 0), 6);
-    shape("#ecebe7", () => ctx.ellipse(0, -410, 30, 24, 0, 0, Math.PI * 2), 6);
+    // hair over the crown and sides, fringe, bun (same as render/ep06-walt-june.html)
+    shape("#ecebe7", () => ctx.ellipse(0, -432, 32, 26, 0, 0, Math.PI * 2), 6);
+    shape("#ecebe7", () => {
+      ctx.moveTo(-74, -300);
+      ctx.ellipse(0, -330, 74, 84, 0, Math.PI, 0);
+      ctx.lineTo(74, -300);
+      ctx.quadraticCurveTo(66, -352, 30, -366);
+      ctx.quadraticCurveTo(0, -352, -30, -366);
+      ctx.quadraticCurveTo(-66, -352, -74, -300);
+      ctx.closePath();
+    }, 6);
+    ctx.fillStyle = "#ffffff"; for (const px of [-30, -10, 10, 30]) { ctx.beginPath(); ctx.arc(px, -250 + Math.abs(px) * 0.2, 7, 0, Math.PI * 2); ctx.fill(); ctx.lineWidth = 3; ctx.stroke(); }
   }
   ctx.lineWidth = 5; ctx.strokeStyle = C.ink; ctx.beginPath();
   ctx.arc(-24, -330, 16, 0, Math.PI * 2); ctx.moveTo(40, -330); ctx.arc(24, -330, 16, 0, Math.PI * 2);
@@ -97,14 +107,17 @@ function elder(cx, footY, o) {
   }
   ctx.restore();
 }
-function moneyBag(cx, footY, v, label) {
+function moneyBag(cx, footY, v, label, alpha = 1) {
+  if (alpha <= 0.01) return;
+  ctx.globalAlpha = alpha;
   if (v > 0.001) {
     const r = 30 + 90 * Math.sqrt(Math.min(v, 1.4) / 1.4);
     shape("#9ccf7e", () => ctx.ellipse(cx, footY - r, r, r, 0, 0, Math.PI * 2));
     shape("#9ccf7e", () => { ctx.moveTo(cx - r * 0.3, footY - 2 * r + 6); ctx.lineTo(cx, footY - 2 * r - r * 0.35); ctx.lineTo(cx + r * 0.3, footY - 2 * r + 6); ctx.closePath(); }, 6);
-    text("$", cx, footY - r + r * 0.35, { size: Math.max(30, r), fill: "#2f6b2a" });
+    text("$", cx, footY - r + r * 0.35, { size: Math.max(30, r), fill: "#2f6b2a", alpha });
   }
-  if (label) text(label, cx, footY + 58, { size: 54 });
+  ctx.globalAlpha = 1;
+  if (label) text(label, cx, footY + 58, { size: 54, alpha });
 }
 function bubble(cx, bottomY, s, colour, alpha) {
   if (alpha <= 0.01) return;
@@ -149,11 +162,12 @@ function stateOf(k, t) {
   const P = k === "W" ? WALT : JUNE;
   let from = 0, to = 0, at = -1;
   for (const [id, yr] of STEPS[k]) if (t >= L[id].start) { from = to; to = yr; at = L[id].start; }
-  const p = at < 0 ? 1 : ease(clamp01((t - at) / 1.0));
+  const p = at < 0 ? 1 : ease(clamp01((t - at) / 1.6));
   const yr = Math.round(from + (to - from) * p);
-  const out = k === "J" && t >= L.S07.start + 0.9;
-  const v = out ? 0 : P.path[from] + (P.path[Math.min(to, HZ)] - P.path[from]) * p;
-  return { yr, v, out };
+  // June's bag fades away and the stamp fades in; nothing on screen switches in one frame
+  const outA = k === "J" ? fade(t, L.S07.start + 0.8, 0.4) : 0;
+  const v = P.path[from] + (P.path[Math.min(to, HZ)] - P.path[from]) * p;
+  return { yr, v, out: outA > 0.5, outA };
 }
 
 const HALVES = {
@@ -174,18 +188,24 @@ function drawHalf(k, t, i) {
   const Hf = HALVES[k], o = Hf.off, s = stateOf(k, t);
   ctx.fillStyle = Hf.tint; ctx.fillRect(0, o, W, HALF);
   text(String(Hf.start + s.yr), 540, o + 170, { size: 130, mono: true, fill: s.out ? C.muted : C.ink });
-  const hook = t < L.S02.start - 0.1;
-  text(hook ? `${Hf.name} · $1M · $40,000 a year` : `${Hf.name} · ${Hf.tag}`, 540, o + 228, { size: 36, fill: Hf.dark, weight: 700 });
-  const act = speaking(t), cur = lineAt(t);
+  // the tag cross-fades from the hook line to the story line
+  const tagSwap = fade(t, L.S02.start - 0.5, 0.5);
+  text(`${Hf.name} · $1M · $40,000 a year`, 540, o + 228, { size: 36, fill: Hf.dark, weight: 700, alpha: 1 - tagSwap });
+  text(`${Hf.name} · ${Hf.tag}`, 540, o + 228, { size: 36, fill: Hf.dark, weight: 700, alpha: tagSwap });
+  const act = speaking(t);
   const talking = act && act.speaker === k;
+  // this half's latest line drives mood and its bubble, which STAYS until the
+  // half's next line (a bubble that vanished in every gap read as a stutter)
+  let mine = null;
+  for (const l of timing.lines) if (l.speaker === k && t >= l.start - 0.05) mine = l;
   let mood = k === "W" ? 0 : 1;
-  if (cur && cur.speaker === k && MOOD[cur.id] != null) mood = MOOD[cur.id];
+  if (mine && MOOD[mine.id] != null) mood = MOOD[mine.id];
   if (t >= L.S06.start) mood = k === "W" ? 1 : -1;
   elder(270, o + 880, { s: 0.95, who: k, shirt: Hf.col, mood, mouth: talking ? mouth.open[Math.min(i, mouth.open.length - 1)] : 0 });
-  if (s.out) stamp(800, o + 640, "RAN OUT · 1989", C.red, -0.08, 1, 54);
-  else moneyBag(800, o + 800, s.v, fmtK(s.v));
-  if (k === "W" && t >= L.S06.start + 0.9) stamp(800, o + 440, "MADE IT", C.green, -0.08, fade(t, L.S06.start + 0.9, 0.25));
-  if (talking && BUBBLE[act.id]) bubble(300, o + 432, BUBBLE[act.id], Hf.dark, fade(t, act.start, 0.2));
+  moneyBag(800, o + 800, s.v, fmtK(s.v), 1 - s.outA);
+  if (k === "J") stamp(800, o + 640, "RAN OUT · 1989", C.red, -0.08, s.outA, 54);
+  if (k === "W" && t >= L.S06.start + 0.9) stamp(800, o + 440, "MADE IT", C.green, -0.08, fade(t, L.S06.start + 0.9, 0.3));
+  if (mine && BUBBLE[mine.id]) bubble(300, o + 432, BUBBLE[mine.id], Hf.dark, fade(t, mine.start, 0.25) * (1 - fade(t, L.S08.start - 0.2, 0.3)));
 }
 
 function renderFrame(i) {
@@ -194,11 +214,13 @@ function renderFrame(i) {
   drawHalf("J", t, i);
   shape(null, () => { ctx.moveTo(0, HALF); ctx.lineTo(W, HALF); }, 8);
   // hook: what is the same, then the question on the divider
-  const hookOn = t < L.S02.start - 0.1;
-  if (hookOn) {
-    // the question sits on the divider from the first frame (the hook is the question)
+  // the question sits on the divider from the first frame, then fades out
+  const hookA = 1 - fade(t, L.S02.start - 0.5, 0.5);
+  if (hookA > 0.01) {
+    ctx.globalAlpha = hookA;
     shape(C.gold, () => ctx.roundRect(170, HALF - 58, 740, 116, 58), 8);
-    text("WHO RUNS OUT?", 540, HALF + 28, { size: 78, fill: C.ink, weight: 900 });
+    ctx.globalAlpha = 1;
+    text("WHO RUNS OUT?", 540, HALF + 28, { size: 78, fill: C.ink, weight: 900, alpha: hookA });
   }
   // end card
   const e = fade(t, L.S08.start, 0.3);
