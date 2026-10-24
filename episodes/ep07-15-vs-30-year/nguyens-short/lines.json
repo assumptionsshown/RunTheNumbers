@@ -1,0 +1,21 @@
+{
+  "note": "ep07 Short 'The Nguyens: 15 or 30?' (2026-10-23), 9:16, published with the long-form. Uncle Tu's January 1993 loan replayed both ways on a shared clock (`year` = years since signing). Numbers checked by tools/validate-ep07-story.mjs (short section) and asserted by render/short-nguyens.html.",
+  "leadIn": 0.3,
+  "gap": { "sameScene": 0.3, "sameSpeaker": 0.2, "sceneChange": 0.5 },
+  "tail": 1.0,
+  "voices": {
+    "N": { "name": "en-US-JasonNeural", "style": "friendly", "pitch": "+10%", "rate": "+8%" },
+    "A": { "name": "en-US-DavisNeural", "style": "friendly", "pitch": "-14%", "rate": "+6%" },
+    "B": { "name": "en-US-DavisNeural", "style": "friendly", "pitch": "-14%", "rate": "+6%" }
+  },
+  "lines": [
+    { "id": "S01", "speaker": "N", "scene": "hook", "year": 0, "text": "Fifteen-year mortgage, or thirty years and invest the difference? Uncle Tu took the fifteen in nineteen ninety-three. Let's replay it both ways. *Who ends up richer?*" },
+    { "id": "S02", "speaker": "B", "scene": "story", "year": 7, "style": "cheerful", "text": "The thirty. Two thousand. Stocks are booming. *Sixty-four thousand* invested." },
+    { "id": "S03", "speaker": "A", "scene": "story", "year": 7, "text": "The fifteen. Nothing invested. Every dollar goes to the house." },
+    { "id": "S04", "speaker": "B", "scene": "story", "year": 10, "style": "sad", "text": "Two thousand three. The dot-com crash. Down to *forty-eight thousand*." },
+    { "id": "S05", "speaker": "A", "scene": "story", "year": 15, "style": "cheerful", "text": "Two thousand eight. House paid off. Now I invest the whole payment, *right into the crash*." },
+    { "id": "S06", "speaker": "A", "scene": "story", "year": 30, "style": "cheerful", "text": "Twenty twenty-three: *four hundred eighteen thousand*." },
+    { "id": "S07", "speaker": "B", "scene": "story", "year": 30, "text": "Me: *three hundred twenty-eight thousand*." },
+    { "id": "S08", "speaker": "N", "scene": "end", "year": 30, "text": "The fifteen won here, and in every finished loan signed at seven to nine percent. But when rates were low, the thirty was ahead at the halfway mark. *The rate decides.* Full story on the channel." }
+  ]
+}

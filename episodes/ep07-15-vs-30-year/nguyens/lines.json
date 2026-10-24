@@ -1,0 +1,55 @@
+{
+  "note": "ep07 v2 'The Nguyens: 15 or 30?' (2026-10-23). First episode of the proposed family series: Minh and Lan buy their first house in 2026; Uncle Tu took a 15-year loan in January 1993; the replay runs two versions of Tu on the pinned FRED + Shiller data (the 1993-01 cohort is the median of the 58 completed windows). Every spoken number is checked by tools/validate-ep07-story.mjs. Replay lines carry `year` (years since signing). Speakers: N narrator, M Minh, L Lan, T Uncle Tu (kitchen), A Tu who took the 15 (left panel), B Tu who took the 30 (right panel). `*word*` = emphasis. The family are illustrations.",
+  "leadIn": 0.5,
+  "gap": { "sameScene": 0.3, "sameSpeaker": 0.22, "sceneChange": 0.8 },
+  "tail": 1.2,
+  "voices": {
+    "N": { "name": "en-US-JasonNeural", "style": "friendly", "pitch": "+10%", "rate": "+8%" },
+    "M": { "name": "en-US-GuyNeural", "style": "friendly", "pitch": "+0%", "rate": "+8%" },
+    "L": { "name": "en-US-AriaNeural", "style": "friendly", "pitch": "+0%", "rate": "+8%" },
+    "T": { "name": "en-US-DavisNeural", "style": "friendly", "pitch": "-14%", "rate": "+4%" },
+    "A": { "name": "en-US-DavisNeural", "style": "friendly", "pitch": "-14%", "rate": "+6%" },
+    "B": { "name": "en-US-DavisNeural", "style": "friendly", "pitch": "-14%", "rate": "+6%" }
+  },
+  "lines": [
+    { "id": "N00", "speaker": "N", "scene": "kitchen", "text": "Minh and Lan are buying their first house in America. A *four hundred thousand dollar* loan. And the bank gives them a choice." },
+    { "id": "N01", "speaker": "N", "scene": "kitchen", "text": "Fifteen years, at six and a half percent: about *thirty-five hundred* a month. Or thirty years, at seven percent: about *twenty-seven hundred* a month." },
+    { "id": "L01", "speaker": "L", "scene": "kitchen", "text": "Fifteen. I don't want to owe the bank for thirty years." },
+    { "id": "M01", "speaker": "M", "scene": "kitchen", "text": "But with the thirty, we pay *eight hundred less* every month. We could invest that." },
+    { "id": "T01", "speaker": "T", "scene": "kitchen", "text": "Listen to Lan. I took the fifteen in nineteen ninety-three. *Best thing I ever did.*" },
+    { "id": "M02", "speaker": "M", "scene": "kitchen", "text": "Maybe. But what if you had taken the thirty, and invested the difference?" },
+    { "id": "N02", "speaker": "N", "scene": "kitchen", "after": 0.9, "text": "Good question. And we can actually check. Same house, same month, January nineteen ninety-three. Same cash every month. *Two versions of Uncle Tu.*" },
+
+    { "id": "N03", "speaker": "N", "scene": "replay", "year": 0, "text": "On the left, what he really did: the fifteen. On the right, the thirty, investing the difference every single month. The red bar is what he still owes. The green bag is what he has invested." },
+    { "id": "B01", "speaker": "B", "scene": "replay", "year": 7, "style": "cheerful", "text": "Two thousand. Stocks are booming. I've already got *sixty-four thousand* invested." },
+    { "id": "A01", "speaker": "A", "scene": "replay", "year": 7, "text": "Nothing invested yet. Every dollar goes to the house. But I owe less every month." },
+    { "id": "B02", "speaker": "B", "scene": "replay", "year": 10, "style": "sad", "text": "Two thousand three. The dot-com crash. My savings fell to *forty-eight thousand*." },
+    { "id": "A02", "speaker": "A", "scene": "replay", "year": 15, "style": "cheerful", "text": "Two thousand eight. My house is *paid off*! Now I invest the whole payment, every month." },
+    { "id": "N04", "speaker": "N", "scene": "replay", "year": 16, "text": "And he starts right as the two thousand eight crash hits. *Buying stocks on sale.* The other Tu takes his second crash." },
+    { "id": "A03", "speaker": "A", "scene": "replay", "year": 30, "style": "cheerful", "text": "Twenty twenty-three. Thirty years. *Four hundred eighteen thousand* invested. No mortgage." },
+    { "id": "B03", "speaker": "B", "scene": "replay", "year": 30, "text": "My house is paid off too. *Three hundred twenty-eight thousand.*" },
+
+    { "id": "N05", "speaker": "N", "scene": "why", "text": "So Uncle Tu was right, by about *ninety thousand dollars*, in nineteen ninety-three money. And not because stocks did badly. They grew almost ten percent a year. The thirty's savings were simply biggest right when *two crashes* hit." },
+    { "id": "L02", "speaker": "L", "scene": "why", "style": "cheerful", "text": "So I'm right. The fifteen always wins." },
+
+    { "id": "N06", "speaker": "N", "scene": "every", "text": "Not so fast. We ran every month you could have signed since nineteen ninety-one. Every loan old enough to finish, *fifty-eight* of them, was signed when rates were about seven to nine percent. The fifteen won *all fifty-eight*." },
+    { "id": "N07", "speaker": "N", "scene": "every", "text": "Later loans haven't finished yet, so check them at the halfway mark, year fifteen. Signed in the nineties, at high rates: the thirty was *never* ahead. Signed two thousand five to twenty eleven, at about four to seven percent: the thirty was ahead *every time*." },
+    { "id": "N08", "speaker": "N", "scene": "every", "text": "So it's not fifteen good, thirty bad. *The rate you sign at decides.*" },
+
+    { "id": "M03", "speaker": "M", "scene": "today", "text": "Then what about us, at seven percent?" },
+    { "id": "N09", "speaker": "N", "scene": "today", "text": "At seven on the thirty and six and a half on the fifteen, the money you invest has to earn more than *eight percent a year*, every year, just to tie. And you have to invest it *every single month*, for thirty years." },
+    { "id": "L03", "speaker": "L", "scene": "today", "style": "cheerful", "text": "Minh. You can't even keep a gym membership for three months." },
+    { "id": "M04", "speaker": "M", "scene": "today", "style": "cheerful", "text": "Okay. Fair." },
+
+    { "id": "N10", "speaker": "N", "scene": "hybrid", "text": "But there's a third option. Take the thirty-year loan, and *pay it like a fifteen*. You're done eleven months later, and it costs about nine percent of the loan extra. In exchange, any month things go wrong, you can drop to the lower payment." },
+    { "id": "L04", "speaker": "L", "scene": "hybrid", "text": "So we pay it off fast, like I want." },
+    { "id": "M05", "speaker": "M", "scene": "hybrid", "style": "cheerful", "text": "And we keep a safety net. *Deal.*" },
+
+    { "id": "N11", "speaker": "N", "scene": "answer", "text": "So what does this mean for you? *Lesson one.* The rate you sign at decides. When rates were high, the fifteen came out ahead. When they were low, the thirty was ahead at the halfway mark." },
+    { "id": "N12", "speaker": "N", "scene": "answer", "text": "*Lesson two.* At today's rates, the thirty only wins if you invest the difference every month, and it earns more than about eight percent a year." },
+    { "id": "N13", "speaker": "N", "scene": "answer", "text": "*Lesson three.* Can't decide? Take the thirty and pay it like a fifteen. You keep the option to slow down." },
+
+    { "id": "N14", "speaker": "N", "scene": "panel", "text": "The fine print. Freddie Mac survey rates, from the month you sign. Stocks are the S and P with dividends, no fees. No refinancing, no taxes, no points. The thirty-year borrower never skips a month. The finished loans all come from one era, overlapping. The family are illustrations. The history is real. This is history, not advice." },
+    { "id": "N15", "speaker": "N", "scene": "close", "text": "Which would you pick: Lan's fifteen, Minh's thirty, or the deal they made? Tell me in the comments." }
+  ]
+}

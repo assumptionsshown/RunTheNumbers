@@ -4,7 +4,7 @@ using RunTheNumbers.Sim;
 
 // Episode simulations.
 //
-//   dotnet run --project src/RunTheNumbers.Sim -- <snapshotDir> <outputJson> [--episode ep02|ep03|ep04|ep06|ep06-batch]
+//   dotnet run --project src/RunTheNumbers.Sim -- <snapshotDir> <outputJson> [--episode ep02|ep03|ep04|ep06|ep06-batch|ep07]
 //
 // Episode 1 is the default and stays inline below. Later episodes live in their
 // own files, so adding one cannot disturb a published result.
@@ -41,6 +41,16 @@ if (episode == "ep06")
 if (episode == "ep06-batch")
 {
     Ep06.WriteBatch(snapshotDir, outputPath);
+    return;
+}
+
+if (episode == "ep07")
+{
+    var fredFlag7 = Array.IndexOf(args, "--fred");
+    var fredDir7 = fredFlag7 >= 0 && fredFlag7 + 1 < args.Length
+        ? args[fredFlag7 + 1]
+        : Path.Combine("data", "snapshots", "fred-housing-2026-07-31");
+    Ep07.Run(snapshotDir, fredDir7, outputPath);
     return;
 }
 

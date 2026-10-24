@@ -1,0 +1,4983 @@
+{
+  "meta": {
+    "episode": "ep07-15-vs-30-year",
+    "generatedAt": "2026-08-02T01:48:05Z",
+    "snapshot": {
+      "source": "https://img1.wsimg.com/blobby/go/e5e77e0b-59d1-44d9-ab25-4763ac982e53/downloads/165d8a6e-26bf-44ec-a26c-a35f7f993480/ie_data.xls",
+      "note": "econ.yale.edu/~shiller/data/ie_data.xls is a stale mirror (frozen at 2023-09). Use shillerdata.com.",
+      "fetchedAt": "2026-07-26",
+      "sha256": "0e3d716f83f51c14f40c5ab5662e767cde4f83fcb7305db24ab003df2c9ee6c5",
+      "rawBytes": 1651712,
+      "months": 1866,
+      "firstMonth": "1871-01",
+      "lastMonth": "2026-06",
+      "droppedPartialMonth": "2026-07",
+      "rowsWithoutTotalReturn": 0,
+      "columnsUsed": {
+        "date": 0,
+        "price": 1,
+        "dividend": 2,
+        "earnings": 3,
+        "cpi": 4,
+        "dateFraction": 5,
+        "gs10": 6,
+        "realPrice": 7,
+        "realDividend": 8,
+        "realTotalReturnPrice": 9,
+        "realEarnings": 10,
+        "cape": 12
+      }
+    },
+    "rateSnapshot": {
+      "source": {
+        "MORTGAGE30US": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE30US",
+        "MORTGAGE15US": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE15US",
+        "CPIAUCSL": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL"
+      },
+      "supplementalSources": {
+        "CPIAUCSL2025OctoberGap": "https://www.bls.gov/cpi/additional-resources/2025-federal-government-shutdown-impact-cpi-faq.htm"
+      },
+      "fetchedAt": "2026-07-31",
+      "retrievalMode": "download",
+      "sha256": "f0ed75612d766156dc7c91a163219875388e35e1045512ade96e1392c7741d10",
+      "rawBytes": 93707,
+      "rawFiles": {
+        "MORTGAGE30US": {
+          "filename": "MORTGAGE30US.csv",
+          "source": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE30US",
+          "citation": "https://fred.stlouisfed.org/series/MORTGAGE30US",
+          "sourceName": "Freddie Mac Primary Mortgage Market Survey via FRED",
+          "frequency": "Weekly, ending Thursday",
+          "units": "Percent, not seasonally adjusted",
+          "sha256": "f01527e9fe649cb181531ce985c77a0a1e7b0ee5b1283ee58a1ad77bf22ba96d",
+          "rawBytes": 46803,
+          "rows": 2888,
+          "numericRows": 2888,
+          "missingObservations": [],
+          "firstObservation": "1971-04-02",
+          "lastObservation": "2026-07-30"
+        },
+        "MORTGAGE15US": {
+          "filename": "MORTGAGE15US.csv",
+          "source": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=MORTGAGE15US",
+          "citation": "https://fred.stlouisfed.org/series/MORTGAGE15US",
+          "sourceName": "Freddie Mac Primary Mortgage Market Survey via FRED",
+          "frequency": "Weekly, ending Thursday",
+          "units": "Percent, not seasonally adjusted",
+          "sha256": "3c502cad9523e85f96549335b3d1708896a98a7e8b1c1acc344273590cdea21b",
+          "rawBytes": 29198,
+          "rows": 1823,
+          "numericRows": 1823,
+          "missingObservations": [],
+          "firstObservation": "1991-08-30",
+          "lastObservation": "2026-07-30"
+        },
+        "CPIAUCSL": {
+          "filename": "CPIAUCSL.csv",
+          "source": "https://fred.stlouisfed.org/graph/fredgraph.csv?id=CPIAUCSL",
+          "citation": "https://fred.stlouisfed.org/series/CPIAUCSL",
+          "sourceName": "U.S. Bureau of Labor Statistics via FRED",
+          "frequency": "Monthly",
+          "units": "Index 1982-1984=100, seasonally adjusted",
+          "sha256": "2efffad3305f5adef58e84b06f268811123534805d5d7358f633cdb7e8c1aedb",
+          "rawBytes": 17706,
+          "rows": 954,
+          "numericRows": 953,
+          "missingObservations": [
+            "2025-10-01"
+          ],
+          "firstObservation": "1947-01-01",
+          "lastObservation": "2026-06-01"
+        }
+      },
+      "coverage": {
+        "firstPeriod": "1971-04",
+        "lastPeriod": "2026-06",
+        "rows": 663,
+        "MORTGAGE30US": {
+          "firstPeriod": "1971-04",
+          "lastPeriod": "2026-06",
+          "months": 663
+        },
+        "MORTGAGE15US": {
+          "firstPeriod": "1991-09",
+          "lastPeriod": "2026-06",
+          "months": 418
+        },
+        "CPIAUCSL": {
+          "firstPeriod": "1971-04",
+          "lastPeriod": "2026-06",
+          "months": 663,
+          "numericMonths": 662,
+          "missingPeriods": [
+            "2025-10"
+          ],
+          "rawFirstPeriod": "1947-01"
+        }
+      },
+      "columnMapping": {
+        "rawDate": "observation_date",
+        "rawValues": {
+          "MORTGAGE30US": "MORTGAGE30US",
+          "MORTGAGE15US": "MORTGAGE15US",
+          "CPIAUCSL": "CPIAUCSL"
+        },
+        "normalised": {
+          "month": 0,
+          "mortgage30usPercent": 1,
+          "mortgage30usObservations": 2,
+          "mortgage15usPercent": 3,
+          "mortgage15usObservations": 4,
+          "cpiaucsl": 5
+        }
+      },
+      "aggregation": {
+        "mortgageRates": "arithmetic mean of all weekly observations dated in the calendar month",
+        "cpi": "monthly source observation copied without aggregation",
+        "missingValueRule": "preserve source blanks; do not interpolate",
+        "finalMonthRule": "exclude the current calendar month and end at the latest month available in all three sources",
+        "lastClosedMonth": "2026-06",
+        "latestSourceMonths": {
+          "MORTGAGE30US": "2026-07",
+          "MORTGAGE15US": "2026-07",
+          "CPIAUCSL": "2026-06"
+        }
+      },
+      "dropped": [
+        {
+          "series": "MORTGAGE15US",
+          "period": "1991-08",
+          "observations": 1,
+          "reason": "source begins on 1991-08-30; too little of the month to average"
+        },
+        {
+          "series": "MORTGAGE30US",
+          "period": "2026-07",
+          "observations": 5,
+          "reason": "current calendar month is never normalised"
+        },
+        {
+          "series": "MORTGAGE15US",
+          "period": "2026-07",
+          "observations": 5,
+          "reason": "current calendar month is never normalised"
+        }
+      ],
+      "knownGaps": [
+        "MORTGAGE15US is unavailable before 1991-08; its lone 1991-08-30 observation is retained raw but excluded from the monthly average, so normalised coverage starts 1991-09.",
+        "The normalised file ends 2026-06. Later raw mortgage observations are retained but excluded by the final-month alignment rule.",
+        "Freddie Mac changed the Primary Mortgage Market Survey methodology on 2022-11-17; pre/post observations are not perfectly method-homogeneous.",
+        "Mortgage rates are not seasonally adjusted; CPIAUCSL is seasonally adjusted.",
+        "CPIAUCSL has a blank source observation for 2025-10 because BLS did not publish the all-items October 2025 index after the lapse in appropriations; the normalised cell is intentionally blank and is not interpolated.",
+        "Freddie Mac mortgage-rate data carried by FRED is copyrighted and requires source citation; keep the manifest citations with any redistributed snapshot."
+      ]
+    },
+    "firstPairMonth": "1991-09",
+    "lastMonth": "2026-06",
+    "assumptions": [
+      "Same house, same loan, same month, and all three borrowers own it outright by the end, so the house cancels exactly and no appreciation is assumed.",
+      "Equal cash every month on every path: the budget is the 15-year payment. The 30-year borrower invests the difference every month without fail, which is the most generous honest version of that strategy.",
+      "Everything runs in nominal dollars and is deflated once at the end. Fixed payments are fixed in nominal terms, so inflation works for the borrower, and it works longer on the 30-year path.",
+      "Both rates are that month\u0027s average Freddie Mac survey rate. The 15-year series begins 1991-09, so the sample starts there. No points, no fees, no refinancing, ever.",
+      "Investments are the S\u0026P Composite with dividends reinvested, no fees. Shiller\u0027s CPI is the deflator, so the index and the deflator share one source; the official October 2025 CPI blank never enters.",
+      "No taxes on either path. The mortgage interest deduction favours the 30-year and capital gains tax favours the 15-year, so they push in opposite directions and both are omitted.",
+      "The hybrid takes the 30-year loan and pays the 15-year amount into it. The only thing separating it from the true 15 is the rate spread, so their gap is the exact price of the never-used flexibility option.",
+      "Originations overlap heavily, and every completed 30-year window was signed 1991-1996 - one economic era, not a sample of eras.",
+      "Freddie Mac changed its survey methodology on 2022-11-17, so observations either side are not perfectly comparable."
+    ]
+  },
+  "spreadSummary": {
+    "months": 418,
+    "medianPp": 0.5425000000000002,
+    "p10Pp": 0.35749999999999993,
+    "p90Pp": 0.7943000000000003,
+    "min": {
+      "month": "2008-12",
+      "spreadPp": 0.24799999999999933
+    },
+    "max": {
+      "month": "2014-03",
+      "spreadPp": 0.9825000000000004
+    },
+    "last": {
+      "month": "2026-06",
+      "spreadPp": 0.6699999999999999
+    }
+  },
+  "spreadSeries": [
+    {
+      "month": "1991-09",
+      "spreadPp": 0.34
+    },
+    {
+      "month": "1991-10",
+      "spreadPp": 0.37
+    },
+    {
+      "month": "1991-11",
+      "spreadPp": 0.39
+    },
+    {
+      "month": "1991-12",
+      "spreadPp": 0.43
+    },
+    {
+      "month": "1992-01",
+      "spreadPp": 0.43
+    },
+    {
+      "month": "1992-02",
+      "spreadPp": 0.38
+    },
+    {
+      "month": "1992-03",
+      "spreadPp": 0.36
+    },
+    {
+      "month": "1992-04",
+      "spreadPp": 0.38
+    },
+    {
+      "month": "1992-05",
+      "spreadPp": 0.38
+    },
+    {
+      "month": "1992-06",
+      "spreadPp": 0.43
+    },
+    {
+      "month": "1992-07",
+      "spreadPp": 0.46
+    },
+    {
+      "month": "1992-08",
+      "spreadPp": 0.48
+    },
+    {
+      "month": "1992-09",
+      "spreadPp": 0.52
+    },
+    {
+      "month": "1992-10",
+      "spreadPp": 0.54
+    },
+    {
+      "month": "1992-11",
+      "spreadPp": 0.51
+    },
+    {
+      "month": "1992-12",
+      "spreadPp": 0.46
+    },
+    {
+      "month": "1993-01",
+      "spreadPp": 0.48
+    },
+    {
+      "month": "1993-02",
+      "spreadPp": 0.51
+    },
+    {
+      "month": "1993-03",
+      "spreadPp": 0.5
+    },
+    {
+      "month": "1993-04",
+      "spreadPp": 0.51
+    },
+    {
+      "month": "1993-05",
+      "spreadPp": 0.54
+    },
+    {
+      "month": "1993-06",
+      "spreadPp": 0.5
+    },
+    {
+      "month": "1993-07",
+      "spreadPp": 0.49
+    },
+    {
+      "month": "1993-08",
+      "spreadPp": 0.48
+    },
+    {
+      "month": "1993-09",
+      "spreadPp": 0.47
+    },
+    {
+      "month": "1993-10",
+      "spreadPp": 0.46
+    },
+    {
+      "month": "1993-11",
+      "spreadPp": 0.47
+    },
+    {
+      "month": "1993-12",
+      "spreadPp": 0.49
+    },
+    {
+      "month": "1994-01",
+      "spreadPp": 0.49
+    },
+    {
+      "month": "1994-02",
+      "spreadPp": 0.5
+    },
+    {
+      "month": "1994-03",
+      "spreadPp": 0.49
+    },
+    {
+      "month": "1994-04",
+      "spreadPp": 0.52
+    },
+    {
+      "month": "1994-05",
+      "spreadPp": 0.52
+    },
+    {
+      "month": "1994-06",
+      "spreadPp": 0.49
+    },
+    {
+      "month": "1994-07",
+      "spreadPp": 0.5
+    },
+    {
+      "month": "1994-08",
+      "spreadPp": 0.49
+    },
+    {
+      "month": "1994-09",
+      "spreadPp": 0.51
+    },
+    {
+      "month": "1994-10",
+      "spreadPp": 0.54
+    },
+    {
+      "month": "1994-11",
+      "spreadPp": 0.51
+    },
+    {
+      "month": "1994-12",
+      "spreadPp": 0.39
+    },
+    {
+      "month": "1995-01",
+      "spreadPp": 0.35
+    },
+    {
+      "month": "1995-02",
+      "spreadPp": 0.37
+    },
+    {
+      "month": "1995-03",
+      "spreadPp": 0.4
+    },
+    {
+      "month": "1995-04",
+      "spreadPp": 0.44
+    },
+    {
+      "month": "1995-05",
+      "spreadPp": 0.45
+    },
+    {
+      "month": "1995-06",
+      "spreadPp": 0.5
+    },
+    {
+      "month": "1995-07",
+      "spreadPp": 0.52
+    },
+    {
+      "month": "1995-08",
+      "spreadPp": 0.5
+    },
+    {
+      "month": "1995-09",
+      "spreadPp": 0.48
+    },
+    {
+      "month": "1995-10",
+      "spreadPp": 0.47
+    },
+    {
+      "month": "1995-11",
+      "spreadPp": 0.49
+    },
+    {
+      "month": "1995-12",
+      "spreadPp": 0.46
+    },
+    {
+      "month": "1996-01",
+      "spreadPp": 0.49
+    },
+    {
+      "month": "1996-02",
+      "spreadPp": 0.52
+    },
+    {
+      "month": "1996-03",
+      "spreadPp": 0.51
+    },
+    {
+      "month": "1996-04",
+      "spreadPp": 0.48
+    },
+    {
+      "month": "1996-05",
+      "spreadPp": 0.49
+    },
+    {
+      "month": "1996-06",
+      "spreadPp": 0.49
+    },
+    {
+      "month": "1996-07",
+      "spreadPp": 0.48
+    },
+    {
+      "month": "1996-08",
+      "spreadPp": 0.48
+    },
+    {
+      "month": "1996-09",
+      "spreadPp": 0.48
+    },
+    {
+      "month": "1996-10",
+      "spreadPp": 0.49
+    },
+    {
+      "month": "1996-11",
+      "spreadPp": 0.48
+    },
+    {
+      "month": "1996-12",
+      "spreadPp": 0.5
+    },
+    {
+      "month": "1997-01",
+      "spreadPp": 0.5
+    },
+    {
+      "month": "1997-02",
+      "spreadPp": 0.5
+    },
+    {
+      "month": "1997-03",
+      "spreadPp": 0.49
+    },
+    {
+      "month": "1997-04",
+      "spreadPp": 0.47
+    },
+    {
+      "month": "1997-05",
+      "spreadPp": 0.47
+    },
+    {
+      "month": "1997-06",
+      "spreadPp": 0.46
+    },
+    {
+      "month": "1997-07",
+      "spreadPp": 0.46
+    },
+    {
+      "month": "1997-08",
+      "spreadPp": 0.46
+    },
+    {
+      "month": "1997-09",
+      "spreadPp": 0.44
+    },
+    {
+      "month": "1997-10",
+      "spreadPp": 0.45
+    },
+    {
+      "month": "1997-11",
+      "spreadPp": 0.45
+    },
+    {
+      "month": "1997-12",
+      "spreadPp": 0.43
+    },
+    {
+      "month": "1998-01",
+      "spreadPp": 0.42
+    },
+    {
+      "month": "1998-02",
+      "spreadPp": 0.41
+    },
+    {
+      "month": "1998-03",
+      "spreadPp": 0.39
+    },
+    {
+      "month": "1998-04",
+      "spreadPp": 0.36
+    },
+    {
+      "month": "1998-05",
+      "spreadPp": 0.36
+    },
+    {
+      "month": "1998-06",
+      "spreadPp": 0.33
+    },
+    {
+      "month": "1998-07",
+      "spreadPp": 0.33
+    },
+    {
+      "month": "1998-08",
+      "spreadPp": 0.31
+    },
+    {
+      "month": "1998-09",
+      "spreadPp": 0.32
+    },
+    {
+      "month": "1998-10",
+      "spreadPp": 0.35
+    },
+    {
+      "month": "1998-11",
+      "spreadPp": 0.36
+    },
+    {
+      "month": "1998-12",
+      "spreadPp": 0.35
+    },
+    {
+      "month": "1999-01",
+      "spreadPp": 0.36
+    },
+    {
+      "month": "1999-02",
+      "spreadPp": 0.37
+    },
+    {
+      "month": "1999-03",
+      "spreadPp": 0.37
+    },
+    {
+      "month": "1999-04",
+      "spreadPp": 0.39
+    },
+    {
+      "month": "1999-05",
+      "spreadPp": 0.4
+    },
+    {
+      "month": "1999-06",
+      "spreadPp": 0.37
+    },
+    {
+      "month": "1999-07",
+      "spreadPp": 0.38
+    },
+    {
+      "month": "1999-08",
+      "spreadPp": 0.42
+    },
+    {
+      "month": "1999-09",
+      "spreadPp": 0.38
+    },
+    {
+      "month": "1999-10",
+      "spreadPp": 0.39
+    },
+    {
+      "month": "1999-11",
+      "spreadPp": 0.38
+    },
+    {
+      "month": "1999-12",
+      "spreadPp": 0.39
+    },
+    {
+      "month": "2000-01",
+      "spreadPp": 0.41
+    },
+    {
+      "month": "2000-02",
+      "spreadPp": 0.39
+    },
+    {
+      "month": "2000-03",
+      "spreadPp": 0.41
+    },
+    {
+      "month": "2000-04",
+      "spreadPp": 0.35
+    },
+    {
+      "month": "2000-05",
+      "spreadPp": 0.33
+    },
+    {
+      "month": "2000-06",
+      "spreadPp": 0.3
+    },
+    {
+      "month": "2000-07",
+      "spreadPp": 0.28
+    },
+    {
+      "month": "2000-08",
+      "spreadPp": 0.26
+    },
+    {
+      "month": "2000-09",
+      "spreadPp": 0.31
+    },
+    {
+      "month": "2000-10",
+      "spreadPp": 0.33
+    },
+    {
+      "month": "2000-11",
+      "spreadPp": 0.33
+    },
+    {
+      "month": "2000-12",
+      "spreadPp": 0.33
+    },
+    {
+      "month": "2001-01",
+      "spreadPp": 0.39
+    },
+    {
+      "month": "2001-02",
+      "spreadPp": 0.41
+    },
+    {
+      "month": "2001-03",
+      "spreadPp": 0.44
+    },
+    {
+      "month": "2001-04",
+      "spreadPp": 0.48
+    },
+    {
+      "month": "2001-05",
+      "spreadPp": 0.47
+    },
+    {
+      "month": "2001-06",
+      "spreadPp": 0.46
+    },
+    {
+      "month": "2001-07",
+      "spreadPp": 0.45
+    },
+    {
+      "month": "2001-08",
+      "spreadPp": 0.45
+    },
+    {
+      "month": "2001-09",
+      "spreadPp": 0.48
+    },
+    {
+      "month": "2001-10",
+      "spreadPp": 0.52
+    },
+    {
+      "month": "2001-11",
+      "spreadPp": 0.51
+    },
+    {
+      "month": "2001-12",
+      "spreadPp": 0.52
+    },
+    {
+      "month": "2002-01",
+      "spreadPp": 0.52
+    },
+    {
+      "month": "2002-02",
+      "spreadPp": 0.52
+    },
+    {
+      "month": "2002-03",
+      "spreadPp": 0.5
+    },
+    {
+      "month": "2002-04",
+      "spreadPp": 0.51
+    },
+    {
+      "month": "2002-05",
+      "spreadPp": 0.53
+    },
+    {
+      "month": "2002-06",
+      "spreadPp": 0.54
+    },
+    {
+      "month": "2002-07",
+      "spreadPp": 0.56
+    },
+    {
+      "month": "2002-08",
+      "spreadPp": 0.59
+    },
+    {
+      "month": "2002-09",
+      "spreadPp": 0.58
+    },
+    {
+      "month": "2002-10",
+      "spreadPp": 0.61
+    },
+    {
+      "month": "2002-11",
+      "spreadPp": 0.6
+    },
+    {
+      "month": "2002-12",
+      "spreadPp": 0.6
+    },
+    {
+      "month": "2003-01",
+      "spreadPp": 0.61
+    },
+    {
+      "month": "2003-02",
+      "spreadPp": 0.62
+    },
+    {
+      "month": "2003-03",
+      "spreadPp": 0.68
+    },
+    {
+      "month": "2003-04",
+      "spreadPp": 0.7
+    },
+    {
+      "month": "2003-05",
+      "spreadPp": 0.62
+    },
+    {
+      "month": "2003-06",
+      "spreadPp": 0.6
+    },
+    {
+      "month": "2003-07",
+      "spreadPp": 0.66
+    },
+    {
+      "month": "2003-08",
+      "spreadPp": 0.68
+    },
+    {
+      "month": "2003-09",
+      "spreadPp": 0.69
+    },
+    {
+      "month": "2003-10",
+      "spreadPp": 0.68
+    },
+    {
+      "month": "2003-11",
+      "spreadPp": 0.66
+    },
+    {
+      "month": "2003-12",
+      "spreadPp": 0.67
+    },
+    {
+      "month": "2004-01",
+      "spreadPp": 0.7
+    },
+    {
+      "month": "2004-02",
+      "spreadPp": 0.7
+    },
+    {
+      "month": "2004-03",
+      "spreadPp": 0.7
+    },
+    {
+      "month": "2004-04",
+      "spreadPp": 0.67
+    },
+    {
+      "month": "2004-05",
+      "spreadPp": 0.63
+    },
+    {
+      "month": "2004-06",
+      "spreadPp": 0.63
+    },
+    {
+      "month": "2004-07",
+      "spreadPp": 0.59
+    },
+    {
+      "month": "2004-08",
+      "spreadPp": 0.61
+    },
+    {
+      "month": "2004-09",
+      "spreadPp": 0.61
+    },
+    {
+      "month": "2004-10",
+      "spreadPp": 0.61
+    },
+    {
+      "month": "2004-11",
+      "spreadPp": 0.6
+    },
+    {
+      "month": "2004-12",
+      "spreadPp": 0.57
+    },
+    {
+      "month": "2005-01",
+      "spreadPp": 0.54
+    },
+    {
+      "month": "2005-02",
+      "spreadPp": 0.48
+    },
+    {
+      "month": "2005-03",
+      "spreadPp": 0.46
+    },
+    {
+      "month": "2005-04",
+      "spreadPp": 0.45
+    },
+    {
+      "month": "2005-05",
+      "spreadPp": 0.44
+    },
+    {
+      "month": "2005-06",
+      "spreadPp": 0.41
+    },
+    {
+      "month": "2005-07",
+      "spreadPp": 0.42
+    },
+    {
+      "month": "2005-08",
+      "spreadPp": 0.42
+    },
+    {
+      "month": "2005-09",
+      "spreadPp": 0.42
+    },
+    {
+      "month": "2005-10",
+      "spreadPp": 0.44
+    },
+    {
+      "month": "2005-11",
+      "spreadPp": 0.47
+    },
+    {
+      "month": "2005-12",
+      "spreadPp": 0.46
+    },
+    {
+      "month": "2006-01",
+      "spreadPp": 0.43
+    },
+    {
+      "month": "2006-02",
+      "spreadPp": 0.39
+    },
+    {
+      "month": "2006-03",
+      "spreadPp": 0.36
+    },
+    {
+      "month": "2006-04",
+      "spreadPp": 0.35
+    },
+    {
+      "month": "2006-05",
+      "spreadPp": 0.39
+    },
+    {
+      "month": "2006-06",
+      "spreadPp": 0.38
+    },
+    {
+      "month": "2006-07",
+      "spreadPp": 0.37
+    },
+    {
+      "month": "2006-08",
+      "spreadPp": 0.33
+    },
+    {
+      "month": "2006-09",
+      "spreadPp": 0.33
+    },
+    {
+      "month": "2006-10",
+      "spreadPp": 0.31
+    },
+    {
+      "month": "2006-11",
+      "spreadPp": 0.28
+    },
+    {
+      "month": "2006-12",
+      "spreadPp": 0.25
+    },
+    {
+      "month": "2007-01",
+      "spreadPp": 0.25
+    },
+    {
+      "month": "2007-02",
+      "spreadPp": 0.27
+    },
+    {
+      "month": "2007-03",
+      "spreadPp": 0.27
+    },
+    {
+      "month": "2007-04",
+      "spreadPp": 0.3
+    },
+    {
+      "month": "2007-05",
+      "spreadPp": 0.29
+    },
+    {
+      "month": "2007-06",
+      "spreadPp": 0.32
+    },
+    {
+      "month": "2007-07",
+      "spreadPp": 0.34
+    },
+    {
+      "month": "2007-08",
+      "spreadPp": 0.34
+    },
+    {
+      "month": "2007-09",
+      "spreadPp": 0.34
+    },
+    {
+      "month": "2007-10",
+      "spreadPp": 0.34
+    },
+    {
+      "month": "2007-11",
+      "spreadPp": 0.36
+    },
+    {
+      "month": "2007-12",
+      "spreadPp": 0.34
+    },
+    {
+      "month": "2008-01",
+      "spreadPp": 0.47
+    },
+    {
+      "month": "2008-02",
+      "spreadPp": 0.48
+    },
+    {
+      "month": "2008-03",
+      "spreadPp": 0.55
+    },
+    {
+      "month": "2008-04",
+      "spreadPp": 0.45
+    },
+    {
+      "month": "2008-05",
+      "spreadPp": 0.44
+    },
+    {
+      "month": "2008-06",
+      "spreadPp": 0.41
+    },
+    {
+      "month": "2008-07",
+      "spreadPp": 0.45
+    },
+    {
+      "month": "2008-08",
+      "spreadPp": 0.45
+    },
+    {
+      "month": "2008-09",
+      "spreadPp": 0.4
+    },
+    {
+      "month": "2008-10",
+      "spreadPp": 0.31
+    },
+    {
+      "month": "2008-11",
+      "spreadPp": 0.3
+    },
+    {
+      "month": "2008-12",
+      "spreadPp": 0.25
+    },
+    {
+      "month": "2009-01",
+      "spreadPp": 0.33
+    },
+    {
+      "month": "2009-02",
+      "spreadPp": 0.36
+    },
+    {
+      "month": "2009-03",
+      "spreadPp": 0.37
+    },
+    {
+      "month": "2009-04",
+      "spreadPp": 0.31
+    },
+    {
+      "month": "2009-05",
+      "spreadPp": 0.34
+    },
+    {
+      "month": "2009-06",
+      "spreadPp": 0.52
+    },
+    {
+      "month": "2009-07",
+      "spreadPp": 0.53
+    },
+    {
+      "month": "2009-08",
+      "spreadPp": 0.58
+    },
+    {
+      "month": "2009-09",
+      "spreadPp": 0.57
+    },
+    {
+      "month": "2009-10",
+      "spreadPp": 0.56
+    },
+    {
+      "month": "2009-11",
+      "spreadPp": 0.53
+    },
+    {
+      "month": "2009-12",
+      "spreadPp": 0.54
+    },
+    {
+      "month": "2010-01",
+      "spreadPp": 0.6
+    },
+    {
+      "month": "2010-02",
+      "spreadPp": 0.62
+    },
+    {
+      "month": "2010-03",
+      "spreadPp": 0.64
+    },
+    {
+      "month": "2010-04",
+      "spreadPp": 0.68
+    },
+    {
+      "month": "2010-05",
+      "spreadPp": 0.61
+    },
+    {
+      "month": "2010-06",
+      "spreadPp": 0.56
+    },
+    {
+      "month": "2010-07",
+      "spreadPp": 0.52
+    },
+    {
+      "month": "2010-08",
+      "spreadPp": 0.52
+    },
+    {
+      "month": "2010-09",
+      "spreadPp": 0.54
+    },
+    {
+      "month": "2010-10",
+      "spreadPp": 0.56
+    },
+    {
+      "month": "2010-11",
+      "spreadPp": 0.62
+    },
+    {
+      "month": "2010-12",
+      "spreadPp": 0.66
+    },
+    {
+      "month": "2011-01",
+      "spreadPp": 0.67
+    },
+    {
+      "month": "2011-02",
+      "spreadPp": 0.74
+    },
+    {
+      "month": "2011-03",
+      "spreadPp": 0.76
+    },
+    {
+      "month": "2011-04",
+      "spreadPp": 0.79
+    },
+    {
+      "month": "2011-05",
+      "spreadPp": 0.82
+    },
+    {
+      "month": "2011-06",
+      "spreadPp": 0.82
+    },
+    {
+      "month": "2011-07",
+      "spreadPp": 0.86
+    },
+    {
+      "month": "2011-08",
+      "spreadPp": 0.81
+    },
+    {
+      "month": "2011-09",
+      "spreadPp": 0.79
+    },
+    {
+      "month": "2011-10",
+      "spreadPp": 0.72
+    },
+    {
+      "month": "2011-11",
+      "spreadPp": 0.69
+    },
+    {
+      "month": "2011-12",
+      "spreadPp": 0.71
+    },
+    {
+      "month": "2012-01",
+      "spreadPp": 0.71
+    },
+    {
+      "month": "2012-02",
+      "spreadPp": 0.73
+    },
+    {
+      "month": "2012-03",
+      "spreadPp": 0.76
+    },
+    {
+      "month": "2012-04",
+      "spreadPp": 0.77
+    },
+    {
+      "month": "2012-05",
+      "spreadPp": 0.76
+    },
+    {
+      "month": "2012-06",
+      "spreadPp": 0.72
+    },
+    {
+      "month": "2012-07",
+      "spreadPp": 0.7
+    },
+    {
+      "month": "2012-08",
+      "spreadPp": 0.74
+    },
+    {
+      "month": "2012-09",
+      "spreadPp": 0.69
+    },
+    {
+      "month": "2012-10",
+      "spreadPp": 0.69
+    },
+    {
+      "month": "2012-11",
+      "spreadPp": 0.69
+    },
+    {
+      "month": "2012-12",
+      "spreadPp": 0.69
+    },
+    {
+      "month": "2013-01",
+      "spreadPp": 0.72
+    },
+    {
+      "month": "2013-02",
+      "spreadPp": 0.77
+    },
+    {
+      "month": "2013-03",
+      "spreadPp": 0.81
+    },
+    {
+      "month": "2013-04",
+      "spreadPp": 0.78
+    },
+    {
+      "month": "2013-05",
+      "spreadPp": 0.81
+    },
+    {
+      "month": "2013-06",
+      "spreadPp": 0.9
+    },
+    {
+      "month": "2013-07",
+      "spreadPp": 0.94
+    },
+    {
+      "month": "2013-08",
+      "spreadPp": 0.97
+    },
+    {
+      "month": "2013-09",
+      "spreadPp": 0.97
+    },
+    {
+      "month": "2013-10",
+      "spreadPp": 0.92
+    },
+    {
+      "month": "2013-11",
+      "spreadPp": 0.96
+    },
+    {
+      "month": "2013-12",
+      "spreadPp": 0.97
+    },
+    {
+      "month": "2014-01",
+      "spreadPp": 0.95
+    },
+    {
+      "month": "2014-02",
+      "spreadPp": 0.95
+    },
+    {
+      "month": "2014-03",
+      "spreadPp": 0.98
+    },
+    {
+      "month": "2014-04",
+      "spreadPp": 0.95
+    },
+    {
+      "month": "2014-05",
+      "spreadPp": 0.9
+    },
+    {
+      "month": "2014-06",
+      "spreadPp": 0.9
+    },
+    {
+      "month": "2014-07",
+      "spreadPp": 0.89
+    },
+    {
+      "month": "2014-08",
+      "spreadPp": 0.87
+    },
+    {
+      "month": "2014-09",
+      "spreadPp": 0.85
+    },
+    {
+      "month": "2014-10",
+      "spreadPp": 0.83
+    },
+    {
+      "month": "2014-11",
+      "spreadPp": 0.81
+    },
+    {
+      "month": "2014-12",
+      "spreadPp": 0.74
+    },
+    {
+      "month": "2015-01",
+      "spreadPp": 0.68
+    },
+    {
+      "month": "2015-02",
+      "spreadPp": 0.7
+    },
+    {
+      "month": "2015-03",
+      "spreadPp": 0.73
+    },
+    {
+      "month": "2015-04",
+      "spreadPp": 0.73
+    },
+    {
+      "month": "2015-05",
+      "spreadPp": 0.78
+    },
+    {
+      "month": "2015-06",
+      "spreadPp": 0.79
+    },
+    {
+      "month": "2015-07",
+      "spreadPp": 0.83
+    },
+    {
+      "month": "2015-08",
+      "spreadPp": 0.78
+    },
+    {
+      "month": "2015-09",
+      "spreadPp": 0.8
+    },
+    {
+      "month": "2015-10",
+      "spreadPp": 0.79
+    },
+    {
+      "month": "2015-11",
+      "spreadPp": 0.78
+    },
+    {
+      "month": "2015-12",
+      "spreadPp": 0.76
+    },
+    {
+      "month": "2016-01",
+      "spreadPp": 0.72
+    },
+    {
+      "month": "2016-02",
+      "spreadPp": 0.7
+    },
+    {
+      "month": "2016-03",
+      "spreadPp": 0.73
+    },
+    {
+      "month": "2016-04",
+      "spreadPp": 0.73
+    },
+    {
+      "month": "2016-05",
+      "spreadPp": 0.76
+    },
+    {
+      "month": "2016-06",
+      "spreadPp": 0.73
+    },
+    {
+      "month": "2016-07",
+      "spreadPp": 0.69
+    },
+    {
+      "month": "2016-08",
+      "spreadPp": 0.69
+    },
+    {
+      "month": "2016-09",
+      "spreadPp": 0.7
+    },
+    {
+      "month": "2016-10",
+      "spreadPp": 0.71
+    },
+    {
+      "month": "2016-11",
+      "spreadPp": 0.74
+    },
+    {
+      "month": "2016-12",
+      "spreadPp": 0.77
+    },
+    {
+      "month": "2017-01",
+      "spreadPp": 0.76
+    },
+    {
+      "month": "2017-02",
+      "spreadPp": 0.79
+    },
+    {
+      "month": "2017-03",
+      "spreadPp": 0.78
+    },
+    {
+      "month": "2017-04",
+      "spreadPp": 0.75
+    },
+    {
+      "month": "2017-05",
+      "spreadPp": 0.75
+    },
+    {
+      "month": "2017-06",
+      "spreadPp": 0.73
+    },
+    {
+      "month": "2017-07",
+      "spreadPp": 0.73
+    },
+    {
+      "month": "2017-08",
+      "spreadPp": 0.72
+    },
+    {
+      "month": "2017-09",
+      "spreadPp": 0.7
+    },
+    {
+      "month": "2017-10",
+      "spreadPp": 0.69
+    },
+    {
+      "month": "2017-11",
+      "spreadPp": 0.63
+    },
+    {
+      "month": "2017-12",
+      "spreadPp": 0.57
+    },
+    {
+      "month": "2018-01",
+      "spreadPp": 0.55
+    },
+    {
+      "month": "2018-02",
+      "spreadPp": 0.54
+    },
+    {
+      "month": "2018-03",
+      "spreadPp": 0.53
+    },
+    {
+      "month": "2018-04",
+      "spreadPp": 0.54
+    },
+    {
+      "month": "2018-05",
+      "spreadPp": 0.52
+    },
+    {
+      "month": "2018-06",
+      "spreadPp": 0.53
+    },
+    {
+      "month": "2018-07",
+      "spreadPp": 0.52
+    },
+    {
+      "month": "2018-08",
+      "spreadPp": 0.53
+    },
+    {
+      "month": "2018-09",
+      "spreadPp": 0.55
+    },
+    {
+      "month": "2018-10",
+      "spreadPp": 0.58
+    },
+    {
+      "month": "2018-11",
+      "spreadPp": 0.58
+    },
+    {
+      "month": "2018-12",
+      "spreadPp": 0.55
+    },
+    {
+      "month": "2019-01",
+      "spreadPp": 0.56
+    },
+    {
+      "month": "2019-02",
+      "spreadPp": 0.57
+    },
+    {
+      "month": "2019-03",
+      "spreadPp": 0.55
+    },
+    {
+      "month": "2019-04",
+      "spreadPp": 0.54
+    },
+    {
+      "month": "2019-05",
+      "spreadPp": 0.54
+    },
+    {
+      "month": "2019-06",
+      "spreadPp": 0.57
+    },
+    {
+      "month": "2019-07",
+      "spreadPp": 0.56
+    },
+    {
+      "month": "2019-08",
+      "spreadPp": 0.53
+    },
+    {
+      "month": "2019-09",
+      "spreadPp": 0.49
+    },
+    {
+      "month": "2019-10",
+      "spreadPp": 0.55
+    },
+    {
+      "month": "2019-11",
+      "spreadPp": 0.54
+    },
+    {
+      "month": "2019-12",
+      "spreadPp": 0.54
+    },
+    {
+      "month": "2020-01",
+      "spreadPp": 0.55
+    },
+    {
+      "month": "2020-02",
+      "spreadPp": 0.49
+    },
+    {
+      "month": "2020-03",
+      "spreadPp": 0.57
+    },
+    {
+      "month": "2020-04",
+      "spreadPp": 0.5
+    },
+    {
+      "month": "2020-05",
+      "spreadPp": 0.54
+    },
+    {
+      "month": "2020-06",
+      "spreadPp": 0.56
+    },
+    {
+      "month": "2020-07",
+      "spreadPp": 0.5
+    },
+    {
+      "month": "2020-08",
+      "spreadPp": 0.46
+    },
+    {
+      "month": "2020-09",
+      "spreadPp": 0.51
+    },
+    {
+      "month": "2020-10",
+      "spreadPp": 0.49
+    },
+    {
+      "month": "2020-11",
+      "spreadPp": 0.46
+    },
+    {
+      "month": "2020-12",
+      "spreadPp": 0.47
+    },
+    {
+      "month": "2021-01",
+      "spreadPp": 0.53
+    },
+    {
+      "month": "2021-02",
+      "spreadPp": 0.57
+    },
+    {
+      "month": "2021-03",
+      "spreadPp": 0.69
+    },
+    {
+      "month": "2021-04",
+      "spreadPp": 0.7
+    },
+    {
+      "month": "2021-05",
+      "spreadPp": 0.68
+    },
+    {
+      "month": "2021-06",
+      "spreadPp": 0.7
+    },
+    {
+      "month": "2021-07",
+      "spreadPp": 0.69
+    },
+    {
+      "month": "2021-08",
+      "spreadPp": 0.7
+    },
+    {
+      "month": "2021-09",
+      "spreadPp": 0.72
+    },
+    {
+      "month": "2021-10",
+      "spreadPp": 0.76
+    },
+    {
+      "month": "2021-11",
+      "spreadPp": 0.71
+    },
+    {
+      "month": "2021-12",
+      "spreadPp": 0.75
+    },
+    {
+      "month": "2022-01",
+      "spreadPp": 0.78
+    },
+    {
+      "month": "2022-02",
+      "spreadPp": 0.77
+    },
+    {
+      "month": "2022-03",
+      "spreadPp": 0.78
+    },
+    {
+      "month": "2022-04",
+      "spreadPp": 0.77
+    },
+    {
+      "month": "2022-05",
+      "spreadPp": 0.8
+    },
+    {
+      "month": "2022-06",
+      "spreadPp": 0.87
+    },
+    {
+      "month": "2022-07",
+      "spreadPp": 0.8
+    },
+    {
+      "month": "2022-08",
+      "spreadPp": 0.66
+    },
+    {
+      "month": "2022-09",
+      "spreadPp": 0.76
+    },
+    {
+      "month": "2022-10",
+      "spreadPp": 0.76
+    },
+    {
+      "month": "2022-11",
+      "spreadPp": 0.67
+    },
+    {
+      "month": "2022-12",
+      "spreadPp": 0.7
+    },
+    {
+      "month": "2023-01",
+      "spreadPp": 0.85
+    },
+    {
+      "month": "2023-02",
+      "spreadPp": 0.84
+    },
+    {
+      "month": "2023-03",
+      "spreadPp": 0.75
+    },
+    {
+      "month": "2023-04",
+      "spreadPp": 0.68
+    },
+    {
+      "month": "2023-05",
+      "spreadPp": 0.62
+    },
+    {
+      "month": "2023-06",
+      "spreadPp": 0.63
+    },
+    {
+      "month": "2023-07",
+      "spreadPp": 0.66
+    },
+    {
+      "month": "2023-08",
+      "spreadPp": 0.64
+    },
+    {
+      "month": "2023-09",
+      "spreadPp": 0.63
+    },
+    {
+      "month": "2023-10",
+      "spreadPp": 0.71
+    },
+    {
+      "month": "2023-11",
+      "spreadPp": 0.68
+    },
+    {
+      "month": "2023-12",
+      "spreadPp": 0.68
+    },
+    {
+      "month": "2024-01",
+      "spreadPp": 0.77
+    },
+    {
+      "month": "2024-02",
+      "spreadPp": 0.67
+    },
+    {
+      "month": "2024-03",
+      "spreadPp": 0.65
+    },
+    {
+      "month": "2024-04",
+      "spreadPp": 0.73
+    },
+    {
+      "month": "2024-05",
+      "spreadPp": 0.71
+    },
+    {
+      "month": "2024-06",
+      "spreadPp": 0.73
+    },
+    {
+      "month": "2024-07",
+      "spreadPp": 0.71
+    },
+    {
+      "month": "2024-08",
+      "spreadPp": 0.82
+    },
+    {
+      "month": "2024-09",
+      "spreadPp": 0.92
+    },
+    {
+      "month": "2024-10",
+      "spreadPp": 0.83
+    },
+    {
+      "month": "2024-11",
+      "spreadPp": 0.78
+    },
+    {
+      "month": "2024-12",
+      "spreadPp": 0.79
+    },
+    {
+      "month": "2025-01",
+      "spreadPp": 0.79
+    },
+    {
+      "month": "2025-02",
+      "spreadPp": 0.81
+    },
+    {
+      "month": "2025-03",
+      "spreadPp": 0.82
+    },
+    {
+      "month": "2025-04",
+      "spreadPp": 0.82
+    },
+    {
+      "month": "2025-05",
+      "spreadPp": 0.86
+    },
+    {
+      "month": "2025-06",
+      "spreadPp": 0.87
+    },
+    {
+      "month": "2025-07",
+      "spreadPp": 0.86
+    },
+    {
+      "month": "2025-08",
+      "spreadPp": 0.88
+    },
+    {
+      "month": "2025-09",
+      "spreadPp": 0.85
+    },
+    {
+      "month": "2025-10",
+      "spreadPp": 0.76
+    },
+    {
+      "month": "2025-11",
+      "spreadPp": 0.73
+    },
+    {
+      "month": "2025-12",
+      "spreadPp": 0.71
+    },
+    {
+      "month": "2026-01",
+      "spreadPp": 0.66
+    },
+    {
+      "month": "2026-02",
+      "spreadPp": 0.62
+    },
+    {
+      "month": "2026-03",
+      "spreadPp": 0.62
+    },
+    {
+      "month": "2026-04",
+      "spreadPp": 0.66
+    },
+    {
+      "month": "2026-05",
+      "spreadPp": 0.66
+    },
+    {
+      "month": "2026-06",
+      "spreadPp": 0.67
+    }
+  ],
+  "breakEven": [
+    {
+      "rate30Percent": 3,
+      "spreadPp": 0.25,
+      "rate15Percent": 2.75,
+      "paymentRatio": 1.6096184645650273,
+      "monthlyDiffShare": 0.0025701760369657295,
+      "requiredAnnualReturn30y": 0.03354516378839867,
+      "hybridPayoffMonths": 185,
+      "hybridExtraMonths": 5,
+      "hybridExtraCostShare": 0.027316885223353182,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 3,
+      "spreadPp": 0.5,
+      "rate15Percent": 2.5,
+      "paymentRatio": 1.5815532007856425,
+      "monthlyDiffShare": 0.0024518517527950317,
+      "requiredAnnualReturn30y": 0.036797727550245685,
+      "hybridPayoffMonths": 189,
+      "hybridExtraMonths": 9,
+      "hybridExtraCostShare": 0.05462597103897626,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 3,
+      "spreadPp": 0.75,
+      "rate15Percent": 2.25,
+      "paymentRatio": 1.553791513949745,
+      "monthlyDiffShare": 0.002334807361263548,
+      "requiredAnnualReturn30y": 0.040184186051297144,
+      "hybridPayoffMonths": 193,
+      "hybridExtraMonths": 13,
+      "hybridExtraCostShare": 0.08193710900908502,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 3,
+      "spreadPp": 1,
+      "rate15Percent": 2,
+      "paymentRatio": 1.5263343067790798,
+      "monthlyDiffShare": 0.0022190466682825705,
+      "requiredAnnualReturn30y": 0.04371651329131521,
+      "hybridPayoffMonths": 197,
+      "hybridExtraMonths": 17,
+      "hybridExtraCostShare": 0.10925997491759709,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 4,
+      "spreadPp": 0.25,
+      "rate15Percent": 3.75,
+      "paymentRatio": 1.523249149254381,
+      "monthlyDiffShare": 0.0024980714719332765,
+      "requiredAnnualReturn30y": 0.04412564959462373,
+      "hybridPayoffMonths": 185,
+      "hybridExtraMonths": 5,
+      "hybridExtraCostShare": 0.03094784366069825,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 4,
+      "spreadPp": 0.5,
+      "rate15Percent": 3.5,
+      "paymentRatio": 1.4974018388878843,
+      "monthlyDiffShare": 0.002374672458777193,
+      "requiredAnnualReturn30y": 0.04765793708407495,
+      "hybridPayoffMonths": 189,
+      "hybridExtraMonths": 9,
+      "hybridExtraCostShare": 0.062035045564012625,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 4,
+      "spreadPp": 0.75,
+      "rate15Percent": 3.25,
+      "paymentRatio": 1.471818719663817,
+      "monthlyDiffShare": 0.002252534734544334,
+      "requiredAnnualReturn30y": 0.05135242835454912,
+      "hybridPayoffMonths": 194,
+      "hybridExtraMonths": 14,
+      "hybridExtraCostShare": 0.09328522831239083,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 4,
+      "spreadPp": 1,
+      "rate15Percent": 3,
+      "paymentRatio": 1.4465008700752295,
+      "monthlyDiffShare": 0.0021316634481254792,
+      "requiredAnnualReturn30y": 0.05522526134692762,
+      "hybridPayoffMonths": 199,
+      "hybridExtraMonths": 19,
+      "hybridExtraCostShare": 0.12472180411783795,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 5,
+      "spreadPp": 0.25,
+      "rate15Percent": 4.75,
+      "paymentRatio": 1.4489578742112763,
+      "monthlyDiffShare": 0.002410102946981774,
+      "requiredAnnualReturn30y": 0.054839280396384305,
+      "hybridPayoffMonths": 185,
+      "hybridExtraMonths": 5,
+      "hybridExtraCostShare": 0.03504758053954893,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 5,
+      "spreadPp": 0.5,
+      "rate15Percent": 4.5,
+      "paymentRatio": 1.4250418686956718,
+      "monthlyDiffShare": 0.002281716658013234,
+      "requiredAnnualReturn30y": 0.05869587071272975,
+      "hybridPayoffMonths": 190,
+      "hybridExtraMonths": 10,
+      "hybridExtraCostShare": 0.07043890709612599,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 5,
+      "spreadPp": 0.75,
+      "rate15Percent": 4.25,
+      "paymentRatio": 1.4013563889028782,
+      "monthlyDiffShare": 0.0021545678809713467,
+      "requiredAnnualReturn30y": 0.06275050814677907,
+      "hybridPayoffMonths": 195,
+      "hybridExtraMonths": 15,
+      "hybridExtraCostShare": 0.10622079740172663,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 5,
+      "spreadPp": 1,
+      "rate15Percent": 4,
+      "paymentRatio": 1.3779026289194956,
+      "monthlyDiffShare": 0.00202866302597118,
+      "requiredAnnualReturn30y": 0.06702519054570721,
+      "hybridPayoffMonths": 200,
+      "hybridExtraMonths": 20,
+      "hybridExtraCostShare": 0.14244038297977712,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 6,
+      "spreadPp": 0.25,
+      "rate15Percent": 5.75,
+      "paymentRatio": 1.385054390216872,
+      "monthlyDiffShare": 0.0023085956186690015,
+      "requiredAnnualReturn30y": 0.06569238224094553,
+      "hybridPayoffMonths": 185,
+      "hybridExtraMonths": 5,
+      "hybridExtraCostShare": 0.039675819254684885,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 6,
+      "spreadPp": 0.5,
+      "rate15Percent": 5.5,
+      "paymentRatio": 1.3628266848952428,
+      "monthlyDiffShare": 0.002175329294683767,
+      "requiredAnnualReturn30y": 0.06992512285770103,
+      "hybridPayoffMonths": 190,
+      "hybridExtraMonths": 10,
+      "hybridExtraCostShare": 0.07998068575942718,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 6,
+      "spreadPp": 0.75,
+      "rate15Percent": 5.25,
+      "paymentRatio": 1.340800619331084,
+      "monthlyDiffShare": 0.002043271902923362,
+      "requiredAnnualReturn30y": 0.07440158820354859,
+      "hybridPayoffMonths": 196,
+      "hybridExtraMonths": 16,
+      "hybridExtraCostShare": 0.12098749236894646,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 6,
+      "spreadPp": 1,
+      "rate15Percent": 5,
+      "paymentRatio": 1.3189774565539134,
+      "monthlyDiffShare": 0.0019124310158878943,
+      "requiredAnnualReturn30y": 0.07915211761537544,
+      "hybridPayoffMonths": 201,
+      "hybridExtraMonths": 21,
+      "hybridExtraCostShare": 0.1627851998204637,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 7,
+      "spreadPp": 0.25,
+      "rate15Percent": 6.75,
+      "paymentRatio": 1.3300858912541644,
+      "monthlyDiffShare": 0.002196069670748399,
+      "requiredAnnualReturn30y": 0.07669212319788865,
+      "hybridPayoffMonths": 186,
+      "hybridExtraMonths": 6,
+      "hybridExtraCostShare": 0.04490383321363134,
+      "inHistoricalSample": true
+    },
+    {
+      "rate30Percent": 7,
+      "spreadPp": 0.5,
+      "rate15Percent": 6.5,
+      "paymentRatio": 1.3093402949928137,
+      "monthlyDiffShare": 0.002058048701181832,
+      "requiredAnnualReturn30y": 0.08136149277173088,
+      "hybridPayoffMonths": 191,
+      "hybridExtraMonths": 11,
+      "hybridExtraCostShare": 0.09082587735174141,
+      "inHistoricalSample": true
+    },
+    {
+      "rate30Percent": 7,
+      "spreadPp": 0.75,
+      "rate15Percent": 6.25,
+      "paymentRatio": 1.2887714576649072,
+      "monthlyDiffShare": 0.001921203713209924,
+      "requiredAnnualReturn30y": 0.08633319137405737,
+      "hybridPayoffMonths": 197,
+      "hybridExtraMonths": 17,
+      "hybridExtraCostShare": 0.13787480292753385,
+      "inHistoricalSample": true
+    },
+    {
+      "rate30Percent": 7,
+      "spreadPp": 1,
+      "rate15Percent": 6,
+      "paymentRatio": 1.268380675201272,
+      "monthlyDiffShare": 0.0017855433286928,
+      "requiredAnnualReturn30y": 0.09164957640838478,
+      "hybridPayoffMonths": 203,
+      "hybridExtraMonths": 23,
+      "hybridExtraCostShare": 0.18620126138460358,
+      "inHistoricalSample": true
+    },
+    {
+      "rate30Percent": 8,
+      "spreadPp": 0.25,
+      "rate15Percent": 7.75,
+      "paymentRatio": 1.2828034856789883,
+      "monthlyDiffShare": 0.002075111791608457,
+      "requiredAnnualReturn30y": 0.08784666032063992,
+      "hybridPayoffMonths": 186,
+      "hybridExtraMonths": 6,
+      "hybridExtraCostShare": 0.05082128192567792,
+      "inHistoricalSample": true
+    },
+    {
+      "rate30Percent": 8,
+      "spreadPp": 0.5,
+      "rate15Percent": 7.5,
+      "paymentRatio": 1.2633648352654328,
+      "monthlyDiffShare": 0.001932477861233529,
+      "requiredAnnualReturn30y": 0.09302345339659757,
+      "hybridPayoffMonths": 192,
+      "hybridExtraMonths": 12,
+      "hybridExtraCostShare": 0.10315913863070536,
+      "inHistoricalSample": true
+    },
+    {
+      "rate30Percent": 8,
+      "spreadPp": 0.75,
+      "rate15Percent": 7.25,
+      "paymentRatio": 1.2440814309250705,
+      "monthlyDiffShare": 0.0017909830715460325,
+      "requiredAnnualReturn30y": 0.09857830265701473,
+      "hybridPayoffMonths": 198,
+      "hybridExtraMonths": 18,
+      "hybridExtraCostShare": 0.15722790503161943,
+      "inHistoricalSample": true
+    },
+    {
+      "rate30Percent": 8,
+      "spreadPp": 1,
+      "rate15Percent": 7,
+      "paymentRatio": 1.2249545737815646,
+      "monthlyDiffShare": 0.0016506369697304683,
+      "requiredAnnualReturn30y": 0.10457110508695988,
+      "hybridPayoffMonths": 204,
+      "hybridExtraMonths": 24,
+      "hybridExtraCostShare": 0.2132513769394846,
+      "inHistoricalSample": true
+    },
+    {
+      "rate30Percent": 9,
+      "spreadPp": 0.25,
+      "rate15Percent": 8.75,
+      "paymentRatio": 1.2421334295128208,
+      "monthlyDiffShare": 0.001948260337044207,
+      "requiredAnnualReturn30y": 0.09916531755236913,
+      "hybridPayoffMonths": 186,
+      "hybridExtraMonths": 6,
+      "hybridExtraCostShare": 0.05750725093325104,
+      "inHistoricalSample": true
+    },
+    {
+      "rate30Percent": 9,
+      "spreadPp": 0.5,
+      "rate15Percent": 8.5,
+      "paymentRatio": 1.2238526946517252,
+      "monthlyDiffShare": 0.0018011694098081215,
+      "requiredAnnualReturn30y": 0.10493274674219577,
+      "hybridPayoffMonths": 192,
+      "hybridExtraMonths": 12,
+      "hybridExtraCostShare": 0.11721479659280343,
+      "inHistoricalSample": true
+    },
+    {
+      "rate30Percent": 9,
+      "spreadPp": 0.75,
+      "rate15Percent": 8.25,
+      "paymentRatio": 1.2057085363531301,
+      "monthlyDiffShare": 0.0016551774084833625,
+      "requiredAnnualReturn30y": 0.11117683522332522,
+      "hybridPayoffMonths": 199,
+      "hybridExtraMonths": 19,
+      "hybridExtraCostShare": 0.1794596848665435,
+      "inHistoricalSample": true
+    },
+    {
+      "rate30Percent": 9,
+      "spreadPp": 1,
+      "rate15Percent": 8,
+      "paymentRatio": 1.1877022397891903,
+      "monthlyDiffShare": 0.0015102946738557513,
+      "requiredAnnualReturn30y": 0.11798343744857409,
+      "hybridPayoffMonths": 206,
+      "hybridExtraMonths": 26,
+      "hybridExtraCostShare": 0.2446067269703729,
+      "inHistoricalSample": true
+    },
+    {
+      "rate30Percent": 10,
+      "spreadPp": 0.25,
+      "rate15Percent": 9.75,
+      "paymentRatio": 1.2071524416356894,
+      "monthlyDiffShare": 0.0018179109345396027,
+      "requiredAnnualReturn30y": 0.11065880237338954,
+      "hybridPayoffMonths": 187,
+      "hybridExtraMonths": 7,
+      "hybridExtraCostShare": 0.06507425975716163,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 10,
+      "spreadPp": 0.5,
+      "rate15Percent": 9.5,
+      "paymentRatio": 1.1899025885240673,
+      "monthlyDiffShare": 0.0016665311277499293,
+      "requiredAnnualReturn30y": 0.1171151484517462,
+      "hybridPayoffMonths": 193,
+      "hybridExtraMonths": 13,
+      "hybridExtraCostShare": 0.13326309388208046,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 10,
+      "spreadPp": 0.75,
+      "rate15Percent": 9.25,
+      "paymentRatio": 1.172773053358066,
+      "monthlyDiffShare": 0.0015162071970447385,
+      "requiredAnnualReturn30y": 0.12417761381840908,
+      "hybridPayoffMonths": 200,
+      "hybridExtraMonths": 20,
+      "hybridExtraCostShare": 0.20506537794409074,
+      "inHistoricalSample": false
+    },
+    {
+      "rate30Percent": 10,
+      "spreadPp": 1,
+      "rate15Percent": 9,
+      "paymentRatio": 1.1557650894036484,
+      "monthlyDiffShare": 0.0013669501407298189,
+      "requiredAnnualReturn30y": 0.13197106245663426,
+      "hybridPayoffMonths": 208,
+      "hybridExtraMonths": 28,
+      "hybridExtraCostShare": 0.2811211474015496,
+      "inHistoricalSample": false
+    }
+  ],
+  "headline30y": {
+    "cohorts": 58,
+    "firstStart": "1991-09",
+    "lastStart": "1996-06",
+    "thirtyWinRate": 0,
+    "medianGapShare": -0.4499861041357661,
+    "p10GapShare": -0.6972920281108858,
+    "p90GapShare": -0.2860662617571847,
+    "medianFlexCostShare": 0.2767240331306817,
+    "medianHybridPayoffMonth": 191,
+    "worst": {
+      "StartMonth": "1994-11",
+      "Rate30": 9.17,
+      "GapShare": -0.8768303355406004
+    },
+    "best": {
+      "StartMonth": "1996-01",
+      "Rate30": 7.03,
+      "GapShare": -0.17197380480193303
+    },
+    "thirtyWinRateIfSteady": 1,
+    "medianSequencePenalty": -0.671,
+    "medianRealizedCagr": 0.1032,
+    "medianRequiredReturn": 0.0931
+  },
+  "pathVsSteady": [
+    {
+      "Month": "1991-09",
+      "Rate30": 9.0075,
+      "RealizedCagr": 0.1063,
+      "RequiredReturn": 0.1012,
+      "RealizedGapShare": -0.7075,
+      "SteadyGapShare": 0.1229,
+      "SequencePenalty": -0.8304,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1991-10",
+      "Rate30": 8.855,
+      "RealizedCagr": 0.1064,
+      "RequiredReturn": 0.1002,
+      "RealizedGapShare": -0.6765,
+      "SteadyGapShare": 0.1471,
+      "SequencePenalty": -0.8236,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1991-11",
+      "Rate30": 8.712,
+      "RealizedCagr": 0.1081,
+      "RequiredReturn": 0.0989,
+      "RealizedGapShare": -0.6701,
+      "SteadyGapShare": 0.2245,
+      "SequencePenalty": -0.8946,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1991-12",
+      "Rate30": 8.4975,
+      "RealizedCagr": 0.1079,
+      "RequiredReturn": 0.0973,
+      "RealizedGapShare": -0.6251,
+      "SteadyGapShare": 0.2534,
+      "SequencePenalty": -0.8786,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1992-01",
+      "Rate30": 8.432,
+      "RealizedCagr": 0.1045,
+      "RequiredReturn": 0.0965,
+      "RealizedGapShare": -0.5904,
+      "SteadyGapShare": 0.181,
+      "SequencePenalty": -0.7714,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1992-02",
+      "Rate30": 8.7625,
+      "RealizedCagr": 0.1037,
+      "RequiredReturn": 0.0993,
+      "RealizedGapShare": -0.6483,
+      "SteadyGapShare": 0.0967,
+      "SequencePenalty": -0.7449,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1992-03",
+      "Rate30": 8.935,
+      "RealizedCagr": 0.1037,
+      "RequiredReturn": 0.1008,
+      "RealizedGapShare": -0.679,
+      "SteadyGapShare": 0.0639,
+      "SequencePenalty": -0.7428,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1992-04",
+      "Rate30": 8.8525,
+      "RealizedCagr": 0.1036,
+      "RequiredReturn": 0.1004,
+      "RealizedGapShare": -0.6658,
+      "SteadyGapShare": 0.0708,
+      "SequencePenalty": -0.7366,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1992-05",
+      "Rate30": 8.672,
+      "RealizedCagr": 0.0999,
+      "RequiredReturn": 0.0982,
+      "RealizedGapShare": -0.5612,
+      "SteadyGapShare": 0.0342,
+      "SequencePenalty": -0.5953,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1992-06",
+      "Rate30": 8.51,
+      "RealizedCagr": 0.0991,
+      "RequiredReturn": 0.0975,
+      "RealizedGapShare": -0.5203,
+      "SteadyGapShare": 0.0314,
+      "SequencePenalty": -0.5518,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1992-07",
+      "Rate30": 8.128,
+      "RealizedCagr": 0.0986,
+      "RequiredReturn": 0.0936,
+      "RealizedGapShare": -0.4439,
+      "SteadyGapShare": 0.0984,
+      "SequencePenalty": -0.5422,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1992-08",
+      "Rate30": 7.975,
+      "RealizedCagr": 0.1005,
+      "RequiredReturn": 0.0924,
+      "RealizedGapShare": -0.4492,
+      "SteadyGapShare": 0.1653,
+      "SequencePenalty": -0.6145,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1992-09",
+      "Rate30": 7.9225,
+      "RealizedCagr": 0.0976,
+      "RequiredReturn": 0.0925,
+      "RealizedGapShare": -0.4186,
+      "SteadyGapShare": 0.0998,
+      "SequencePenalty": -0.5184,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1992-10",
+      "Rate30": 8.088,
+      "RealizedCagr": 0.0969,
+      "RequiredReturn": 0.095,
+      "RealizedGapShare": -0.4544,
+      "SteadyGapShare": 0.0372,
+      "SequencePenalty": -0.4916,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1992-11",
+      "Rate30": 8.305,
+      "RealizedCagr": 0.0978,
+      "RequiredReturn": 0.0969,
+      "RealizedGapShare": -0.5239,
+      "SteadyGapShare": 0.0188,
+      "SequencePenalty": -0.5427,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1992-12",
+      "Rate30": 8.206,
+      "RealizedCagr": 0.0966,
+      "RequiredReturn": 0.0947,
+      "RealizedGapShare": -0.4875,
+      "SteadyGapShare": 0.0381,
+      "SequencePenalty": -0.5256,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1993-01",
+      "Rate30": 7.9925,
+      "RealizedCagr": 0.0971,
+      "RequiredReturn": 0.0926,
+      "RealizedGapShare": -0.4508,
+      "SteadyGapShare": 0.0876,
+      "SequencePenalty": -0.5384,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1993-02",
+      "Rate30": 7.6825,
+      "RealizedCagr": 0.0976,
+      "RequiredReturn": 0.0896,
+      "RealizedGapShare": -0.4015,
+      "SteadyGapShare": 0.1554,
+      "SequencePenalty": -0.5569,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1993-03",
+      "Rate30": 7.495,
+      "RealizedCagr": 0.0959,
+      "RequiredReturn": 0.0872,
+      "RealizedGapShare": -0.3466,
+      "SteadyGapShare": 0.1628,
+      "SequencePenalty": -0.5095,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1993-04",
+      "Rate30": 7.472,
+      "RealizedCagr": 0.0978,
+      "RequiredReturn": 0.0871,
+      "RealizedGapShare": -0.3575,
+      "SteadyGapShare": 0.2066,
+      "SequencePenalty": -0.5641,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1993-05",
+      "Rate30": 7.465,
+      "RealizedCagr": 0.0978,
+      "RequiredReturn": 0.0875,
+      "RealizedGapShare": -0.3686,
+      "SteadyGapShare": 0.1973,
+      "SequencePenalty": -0.5658,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1993-06",
+      "Rate30": 7.4175,
+      "RealizedCagr": 0.0992,
+      "RequiredReturn": 0.0863,
+      "RealizedGapShare": -0.3638,
+      "SteadyGapShare": 0.2557,
+      "SequencePenalty": -0.6194,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1993-07",
+      "Rate30": 7.206,
+      "RealizedCagr": 0.1006,
+      "RequiredReturn": 0.0835,
+      "RealizedGapShare": -0.3199,
+      "SteadyGapShare": 0.343,
+      "SequencePenalty": -0.663,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1993-08",
+      "Rate30": 7.1125,
+      "RealizedCagr": 0.0996,
+      "RequiredReturn": 0.0824,
+      "RealizedGapShare": -0.2926,
+      "SteadyGapShare": 0.3397,
+      "SequencePenalty": -0.6323,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1993-09",
+      "Rate30": 6.915,
+      "RealizedCagr": 0.0988,
+      "RequiredReturn": 0.0799,
+      "RealizedGapShare": -0.2398,
+      "SteadyGapShare": 0.3664,
+      "SequencePenalty": -0.6062,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1993-10",
+      "Rate30": 6.834,
+      "RealizedCagr": 0.0972,
+      "RequiredReturn": 0.0787,
+      "RealizedGapShare": -0.2098,
+      "SteadyGapShare": 0.3527,
+      "SequencePenalty": -0.5626,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1993-11",
+      "Rate30": 7.155,
+      "RealizedCagr": 0.0988,
+      "RequiredReturn": 0.0825,
+      "RealizedGapShare": -0.2939,
+      "SteadyGapShare": 0.3207,
+      "SequencePenalty": -0.6147,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1993-12",
+      "Rate30": 7.172,
+      "RealizedCagr": 0.1004,
+      "RequiredReturn": 0.0832,
+      "RealizedGapShare": -0.313,
+      "SteadyGapShare": 0.3454,
+      "SequencePenalty": -0.6584,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1994-01",
+      "Rate30": 7.06,
+      "RealizedCagr": 0.1008,
+      "RequiredReturn": 0.082,
+      "RealizedGapShare": -0.2849,
+      "SteadyGapShare": 0.3785,
+      "SequencePenalty": -0.6634,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1994-02",
+      "Rate30": 7.1525,
+      "RealizedCagr": 0.1023,
+      "RequiredReturn": 0.0831,
+      "RealizedGapShare": -0.3105,
+      "SteadyGapShare": 0.3952,
+      "SequencePenalty": -0.7057,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1994-03",
+      "Rate30": 7.675,
+      "RealizedCagr": 0.104,
+      "RequiredReturn": 0.0891,
+      "RealizedGapShare": -0.4448,
+      "SteadyGapShare": 0.3166,
+      "SequencePenalty": -0.7614,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1994-04",
+      "Rate30": 8.316,
+      "RealizedCagr": 0.1049,
+      "RequiredReturn": 0.0971,
+      "RealizedGapShare": -0.6042,
+      "SteadyGapShare": 0.1665,
+      "SequencePenalty": -0.7707,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1994-05",
+      "Rate30": 8.5975,
+      "RealizedCagr": 0.1054,
+      "RequiredReturn": 0.1006,
+      "RealizedGapShare": -0.6839,
+      "SteadyGapShare": 0.1048,
+      "SequencePenalty": -0.7887,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1994-06",
+      "Rate30": 8.3975,
+      "RealizedCagr": 0.1063,
+      "RequiredReturn": 0.0974,
+      "RealizedGapShare": -0.6253,
+      "SteadyGapShare": 0.195,
+      "SequencePenalty": -0.8203,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1994-07",
+      "Rate30": 8.614,
+      "RealizedCagr": 0.1074,
+      "RequiredReturn": 0.1004,
+      "RealizedGapShare": -0.6972,
+      "SteadyGapShare": 0.1569,
+      "SequencePenalty": -0.854,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1994-08",
+      "Rate30": 8.5125,
+      "RealizedCagr": 0.1059,
+      "RequiredReturn": 0.0989,
+      "RealizedGapShare": -0.6465,
+      "SteadyGapShare": 0.1529,
+      "SequencePenalty": -0.7994,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1994-09",
+      "Rate30": 8.64,
+      "RealizedCagr": 0.1066,
+      "RequiredReturn": 0.1008,
+      "RealizedGapShare": -0.6976,
+      "SteadyGapShare": 0.1281,
+      "SequencePenalty": -0.8257,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1994-10",
+      "Rate30": 8.925,
+      "RealizedCagr": 0.1079,
+      "RequiredReturn": 0.1049,
+      "RealizedGapShare": -0.8067,
+      "SteadyGapShare": 0.0666,
+      "SequencePenalty": -0.8734,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1994-11",
+      "Rate30": 9.17,
+      "RealizedCagr": 0.1089,
+      "RequiredReturn": 0.1071,
+      "RealizedGapShare": -0.8768,
+      "SteadyGapShare": 0.0421,
+      "SequencePenalty": -0.9189,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1994-12",
+      "Rate30": 9.198,
+      "RealizedCagr": 0.1099,
+      "RequiredReturn": 0.1048,
+      "RealizedGapShare": -0.8348,
+      "SteadyGapShare": 0.121,
+      "SequencePenalty": -0.9558,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1995-01",
+      "Rate30": 9.1475,
+      "RealizedCagr": 0.1088,
+      "RequiredReturn": 0.1032,
+      "RealizedGapShare": -0.7848,
+      "SteadyGapShare": 0.1318,
+      "SequencePenalty": -0.9167,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1995-02",
+      "Rate30": 8.8275,
+      "RealizedCagr": 0.1078,
+      "RequiredReturn": 0.0998,
+      "RealizedGapShare": -0.6943,
+      "SteadyGapShare": 0.185,
+      "SequencePenalty": -0.8793,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1995-03",
+      "Rate30": 8.462,
+      "RealizedCagr": 0.1047,
+      "RequiredReturn": 0.0962,
+      "RealizedGapShare": -0.5566,
+      "SteadyGapShare": 0.1856,
+      "SequencePenalty": -0.7421,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1995-04",
+      "Rate30": 8.32,
+      "RealizedCagr": 0.1015,
+      "RequiredReturn": 0.0955,
+      "RealizedGapShare": -0.4991,
+      "SteadyGapShare": 0.1243,
+      "SequencePenalty": -0.6235,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1995-05",
+      "Rate30": 7.955,
+      "RealizedCagr": 0.1032,
+      "RequiredReturn": 0.0913,
+      "RealizedGapShare": -0.4358,
+      "SteadyGapShare": 0.252,
+      "SequencePenalty": -0.6877,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1995-06",
+      "Rate30": 7.566,
+      "RealizedCagr": 0.1035,
+      "RequiredReturn": 0.088,
+      "RealizedGapShare": -0.36,
+      "SteadyGapShare": 0.3242,
+      "SequencePenalty": -0.6842,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1995-07",
+      "Rate30": 7.6075,
+      "RealizedCagr": 0.1038,
+      "RequiredReturn": 0.0888,
+      "RealizedGapShare": -0.3843,
+      "SteadyGapShare": 0.3148,
+      "SequencePenalty": -0.6991,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1995-08",
+      "Rate30": 7.86,
+      "RealizedCagr": 0.1043,
+      "RequiredReturn": 0.0914,
+      "RealizedGapShare": -0.4443,
+      "SteadyGapShare": 0.2752,
+      "SequencePenalty": -0.7195,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1995-09",
+      "Rate30": 7.636,
+      "RealizedCagr": 0.104,
+      "RequiredReturn": 0.0883,
+      "RealizedGapShare": -0.3673,
+      "SteadyGapShare": 0.3337,
+      "SequencePenalty": -0.701,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1995-10",
+      "Rate30": 7.475,
+      "RealizedCagr": 0.1045,
+      "RequiredReturn": 0.0862,
+      "RealizedGapShare": -0.3135,
+      "SteadyGapShare": 0.3923,
+      "SequencePenalty": -0.7058,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1995-11",
+      "Rate30": 7.3775,
+      "RealizedCagr": 0.1037,
+      "RequiredReturn": 0.0855,
+      "RealizedGapShare": -0.2866,
+      "SteadyGapShare": 0.3846,
+      "SequencePenalty": -0.6712,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1995-12",
+      "Rate30": 7.2,
+      "RealizedCagr": 0.1032,
+      "RequiredReturn": 0.083,
+      "RealizedGapShare": -0.2177,
+      "SteadyGapShare": 0.4234,
+      "SequencePenalty": -0.6412,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1996-01",
+      "Rate30": 7.03,
+      "RealizedCagr": 0.1035,
+      "RequiredReturn": 0.0814,
+      "RealizedGapShare": -0.172,
+      "SteadyGapShare": 0.4653,
+      "SequencePenalty": -0.6373,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1996-02",
+      "Rate30": 7.075,
+      "RealizedCagr": 0.1013,
+      "RequiredReturn": 0.0825,
+      "RealizedGapShare": -0.1903,
+      "SteadyGapShare": 0.3793,
+      "SequencePenalty": -0.5696,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1996-03",
+      "Rate30": 7.624,
+      "RealizedCagr": 0.1001,
+      "RequiredReturn": 0.0888,
+      "RealizedGapShare": -0.3266,
+      "SteadyGapShare": 0.2242,
+      "SequencePenalty": -0.5508,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1996-04",
+      "Rate30": 7.925,
+      "RealizedCagr": 0.1017,
+      "RequiredReturn": 0.0918,
+      "RealizedGapShare": -0.4078,
+      "SteadyGapShare": 0.2013,
+      "SequencePenalty": -0.6091,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1996-05",
+      "Rate30": 8.07,
+      "RealizedCagr": 0.1032,
+      "RequiredReturn": 0.0937,
+      "RealizedGapShare": -0.4715,
+      "SteadyGapShare": 0.1978,
+      "SequencePenalty": -0.6693,
+      "ThirtyWinsIfSteady": true
+    },
+    {
+      "Month": "1996-06",
+      "Rate30": 8.32,
+      "RealizedCagr": 0.1029,
+      "RequiredReturn": 0.0965,
+      "RealizedGapShare": -0.538,
+      "SteadyGapShare": 0.1328,
+      "SequencePenalty": -0.6708,
+      "ThirtyWinsIfSteady": true
+    }
+  ],
+  "checkpoint15y": {
+    "cohorts": 238,
+    "firstStart": "1991-09",
+    "lastStart": "2011-06",
+    "thirtyAheadRate": 0.5042016806722689,
+    "medianThirtyNet": 0.010191255507961669,
+    "p10ThirtyNet": -0.22113997863299148,
+    "p90ThirtyNet": 0.40443649718053615
+  },
+  "headline20y": {
+    "cohorts": 178,
+    "thirtyWinRate": 0.47752808988764045,
+    "medianGapShare": -0.008379941987466999
+  },
+  "byEra30": [
+    {
+      "fromYear": 1990,
+      "toYear": 1991,
+      "cohorts": 4,
+      "rate30Low": 8.4975,
+      "rate30High": 9.0075,
+      "thirtyWinRate": 0,
+      "medianGapShare": -0.6732954513978662,
+      "medianFlexCostShare": 0.1807811216420463
+    },
+    {
+      "fromYear": 1992,
+      "toYear": 1993,
+      "cohorts": 24,
+      "rate30Low": 6.834,
+      "rate30High": 8.935,
+      "thirtyWinRate": 0,
+      "medianGapShare": -0.4312350708361272,
+      "medianFlexCostShare": 0.2043036397952348
+    },
+    {
+      "fromYear": 1994,
+      "toYear": 1995,
+      "cohorts": 24,
+      "rate30Low": 7.06,
+      "rate30High": 9.198,
+      "thirtyWinRate": 0,
+      "medianGapShare": -0.527841128522541,
+      "medianFlexCostShare": 0.3113027713643939
+    },
+    {
+      "fromYear": 1996,
+      "toYear": 1996,
+      "cohorts": 6,
+      "rate30Low": 7.03,
+      "rate30High": 8.32,
+      "thirtyWinRate": 0,
+      "medianGapShare": -0.3672156915236855,
+      "medianFlexCostShare": 0.3269929556184139
+    }
+  ],
+  "byEra15": [
+    {
+      "fromYear": 1990,
+      "toYear": 1994,
+      "cohorts": 40,
+      "rate30Low": 6.834,
+      "rate30High": 9.198,
+      "thirtyWinRate": 0,
+      "medianGapShare": -0.07957214455109747,
+      "medianFlexCostShare": 0.06240800329195941
+    },
+    {
+      "fromYear": 1995,
+      "toYear": 1999,
+      "cohorts": 60,
+      "rate30Low": 6.71,
+      "rate30High": 9.1475,
+      "thirtyWinRate": 0,
+      "medianGapShare": -0.16632153621400525,
+      "medianFlexCostShare": 0.05778388724813817
+    },
+    {
+      "fromYear": 2000,
+      "toYear": 2004,
+      "cohorts": 60,
+      "rate30Low": 5.23,
+      "rate30High": 8.515,
+      "thirtyWinRate": 0.7,
+      "medianGapShare": 0.06969900681160678,
+      "medianFlexCostShare": 0.06636515696165995
+    },
+    {
+      "fromYear": 2005,
+      "toYear": 2009,
+      "cohorts": 60,
+      "rate30Low": 4.81,
+      "rate30High": 6.7625,
+      "thirtyWinRate": 1,
+      "medianGapShare": 0.2953740090635465,
+      "medianFlexCostShare": 0.04742089892859894
+    },
+    {
+      "fromYear": 2010,
+      "toYear": 2011,
+      "cohorts": 18,
+      "rate30Low": 4.225,
+      "rate30High": 5.098,
+      "thirtyWinRate": 1,
+      "medianGapShare": 0.4314657916888407,
+      "medianFlexCostShare": 0.05851711087247163
+    }
+  ],
+  "byRateBucket15": [
+    {
+      "RateLow": 4,
+      "RateHigh": 5,
+      "Cohorts": 21,
+      "ThirtyWinRate": 1,
+      "MedianGapShare": 0.44432993518506064,
+      "P10GapShare": 0.37106732533018777,
+      "P90GapShare": 0.4734524751367234
+    },
+    {
+      "RateLow": 5,
+      "RateHigh": 6,
+      "Cohorts": 42,
+      "ThirtyWinRate": 1,
+      "MedianGapShare": 0.19038866064369062,
+      "P10GapShare": 0.11023805715648796,
+      "P90GapShare": 0.40324765714874616
+    },
+    {
+      "RateLow": 6,
+      "RateHigh": 7,
+      "Cohorts": 68,
+      "ThirtyWinRate": 0.7941176470588235,
+      "MedianGapShare": 0.173064120265898,
+      "P10GapShare": -0.05402357812915297,
+      "P90GapShare": 0.3804267538065424
+    },
+    {
+      "RateLow": 7,
+      "RateHigh": 8,
+      "Cohorts": 66,
+      "ThirtyWinRate": 0.045454545454545456,
+      "MedianGapShare": -0.11123723300053176,
+      "P10GapShare": -0.2290468338867897,
+      "P90GapShare": -0.01975372130759149
+    },
+    {
+      "RateLow": 8,
+      "RateHigh": 10,
+      "Cohorts": 41,
+      "ThirtyWinRate": 0,
+      "MedianGapShare": -0.06476168262477881,
+      "P10GapShare": -0.2686366700899766,
+      "P90GapShare": -0.029852811964195734
+    }
+  ],
+  "cohorts30": [
+    {
+      "month": "1991-09",
+      "rate15": 8.67,
+      "rate30": 9.0075,
+      "gapShare": -0.7075,
+      "flexCostShare": 0.1669,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 188
+    },
+    {
+      "month": "1991-10",
+      "rate15": 8.4825,
+      "rate30": 8.855,
+      "gapShare": -0.6765,
+      "flexCostShare": 0.1765,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 189
+    },
+    {
+      "month": "1991-11",
+      "rate15": 8.326,
+      "rate30": 8.712,
+      "gapShare": -0.6701,
+      "flexCostShare": 0.1851,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 189
+    },
+    {
+      "month": "1991-12",
+      "rate15": 8.07,
+      "rate30": 8.4975,
+      "gapShare": -0.6251,
+      "flexCostShare": 0.1982,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 190
+    },
+    {
+      "month": "1992-01",
+      "rate15": 8.006,
+      "rate30": 8.432,
+      "gapShare": -0.5904,
+      "flexCostShare": 0.1888,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 190
+    },
+    {
+      "month": "1992-02",
+      "rate15": 8.3825,
+      "rate30": 8.7625,
+      "gapShare": -0.6483,
+      "flexCostShare": 0.1681,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 189
+    },
+    {
+      "month": "1992-03",
+      "rate15": 8.5775,
+      "rate30": 8.935,
+      "gapShare": -0.679,
+      "flexCostShare": 0.1579,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 189
+    },
+    {
+      "month": "1992-04",
+      "rate15": 8.47,
+      "rate30": 8.8525,
+      "gapShare": -0.6658,
+      "flexCostShare": 0.1659,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 189
+    },
+    {
+      "month": "1992-05",
+      "rate15": 8.294,
+      "rate30": 8.672,
+      "gapShare": -0.5612,
+      "flexCostShare": 0.1466,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 189
+    },
+    {
+      "month": "1992-06",
+      "rate15": 8.0775,
+      "rate30": 8.51,
+      "gapShare": -0.5203,
+      "flexCostShare": 0.1614,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 190
+    },
+    {
+      "month": "1992-07",
+      "rate15": 7.67,
+      "rate30": 8.128,
+      "gapShare": -0.4439,
+      "flexCostShare": 0.1659,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1992-08",
+      "rate15": 7.49,
+      "rate30": 7.975,
+      "gapShare": -0.4492,
+      "flexCostShare": 0.186,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1992-09",
+      "rate15": 7.405,
+      "rate30": 7.9225,
+      "gapShare": -0.4186,
+      "flexCostShare": 0.1863,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 192
+    },
+    {
+      "month": "1992-10",
+      "rate15": 7.546,
+      "rate30": 8.088,
+      "gapShare": -0.4544,
+      "flexCostShare": 0.1983,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 193
+    },
+    {
+      "month": "1992-11",
+      "rate15": 7.795,
+      "rate30": 8.305,
+      "gapShare": -0.5239,
+      "flexCostShare": 0.2067,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 192
+    },
+    {
+      "month": "1992-12",
+      "rate15": 7.742,
+      "rate30": 8.206,
+      "gapShare": -0.4875,
+      "flexCostShare": 0.1861,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1993-01",
+      "rate15": 7.51,
+      "rate30": 7.9925,
+      "gapShare": -0.4508,
+      "flexCostShare": 0.2019,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1993-02",
+      "rate15": 7.17,
+      "rate30": 7.6825,
+      "gapShare": -0.4015,
+      "flexCostShare": 0.2254,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 192
+    },
+    {
+      "month": "1993-03",
+      "rate15": 6.99,
+      "rate30": 7.495,
+      "gapShare": -0.3466,
+      "flexCostShare": 0.2182,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1993-04",
+      "rate15": 6.96,
+      "rate30": 7.472,
+      "gapShare": -0.3575,
+      "flexCostShare": 0.2406,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 192
+    },
+    {
+      "month": "1993-05",
+      "rate15": 6.9275,
+      "rate30": 7.465,
+      "gapShare": -0.3686,
+      "flexCostShare": 0.2704,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 192
+    },
+    {
+      "month": "1993-06",
+      "rate15": 6.915,
+      "rate30": 7.4175,
+      "gapShare": -0.3638,
+      "flexCostShare": 0.2702,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1993-07",
+      "rate15": 6.718,
+      "rate30": 7.206,
+      "gapShare": -0.3199,
+      "flexCostShare": 0.2727,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1993-08",
+      "rate15": 6.6275,
+      "rate30": 7.1125,
+      "gapShare": -0.2926,
+      "flexCostShare": 0.2715,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1993-09",
+      "rate15": 6.44,
+      "rate30": 6.915,
+      "gapShare": -0.2398,
+      "flexCostShare": 0.2635,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 190
+    },
+    {
+      "month": "1993-10",
+      "rate15": 6.374,
+      "rate30": 6.834,
+      "gapShare": -0.2098,
+      "flexCostShare": 0.2516,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 190
+    },
+    {
+      "month": "1993-11",
+      "rate15": 6.6875,
+      "rate30": 7.155,
+      "gapShare": -0.2939,
+      "flexCostShare": 0.2773,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 190
+    },
+    {
+      "month": "1993-12",
+      "rate15": 6.682,
+      "rate30": 7.172,
+      "gapShare": -0.313,
+      "flexCostShare": 0.2991,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1994-01",
+      "rate15": 6.565,
+      "rate30": 7.06,
+      "gapShare": -0.2849,
+      "flexCostShare": 0.2994,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1994-02",
+      "rate15": 6.655,
+      "rate30": 7.1525,
+      "gapShare": -0.3105,
+      "flexCostShare": 0.3084,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1994-03",
+      "rate15": 7.1825,
+      "rate30": 7.675,
+      "gapShare": -0.4448,
+      "flexCostShare": 0.3237,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1994-04",
+      "rate15": 7.8,
+      "rate30": 8.316,
+      "gapShare": -0.6042,
+      "flexCostShare": 0.3459,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 192
+    },
+    {
+      "month": "1994-05",
+      "rate15": 8.0775,
+      "rate30": 8.5975,
+      "gapShare": -0.6839,
+      "flexCostShare": 0.3575,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 193
+    },
+    {
+      "month": "1994-06",
+      "rate15": 7.91,
+      "rate30": 8.3975,
+      "gapShare": -0.6253,
+      "flexCostShare": 0.3332,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 192
+    },
+    {
+      "month": "1994-07",
+      "rate15": 8.112,
+      "rate30": 8.614,
+      "gapShare": -0.6972,
+      "flexCostShare": 0.3548,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 192
+    },
+    {
+      "month": "1994-08",
+      "rate15": 8.02,
+      "rate30": 8.5125,
+      "gapShare": -0.6465,
+      "flexCostShare": 0.3359,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 192
+    },
+    {
+      "month": "1994-09",
+      "rate15": 8.132,
+      "rate30": 8.64,
+      "gapShare": -0.6976,
+      "flexCostShare": 0.3596,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 192
+    },
+    {
+      "month": "1994-10",
+      "rate15": 8.3875,
+      "rate30": 8.925,
+      "gapShare": -0.8067,
+      "flexCostShare": 0.4031,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 193
+    },
+    {
+      "month": "1994-11",
+      "rate15": 8.665,
+      "rate30": 9.17,
+      "gapShare": -0.8768,
+      "flexCostShare": 0.3977,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 193
+    },
+    {
+      "month": "1994-12",
+      "rate15": 8.804,
+      "rate30": 9.198,
+      "gapShare": -0.8348,
+      "flexCostShare": 0.3142,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 190
+    },
+    {
+      "month": "1995-01",
+      "rate15": 8.795,
+      "rate30": 9.1475,
+      "gapShare": -0.7848,
+      "flexCostShare": 0.2762,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 189
+    },
+    {
+      "month": "1995-02",
+      "rate15": 8.46,
+      "rate30": 8.8275,
+      "gapShare": -0.6943,
+      "flexCostShare": 0.2786,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 189
+    },
+    {
+      "month": "1995-03",
+      "rate15": 8.064,
+      "rate30": 8.462,
+      "gapShare": -0.5566,
+      "flexCostShare": 0.2683,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 190
+    },
+    {
+      "month": "1995-04",
+      "rate15": 7.88,
+      "rate30": 8.32,
+      "gapShare": -0.4991,
+      "flexCostShare": 0.2709,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 190
+    },
+    {
+      "month": "1995-05",
+      "rate15": 7.51,
+      "rate30": 7.955,
+      "gapShare": -0.4358,
+      "flexCostShare": 0.2809,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 190
+    },
+    {
+      "month": "1995-06",
+      "rate15": 7.062,
+      "rate30": 7.566,
+      "gapShare": -0.36,
+      "flexCostShare": 0.3064,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1995-07",
+      "rate15": 7.0875,
+      "rate30": 7.6075,
+      "gapShare": -0.3843,
+      "flexCostShare": 0.3243,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 192
+    },
+    {
+      "month": "1995-08",
+      "rate15": 7.36,
+      "rate30": 7.86,
+      "gapShare": -0.4443,
+      "flexCostShare": 0.3222,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 192
+    },
+    {
+      "month": "1995-09",
+      "rate15": 7.16,
+      "rate30": 7.636,
+      "gapShare": -0.3673,
+      "flexCostShare": 0.3009,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1995-10",
+      "rate15": 7.0075,
+      "rate30": 7.475,
+      "gapShare": -0.3135,
+      "flexCostShare": 0.292,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1995-11",
+      "rate15": 6.8875,
+      "rate30": 7.3775,
+      "gapShare": -0.2866,
+      "flexCostShare": 0.3042,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1995-12",
+      "rate15": 6.736,
+      "rate30": 7.2,
+      "gapShare": -0.2177,
+      "flexCostShare": 0.2847,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 190
+    },
+    {
+      "month": "1996-01",
+      "rate15": 6.545,
+      "rate30": 7.03,
+      "gapShare": -0.172,
+      "flexCostShare": 0.2967,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1996-02",
+      "rate15": 6.56,
+      "rate30": 7.075,
+      "gapShare": -0.1903,
+      "flexCostShare": 0.3166,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1996-03",
+      "rate15": 7.114,
+      "rate30": 7.624,
+      "gapShare": -0.3266,
+      "flexCostShare": 0.3229,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 192
+    },
+    {
+      "month": "1996-04",
+      "rate15": 7.44,
+      "rate30": 7.925,
+      "gapShare": -0.4078,
+      "flexCostShare": 0.3311,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1996-05",
+      "rate15": 7.578,
+      "rate30": 8.07,
+      "gapShare": -0.4715,
+      "flexCostShare": 0.3609,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 191
+    },
+    {
+      "month": "1996-06",
+      "rate15": 7.8325,
+      "rate30": 8.32,
+      "gapShare": -0.538,
+      "flexCostShare": 0.3685,
+      "thirtyWon": false,
+      "hybridPayoffMonth": 192
+    }
+  ],
+  "cohorts15": [
+    {
+      "month": "1991-09",
+      "rate30": 9.0075,
+      "thirtyNet": -0.0669,
+      "flexCostShare": 0.0512
+    },
+    {
+      "month": "1991-10",
+      "rate30": 8.855,
+      "thirtyNet": -0.0526,
+      "flexCostShare": 0.0558
+    },
+    {
+      "month": "1991-11",
+      "rate30": 8.712,
+      "thirtyNet": -0.0428,
+      "flexCostShare": 0.0571
+    },
+    {
+      "month": "1991-12",
+      "rate30": 8.4975,
+      "thirtyNet": -0.0325,
+      "flexCostShare": 0.0615
+    },
+    {
+      "month": "1992-01",
+      "rate30": 8.432,
+      "thirtyNet": -0.0304,
+      "flexCostShare": 0.0607
+    },
+    {
+      "month": "1992-02",
+      "rate30": 8.7625,
+      "thirtyNet": -0.037,
+      "flexCostShare": 0.0563
+    },
+    {
+      "month": "1992-03",
+      "rate30": 8.935,
+      "thirtyNet": -0.059,
+      "flexCostShare": 0.0539
+    },
+    {
+      "month": "1992-04",
+      "rate30": 8.8525,
+      "thirtyNet": -0.0433,
+      "flexCostShare": 0.0568
+    },
+    {
+      "month": "1992-05",
+      "rate30": 8.672,
+      "thirtyNet": -0.0215,
+      "flexCostShare": 0.0547
+    },
+    {
+      "month": "1992-06",
+      "rate30": 8.51,
+      "thirtyNet": -0.0248,
+      "flexCostShare": 0.0614
+    },
+    {
+      "month": "1992-07",
+      "rate30": 8.128,
+      "thirtyNet": -0.0112,
+      "flexCostShare": 0.0622
+    },
+    {
+      "month": "1992-08",
+      "rate30": 7.975,
+      "thirtyNet": -0.0337,
+      "flexCostShare": 0.065
+    },
+    {
+      "month": "1992-09",
+      "rate30": 7.9225,
+      "thirtyNet": -0.0257,
+      "flexCostShare": 0.0689
+    },
+    {
+      "month": "1992-10",
+      "rate30": 8.088,
+      "thirtyNet": -0.0282,
+      "flexCostShare": 0.0736
+    },
+    {
+      "month": "1992-11",
+      "rate30": 8.305,
+      "thirtyNet": -0.0628,
+      "flexCostShare": 0.0708
+    },
+    {
+      "month": "1992-12",
+      "rate30": 8.206,
+      "thirtyNet": -0.0503,
+      "flexCostShare": 0.0637
+    },
+    {
+      "month": "1993-01",
+      "rate30": 7.9925,
+      "thirtyNet": -0.0782,
+      "flexCostShare": 0.0646
+    },
+    {
+      "month": "1993-02",
+      "rate30": 7.6825,
+      "thirtyNet": -0.0786,
+      "flexCostShare": 0.0661
+    },
+    {
+      "month": "1993-03",
+      "rate30": 7.495,
+      "thirtyNet": -0.084,
+      "flexCostShare": 0.0633
+    },
+    {
+      "month": "1993-04",
+      "rate30": 7.472,
+      "thirtyNet": -0.0696,
+      "flexCostShare": 0.0638
+    },
+    {
+      "month": "1993-05",
+      "rate30": 7.465,
+      "thirtyNet": -0.065,
+      "flexCostShare": 0.0665
+    },
+    {
+      "month": "1993-06",
+      "rate30": 7.4175,
+      "thirtyNet": -0.0806,
+      "flexCostShare": 0.0613
+    },
+    {
+      "month": "1993-07",
+      "rate30": 7.206,
+      "thirtyNet": -0.0984,
+      "flexCostShare": 0.0577
+    },
+    {
+      "month": "1993-08",
+      "rate30": 7.1125,
+      "thirtyNet": -0.0902,
+      "flexCostShare": 0.0571
+    },
+    {
+      "month": "1993-09",
+      "rate30": 6.915,
+      "thirtyNet": -0.1043,
+      "flexCostShare": 0.0548
+    },
+    {
+      "month": "1993-10",
+      "rate30": 6.834,
+      "thirtyNet": -0.1832,
+      "flexCostShare": 0.0533
+    },
+    {
+      "month": "1993-11",
+      "rate30": 7.155,
+      "thirtyNet": -0.2287,
+      "flexCostShare": 0.0575
+    },
+    {
+      "month": "1993-12",
+      "rate30": 7.172,
+      "thirtyNet": -0.2366,
+      "flexCostShare": 0.061
+    },
+    {
+      "month": "1994-01",
+      "rate30": 7.06,
+      "thirtyNet": -0.2377,
+      "flexCostShare": 0.0607
+    },
+    {
+      "month": "1994-02",
+      "rate30": 7.1525,
+      "thirtyNet": -0.261,
+      "flexCostShare": 0.0616
+    },
+    {
+      "month": "1994-03",
+      "rate30": 7.675,
+      "thirtyNet": -0.2947,
+      "flexCostShare": 0.065
+    },
+    {
+      "month": "1994-04",
+      "rate30": 8.316,
+      "thirtyNet": -0.292,
+      "flexCostShare": 0.0734
+    },
+    {
+      "month": "1994-05",
+      "rate30": 8.5975,
+      "thirtyNet": -0.2876,
+      "flexCostShare": 0.0763
+    },
+    {
+      "month": "1994-06",
+      "rate30": 8.3975,
+      "thirtyNet": -0.2713,
+      "flexCostShare": 0.0696
+    },
+    {
+      "month": "1994-07",
+      "rate30": 8.614,
+      "thirtyNet": -0.2802,
+      "flexCostShare": 0.0738
+    },
+    {
+      "month": "1994-08",
+      "rate30": 8.5125,
+      "thirtyNet": -0.2574,
+      "flexCostShare": 0.0717
+    },
+    {
+      "month": "1994-09",
+      "rate30": 8.64,
+      "thirtyNet": -0.2563,
+      "flexCostShare": 0.0752
+    },
+    {
+      "month": "1994-10",
+      "rate30": 8.925,
+      "thirtyNet": -0.2655,
+      "flexCostShare": 0.0823
+    },
+    {
+      "month": "1994-11",
+      "rate30": 9.17,
+      "thirtyNet": -0.2686,
+      "flexCostShare": 0.0797
+    },
+    {
+      "month": "1994-12",
+      "rate30": 9.198,
+      "thirtyNet": -0.2559,
+      "flexCostShare": 0.0626
+    },
+    {
+      "month": "1995-01",
+      "rate30": 9.1475,
+      "thirtyNet": -0.2489,
+      "flexCostShare": 0.0557
+    },
+    {
+      "month": "1995-02",
+      "rate30": 8.8275,
+      "thirtyNet": -0.2508,
+      "flexCostShare": 0.0561
+    },
+    {
+      "month": "1995-03",
+      "rate30": 8.462,
+      "thirtyNet": -0.2243,
+      "flexCostShare": 0.0581
+    },
+    {
+      "month": "1995-04",
+      "rate30": 8.32,
+      "thirtyNet": -0.213,
+      "flexCostShare": 0.0632
+    },
+    {
+      "month": "1995-05",
+      "rate30": 7.955,
+      "thirtyNet": -0.2215,
+      "flexCostShare": 0.0613
+    },
+    {
+      "month": "1995-06",
+      "rate30": 7.566,
+      "thirtyNet": -0.2258,
+      "flexCostShare": 0.0663
+    },
+    {
+      "month": "1995-07",
+      "rate30": 7.6075,
+      "thirtyNet": -0.2315,
+      "flexCostShare": 0.0688
+    },
+    {
+      "month": "1995-08",
+      "rate30": 7.86,
+      "thirtyNet": -0.2393,
+      "flexCostShare": 0.0683
+    },
+    {
+      "month": "1995-09",
+      "rate30": 7.636,
+      "thirtyNet": -0.221,
+      "flexCostShare": 0.0634
+    },
+    {
+      "month": "1995-10",
+      "rate30": 7.475,
+      "thirtyNet": -0.2023,
+      "flexCostShare": 0.0612
+    },
+    {
+      "month": "1995-11",
+      "rate30": 7.3775,
+      "thirtyNet": -0.1944,
+      "flexCostShare": 0.0633
+    },
+    {
+      "month": "1995-12",
+      "rate30": 7.2,
+      "thirtyNet": -0.1743,
+      "flexCostShare": 0.0585
+    },
+    {
+      "month": "1996-01",
+      "rate30": 7.03,
+      "thirtyNet": -0.1599,
+      "flexCostShare": 0.06
+    },
+    {
+      "month": "1996-02",
+      "rate30": 7.075,
+      "thirtyNet": -0.1557,
+      "flexCostShare": 0.0639
+    },
+    {
+      "month": "1996-03",
+      "rate30": 7.624,
+      "thirtyNet": -0.1835,
+      "flexCostShare": 0.0673
+    },
+    {
+      "month": "1996-04",
+      "rate30": 7.925,
+      "thirtyNet": -0.1876,
+      "flexCostShare": 0.0662
+    },
+    {
+      "month": "1996-05",
+      "rate30": 8.07,
+      "thirtyNet": -0.1938,
+      "flexCostShare": 0.0682
+    },
+    {
+      "month": "1996-06",
+      "rate30": 8.32,
+      "thirtyNet": -0.2182,
+      "flexCostShare": 0.0697
+    },
+    {
+      "month": "1996-07",
+      "rate30": 8.245,
+      "thirtyNet": -0.2065,
+      "flexCostShare": 0.0678
+    },
+    {
+      "month": "1996-08",
+      "rate30": 8.002,
+      "thirtyNet": -0.2341,
+      "flexCostShare": 0.0666
+    },
+    {
+      "month": "1996-09",
+      "rate30": 8.23,
+      "thirtyNet": -0.2467,
+      "flexCostShare": 0.0677
+    },
+    {
+      "month": "1996-10",
+      "rate30": 7.915,
+      "thirtyNet": -0.2294,
+      "flexCostShare": 0.0665
+    },
+    {
+      "month": "1996-11",
+      "rate30": 7.618,
+      "thirtyNet": -0.2138,
+      "flexCostShare": 0.0632
+    },
+    {
+      "month": "1996-12",
+      "rate30": 7.5975,
+      "thirtyNet": -0.2124,
+      "flexCostShare": 0.0664
+    },
+    {
+      "month": "1997-01",
+      "rate30": 7.824,
+      "thirtyNet": -0.2074,
+      "flexCostShare": 0.0676
+    },
+    {
+      "month": "1997-02",
+      "rate30": 7.65,
+      "thirtyNet": -0.1884,
+      "flexCostShare": 0.0666
+    },
+    {
+      "month": "1997-03",
+      "rate30": 7.8975,
+      "thirtyNet": -0.1888,
+      "flexCostShare": 0.0673
+    },
+    {
+      "month": "1997-04",
+      "rate30": 8.1425,
+      "thirtyNet": -0.1979,
+      "flexCostShare": 0.0657
+    },
+    {
+      "month": "1997-05",
+      "rate30": 7.944,
+      "thirtyNet": -0.2027,
+      "flexCostShare": 0.0648
+    },
+    {
+      "month": "1997-06",
+      "rate30": 7.69,
+      "thirtyNet": -0.1968,
+      "flexCostShare": 0.0607
+    },
+    {
+      "month": "1997-07",
+      "rate30": 7.4975,
+      "thirtyNet": -0.1816,
+      "flexCostShare": 0.0602
+    },
+    {
+      "month": "1997-08",
+      "rate30": 7.48,
+      "thirtyNet": -0.1702,
+      "flexCostShare": 0.0603
+    },
+    {
+      "month": "1997-09",
+      "rate30": 7.43,
+      "thirtyNet": -0.1563,
+      "flexCostShare": 0.0571
+    },
+    {
+      "month": "1997-10",
+      "rate30": 7.294,
+      "thirtyNet": -0.1537,
+      "flexCostShare": 0.0568
+    },
+    {
+      "month": "1997-11",
+      "rate30": 7.205,
+      "thirtyNet": -0.1624,
+      "flexCostShare": 0.0563
+    },
+    {
+      "month": "1997-12",
+      "rate30": 7.095,
+      "thirtyNet": -0.1503,
+      "flexCostShare": 0.0541
+    },
+    {
+      "month": "1998-01",
+      "rate30": 6.994,
+      "thirtyNet": -0.13,
+      "flexCostShare": 0.0516
+    },
+    {
+      "month": "1998-02",
+      "rate30": 7.0425,
+      "thirtyNet": -0.1223,
+      "flexCostShare": 0.05
+    },
+    {
+      "month": "1998-03",
+      "rate30": 7.1275,
+      "thirtyNet": -0.1144,
+      "flexCostShare": 0.048
+    },
+    {
+      "month": "1998-04",
+      "rate30": 7.14,
+      "thirtyNet": -0.108,
+      "flexCostShare": 0.0451
+    },
+    {
+      "month": "1998-05",
+      "rate30": 7.144,
+      "thirtyNet": -0.0907,
+      "flexCostShare": 0.0451
+    },
+    {
+      "month": "1998-06",
+      "rate30": 6.9975,
+      "thirtyNet": -0.087,
+      "flexCostShare": 0.0406
+    },
+    {
+      "month": "1998-07",
+      "rate30": 6.952,
+      "thirtyNet": -0.0722,
+      "flexCostShare": 0.0402
+    },
+    {
+      "month": "1998-08",
+      "rate30": 6.9225,
+      "thirtyNet": -0.0691,
+      "flexCostShare": 0.0378
+    },
+    {
+      "month": "1998-09",
+      "rate30": 6.7225,
+      "thirtyNet": -0.0576,
+      "flexCostShare": 0.0381
+    },
+    {
+      "month": "1998-10",
+      "rate30": 6.71,
+      "thirtyNet": -0.0525,
+      "flexCostShare": 0.0413
+    },
+    {
+      "month": "1998-11",
+      "rate30": 6.865,
+      "thirtyNet": -0.0455,
+      "flexCostShare": 0.0439
+    },
+    {
+      "month": "1998-12",
+      "rate30": 6.738,
+      "thirtyNet": -0.0325,
+      "flexCostShare": 0.0418
+    },
+    {
+      "month": "1999-01",
+      "rate30": 6.785,
+      "thirtyNet": -0.033,
+      "flexCostShare": 0.0434
+    },
+    {
+      "month": "1999-02",
+      "rate30": 6.8075,
+      "thirtyNet": -0.0372,
+      "flexCostShare": 0.0446
+    },
+    {
+      "month": "1999-03",
+      "rate30": 7.04,
+      "thirtyNet": -0.0358,
+      "flexCostShare": 0.0451
+    },
+    {
+      "month": "1999-04",
+      "rate30": 6.916,
+      "thirtyNet": -0.0333,
+      "flexCostShare": 0.0474
+    },
+    {
+      "month": "1999-05",
+      "rate30": 7.145,
+      "thirtyNet": -0.0392,
+      "flexCostShare": 0.0497
+    },
+    {
+      "month": "1999-06",
+      "rate30": 7.55,
+      "thirtyNet": -0.0413,
+      "flexCostShare": 0.0489
+    },
+    {
+      "month": "1999-07",
+      "rate30": 7.632,
+      "thirtyNet": -0.04,
+      "flexCostShare": 0.05
+    },
+    {
+      "month": "1999-08",
+      "rate30": 7.9425,
+      "thirtyNet": -0.064,
+      "flexCostShare": 0.0575
+    },
+    {
+      "month": "1999-09",
+      "rate30": 7.8225,
+      "thirtyNet": -0.0464,
+      "flexCostShare": 0.0521
+    },
+    {
+      "month": "1999-10",
+      "rate30": 7.852,
+      "thirtyNet": -0.0633,
+      "flexCostShare": 0.0533
+    },
+    {
+      "month": "1999-11",
+      "rate30": 7.7375,
+      "thirtyNet": -0.0314,
+      "flexCostShare": 0.0525
+    },
+    {
+      "month": "1999-12",
+      "rate30": 7.912,
+      "thirtyNet": -0.0397,
+      "flexCostShare": 0.0549
+    },
+    {
+      "month": "2000-01",
+      "rate30": 8.21,
+      "thirtyNet": -0.0648,
+      "flexCostShare": 0.0599
+    },
+    {
+      "month": "2000-02",
+      "rate30": 8.325,
+      "thirtyNet": -0.0559,
+      "flexCostShare": 0.0586
+    },
+    {
+      "month": "2000-03",
+      "rate30": 8.24,
+      "thirtyNet": -0.055,
+      "flexCostShare": 0.0604
+    },
+    {
+      "month": "2000-04",
+      "rate30": 8.1525,
+      "thirtyNet": -0.0389,
+      "flexCostShare": 0.0516
+    },
+    {
+      "month": "2000-05",
+      "rate30": 8.515,
+      "thirtyNet": -0.0509,
+      "flexCostShare": 0.0507
+    },
+    {
+      "month": "2000-06",
+      "rate30": 8.288,
+      "thirtyNet": -0.0373,
+      "flexCostShare": 0.044
+    },
+    {
+      "month": "2000-07",
+      "rate30": 8.1475,
+      "thirtyNet": -0.0299,
+      "flexCostShare": 0.0414
+    },
+    {
+      "month": "2000-08",
+      "rate30": 8.0275,
+      "thirtyNet": -0.0354,
+      "flexCostShare": 0.0384
+    },
+    {
+      "month": "2000-09",
+      "rate30": 7.912,
+      "thirtyNet": -0.0607,
+      "flexCostShare": 0.0442
+    },
+    {
+      "month": "2000-10",
+      "rate30": 7.795,
+      "thirtyNet": -0.0369,
+      "flexCostShare": 0.0461
+    },
+    {
+      "month": "2000-11",
+      "rate30": 7.745,
+      "thirtyNet": -0.0209,
+      "flexCostShare": 0.0463
+    },
+    {
+      "month": "2000-12",
+      "rate30": 7.382,
+      "thirtyNet": -0.0094,
+      "flexCostShare": 0.0443
+    },
+    {
+      "month": "2001-01",
+      "rate30": 7.0325,
+      "thirtyNet": -0.0374,
+      "flexCostShare": 0.0513
+    },
+    {
+      "month": "2001-02",
+      "rate30": 7.05,
+      "thirtyNet": -0.045,
+      "flexCostShare": 0.0538
+    },
+    {
+      "month": "2001-03",
+      "rate30": 6.952,
+      "thirtyNet": -0.0141,
+      "flexCostShare": 0.0575
+    },
+    {
+      "month": "2001-04",
+      "rate30": 7.0775,
+      "thirtyNet": -0.0132,
+      "flexCostShare": 0.0633
+    },
+    {
+      "month": "2001-05",
+      "rate30": 7.145,
+      "thirtyNet": -0.0186,
+      "flexCostShare": 0.0622
+    },
+    {
+      "month": "2001-06",
+      "rate30": 7.16,
+      "thirtyNet": -0.0141,
+      "flexCostShare": 0.0609
+    },
+    {
+      "month": "2001-07",
+      "rate30": 7.1275,
+      "thirtyNet": 0.0056,
+      "flexCostShare": 0.0586
+    },
+    {
+      "month": "2001-08",
+      "rate30": 6.95,
+      "thirtyNet": 0.0189,
+      "flexCostShare": 0.058
+    },
+    {
+      "month": "2001-09",
+      "rate30": 6.8175,
+      "thirtyNet": 0.0173,
+      "flexCostShare": 0.0606
+    },
+    {
+      "month": "2001-10",
+      "rate30": 6.6175,
+      "thirtyNet": 0.0162,
+      "flexCostShare": 0.0641
+    },
+    {
+      "month": "2001-11",
+      "rate30": 6.658,
+      "thirtyNet": 0.0192,
+      "flexCostShare": 0.0634
+    },
+    {
+      "month": "2001-12",
+      "rate30": 7.065,
+      "thirtyNet": 0.0148,
+      "flexCostShare": 0.0677
+    },
+    {
+      "month": "2002-01",
+      "rate30": 6.9975,
+      "thirtyNet": 0.0247,
+      "flexCostShare": 0.0663
+    },
+    {
+      "month": "2002-02",
+      "rate30": 6.8925,
+      "thirtyNet": 0.0425,
+      "flexCostShare": 0.0655
+    },
+    {
+      "month": "2002-03",
+      "rate30": 7.014,
+      "thirtyNet": 0.0463,
+      "flexCostShare": 0.0643
+    },
+    {
+      "month": "2002-04",
+      "rate30": 6.985,
+      "thirtyNet": 0.0426,
+      "flexCostShare": 0.0658
+    },
+    {
+      "month": "2002-05",
+      "rate30": 6.806,
+      "thirtyNet": 0.0572,
+      "flexCostShare": 0.0663
+    },
+    {
+      "month": "2002-06",
+      "rate30": 6.65,
+      "thirtyNet": 0.0705,
+      "flexCostShare": 0.0674
+    },
+    {
+      "month": "2002-07",
+      "rate30": 6.485,
+      "thirtyNet": 0.081,
+      "flexCostShare": 0.0674
+    },
+    {
+      "month": "2002-08",
+      "rate30": 6.29,
+      "thirtyNet": 0.0843,
+      "flexCostShare": 0.0697
+    },
+    {
+      "month": "2002-09",
+      "rate30": 6.0925,
+      "thirtyNet": 0.1016,
+      "flexCostShare": 0.0675
+    },
+    {
+      "month": "2002-10",
+      "rate30": 6.1125,
+      "thirtyNet": 0.1088,
+      "flexCostShare": 0.0709
+    },
+    {
+      "month": "2002-11",
+      "rate30": 6.068,
+      "thirtyNet": 0.1181,
+      "flexCostShare": 0.0696
+    },
+    {
+      "month": "2002-12",
+      "rate30": 6.0475,
+      "thirtyNet": 0.1341,
+      "flexCostShare": 0.0686
+    },
+    {
+      "month": "2003-01",
+      "rate30": 5.916,
+      "thirtyNet": 0.1663,
+      "flexCostShare": 0.069
+    },
+    {
+      "month": "2003-02",
+      "rate30": 5.8425,
+      "thirtyNet": 0.1447,
+      "flexCostShare": 0.0698
+    },
+    {
+      "month": "2003-03",
+      "rate30": 5.745,
+      "thirtyNet": 0.1367,
+      "flexCostShare": 0.0755
+    },
+    {
+      "month": "2003-04",
+      "rate30": 5.8125,
+      "thirtyNet": 0.1138,
+      "flexCostShare": 0.0773
+    },
+    {
+      "month": "2003-05",
+      "rate30": 5.484,
+      "thirtyNet": 0.1505,
+      "flexCostShare": 0.0664
+    },
+    {
+      "month": "2003-06",
+      "rate30": 5.23,
+      "thirtyNet": 0.1773,
+      "flexCostShare": 0.0622
+    },
+    {
+      "month": "2003-07",
+      "rate30": 5.6325,
+      "thirtyNet": 0.1509,
+      "flexCostShare": 0.0721
+    },
+    {
+      "month": "2003-08",
+      "rate30": 6.264,
+      "thirtyNet": 0.1241,
+      "flexCostShare": 0.0793
+    },
+    {
+      "month": "2003-09",
+      "rate30": 6.1475,
+      "thirtyNet": 0.1355,
+      "flexCostShare": 0.08
+    },
+    {
+      "month": "2003-10",
+      "rate30": 5.952,
+      "thirtyNet": 0.1189,
+      "flexCostShare": 0.0765
+    },
+    {
+      "month": "2003-11",
+      "rate30": 5.9325,
+      "thirtyNet": 0.1058,
+      "flexCostShare": 0.0744
+    },
+    {
+      "month": "2003-12",
+      "rate30": 5.876,
+      "thirtyNet": 0.0689,
+      "flexCostShare": 0.0754
+    },
+    {
+      "month": "2004-01",
+      "rate30": 5.7125,
+      "thirtyNet": 0.0811,
+      "flexCostShare": 0.0769
+    },
+    {
+      "month": "2004-02",
+      "rate30": 5.635,
+      "thirtyNet": 0.117,
+      "flexCostShare": 0.0763
+    },
+    {
+      "month": "2004-03",
+      "rate30": 5.445,
+      "thirtyNet": 0.1354,
+      "flexCostShare": 0.0754
+    },
+    {
+      "month": "2004-04",
+      "rate30": 5.83,
+      "thirtyNet": 0.1384,
+      "flexCostShare": 0.0752
+    },
+    {
+      "month": "2004-05",
+      "rate30": 6.27,
+      "thirtyNet": 0.1058,
+      "flexCostShare": 0.075
+    },
+    {
+      "month": "2004-06",
+      "rate30": 6.2875,
+      "thirtyNet": 0.111,
+      "flexCostShare": 0.0748
+    },
+    {
+      "month": "2004-07",
+      "rate30": 6.056,
+      "thirtyNet": 0.1511,
+      "flexCostShare": 0.0684
+    },
+    {
+      "month": "2004-08",
+      "rate30": 5.8675,
+      "thirtyNet": 0.1343,
+      "flexCostShare": 0.0686
+    },
+    {
+      "month": "2004-09",
+      "rate30": 5.754,
+      "thirtyNet": 0.1568,
+      "flexCostShare": 0.0681
+    },
+    {
+      "month": "2004-10",
+      "rate30": 5.7225,
+      "thirtyNet": 0.1554,
+      "flexCostShare": 0.0677
+    },
+    {
+      "month": "2004-11",
+      "rate30": 5.73,
+      "thirtyNet": 0.1829,
+      "flexCostShare": 0.0665
+    },
+    {
+      "month": "2004-12",
+      "rate30": 5.752,
+      "thirtyNet": 0.1979,
+      "flexCostShare": 0.0641
+    },
+    {
+      "month": "2005-01",
+      "rate30": 5.71,
+      "thirtyNet": 0.2263,
+      "flexCostShare": 0.0597
+    },
+    {
+      "month": "2005-02",
+      "rate30": 5.6275,
+      "thirtyNet": 0.2391,
+      "flexCostShare": 0.0527
+    },
+    {
+      "month": "2005-03",
+      "rate30": 5.928,
+      "thirtyNet": 0.079,
+      "flexCostShare": 0.0537
+    },
+    {
+      "month": "2005-04",
+      "rate30": 5.855,
+      "thirtyNet": 0.1098,
+      "flexCostShare": 0.052
+    },
+    {
+      "month": "2005-05",
+      "rate30": 5.72,
+      "thirtyNet": 0.1527,
+      "flexCostShare": 0.0503
+    },
+    {
+      "month": "2005-06",
+      "rate30": 5.582,
+      "thirtyNet": 0.2044,
+      "flexCostShare": 0.0463
+    },
+    {
+      "month": "2005-07",
+      "rate30": 5.695,
+      "thirtyNet": 0.218,
+      "flexCostShare": 0.0473
+    },
+    {
+      "month": "2005-08",
+      "rate30": 5.82,
+      "thirtyNet": 0.2498,
+      "flexCostShare": 0.0484
+    },
+    {
+      "month": "2005-09",
+      "rate30": 5.774,
+      "thirtyNet": 0.2464,
+      "flexCostShare": 0.0482
+    },
+    {
+      "month": "2005-10",
+      "rate30": 6.065,
+      "thirtyNet": 0.2329,
+      "flexCostShare": 0.0529
+    },
+    {
+      "month": "2005-11",
+      "rate30": 6.33,
+      "thirtyNet": 0.2344,
+      "flexCostShare": 0.0576
+    },
+    {
+      "month": "2005-12",
+      "rate30": 6.272,
+      "thirtyNet": 0.2675,
+      "flexCostShare": 0.0555
+    },
+    {
+      "month": "2006-01",
+      "rate30": 6.145,
+      "thirtyNet": 0.2989,
+      "flexCostShare": 0.0523
+    },
+    {
+      "month": "2006-02",
+      "rate30": 6.2525,
+      "thirtyNet": 0.3153,
+      "flexCostShare": 0.0477
+    },
+    {
+      "month": "2006-03",
+      "rate30": 6.324,
+      "thirtyNet": 0.3195,
+      "flexCostShare": 0.0436
+    },
+    {
+      "month": "2006-04",
+      "rate30": 6.5075,
+      "thirtyNet": 0.3542,
+      "flexCostShare": 0.0442
+    },
+    {
+      "month": "2006-05",
+      "rate30": 6.5975,
+      "thirtyNet": 0.3392,
+      "flexCostShare": 0.0495
+    },
+    {
+      "month": "2006-06",
+      "rate30": 6.682,
+      "thirtyNet": 0.345,
+      "flexCostShare": 0.0476
+    },
+    {
+      "month": "2006-07",
+      "rate30": 6.7625,
+      "thirtyNet": 0.3608,
+      "flexCostShare": 0.0475
+    },
+    {
+      "month": "2006-08",
+      "rate30": 6.524,
+      "thirtyNet": 0.4024,
+      "flexCostShare": 0.0404
+    },
+    {
+      "month": "2006-09",
+      "rate30": 6.4025,
+      "thirtyNet": 0.4013,
+      "flexCostShare": 0.0394
+    },
+    {
+      "month": "2006-10",
+      "rate30": 6.3575,
+      "thirtyNet": 0.4012,
+      "flexCostShare": 0.0366
+    },
+    {
+      "month": "2006-11",
+      "rate30": 6.24,
+      "thirtyNet": 0.4502,
+      "flexCostShare": 0.0331
+    },
+    {
+      "month": "2006-12",
+      "rate30": 6.135,
+      "thirtyNet": 0.4601,
+      "flexCostShare": 0.0293
+    },
+    {
+      "month": "2007-01",
+      "rate30": 6.2175,
+      "thirtyNet": 0.4272,
+      "flexCostShare": 0.0292
+    },
+    {
+      "month": "2007-02",
+      "rate30": 6.285,
+      "thirtyNet": 0.3859,
+      "flexCostShare": 0.0308
+    },
+    {
+      "month": "2007-03",
+      "rate30": 6.156,
+      "thirtyNet": 0.3781,
+      "flexCostShare": 0.031
+    },
+    {
+      "month": "2007-04",
+      "rate30": 6.18,
+      "thirtyNet": 0.3674,
+      "flexCostShare": 0.034
+    },
+    {
+      "month": "2007-05",
+      "rate30": 6.262,
+      "thirtyNet": 0.2879,
+      "flexCostShare": 0.0337
+    },
+    {
+      "month": "2007-06",
+      "rate30": 6.6575,
+      "thirtyNet": 0.2263,
+      "flexCostShare": 0.0378
+    },
+    {
+      "month": "2007-07",
+      "rate30": 6.695,
+      "thirtyNet": 0.2204,
+      "flexCostShare": 0.04
+    },
+    {
+      "month": "2007-08",
+      "rate30": 6.572,
+      "thirtyNet": 0.2704,
+      "flexCostShare": 0.0397
+    },
+    {
+      "month": "2007-09",
+      "rate30": 6.3825,
+      "thirtyNet": 0.2212,
+      "flexCostShare": 0.0385
+    },
+    {
+      "month": "2007-10",
+      "rate30": 6.375,
+      "thirtyNet": 0.195,
+      "flexCostShare": 0.0384
+    },
+    {
+      "month": "2007-11",
+      "rate30": 6.208,
+      "thirtyNet": 0.2356,
+      "flexCostShare": 0.0405
+    },
+    {
+      "month": "2007-12",
+      "rate30": 6.095,
+      "thirtyNet": 0.2415,
+      "flexCostShare": 0.0383
+    },
+    {
+      "month": "2008-01",
+      "rate30": 5.758,
+      "thirtyNet": 0.244,
+      "flexCostShare": 0.0502
+    },
+    {
+      "month": "2008-02",
+      "rate30": 5.9175,
+      "thirtyNet": 0.2511,
+      "flexCostShare": 0.0518
+    },
+    {
+      "month": "2008-03",
+      "rate30": 5.97,
+      "thirtyNet": 0.2125,
+      "flexCostShare": 0.0603
+    },
+    {
+      "month": "2008-04",
+      "rate30": 5.9175,
+      "thirtyNet": 0.2574,
+      "flexCostShare": 0.0494
+    },
+    {
+      "month": "2008-05",
+      "rate30": 6.036,
+      "thirtyNet": 0.2556,
+      "flexCostShare": 0.0486
+    },
+    {
+      "month": "2008-06",
+      "rate30": 6.32,
+      "thirtyNet": 0.2776,
+      "flexCostShare": 0.0477
+    },
+    {
+      "month": "2008-07",
+      "rate30": 6.426,
+      "thirtyNet": 0.2882,
+      "flexCostShare": 0.0536
+    },
+    {
+      "month": "2008-08",
+      "rate30": 6.4775,
+      "thirtyNet": 0.269,
+      "flexCostShare": 0.0533
+    },
+    {
+      "month": "2008-09",
+      "rate30": 6.0375,
+      "thirtyNet": 0.2929,
+      "flexCostShare": 0.0443
+    },
+    {
+      "month": "2008-10",
+      "rate30": 6.2,
+      "thirtyNet": 0.2669,
+      "flexCostShare": 0.0347
+    },
+    {
+      "month": "2008-11",
+      "rate30": 6.0875,
+      "thirtyNet": 0.2979,
+      "flexCostShare": 0.0325
+    },
+    {
+      "month": "2008-12",
+      "rate30": 5.286,
+      "thirtyNet": 0.3827,
+      "flexCostShare": 0.0244
+    },
+    {
+      "month": "2009-01",
+      "rate30": 5.0475,
+      "thirtyNet": 0.3952,
+      "flexCostShare": 0.0314
+    },
+    {
+      "month": "2009-02",
+      "rate30": 5.13,
+      "thirtyNet": 0.4098,
+      "flexCostShare": 0.0343
+    },
+    {
+      "month": "2009-03",
+      "rate30": 5.0025,
+      "thirtyNet": 0.4309,
+      "flexCostShare": 0.0344
+    },
+    {
+      "month": "2009-04",
+      "rate30": 4.81,
+      "thirtyNet": 0.4301,
+      "flexCostShare": 0.0285
+    },
+    {
+      "month": "2009-05",
+      "rate30": 4.8575,
+      "thirtyNet": 0.4323,
+      "flexCostShare": 0.0317
+    },
+    {
+      "month": "2009-06",
+      "rate30": 5.42,
+      "thirtyNet": 0.3872,
+      "flexCostShare": 0.0516
+    },
+    {
+      "month": "2009-07",
+      "rate30": 5.222,
+      "thirtyNet": 0.406,
+      "flexCostShare": 0.0514
+    },
+    {
+      "month": "2009-08",
+      "rate30": 5.1925,
+      "thirtyNet": 0.3797,
+      "flexCostShare": 0.0561
+    },
+    {
+      "month": "2009-09",
+      "rate30": 5.0575,
+      "thirtyNet": 0.4041,
+      "flexCostShare": 0.0537
+    },
+    {
+      "month": "2009-10",
+      "rate30": 4.952,
+      "thirtyNet": 0.429,
+      "flexCostShare": 0.0527
+    },
+    {
+      "month": "2009-11",
+      "rate30": 4.875,
+      "thirtyNet": 0.4528,
+      "flexCostShare": 0.0496
+    },
+    {
+      "month": "2009-12",
+      "rate30": 4.93,
+      "thirtyNet": 0.451,
+      "flexCostShare": 0.0503
+    },
+    {
+      "month": "2010-01",
+      "rate30": 5.03,
+      "thirtyNet": 0.4186,
+      "flexCostShare": 0.0561
+    },
+    {
+      "month": "2010-02",
+      "rate30": 4.99,
+      "thirtyNet": 0.4143,
+      "flexCostShare": 0.0581
+    },
+    {
+      "month": "2010-03",
+      "rate30": 4.9675,
+      "thirtyNet": 0.354,
+      "flexCostShare": 0.0594
+    },
+    {
+      "month": "2010-04",
+      "rate30": 5.098,
+      "thirtyNet": 0.2866,
+      "flexCostShare": 0.0643
+    },
+    {
+      "month": "2010-05",
+      "rate30": 4.8875,
+      "thirtyNet": 0.3666,
+      "flexCostShare": 0.0562
+    },
+    {
+      "month": "2010-06",
+      "rate30": 4.7375,
+      "thirtyNet": 0.4058,
+      "flexCostShare": 0.0507
+    },
+    {
+      "month": "2010-07",
+      "rate30": 4.564,
+      "thirtyNet": 0.4519,
+      "flexCostShare": 0.0462
+    },
+    {
+      "month": "2010-08",
+      "rate30": 4.4275,
+      "thirtyNet": 0.4665,
+      "flexCostShare": 0.0451
+    },
+    {
+      "month": "2010-09",
+      "rate30": 4.346,
+      "thirtyNet": 0.4822,
+      "flexCostShare": 0.0459
+    },
+    {
+      "month": "2010-10",
+      "rate30": 4.225,
+      "thirtyNet": 0.495,
+      "flexCostShare": 0.0476
+    },
+    {
+      "month": "2010-11",
+      "rate30": 4.3,
+      "thirtyNet": 0.4735,
+      "flexCostShare": 0.0527
+    },
+    {
+      "month": "2010-12",
+      "rate30": 4.714,
+      "thirtyNet": 0.4474,
+      "flexCostShare": 0.0589
+    },
+    {
+      "month": "2011-01",
+      "rate30": 4.755,
+      "thirtyNet": 0.4443,
+      "flexCostShare": 0.0603
+    },
+    {
+      "month": "2011-02",
+      "rate30": 4.9525,
+      "thirtyNet": 0.4051,
+      "flexCostShare": 0.0682
+    },
+    {
+      "month": "2011-03",
+      "rate30": 4.836,
+      "thirtyNet": 0.3711,
+      "flexCostShare": 0.0688
+    },
+    {
+      "month": "2011-04",
+      "rate30": 4.84,
+      "thirtyNet": 0.394,
+      "flexCostShare": 0.0713
+    },
+    {
+      "month": "2011-05",
+      "rate30": 4.6375,
+      "thirtyNet": 0.4476,
+      "flexCostShare": 0.0721
+    },
+    {
+      "month": "2011-06",
+      "rate30": 4.51,
+      "thirtyNet": 0.4498,
+      "flexCostShare": 0.0707
+    }
+  ]
+}

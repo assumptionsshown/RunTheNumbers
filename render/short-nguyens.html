@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Short: The Nguyens, 15 or 30?</title>
+<style>
+  html, body { margin: 0; background: #fbf3df; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script type="module">
+// ep07 Short (2026-10-23), 1080x1920: Uncle Tu's January 1993 loan replayed both
+// ways on one shared clock. Top: Tu took the 15. Bottom: Tu took the 30 and invests
+// the difference. Replay computed here from the pinned CSVs (same convention as
+// render/ep07-nguyens.html) and asserted against results.json; spoken numbers are
+// checked by tools/validate-ep07-story.mjs. Smooth by construction: bubbles persist
+// until the half's next line, everything fades, values ease over 2.4 s.
+const W = 1080, H = 1920, HALF = 960;
+const ctx = document.getElementById("c").getContext("2d");
+const load = async (p) => (await fetch(p)).json();
+const EP = "../episodes/ep07-15-vs-30-year";
+const [results, timing, mouth] = await Promise.all([load(`${EP}/results.json`), load(`${EP}/nguyens-short/timing.json`), load(`${EP}/nguyens-short/mouth.json`)]);
+const FPS = mouth.fps;
+const parse = (t) => { const [h, ...rows] = t.trim().split(/\r?\n/); const c = h.split(","); return rows.map((r) => Object.fromEntries(r.split(",").map((v, i) => [c[i], v]))); };
+const [ratesCsv, shCsv] = await Promise.all([
+  fetch("../data/snapshots/fred-housing-2026-07-31/fred-housing-normalised.csv").then((r) => r.text()).then(parse),
+  fetch("../data/snapshots/shiller-2026-07-26/shiller-monthly.csv").then((r) => r.text()).then(parse),
+]);
+const RATE = new Map(ratesCsv.map((r) => [r.month, { r30: +r.mortgage30usPercent, r15: +r.mortgage15usPercent }]));
+const SH = shCsv.map((r) => ({ m: r.date, cpi: +r.cpi, tr: +r.realTotalReturnPrice * +r.cpi }));
+const AT = new Map(SH.map((r, i) => [r.m, i]));
+const pay = (loan, pct, n) => { const r = pct / 1200; return loan * r / (1 - (1 + r) ** -n); };
+const START = "1993-01", LOAN = 200000;
+const R0 = RATE.get(START), P15 = pay(LOAN, R0.r15, 180), P30 = pay(LOAN, R0.r30, 360), DIFF = P15 - P30;
+const PATH = [];
+{
+  let b15 = LOAN, b30 = LOAN, f15 = 0, f30 = 0; const s0 = AT.get(START);
+  PATH.push({ b15, b30, f15, f30 });
+  for (let k = 0; k < 360; k++) {
+    const g = SH[s0 + k + 1].tr / SH[s0 + k].tr;
+    b15 = Math.max(0, b15 * (1 + R0.r15 / 1200) - P15); b30 = Math.max(0, b30 * (1 + R0.r30 / 1200) - P30);
+    f15 = (f15 + (k >= 180 ? P15 : 0)) * g; f30 = (f30 + DIFF) * g;
+    const real = SH[s0].cpi / SH[s0 + k + 1].cpi;
+    PATH.push({ b15: b15 * real, b30: b30 * real, f15: f15 * real, f30: f30 * real });
+  }
+}
+const claim = (ok, w) => { if (!ok) throw new Error(`short-nguyens: claim false: ${w}`); };
+claim(Math.abs((PATH[360].f30 - PATH[360].f15) / LOAN - results.cohorts30.find((c) => c.month === START).gapShare) < 5e-4, "gap matches results.json");
+claim(Math.round(PATH[360].f15 / 1000) === 418 && Math.round(PATH[360].f30 / 1000) === 328, "y30 418/328");
+
+const L = Object.fromEntries(timing.lines.map((l) => [l.id, l]));
+const speaking = (t) => timing.lines.find((l) => t >= l.start && t <= l.end + 0.05) ?? null;
+const clamp01 = (x) => Math.max(0, Math.min(1, x));
+const fade = (t, at, d = 0.3) => clamp01((t - at) / d);
+const ease = (x) => x * x * (3 - 2 * x);
+const KEYS = []; { let prev = 0; for (const l of timing.lines) { if (l.year == null) continue; if (l.year !== prev) KEYS.push({ from: prev * 12, to: l.year * 12, at: l.start }); prev = l.year; } }
+function monthAt(t) { let m = 0; for (const k of KEYS) { if (t < k.at) break; m = k.from + (k.to - k.from) * ease(clamp01((t - k.at) / 2.4)); } return m; }
+const valAt = (m, key) => { const a = Math.floor(m), b = Math.min(360, a + 1), f = m - a; return PATH[a][key] * (1 - f) + PATH[b][key] * f; };
+
+const C = { paper: "#fbf3df", ink: "#1d1d1f", skin: "#efc39c", grey: "#9a9590", muted: "#7a7468", red: "#e5646e", green: "#4caf5c", gold: "#ffcf4a",
+  sepia: "#f3e2c2", mint: "#e3f1ea", tu: "#8aa05a", tuDark: "#5d7136" };
+const FONT = '"Segoe UI", system-ui, sans-serif', MONO = '"Cascadia Mono", Consolas, monospace';
+function text(s, x, y, { size = 48, fill = C.ink, align = "center", weight = 800, mono = false, alpha = 1 } = {}) {
+  if (alpha <= 0.01) return; ctx.globalAlpha = Math.min(1, alpha); ctx.font = `${weight} ${size}px ${mono ? MONO : FONT}`;
+  ctx.fillStyle = fill; ctx.textAlign = align; ctx.fillText(s, x, y); ctx.globalAlpha = 1;
+}
+function shape(fill, draw, lw = 7) { ctx.beginPath(); draw(); if (fill) { ctx.fillStyle = fill; ctx.fill(); } if (lw) { ctx.lineWidth = lw; ctx.strokeStyle = C.ink; ctx.lineJoin = "round"; ctx.stroke(); } }
+const usd = (v) => `$${Math.round(v).toLocaleString("en-US")}`;
+const k$ = (v) => `$${Math.round(v / 1000).toLocaleString("en-US")}k`;
+function tu(cx, footY, s, mouthOpen) {
+  ctx.save(); ctx.translate(cx, footY); ctx.scale(s, s);
+  shape("#4a4f5c", () => { ctx.rect(-45, -112, 38, 112); ctx.rect(7, -112, 38, 112); }, 6);
+  shape(C.tu, () => ctx.roundRect(-75, -258, 150, 156, 30));
+  shape(C.tu, () => ctx.roundRect(-105, -244, 34, 114, 16), 6); shape(C.tu, () => ctx.roundRect(71, -244, 34, 114, 16), 6);
+  shape(null, () => ctx.rect(14, -228, 30, 28), 4);
+  shape(C.skin, () => ctx.ellipse(0, -325, 62, 72, 0, 0, Math.PI * 2));
+  shape(C.grey, () => ctx.ellipse(-56, -340, 14, 30, 0.15, 0, Math.PI * 2), 5); shape(C.grey, () => ctx.ellipse(56, -340, 14, 30, -0.15, 0, Math.PI * 2), 5);
+  shape(C.grey, () => ctx.ellipse(0, -392, 34, 10, 0, 0, Math.PI * 2), 4);
+  ctx.lineWidth = 5; ctx.strokeStyle = C.ink; ctx.beginPath(); ctx.arc(-24, -330, 16, 0, Math.PI * 2); ctx.moveTo(40, -330); ctx.arc(24, -330, 16, 0, Math.PI * 2); ctx.moveTo(-8, -330); ctx.lineTo(8, -330); ctx.stroke();
+  ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(-24, -330, 6, 0, Math.PI * 2); ctx.arc(24, -330, 6, 0, Math.PI * 2); ctx.fill();
+  shape(C.grey, () => ctx.roundRect(-26, -305, 52, 11, 5), 4);
+  if (mouthOpen > 0.05) shape("#7a2e2e", () => ctx.ellipse(0, -282, 14, 4 + 14 * mouthOpen, 0, 0, Math.PI * 2), 5);
+  else { ctx.lineWidth = 6; ctx.beginPath(); ctx.arc(0, -290, 22, 0.15 * Math.PI, 0.85 * Math.PI); ctx.stroke(); }
+  ctx.restore();
+}
+function bubble(cx, bottomY, s, colour, alpha) {
+  if (alpha <= 0.01) return;
+  ctx.font = `800 40px ${FONT}`; const words = s.split(" "), rows = []; let row = "";
+  for (const w of words) { const t = row ? `${row} ${w}` : w; if (ctx.measureText(t).width > 470 && row) { rows.push(row); row = w; } else row = t; }
+  rows.push(row);
+  const bw = Math.max(...rows.map((r) => ctx.measureText(r).width)) + 60, bh = rows.length * 50 + 36;
+  const bx = Math.max(24, Math.min(W - bw - 24, cx - bw / 2)), by = bottomY - bh;
+  ctx.globalAlpha = alpha; shape("#ffffff", () => ctx.roundRect(bx, by, bw, bh, 26), 6); ctx.globalAlpha = 1;
+  rows.forEach((r, k) => text(r, bx + bw / 2, by + 56 + k * 50, { size: 40, fill: colour, alpha }));
+}
+function moneyBag(cx, footY, v) {
+  if (v > 500) {
+    const r = 22 + 100 * Math.sqrt(Math.min(v, 450000) / 450000);
+    shape("#9ccf7e", () => ctx.ellipse(cx, footY - r, r, r, 0, 0, Math.PI * 2));
+    shape("#9ccf7e", () => { ctx.moveTo(cx - r * 0.3, footY - 2 * r + 6); ctx.lineTo(cx, footY - 2 * r - r * 0.35); ctx.lineTo(cx + r * 0.3, footY - 2 * r + 6); ctx.closePath(); }, 6);
+    text("$", cx, footY - r + r * 0.35, { size: Math.max(26, r), fill: "#2f6b2a" });
+  }
+  text(`invested ${k$(v)}`, cx, footY + 54, { size: 44 });
+}
+const BUB = { S02: "2000: $64k invested!", S03: "Nothing invested. All to the house.", S04: "Dot-com crash: $48k",
+  S05: "2008: paid off! Investing it all.", S06: "2023: $418k", S07: "2023: $328k" };
+
+function half(k, t, i) {
+  const o = k === "A" ? 0 : HALF, m = monthAt(t), yr = Math.floor(m / 12 + 1e-9);
+  ctx.fillStyle = k === "A" ? C.sepia : C.mint; ctx.fillRect(0, o, W, HALF);
+  text(String(1993 + yr), 540, o + 160, { size: 120, mono: true });
+  text(k === "A" ? "TU · took the 15" : "TU · took the 30, invests the rest", 540, o + 220, { size: 38, fill: C.tuDark });
+  text(k === "A" ? (m >= 180 ? `house paid · invests ${usd(P15)}/mo` : `pays ${usd(P15)}/mo`) : `pays ${usd(P30)}/mo · invests ${usd(DIFF)}/mo`, 540, o + 268, { size: 30, fill: C.muted, weight: 700 });
+  const act = speaking(t);
+  tu(240, o + 900, 0.9, act && act.speaker === k ? mouth.open[Math.min(i, mouth.open.length - 1)] : 0);
+  const owed = valAt(m, k === "A" ? "b15" : "b30");
+  text("LOAN OWED", 790, o + 350, { size: 28, fill: C.muted });
+  shape("#f6d3d5", () => ctx.roundRect(590, o + 370, 400, 50, 12), 5);
+  if (owed > 200) shape(C.red, () => ctx.roundRect(590, o + 370, 400 * owed / LOAN, 50, 12), 5);
+  text(owed > 200 ? k$(owed) : "PAID OFF", 790, o + 466, { size: 42, fill: owed > 200 ? C.red : C.green });
+  moneyBag(790, o + 820, valAt(m, k === "A" ? "f15" : "f30"));
+  let mine = null; for (const l of timing.lines) if (l.speaker === k && t >= l.start - 0.05) mine = l;
+  if (mine && BUB[mine.id]) bubble(260, o + 470, BUB[mine.id], C.tuDark, fade(t, mine.start, 0.25) * (1 - fade(t, L.S08.start - 0.2, 0.3)));
+}
+
+function renderFrame(i) {
+  const t = i / FPS;
+  half("A", t, i); half("B", t, i);
+  shape(null, () => { ctx.moveTo(0, HALF); ctx.lineTo(W, HALF); }, 8);
+  const hookA = 1 - fade(t, L.S02.start - 0.5, 0.5);
+  if (hookA > 0.01) {
+    ctx.globalAlpha = hookA; shape(C.gold, () => ctx.roundRect(110, HALF - 62, 860, 124, 62), 8); ctx.globalAlpha = 1;
+    text("WHO ENDS UP RICHER?", 540, HALF + 26, { size: 70, weight: 900, alpha: hookA });
+  }
+  const e = fade(t, L.S08.start, 0.4);
+  if (e > 0.01) {
+    ctx.globalAlpha = e; shape("#ffffff", () => ctx.roundRect(60, HALF - 220, 960, 440, 34), 8); ctx.globalAlpha = 1;
+    text(`the 15 won by ${k$(PATH[360].f15 - PATH[360].f30)}`, 540, HALF - 130, { size: 52, alpha: e });
+    text("rates high (7-9%): the 15 won", 540, HALF - 50, { size: 40, fill: "#b0574a", alpha: fade(t, L.S08.start + 2.5, 0.3) });
+    text("rates low: the 30 ahead at year 15", 540, HALF + 20, { size: 40, fill: "#2e5d8f", alpha: fade(t, L.S08.start + 5, 0.3) });
+    text("THE RATE DECIDES", 540, HALF + 110, { size: 60, weight: 900, alpha: fade(t, L.S08.start + 7.2, 0.3) });
+    text("full story on the channel", 540, HALF + 170, { size: 34, fill: C.muted, alpha: fade(t, L.S08.start + 8.5, 0.3) });
+  }
+  ctx.fillStyle = C.paper; ctx.fillRect(0, H - 40, W, 40);
+  text("illustration · real history (Freddie Mac, S&P with dividends) · 1993 dollars", 540, H - 12, { size: 22, fill: C.muted, weight: 600 });
+  return true;
+}
+window.FRAME_COUNT = mouth.frames;
+window.renderFrame = renderFrame;
+renderFrame(0);
+document.documentElement.dataset.ready = "1";
+</script>
+</body>
+</html>

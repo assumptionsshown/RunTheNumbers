@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Thumbnail: ep07 The Nguyens</title>
+<style>
+  html, body { margin: 0; background: #fbf3df; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1280" height="720"></canvas>
+<script type="module">
+// Thumbnails for ep07 v2 "15-Year or 30-Year Mortgage?" (2026-10-23), three for Test &
+// Compare. Same kit as render/ep07-nguyens.html.
+//   ?anim=a  "15 OR 30?" over Lan (15) vs Minh (30)
+//   ?anim=b  two Uncle Tus: "WHO GOT RICHER?"
+//   ?anim=c  the signing-month strip: "THE RATE DECIDES"
+const which = new URLSearchParams(location.search).get("anim") ?? "a";
+const W = 1280, H = 720;
+const ctx = document.getElementById("c").getContext("2d");
+const results = await (await fetch("../episodes/ep07-15-vs-30-year/results.json")).json();
+const C = { paper: "#fbf3df", ink: "#1d1d1f", skin: "#efc39c", hair: "#2a2522", grey: "#9a9590", muted: "#7a7468", red: "#e5646e",
+  gold: "#ffcf4a", sepia: "#f3e2c2", mint: "#e3f1ea", minh: "#5b8fc7", lan: "#e98a7a", tu: "#8aa05a", tuDark: "#5d7136" };
+const FONT = '"Segoe UI", system-ui, sans-serif';
+function text(s, x, y, { size = 48, fill = C.ink, weight = 900, stroke = 0 } = {}) {
+  ctx.font = `${weight} ${size}px ${FONT}`; ctx.textAlign = "center";
+  if (stroke) { ctx.lineWidth = stroke; ctx.strokeStyle = "#ffffff"; ctx.lineJoin = "round"; ctx.strokeText(s, x, y); }
+  ctx.fillStyle = fill; ctx.fillText(s, x, y);
+}
+function shape(fill, draw, lw = 7) { ctx.beginPath(); draw(); if (fill) { ctx.fillStyle = fill; ctx.fill(); } if (lw) { ctx.lineWidth = lw; ctx.strokeStyle = C.ink; ctx.lineJoin = "round"; ctx.stroke(); } }
+function person(cx, footY, o) {
+  ctx.save(); ctx.translate(cx, footY); ctx.scale(o.s, o.s);
+  if (o.hair === "long") shape(C.hair, () => ctx.roundRect(-80, -400, 160, 170, 50), 6);
+  shape("#4a4f5c", () => { ctx.rect(-45, -112, 38, 112); ctx.rect(7, -112, 38, 112); }, 6);
+  const bw = o.belly ? 150 : 132;
+  shape(o.shirt, () => ctx.roundRect(-bw / 2, -258, bw, 156, 30));
+  shape(o.shirt, () => ctx.roundRect(-bw / 2 - 30, -244, 34, 114, 16), 6); shape(o.shirt, () => ctx.roundRect(bw / 2 - 4, -244, 34, 114, 16), 6);
+  if (o.collar) shape("#ffffff", () => { ctx.moveTo(-26, -258); ctx.lineTo(0, -232); ctx.lineTo(26, -258); ctx.closePath(); }, 5);
+  if (o.pocket) shape(null, () => ctx.rect(14, -228, 30, 28), 4);
+  shape(C.skin, () => ctx.ellipse(0, -325, 62, 72, 0, 0, Math.PI * 2));
+  if (o.hair === "short") shape(C.hair, () => { ctx.moveTo(-64, -318); ctx.ellipse(0, -330, 66, 76, 0, Math.PI, 0); ctx.lineTo(64, -318); ctx.quadraticCurveTo(40, -372, -10, -366); ctx.quadraticCurveTo(-48, -362, -64, -318); ctx.closePath(); }, 6);
+  else if (o.hair === "long") shape(C.hair, () => { ctx.moveTo(-70, -300); ctx.ellipse(0, -330, 72, 82, 0, Math.PI, 0); ctx.lineTo(70, -300); ctx.quadraticCurveTo(58, -360, 10, -362); ctx.quadraticCurveTo(-40, -352, -70, -300); ctx.closePath(); }, 6);
+  else if (o.hair === "receding") {
+    shape(C.grey, () => ctx.ellipse(-56, -340, 14, 30, 0.15, 0, Math.PI * 2), 5); shape(C.grey, () => ctx.ellipse(56, -340, 14, 30, -0.15, 0, Math.PI * 2), 5);
+    shape(C.grey, () => ctx.ellipse(0, -392, 34, 10, 0, 0, Math.PI * 2), 4);
+  }
+  ctx.lineWidth = 5; ctx.strokeStyle = C.ink;
+  if (o.glasses) { ctx.beginPath(); ctx.arc(-24, -330, 16, 0, Math.PI * 2); ctx.moveTo(40, -330); ctx.arc(24, -330, 16, 0, Math.PI * 2); ctx.moveTo(-8, -330); ctx.lineTo(8, -330); ctx.stroke(); }
+  ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(-24, -330, 6, 0, Math.PI * 2); ctx.arc(24, -330, 6, 0, Math.PI * 2); ctx.fill();
+  if (o.mustache) shape(C.grey, () => ctx.roundRect(-26, -305, 52, 11, 5), 4);
+  ctx.lineWidth = 7; ctx.beginPath();
+  if (o.mood > 0) ctx.arc(0, -304, 24, 0.12 * Math.PI, 0.88 * Math.PI);
+  else if (o.mood < 0) ctx.arc(0, -276, 22, 1.2 * Math.PI, 1.8 * Math.PI);
+  else { ctx.moveTo(-15, -290); ctx.lineTo(15, -290); }
+  ctx.stroke();
+  ctx.restore();
+}
+const LAN = { s: 1.05, shirt: C.lan, hair: "long", mood: 1 }, MINH = { s: 1.1, shirt: C.minh, hair: "short", glasses: true, collar: true, mood: 1 };
+const TU = { s: 1.0, shirt: C.tu, hair: "receding", glasses: true, mustache: true, belly: true, pocket: true };
+
+if (which === "a") {
+  ctx.fillStyle = C.sepia; ctx.fillRect(0, 0, W / 2, H); ctx.fillStyle = C.mint; ctx.fillRect(W / 2, 0, W / 2, H);
+  shape(null, () => { ctx.moveTo(W / 2, 0); ctx.lineTo(W / 2, H); }, 8);
+  person(320, 1010, { ...LAN, s: 1.5 }); person(960, 1010, { ...MINH, s: 1.5 });
+  shape(C.gold, () => ctx.roundRect(240, 24, 800, 150, 40), 8);
+  text("15 OR 30?", 640, 140, { size: 130 });
+  text("15 YEARS", 320, 270, { size: 64, fill: "#b0574a", stroke: 10 });
+  text("30 YEARS", 960, 270, { size: 64, fill: "#2e5d8f", stroke: 10 });
+} else if (which === "b") {
+  ctx.fillStyle = C.sepia; ctx.fillRect(0, 0, W / 2, H); ctx.fillStyle = C.mint; ctx.fillRect(W / 2, 0, W / 2, H);
+  shape(null, () => { ctx.moveTo(W / 2, 0); ctx.lineTo(W / 2, H); }, 8);
+  person(320, 1010, { ...TU, s: 1.5, mood: 1 }); person(960, 1010, { ...TU, s: 1.5, mood: 0 });
+  text("TOOK THE 15", 320, 240, { size: 64, fill: "#b0574a", stroke: 10 });
+  text("TOOK THE 30", 960, 240, { size: 64, fill: "#2e5d8f", stroke: 10 });
+  shape("#ffffff", () => ctx.roundRect(170, 30, 940, 140, 36), 8);
+  text("WHO GOT RICHER?", 640, 132, { size: 92, fill: C.red });
+} else {
+  ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
+  const halfs = results.cohorts15, years = []; for (let y = 1991; y <= 2011; y++) years.push(y);
+  const cw = 54, ch = 30, x0 = 640 - (years.length * cw) / 2 + cw / 2, y0 = 250;
+  const by = new Map(halfs.map((c) => [c.month, c]));
+  years.forEach((yy, xi) => { for (let mo = 1; mo <= 12; mo++) { const c = by.get(`${yy}-${String(mo).padStart(2, "0")}`); if (!c) continue;
+    shape(c.thirtyNet > 0 ? C.minh : C.lan, () => ctx.arc(x0 + xi * cw, y0 + (mo - 1) * ch, 11, 0, Math.PI * 2), 3); } });
+  text("15 OR 30?", 640, 140, { size: 120 });
+  text("1991", x0, y0 + 12 * ch + 20, { size: 30, weight: 800, fill: C.muted }); text("2011", x0 + 20 * cw, y0 + 12 * ch + 20, { size: 30, weight: 800, fill: C.muted });
+  shape("#ffffff", () => ctx.roundRect(240, 610, 800, 96, 30), 8);
+  text("THE RATE DECIDES", 640, 680, { size: 62 });
+}
+window.FRAME_COUNT = 1;
+window.renderFrame = () => true;
+document.documentElement.dataset.ready = "1";
+</script>
+</body>
+</html>

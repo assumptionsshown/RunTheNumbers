@@ -25,11 +25,33 @@ Don't trust it. Re-run it.
 
 | # | Question | Headline result | Video | Data |
 |---|---|---|---|---|
+| 7 | 15-year or 30-year mortgage? | The 15 won all 58 finished loans (signed at ~7-9%); loans signed 2005-11 at ~4-7% had the 30 ahead at year 15 every time | The Nguyens: 15 or 30? | `episodes/ep07-15-vs-30-year/results.json` |
 | 6 | Is the 4% rule safe? | It lasted 30 years for 120 of 126 start years; all 6 failures retired 1964-69 | [Walt and June](https://youtu.be/picFtg1xwCY) | `episodes/ep06-four-percent-rule/results.json` |
 | 4 | Which numbers flip rent versus buy? | Buying won 81.9% of 9,399 five-year runs, or 31.0% with one input changed | [Rent vs Buy](https://youtu.be/_AazljGWkgc) | `episodes/ep04-rent-vs-buy/results.json` |
 | 3 | What if you only ever bought at the market top? | It cost about 10% against buying on any day | [Buying at the top](https://youtu.be/X28aftmVfvM) | `episodes/ep03-buying-at-the-top/results.json` |
 | 2 | What does a 1% fee actually cost? | More than panic selling every crash for 30 years | [Fees](https://youtu.be/-v4_SQQyTNc) | `episodes/ep02-fees/results.json` |
 | 1 | Lump sum or spread it out? | Lump sum won 67.2% of 1,855 start months | [Lump sum vs DCA](https://youtu.be/YV2cOHZvYcY) | `episodes/ep01-lumpsum-vs-dca/results.json` |
+
+## Episode 7: the 15-year vs the 30-year mortgage
+
+Same house, same month, same cash every month: the 15-year payment. The 30-year
+borrower pays less and invests the difference in the S&P with dividends, every month,
+never skipping. Freddie Mac survey rates (the 15-year series begins 1991-09).
+
+- **58** loans are old enough to have finished (signed 1991-09 to 1996-06, 30-year rates
+  ~6.8-9.2%). The 15 finished richer in **all 58**. Not because stocks fell short: the
+  median window returned 10.3% a year against a 9.3% break-even. The 30's portfolio was
+  biggest when the 2000-02 and 2008 crashes hit.
+- At year 15 (238 signings, 1991-2011) the 30 was never ahead for 1990s signings and
+  ahead every time for 2005-2011 signings. The rate you sign at decides.
+- At 7.0% / 6.5% the invested difference must earn **8.14%** a year to tie. Taking the
+  30 and paying it like a 15 finishes 11 months later for about 9% of the loan.
+
+**Limits.** No refinancing, taxes, points or fees; the 30-year borrower never skips a
+month; 58 finished windows are one overlapping era, not 58 experiments.
+
+`node tools/validate-ep07.mjs` (867 checks) and `node tools/validate-ep07-story.mjs`
+(82 checks, every spoken number in the video and the Short).
 
 ## Episode 6: the 4% rule, every start year since 1871
 
@@ -155,6 +177,14 @@ dotnet run --project src/RunTheNumbers.Sim -- \
   --episode ep06-batch
 node tools/validate-ep06.mjs
 node tools/validate-ep06-story.mjs
+
+# Episode 7
+dotnet run --project src/RunTheNumbers.Sim -- \
+  data/snapshots/shiller-2026-07-26 \
+  episodes/ep07-15-vs-30-year/results.json \
+  --episode ep07
+node tools/validate-ep07.mjs
+node tools/validate-ep07-story.mjs
 ```
 
 `results.json` holds every number that appears on screen. The slides read from it
