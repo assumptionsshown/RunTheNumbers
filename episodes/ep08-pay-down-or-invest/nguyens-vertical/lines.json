@@ -1,0 +1,44 @@
+{
+  "note": "ep08 vertical (2026-10-31): the whole episode as a standalone 9:16 Short, under 3 minutes, built because a small channel's reach comes from Shorts (decisions/0005). It must make sense to someone who has never seen the channel, so it names the loan, explains every chart out loud, and carries its own assumption panel. Replay lines carry `year` (years since signing) and scene r93 or r72. Speakers: N narrator, M Minh, L Lan, T Uncle Tu. Every spoken number is checked by tools/validate-ep08-story.mjs. `*word*` = emphasis. The family are illustrations.",
+  "leadIn": 0.2,
+  "gap": { "sameScene": 0.22, "sameSpeaker": 0.16, "sceneChange": 0.45 },
+  "tail": 1.0,
+  "voices": {
+    "N": { "name": "en-US-JasonNeural", "style": "friendly", "pitch": "+10%", "rate": "+10%" },
+    "M": { "name": "en-US-GuyNeural", "style": "friendly", "pitch": "+0%", "rate": "+10%" },
+    "L": { "name": "en-US-AriaNeural", "style": "friendly", "pitch": "+0%", "rate": "+10%" },
+    "T": { "name": "en-US-DavisNeural", "style": "friendly", "pitch": "-14%", "rate": "+6%" }
+  },
+  "lines": [
+    { "id": "V01", "speaker": "N", "scene": "kitchen", "text": "A *four hundred thousand dollar* mortgage at seven percent, and an extra *eight hundred dollars* a month. Pay off the house early, or invest it?" },
+    { "id": "V02", "speaker": "L", "scene": "kitchen", "text": "Send it to the bank. The house is ours in about sixteen years, not thirty." },
+    { "id": "V03", "speaker": "M", "scene": "kitchen", "text": "Or put it in stocks. They should beat seven percent." },
+    { "id": "V04", "speaker": "T", "scene": "kitchen", "text": "No debt, ever." },
+    { "id": "V05", "speaker": "N", "scene": "kitchen", "text": "So let's replay it on real history. Same loan, same eight hundred, same rate, about *seven point four percent*. Two real start dates. On top, Lan pays down. On the bottom, Minh invests." },
+
+    { "id": "V06", "speaker": "N", "scene": "r93", "year": 0, "text": "June nineteen ninety-three." },
+    { "id": "V07", "speaker": "M", "scene": "r93", "year": 7, "style": "cheerful", "text": "Two thousand. Stocks are flying. *A hundred twenty-six thousand* invested!" },
+    { "id": "V08", "speaker": "L", "scene": "r93", "year": 16, "style": "cheerful", "text": "Two thousand nine. My house is paid off." },
+    { "id": "V09", "speaker": "M", "scene": "r93", "year": 16, "style": "sad", "text": "Two crashes later, I've got the same *hundred twenty-six thousand*. And I still owe a hundred ninety-four." },
+    { "id": "V10", "speaker": "N", "scene": "r93", "year": 30, "text": "Twenty twenty-three. Both houses are paid off. Lan has seven hundred forty-six thousand, Minh seven hundred ten. Paying down wins, by *thirty-six thousand*." },
+
+    { "id": "V11", "speaker": "N", "scene": "r72", "year": 0, "text": "Now the same rate, twenty-one years earlier. September nineteen seventy-two." },
+    { "id": "V12", "speaker": "M", "scene": "r72", "year": 2, "style": "sad", "text": "Nineteen seventy-four. The market crashed. I've got *eleven thousand*." },
+    { "id": "V13", "speaker": "L", "scene": "r72", "year": 16, "style": "cheerful", "text": "Nineteen eighty-eight. My house is paid off!" },
+    { "id": "V14", "speaker": "M", "scene": "r72", "year": 16, "text": "I still owe a hundred two thousand. But I've got a hundred seventy-nine thousand invested." },
+    { "id": "V15", "speaker": "N", "scene": "r72", "year": 30, "text": "Two thousand two. Minh has five hundred eighty-seven thousand, Lan two hundred sixty-five. Investing wins, by about *three hundred twenty thousand*." },
+
+    { "id": "V16", "speaker": "N", "scene": "every", "text": "Same rate. Opposite winners. So we ran every month since eighteen seventy-one: *fifteen hundred and six* thirty-year loans, all at seven percent. That's a what-if, but the stock history is real. Blue means investing ended up ahead. Red means paying down did." },
+    { "id": "V17", "speaker": "N", "scene": "every", "text": "Investing ended up ahead about *seven times in ten*. When it won, it usually won by about a hundred twenty thousand dollars. When it lost, it usually lost by about sixty thousand." },
+
+    { "id": "V18", "speaker": "N", "scene": "ladder", "text": "Now change only the rate. Each bar is one mortgage rate. The longer the bar, the more often investing came out ahead. At five percent or lower: every single time. At six: more than nine in ten. At seven: about seven in ten. At eight: *less than half*. The higher the rate, the more paying it off saves you." },
+
+    { "id": "V19", "speaker": "N", "scene": "bin", "after": 0.8, "text": "And their son Bin holds up a napkin." },
+    { "id": "V20", "speaker": "N", "scene": "bin", "text": "Half and half? About two times in three, it ended between the other two. But about one time in four, it ended with *less money than both*." },
+
+    { "id": "V21", "speaker": "N", "scene": "answer", "text": "So your rate decides. Around seven percent, investing usually won, but only if you invest every month, through every crash. Paying down is the smaller, surer win." },
+
+    { "id": "V22", "speaker": "N", "scene": "panel", "text": "What we assumed: stocks are the S and P with dividends, no fees. No taxes, no refinancing. The family are illustrations. The history is real. This is history, not advice." },
+    { "id": "V23", "speaker": "N", "scene": "close", "text": "What's your rate? Lan's bank, or Minh's stocks? Tell me in the comments." }
+  ]
+}

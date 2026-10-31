@@ -1,0 +1,366 @@
+{
+  "seconds": 351.775,
+  "fps": 30,
+  "lines": [
+    {
+      "id": "N00",
+      "speaker": "N",
+      "scene": "kitchen",
+      "year": null,
+      "start": 0.5,
+      "end": 10.811
+    },
+    {
+      "id": "N01",
+      "speaker": "N",
+      "scene": "kitchen",
+      "year": null,
+      "start": 11.031,
+      "end": 16.492
+    },
+    {
+      "id": "M01",
+      "speaker": "M",
+      "scene": "kitchen",
+      "year": null,
+      "start": 16.792,
+      "end": 22.396
+    },
+    {
+      "id": "L01",
+      "speaker": "L",
+      "scene": "kitchen",
+      "year": null,
+      "start": 22.696,
+      "end": 29.313
+    },
+    {
+      "id": "T01",
+      "speaker": "T",
+      "scene": "kitchen",
+      "year": null,
+      "start": 29.613,
+      "end": 33.825
+    },
+    {
+      "id": "M02",
+      "speaker": "M",
+      "scene": "kitchen",
+      "year": null,
+      "start": 34.125,
+      "end": 37.566
+    },
+    {
+      "id": "N02",
+      "speaker": "N",
+      "scene": "kitchen",
+      "year": null,
+      "start": 37.866,
+      "end": 56.7
+    },
+    {
+      "id": "N03",
+      "speaker": "N",
+      "scene": "r72",
+      "year": 0,
+      "start": 57.6,
+      "end": 73.963
+    },
+    {
+      "id": "M03",
+      "speaker": "M",
+      "scene": "r72",
+      "year": 2,
+      "start": 74.263,
+      "end": 80.605
+    },
+    {
+      "id": "L02",
+      "speaker": "L",
+      "scene": "r72",
+      "year": 2,
+      "start": 80.905,
+      "end": 83.027
+    },
+    {
+      "id": "L03",
+      "speaker": "L",
+      "scene": "r72",
+      "year": 16,
+      "start": 83.247,
+      "end": 88.683
+    },
+    {
+      "id": "M04",
+      "speaker": "M",
+      "scene": "r72",
+      "year": 16,
+      "start": 88.983,
+      "end": 93.596
+    },
+    {
+      "id": "M05",
+      "speaker": "M",
+      "scene": "r72",
+      "year": 30,
+      "start": 93.816,
+      "end": 99.145
+    },
+    {
+      "id": "L04",
+      "speaker": "L",
+      "scene": "r72",
+      "year": 30,
+      "start": 99.445,
+      "end": 101.08
+    },
+    {
+      "id": "N04",
+      "speaker": "N",
+      "scene": "r72",
+      "year": 30,
+      "start": 101.38,
+      "end": 104.405
+    },
+    {
+      "id": "M06",
+      "speaker": "M",
+      "scene": "r72",
+      "year": 30,
+      "start": 104.705,
+      "end": 106.822
+    },
+    {
+      "id": "N05",
+      "speaker": "N",
+      "scene": "r93",
+      "year": 0,
+      "start": 107.622,
+      "end": 116.359
+    },
+    {
+      "id": "M07",
+      "speaker": "M",
+      "scene": "r93",
+      "year": 7,
+      "start": 116.659,
+      "end": 122.154
+    },
+    {
+      "id": "M08",
+      "speaker": "M",
+      "scene": "r93",
+      "year": 16,
+      "start": 122.374,
+      "end": 130.669
+    },
+    {
+      "id": "L05",
+      "speaker": "L",
+      "scene": "r93",
+      "year": 16,
+      "start": 130.969,
+      "end": 134.093
+    },
+    {
+      "id": "N06",
+      "speaker": "N",
+      "scene": "r93",
+      "year": 30,
+      "start": 134.393,
+      "end": 143.462
+    },
+    {
+      "id": "N07",
+      "speaker": "N",
+      "scene": "r93",
+      "year": 30,
+      "start": 143.682,
+      "end": 152.603
+    },
+    {
+      "id": "M09",
+      "speaker": "M",
+      "scene": "why",
+      "year": null,
+      "start": 153.503,
+      "end": 154.882
+    },
+    {
+      "id": "L06",
+      "speaker": "L",
+      "scene": "why",
+      "year": null,
+      "start": 155.182,
+      "end": 156.796
+    },
+    {
+      "id": "N08",
+      "speaker": "N",
+      "scene": "every",
+      "year": null,
+      "start": 157.596,
+      "end": 171.125
+    },
+    {
+      "id": "N09",
+      "speaker": "N",
+      "scene": "every",
+      "year": null,
+      "start": 171.345,
+      "end": 181.477
+    },
+    {
+      "id": "N10",
+      "speaker": "N",
+      "scene": "every",
+      "year": null,
+      "start": 181.697,
+      "end": 202.622
+    },
+    {
+      "id": "N11",
+      "speaker": "N",
+      "scene": "ladder",
+      "year": null,
+      "start": 203.422,
+      "end": 228.608
+    },
+    {
+      "id": "M10",
+      "speaker": "M",
+      "scene": "today",
+      "year": null,
+      "start": 229.408,
+      "end": 231.277
+    },
+    {
+      "id": "L07",
+      "speaker": "L",
+      "scene": "today",
+      "year": null,
+      "start": 231.577,
+      "end": 232.946
+    },
+    {
+      "id": "T02",
+      "speaker": "T",
+      "scene": "today",
+      "year": null,
+      "start": 233.246,
+      "end": 234.138
+    },
+    {
+      "id": "N12",
+      "speaker": "N",
+      "scene": "today",
+      "year": null,
+      "start": 234.438,
+      "end": 250.066
+    },
+    {
+      "id": "L08",
+      "speaker": "L",
+      "scene": "today",
+      "year": null,
+      "start": 250.366,
+      "end": 252.798
+    },
+    {
+      "id": "M11",
+      "speaker": "M",
+      "scene": "today",
+      "year": null,
+      "start": 253.098,
+      "end": 254.878
+    },
+    {
+      "id": "N13",
+      "speaker": "N",
+      "scene": "bin",
+      "year": null,
+      "start": 255.678,
+      "end": 259.258
+    },
+    {
+      "id": "M12",
+      "speaker": "M",
+      "scene": "bin",
+      "year": null,
+      "start": 260.458,
+      "end": 262.139
+    },
+    {
+      "id": "N14",
+      "speaker": "N",
+      "scene": "bin",
+      "year": null,
+      "start": 262.439,
+      "end": 279.259
+    },
+    {
+      "id": "L09",
+      "speaker": "L",
+      "scene": "bin",
+      "year": null,
+      "start": 279.559,
+      "end": 280.629
+    },
+    {
+      "id": "M13",
+      "speaker": "M",
+      "scene": "bin",
+      "year": null,
+      "start": 280.929,
+      "end": 283.38
+    },
+    {
+      "id": "T03",
+      "speaker": "T",
+      "scene": "bin",
+      "year": null,
+      "start": 283.68,
+      "end": 284.831
+    },
+    {
+      "id": "N15",
+      "speaker": "N",
+      "scene": "answer",
+      "year": null,
+      "start": 285.631,
+      "end": 297.318
+    },
+    {
+      "id": "N16",
+      "speaker": "N",
+      "scene": "answer",
+      "year": null,
+      "start": 297.538,
+      "end": 308.161
+    },
+    {
+      "id": "N17",
+      "speaker": "N",
+      "scene": "answer",
+      "year": null,
+      "start": 308.381,
+      "end": 318.308
+    },
+    {
+      "id": "N18",
+      "speaker": "N",
+      "scene": "panel",
+      "year": null,
+      "start": 319.108,
+      "end": 344.303
+    },
+    {
+      "id": "N19",
+      "speaker": "N",
+      "scene": "close",
+      "year": null,
+      "start": 345.103,
+      "end": 350.575
+    }
+  ]
+}

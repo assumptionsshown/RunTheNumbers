@@ -1,0 +1,86 @@
+{
+  "seconds": 60.796,
+  "fps": 30,
+  "lines": [
+    {
+      "id": "S01",
+      "speaker": "N",
+      "scene": "r93",
+      "year": 0,
+      "start": 0.3,
+      "end": 9.291
+    },
+    {
+      "id": "S02",
+      "speaker": "B",
+      "scene": "r93",
+      "year": 7,
+      "start": 9.591,
+      "end": 15.096
+    },
+    {
+      "id": "S03",
+      "speaker": "A",
+      "scene": "r93",
+      "year": 16,
+      "start": 15.396,
+      "end": 18.401
+    },
+    {
+      "id": "S04",
+      "speaker": "B",
+      "scene": "r93",
+      "year": 16,
+      "start": 18.701,
+      "end": 24.831
+    },
+    {
+      "id": "S05",
+      "speaker": "N",
+      "scene": "r93",
+      "year": 30,
+      "start": 25.131,
+      "end": 29.523
+    },
+    {
+      "id": "S06",
+      "speaker": "N",
+      "scene": "r72",
+      "year": 0,
+      "start": 30.023,
+      "end": 32.297
+    },
+    {
+      "id": "S07",
+      "speaker": "B",
+      "scene": "r72",
+      "year": 2,
+      "start": 32.597,
+      "end": 37.599
+    },
+    {
+      "id": "S08",
+      "speaker": "A",
+      "scene": "r72",
+      "year": 16,
+      "start": 37.899,
+      "end": 40.893
+    },
+    {
+      "id": "S09",
+      "speaker": "N",
+      "scene": "r72",
+      "year": 30,
+      "start": 41.193,
+      "end": 45.796
+    },
+    {
+      "id": "S10",
+      "speaker": "N",
+      "scene": "end",
+      "year": 30,
+      "start": 46.296,
+      "end": 59.796
+    }
+  ]
+}

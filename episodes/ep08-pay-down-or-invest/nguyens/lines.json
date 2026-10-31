@@ -1,0 +1,68 @@
+{
+  "note": "ep08 'The Nguyens: Pay It Off or Invest?' (2026-10-30). Continues ep07: Minh and Lan hold a $400,000 30-year loan at 7% and argue over the extra $800 a month. Two real replays at the same rate (1972-09 and 1993-06, both about 7.4%), then every start since 1871 at a fixed rate. Every spoken number is checked by tools/validate-ep08-story.mjs. Replay lines carry `year` (years since signing) and scene r72 or r93. Speakers: N narrator, M Minh, L Lan, T Uncle Tu. Bin stays silent: his one line is a bubble. `*word*` = emphasis. The family are illustrations.",
+  "leadIn": 0.5,
+  "gap": { "sameScene": 0.3, "sameSpeaker": 0.22, "sceneChange": 0.8 },
+  "tail": 1.2,
+  "voices": {
+    "N": { "name": "en-US-JasonNeural", "style": "friendly", "pitch": "+10%", "rate": "+8%" },
+    "M": { "name": "en-US-GuyNeural", "style": "friendly", "pitch": "+0%", "rate": "+8%" },
+    "L": { "name": "en-US-AriaNeural", "style": "friendly", "pitch": "+0%", "rate": "+8%" },
+    "T": { "name": "en-US-DavisNeural", "style": "friendly", "pitch": "-14%", "rate": "+4%" }
+  },
+  "lines": [
+    { "id": "N00", "speaker": "N", "scene": "kitchen", "text": "Last time, Minh and Lan signed a thirty-year mortgage: *four hundred thousand dollars*, at seven percent, about twenty-seven hundred a month. And they agreed to pay extra, and finish early." },
+    { "id": "N01", "speaker": "N", "scene": "kitchen", "text": "That extra is about *eight hundred dollars* a month. First payment day, and the deal is already in trouble." },
+    { "id": "M01", "speaker": "M", "scene": "kitchen", "text": "Eight hundred to the bank? We could put that in stocks. Stocks do better than seven percent." },
+    { "id": "L01", "speaker": "L", "scene": "kitchen", "text": "The bank is a sure thing. Every extra dollar stops costing us seven percent. *No crash can touch that.*" },
+    { "id": "T01", "speaker": "T", "scene": "kitchen", "text": "No debt, ever. A paid-off house, nobody can take from you." },
+    { "id": "M02", "speaker": "M", "scene": "kitchen", "text": "That's a feeling. I want to know which one ends up with more money." },
+    { "id": "N02", "speaker": "N", "scene": "kitchen", "after": 0.9, "text": "Fair enough. Here's what's certain. Send the eight hundred to the bank, and the loan is gone in about *sixteen years*, not thirty. That saves about *two hundred ninety thousand dollars* of interest. Invest it instead, and you owe the bank for the full thirty. So who ends up with more? Let's replay it on *real history*." },
+
+    { "id": "N03", "speaker": "N", "scene": "r72", "year": 0, "text": "September nineteen seventy-two. The mortgage rate that month: about *seven point four percent*. On the left, Lan's way: the eight hundred goes to the bank. On the right, Minh's way: it goes into stocks. Same loan, scaled to four hundred thousand, in the money of that month." },
+    { "id": "M03", "speaker": "M", "scene": "r72", "year": 2, "style": "sad", "text": "Nineteen seventy-four. The market crashed. Two years in, I've got *eleven thousand*." },
+    { "id": "L02", "speaker": "L", "scene": "r72", "year": 2, "text": "And I owe seventeen thousand less than you do." },
+    { "id": "L03", "speaker": "L", "scene": "r72", "year": 16, "style": "cheerful", "text": "Nineteen eighty-eight. House *paid off*! Now the whole payment goes into stocks." },
+    { "id": "M04", "speaker": "M", "scene": "r72", "year": 16, "text": "I still owe a hundred two thousand. But I've got *a hundred seventy-nine thousand* invested." },
+    { "id": "M05", "speaker": "M", "scene": "r72", "year": 30, "style": "cheerful", "text": "Two thousand two. Thirty years. I've got *five hundred eighty-seven thousand*." },
+    { "id": "L04", "speaker": "L", "scene": "r72", "year": 30, "text": "*Two hundred sixty-five thousand.*" },
+    { "id": "N04", "speaker": "N", "scene": "r72", "year": 30, "text": "Minh's way, by about *three hundred twenty thousand dollars*." },
+    { "id": "M06", "speaker": "M", "scene": "r72", "year": 30, "style": "cheerful", "text": "See? Just math." },
+
+    { "id": "N05", "speaker": "N", "scene": "r93", "year": 0, "text": "Now the same rate, twenty-one years later. June nineteen ninety-three, also about *seven point four percent*. Same loan, same eight hundred." },
+    { "id": "M07", "speaker": "M", "scene": "r93", "year": 7, "style": "cheerful", "text": "Two thousand. Stocks are flying. *A hundred twenty-six thousand* invested!" },
+    { "id": "M08", "speaker": "M", "scene": "r93", "year": 16, "style": "sad", "text": "Two thousand nine. Two crashes later, I've got the same *hundred twenty-six thousand*. And I still owe a hundred ninety-four." },
+    { "id": "L05", "speaker": "L", "scene": "r93", "year": 16, "style": "cheerful", "text": "My house is paid off. Nobody can take it." },
+    { "id": "N06", "speaker": "N", "scene": "r93", "year": 30, "text": "Then stocks came roaring back. Twenty twenty-three. It's close, but Lan's way wins: *seven hundred forty-six thousand*, to seven hundred ten." },
+    { "id": "N07", "speaker": "N", "scene": "r93", "year": 30, "after": 0.9, "text": "Same rate. Same eight hundred. One start, Minh wins by three hundred twenty thousand. The other, Lan wins by *thirty-six*." },
+
+    { "id": "M09", "speaker": "M", "scene": "why", "text": "Two picks don't prove anything." },
+    { "id": "L06", "speaker": "L", "scene": "why", "style": "cheerful", "text": "For once, I agree with you." },
+
+    { "id": "N08", "speaker": "N", "scene": "every", "text": "So we ran all of it. Every month since eighteen seventy-one that a thirty-year loan could have started and finished: *fifteen hundred and six* of them, all at seven percent. That rate didn't always exist. We're only asking what stocks would have done against it." },
+    { "id": "N09", "speaker": "N", "scene": "every", "text": "Investing ended up ahead about *seven times in ten*. When it won, it usually won by about a hundred twenty thousand dollars. When it lost, it usually lost by about sixty thousand." },
+    { "id": "N10", "speaker": "N", "scene": "every", "text": "But that seven percent was a what-if. So we also checked real rates: only the months when the actual mortgage rate was seven to eight percent. Among loans old enough to finish, that happened in two stretches. Started in the early seventies, investing won all twenty-seven months. Started in the nineties, only about one in four. Together, about six in ten." },
+
+    { "id": "N11", "speaker": "N", "scene": "ladder", "text": "Now change just one thing: *the rate*. Each bar is one mortgage rate. The longer the bar, the more often investing came out ahead. At three, four, even five percent, it won every single time since eighteen seventy-one. At six, more than nine times in ten. At seven, about seven in ten. At eight, *less than half*. The higher the rate, the more paying it off saves you, so stocks have a harder job." },
+
+    { "id": "M10", "speaker": "M", "scene": "today", "style": "cheerful", "text": "So at seven percent, I win." },
+    { "id": "L07", "speaker": "L", "scene": "today", "text": "Seven times out of ten." },
+    { "id": "T02", "speaker": "T", "scene": "today", "text": "And the other three?" },
+    { "id": "N12", "speaker": "N", "scene": "today", "text": "In the worst start, paying down won by about *two hundred sixty thousand dollars*. In the best, investing won by about eight hundred eighty thousand. And to tie at seven percent, the money you invest has to earn about *seven point two percent* a year, for thirty years, and you can never skip a month." },
+    { "id": "L08", "speaker": "L", "scene": "today", "style": "cheerful", "text": "Minh. The gym membership." },
+    { "id": "M11", "speaker": "M", "scene": "today", "style": "cheerful", "text": "Okay. Fair." },
+
+    { "id": "N13", "speaker": "N", "scene": "bin", "after": 1.2, "text": "And Bin, who hasn't said a word this whole time, holds up a napkin." },
+    { "id": "M12", "speaker": "M", "scene": "bin", "text": "Half to the bank, half to stocks?" },
+    { "id": "N14", "speaker": "N", "scene": "bin", "text": "We ran that too. About two times in three, half and half lands between the other two. About one time in four, it ended with less money than both. About one time in ten, it ended with more than both. It's no secret best answer. It just means neither of you has to be completely right." },
+    { "id": "L09", "speaker": "L", "scene": "bin", "text": "Four hundred to the bank." },
+    { "id": "M13", "speaker": "M", "scene": "bin", "style": "cheerful", "text": "Four hundred to stocks. *Deal.*" },
+    { "id": "T03", "speaker": "T", "scene": "bin", "text": "I still say no debt." },
+
+    { "id": "N15", "speaker": "N", "scene": "answer", "text": "So what does this mean for you? *Lesson one.* Your rate decides. At five percent or below, investing won every time since eighteen seventy-one. At eight, it won less than half." },
+    { "id": "N16", "speaker": "N", "scene": "answer", "text": "*Lesson two.* Around seven percent, investing usually won, and its typical win was about twice its typical loss. But that only counts if you invest every month, through every crash." },
+    { "id": "N17", "speaker": "N", "scene": "answer", "text": "*Lesson three.* Paying down is the smaller, surer win. A fixed seven percent that no crash can touch. That's not a mistake. It's a choice." },
+
+    { "id": "N18", "speaker": "N", "scene": "panel", "text": "Here's what we assumed. Stocks are the S and P with dividends, no fees. The fixed rates are what-ifs; the real months use Freddie Mac. The eight hundred goes in every month, never skipped. No taxes, and no refinancing, which would likely have helped the investing side. Dollars are the money of the month you start. The family are illustrations. The history is real. This is history, not advice." },
+    { "id": "N19", "speaker": "N", "scene": "close", "text": "Which would you pick: Lan's bank, Minh's stocks, or Bin's napkin? Tell me in the comments." }
+  ]
+}

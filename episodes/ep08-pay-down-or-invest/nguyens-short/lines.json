@@ -1,0 +1,23 @@
+{
+  "note": "ep08 Short 'Pay It Off or Invest?' (2026-10-30), 9:16, published with the long-form. The same $400,000 loan and $800 a month replayed at the same rate from two real starts: June 1993, then September 1972. Top half A = pays down, bottom half B = invests. `year` = years since signing. Numbers checked by tools/validate-ep08-story.mjs (short section) and asserted by render/short-ep08-nguyens.html.",
+  "leadIn": 0.3,
+  "gap": { "sameScene": 0.3, "sameSpeaker": 0.2, "sceneChange": 0.5 },
+  "tail": 1.0,
+  "voices": {
+    "N": { "name": "en-US-JasonNeural", "style": "friendly", "pitch": "+10%", "rate": "+8%" },
+    "A": { "name": "en-US-AriaNeural", "style": "friendly", "pitch": "+0%", "rate": "+8%" },
+    "B": { "name": "en-US-GuyNeural", "style": "friendly", "pitch": "+0%", "rate": "+8%" }
+  },
+  "lines": [
+    { "id": "S01", "speaker": "N", "scene": "r93", "year": 0, "text": "An extra eight hundred a month: pay off the mortgage, or invest it? Same rate, about seven point four percent, two real starts. *Who ends up richer?*" },
+    { "id": "S02", "speaker": "B", "scene": "r93", "year": 7, "style": "cheerful", "text": "Two thousand. Stocks are flying. *A hundred twenty-six thousand* invested." },
+    { "id": "S03", "speaker": "A", "scene": "r93", "year": 16, "style": "cheerful", "text": "Two thousand nine. My house is paid off." },
+    { "id": "S04", "speaker": "B", "scene": "r93", "year": 16, "style": "sad", "text": "Two crashes later: the same *hundred twenty-six thousand*. And I still owe a hundred ninety-four." },
+    { "id": "S05", "speaker": "N", "scene": "r93", "year": 30, "text": "Twenty twenty-three. Paying down wins, by about *thirty-six thousand*." },
+    { "id": "S06", "speaker": "N", "scene": "r72", "year": 0, "text": "Now the same rate, in nineteen seventy-two." },
+    { "id": "S07", "speaker": "B", "scene": "r72", "year": 2, "style": "sad", "text": "Nineteen seventy-four. A crash. I've got *eleven thousand*." },
+    { "id": "S08", "speaker": "A", "scene": "r72", "year": 16, "style": "cheerful", "text": "Nineteen eighty-eight. My house is paid off." },
+    { "id": "S09", "speaker": "N", "scene": "r72", "year": 30, "text": "Two thousand two. Investing wins, by about *three hundred twenty thousand*." },
+    { "id": "S10", "speaker": "N", "scene": "end", "year": 30, "text": "Every start since eighteen seventy-one, at seven percent: investing won about seven in ten. At five percent or below, every time. At eight, less than half. *Your rate decides.* Full story on the channel." }
+  ]
+}

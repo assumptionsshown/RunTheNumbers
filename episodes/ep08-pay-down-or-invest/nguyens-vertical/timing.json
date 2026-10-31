@@ -1,0 +1,190 @@
+{
+  "seconds": 173.053,
+  "fps": 30,
+  "lines": [
+    {
+      "id": "V01",
+      "speaker": "N",
+      "scene": "kitchen",
+      "year": null,
+      "start": 0.2,
+      "end": 7.18
+    },
+    {
+      "id": "V02",
+      "speaker": "L",
+      "scene": "kitchen",
+      "year": null,
+      "start": 7.4,
+      "end": 11.782
+    },
+    {
+      "id": "V03",
+      "speaker": "M",
+      "scene": "kitchen",
+      "year": null,
+      "start": 12.002,
+      "end": 15.336
+    },
+    {
+      "id": "V04",
+      "speaker": "T",
+      "scene": "kitchen",
+      "year": null,
+      "start": 15.556,
+      "end": 16.722
+    },
+    {
+      "id": "V05",
+      "speaker": "N",
+      "scene": "kitchen",
+      "year": null,
+      "start": 16.942,
+      "end": 30.043
+    },
+    {
+      "id": "V06",
+      "speaker": "N",
+      "scene": "r93",
+      "year": 0,
+      "start": 30.493,
+      "end": 31.781
+    },
+    {
+      "id": "V07",
+      "speaker": "M",
+      "scene": "r93",
+      "year": 7,
+      "start": 32.001,
+      "end": 37.42
+    },
+    {
+      "id": "V08",
+      "speaker": "L",
+      "scene": "r93",
+      "year": 16,
+      "start": 37.64,
+      "end": 40.602
+    },
+    {
+      "id": "V09",
+      "speaker": "M",
+      "scene": "r93",
+      "year": 16,
+      "start": 40.822,
+      "end": 47.115
+    },
+    {
+      "id": "V10",
+      "speaker": "N",
+      "scene": "r93",
+      "year": 30,
+      "start": 47.335,
+      "end": 57.693
+    },
+    {
+      "id": "V11",
+      "speaker": "N",
+      "scene": "r72",
+      "year": 0,
+      "start": 58.143,
+      "end": 62.737
+    },
+    {
+      "id": "V12",
+      "speaker": "M",
+      "scene": "r72",
+      "year": 2,
+      "start": 62.957,
+      "end": 68.275
+    },
+    {
+      "id": "V13",
+      "speaker": "L",
+      "scene": "r72",
+      "year": 16,
+      "start": 68.495,
+      "end": 71.452
+    },
+    {
+      "id": "V14",
+      "speaker": "M",
+      "scene": "r72",
+      "year": 16,
+      "start": 71.672,
+      "end": 76.209
+    },
+    {
+      "id": "V15",
+      "speaker": "N",
+      "scene": "r72",
+      "year": 30,
+      "start": 76.429,
+      "end": 85.316
+    },
+    {
+      "id": "V16",
+      "speaker": "N",
+      "scene": "every",
+      "year": null,
+      "start": 85.766,
+      "end": 101.973
+    },
+    {
+      "id": "V17",
+      "speaker": "N",
+      "scene": "every",
+      "year": null,
+      "start": 102.133,
+      "end": 112.095
+    },
+    {
+      "id": "V18",
+      "speaker": "N",
+      "scene": "ladder",
+      "year": null,
+      "start": 112.545,
+      "end": 132.707
+    },
+    {
+      "id": "V19",
+      "speaker": "N",
+      "scene": "bin",
+      "year": null,
+      "start": 133.157,
+      "end": 134.891
+    },
+    {
+      "id": "V20",
+      "speaker": "N",
+      "scene": "bin",
+      "year": null,
+      "start": 135.691,
+      "end": 143.357
+    },
+    {
+      "id": "V21",
+      "speaker": "N",
+      "scene": "answer",
+      "year": null,
+      "start": 143.807,
+      "end": 153.776
+    },
+    {
+      "id": "V22",
+      "speaker": "N",
+      "scene": "panel",
+      "year": null,
+      "start": 154.226,
+      "end": 166.893
+    },
+    {
+      "id": "V23",
+      "speaker": "N",
+      "scene": "close",
+      "year": null,
+      "start": 167.343,
+      "end": 172.053
+    }
+  ]
+}

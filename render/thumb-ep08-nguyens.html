@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Thumbnail: ep08 The Nguyens</title>
+<style>
+  html, body { margin: 0; background: #fbf3df; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1280" height="720"></canvas>
+<script type="module">
+// Thumbnails for ep08 "Pay Off Your Mortgage Early or Invest?" (2026-10-30), three for
+// Test & Compare. Same kit as render/ep08-nguyens.html.
+//   ?anim=a  "PAY IT OFF OR INVEST?" over Lan (bank) vs Minh (stocks)
+//   ?anim=b  "SAME RATE. WHO WON?" with the 1972 and 1993 starts
+//   ?anim=c  the win-rate ladder: "YOUR RATE DECIDES"
+const which = new URLSearchParams(location.search).get("anim") ?? "a";
+const W = 1280, H = 720;
+const ctx = document.getElementById("c").getContext("2d");
+const C = { paper: "#fbf3df", ink: "#1d1d1f", skin: "#efc39c", hair: "#2a2522", muted: "#7a7468", gold: "#ffcf4a",
+  sepia: "#f3e2c2", mint: "#e3f1ea", minh: "#5b8fc7", lan: "#e98a7a", minhDark: "#2e5d8f", lanDark: "#b0574a", red: "#e5646e" };
+const FONT = '"Segoe UI", system-ui, sans-serif';
+function text(s, x, y, { size = 48, fill = C.ink, weight = 900, stroke = 0, align = "center" } = {}) {
+  ctx.font = `${weight} ${size}px ${FONT}`; ctx.textAlign = align;
+  if (stroke) { ctx.lineWidth = stroke; ctx.strokeStyle = "#ffffff"; ctx.lineJoin = "round"; ctx.strokeText(s, x, y); }
+  ctx.fillStyle = fill; ctx.fillText(s, x, y);
+}
+function shape(fill, draw, lw = 7) { ctx.beginPath(); draw(); if (fill) { ctx.fillStyle = fill; ctx.fill(); } if (lw) { ctx.lineWidth = lw; ctx.strokeStyle = C.ink; ctx.lineJoin = "round"; ctx.stroke(); } }
+function person(cx, footY, o) {
+  ctx.save(); ctx.translate(cx, footY); ctx.scale(o.s, o.s);
+  if (o.hair === "long") shape(C.hair, () => ctx.roundRect(-80, -400, 160, 170, 50), 6);
+  shape("#4a4f5c", () => { ctx.rect(-45, -112, 38, 112); ctx.rect(7, -112, 38, 112); }, 6);
+  shape(o.shirt, () => ctx.roundRect(-66, -258, 132, 156, 30));
+  shape(o.shirt, () => ctx.roundRect(-96, -244, 34, 114, 16), 6); shape(o.shirt, () => ctx.roundRect(62, -244, 34, 114, 16), 6);
+  if (o.collar) shape("#ffffff", () => { ctx.moveTo(-26, -258); ctx.lineTo(0, -232); ctx.lineTo(26, -258); ctx.closePath(); }, 5);
+  shape(C.skin, () => ctx.ellipse(0, -325, 62, 72, 0, 0, Math.PI * 2));
+  if (o.hair === "short") shape(C.hair, () => { ctx.moveTo(-64, -318); ctx.ellipse(0, -330, 66, 76, 0, Math.PI, 0); ctx.lineTo(64, -318); ctx.quadraticCurveTo(40, -372, -10, -366); ctx.quadraticCurveTo(-48, -362, -64, -318); ctx.closePath(); }, 6);
+  else shape(C.hair, () => { ctx.moveTo(-70, -300); ctx.ellipse(0, -330, 72, 82, 0, Math.PI, 0); ctx.lineTo(70, -300); ctx.quadraticCurveTo(58, -360, 10, -362); ctx.quadraticCurveTo(-40, -352, -70, -300); ctx.closePath(); }, 6);
+  ctx.lineWidth = 5; ctx.strokeStyle = C.ink;
+  if (o.glasses) { ctx.beginPath(); ctx.arc(-24, -330, 16, 0, Math.PI * 2); ctx.moveTo(40, -330); ctx.arc(24, -330, 16, 0, Math.PI * 2); ctx.moveTo(-8, -330); ctx.lineTo(8, -330); ctx.stroke(); }
+  ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(-24, -330, 6, 0, Math.PI * 2); ctx.arc(24, -330, 6, 0, Math.PI * 2); ctx.fill();
+  ctx.lineWidth = 7; ctx.beginPath(); ctx.arc(0, -304, 24, 0.12 * Math.PI, 0.88 * Math.PI); ctx.stroke();
+  ctx.restore();
+}
+const LAN = { shirt: C.lan, hair: "long" }, MINH = { shirt: C.minh, hair: "short", glasses: true, collar: true };
+
+if (which === "a") {
+  ctx.fillStyle = C.sepia; ctx.fillRect(0, 0, W / 2, H); ctx.fillStyle = C.mint; ctx.fillRect(W / 2, 0, W / 2, H);
+  shape(null, () => { ctx.moveTo(W / 2, 0); ctx.lineTo(W / 2, H); }, 8);
+  person(320, 1010, { ...LAN, s: 1.5 }); person(960, 1010, { ...MINH, s: 1.5 });
+  shape(C.gold, () => ctx.roundRect(90, 24, 1100, 150, 40), 8);
+  text("PAY IT OFF OR INVEST?", 640, 128, { size: 92 });
+  text("THE BANK", 320, 270, { size: 64, fill: C.lanDark, stroke: 10 });
+  text("STOCKS", 960, 270, { size: 64, fill: C.minhDark, stroke: 10 });
+} else if (which === "b") {
+  ctx.fillStyle = C.sepia; ctx.fillRect(0, 0, W / 2, H); ctx.fillStyle = C.mint; ctx.fillRect(W / 2, 0, W / 2, H);
+  shape(null, () => { ctx.moveTo(W / 2, 0); ctx.lineTo(W / 2, H); }, 8);
+  shape("#ffffff", () => ctx.roundRect(110, 28, 1060, 136, 36), 8);
+  text("SAME RATE. WHO WON?", 640, 124, { size: 78, fill: C.red });
+  text("1972", 320, 330, { size: 150 }); text("1993", 960, 330, { size: 150 });
+  text("7.4%", 320, 420, { size: 70, fill: C.muted }); text("7.4%", 960, 420, { size: 70, fill: C.muted });
+  text("STOCKS +$320K", 320, 560, { size: 66, fill: C.minhDark, stroke: 10 });
+  text("BANK +$36K", 960, 560, { size: 66, fill: C.lanDark, stroke: 10 });
+} else {
+  ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
+  text("PAY IT OFF OR INVEST?", 640, 104, { size: 76 });
+  // The bar values are validated by tools/validate-ep08-story.mjs and drawn by render/ep08-nguyens.html.
+  const bars = [[5, 1.0], [6, 0.928], [7, 0.714], [8, 0.459]];
+  const x0 = 230, w = 860, y0 = 150, rh = 105;
+  bars.forEach(([p, v], k) => {
+    const y = y0 + k * rh;
+    text(`${p}%`, x0 - 30, y + 62, { size: 66, align: "right" });
+    shape("#efe3c6", () => ctx.roundRect(x0, y, w, 84, 14), 6);
+    shape(v >= 0.5 ? C.minh : C.lan, () => ctx.roundRect(x0, y, w * v, 84, 14), 6);
+    text(`${Math.round(v * 100)}%`, x0 + w + 20, y + 62, { size: 58, align: "left" });
+  });
+  shape("#ffffff", () => ctx.roundRect(240, 590, 800, 100, 30), 8);
+  text("YOUR RATE DECIDES", 640, 662, { size: 64 });
+}
+window.FRAME_COUNT = 1;
+window.renderFrame = () => true;
+document.documentElement.dataset.ready = "1";
+</script>
+</body>
+</html>
