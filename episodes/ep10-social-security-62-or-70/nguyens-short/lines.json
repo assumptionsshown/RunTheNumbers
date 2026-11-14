@@ -1,0 +1,20 @@
+{
+  "note": "ep10 Short 2 (2026-11-13): the break-even and the life table only, about a minute, 9:16. Same model as nguyens/lines.json (plain checks, today's money). Race lines carry `month` = months since the 62nd birthday. Every spoken number is checked by tools/validate-ep10-story.mjs. The family are illustrations.",
+  "leadIn": 0.2,
+  "gap": { "sameScene": 0.22, "sameSpeaker": 0.16, "sceneChange": 0.45 },
+  "tail": 1.0,
+  "voices": {
+    "N": { "name": "en-US-JasonNeural", "style": "friendly", "pitch": "+10%", "rate": "+10%" },
+    "L": { "name": "en-US-AriaNeural", "style": "friendly", "pitch": "+0%", "rate": "+10%" },
+    "T": { "name": "en-US-DavisNeural", "style": "friendly", "pitch": "-14%", "rate": "+6%" }
+  },
+  "lines": [
+    { "id": "S01", "speaker": "N", "scene": "kitchen", "text": "Uncle Tu just turned sixty-two. Social Security: *fourteen hundred* a month now, or *twenty-four hundred eighty* if he waits until seventy." },
+    { "id": "S02", "speaker": "T", "scene": "kitchen", "text": "I take it now. Who knows if I'm still here at eighty?" },
+    { "id": "S03", "speaker": "N", "scene": "race", "month": 96, "text": "In today's money: by seventy, taking it early has collected a hundred thirty-four thousand dollars. Waiting: zero." },
+    { "id": "S04", "speaker": "N", "scene": "race", "month": 221, "text": "Then the bigger check catches up, a thousand eighty dollars a month. A little past *eighty*, they're even." },
+    { "id": "S05", "speaker": "N", "scene": "people", "text": "So, will he make it to eighty? Social Security's own table: of a hundred men who reach sixty-two, about *six in ten* do. On average, a man lives to about eighty-two." },
+    { "id": "S06", "speaker": "L", "scene": "people", "text": "And if he lives to ninety-five, waiting is ahead by about a hundred ninety thousand." },
+    { "id": "S07", "speaker": "N", "scene": "close", "text": "Waiting isn't a bet that you live long. It's insurance, in case you do. Would you take it at sixty-two, or wait? Tell me in the comments." }
+  ]
+}

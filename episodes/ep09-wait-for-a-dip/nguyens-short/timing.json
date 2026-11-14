@@ -1,0 +1,70 @@
+{
+  "seconds": 54.483,
+  "fps": 30,
+  "lines": [
+    {
+      "id": "S01",
+      "speaker": "N",
+      "scene": "kitchen",
+      "year": null,
+      "start": 0.2,
+      "end": 9.975
+    },
+    {
+      "id": "S02",
+      "speaker": "N",
+      "scene": "r07",
+      "year": null,
+      "start": 10.375,
+      "end": 17.564
+    },
+    {
+      "id": "S03",
+      "speaker": "T",
+      "scene": "r07",
+      "year": null,
+      "start": 17.764,
+      "end": 22.384
+    },
+    {
+      "id": "S04",
+      "speaker": "M",
+      "scene": "r07",
+      "year": null,
+      "start": 22.584,
+      "end": 28.483
+    },
+    {
+      "id": "S05",
+      "speaker": "T",
+      "scene": "r07",
+      "year": null,
+      "start": 28.683,
+      "end": 32.72
+    },
+    {
+      "id": "S06",
+      "speaker": "N",
+      "scene": "r07",
+      "year": null,
+      "start": 32.92,
+      "end": 37.266
+    },
+    {
+      "id": "S07",
+      "speaker": "N",
+      "scene": "r07",
+      "year": null,
+      "start": 37.416,
+      "end": 45.304
+    },
+    {
+      "id": "S08",
+      "speaker": "N",
+      "scene": "close",
+      "year": null,
+      "start": 45.704,
+      "end": 53.483
+    }
+  ]
+}

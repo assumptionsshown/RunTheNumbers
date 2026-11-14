@@ -1,0 +1,38 @@
+{
+  "note": "ep09 vertical (2026-11-07): the whole episode as a standalone 9:16 Short, under 3 minutes (decisions/0005: Shorts are a main product). It must make sense to someone who has never seen the channel, so it states the rule, explains every chart out loud, and carries its own assumption panel. Replay lines carry `month` (months since the start) and scene r18 or r07. Speakers: N narrator, M Minh, L Lan, T Uncle Tu. Every spoken number is checked by tools/validate-ep09-story.mjs. `*word*` = emphasis. The family are illustrations.",
+  "leadIn": 0.2,
+  "gap": { "sameScene": 0.22, "sameSpeaker": 0.16, "sceneChange": 0.45 },
+  "tail": 1.0,
+  "voices": {
+    "N": { "name": "en-US-JasonNeural", "style": "friendly", "pitch": "+10%", "rate": "+10%" },
+    "M": { "name": "en-US-GuyNeural", "style": "friendly", "pitch": "+0%", "rate": "+10%" },
+    "L": { "name": "en-US-AriaNeural", "style": "friendly", "pitch": "+0%", "rate": "+10%" },
+    "T": { "name": "en-US-DavisNeural", "style": "friendly", "pitch": "-14%", "rate": "+6%" }
+  },
+  "lines": [
+    { "id": "V01", "speaker": "N", "scene": "kitchen", "text": "Stocks keep hitting record highs. Minh wants to invest *five hundred dollars* a month." },
+    { "id": "V02", "speaker": "T", "scene": "kitchen", "text": "Never buy at the top. Wait until it's *ten percent* down, then buy with everything you saved." },
+    { "id": "V03", "speaker": "M", "scene": "kitchen", "text": "I'd rather just buy every paycheck." },
+    { "id": "V04", "speaker": "N", "scene": "kitchen", "text": "So let's replay both on real history, in today's money. On top, Uncle Tu waits for the drop. On the bottom, Minh buys every month." },
+
+    { "id": "V05", "speaker": "N", "scene": "r18", "month": 0, "text": "January twenty eighteen. A record." },
+    { "id": "V06", "speaker": "T", "scene": "r18", "month": 26, "text": "Every drop, I buy cheap. Twenty eighteen, twenty twenty, twenty twenty-two." },
+    { "id": "V07", "speaker": "N", "scene": "r18", "month": 101, "text": "June twenty twenty-six. Uncle Tu's way wins, by about *two thousand dollars*." },
+
+    { "id": "V08", "speaker": "N", "scene": "r07", "month": 0, "text": "Now October two thousand seven. Another record, right before the worst crash since the Great Depression." },
+    { "id": "V09", "speaker": "M", "scene": "r07", "month": 17, "style": "sad", "text": "March two thousand nine. I bought right into the crash. I'm down by about a third." },
+    { "id": "V10", "speaker": "T", "scene": "r07", "month": 72, "text": "Twenty thirteen. A new record. I stop buying." },
+    { "id": "V11", "speaker": "N", "scene": "r07", "month": 134, "text": "And the records kept coming. For more than six years, his paychecks piled up in cash: *thirty-eight thousand dollars*." },
+    { "id": "V12", "speaker": "N", "scene": "r07", "month": 224, "text": "June twenty twenty-six. Minh has three hundred fifty-five thousand, Uncle Tu three hundred thirty. Minh's way wins, by about *twenty-five thousand*. The crash didn't cost Uncle Tu. The years in cash did." },
+
+    { "id": "V13", "speaker": "N", "scene": "every", "text": "So we ran every thirty-year window since eighteen seventy-one: *fifteen hundred and six* of them. Blue means Minh's way ended ahead. Green means Uncle Tu's did." },
+    { "id": "V14", "speaker": "N", "scene": "every", "text": "Waiting won *less than one time in four*. When it won, usually by about four thousand dollars. When it lost, usually by about *twenty-five thousand*." },
+
+    { "id": "V15", "speaker": "N", "scene": "ladder", "text": "And waiting for a bigger crash cost more. Each bar is the drop you wait for. Ten percent: about eleven thousand behind. Twenty: about twenty thousand. Thirty: about *sixty-six thousand* behind." },
+
+    { "id": "V16", "speaker": "N", "scene": "answer", "text": "So waiting for a dip won small and lost big. Records are normal: since nineteen sixty, about three months in ten set one. The boring way won: every paycheck, record or not." },
+
+    { "id": "V17", "speaker": "N", "scene": "panel", "text": "What we assumed: the S and P with dividends, no fees, no taxes. Monthly averages. Uncle Tu's cash keeps up with inflation, which is generous. The family are illustrations. The history is real. This is history, not advice." },
+    { "id": "V18", "speaker": "N", "scene": "close", "text": "Would you wait for the dip, or buy every paycheck? Tell me in the comments." }
+  ]
+}

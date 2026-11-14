@@ -1,0 +1,30 @@
+{
+  "note": "ep10 vertical (2026-11-13): the whole episode as a standalone 9:16 Short under 3 minutes (Shorts are a main product). Same model as nguyens/lines.json. Race/replay lines carry `month` = months since the 62nd birthday. Speakers: N narrator, M Minh, L Lan, T Uncle Tu. Every spoken number is checked by tools/validate-ep10-story.mjs. `*word*` = emphasis. The family are illustrations.",
+  "leadIn": 0.2,
+  "gap": { "sameScene": 0.22, "sameSpeaker": 0.16, "sceneChange": 0.45 },
+  "tail": 1.0,
+  "voices": {
+    "N": { "name": "en-US-JasonNeural", "style": "friendly", "pitch": "+10%", "rate": "+10%" },
+    "M": { "name": "en-US-GuyNeural", "style": "friendly", "pitch": "+0%", "rate": "+10%" },
+    "L": { "name": "en-US-AriaNeural", "style": "friendly", "pitch": "+0%", "rate": "+10%" },
+    "T": { "name": "en-US-DavisNeural", "style": "friendly", "pitch": "-14%", "rate": "+6%" }
+  },
+  "lines": [
+    { "id": "V01", "speaker": "N", "scene": "kitchen", "text": "Uncle Tu just turned sixty-two. Social Security: take *fourteen hundred* a month now, or wait until seventy and get *twenty-four hundred eighty*, for life." },
+    { "id": "V02", "speaker": "T", "scene": "kitchen", "text": "I take it now. Who knows if I'm still here at eighty?" },
+    { "id": "V03", "speaker": "L", "scene": "kitchen", "text": "Waiting pays almost eighty percent more." },
+    { "id": "V04", "speaker": "M", "scene": "kitchen", "text": "Or take it now, and invest it!" },
+    { "id": "V05", "speaker": "N", "scene": "race", "month": 96, "text": "So we checked, in today's money. By seventy, taking it early has collected a hundred thirty-four thousand dollars. Waiting: zero." },
+    { "id": "V06", "speaker": "N", "scene": "race", "month": 221, "text": "Then the bigger check catches up, a thousand eighty dollars a month. A little past *eighty*, they're even." },
+    { "id": "V07", "speaker": "N", "scene": "people", "text": "Social Security's own table: of a hundred men who reach sixty-two, about *six in ten* live past eighty. For women, about seven in ten." },
+    { "id": "V08", "speaker": "L", "scene": "people", "text": "Waiting isn't a bet that you live long. It's insurance, in case you do." },
+    { "id": "V09", "speaker": "N", "scene": "plan", "text": "Now Minh's idea. Invest every check from sixty-two to seventy. Then use the pile to top up to the big check, until it runs out." },
+    { "id": "V10", "speaker": "N", "scene": "r90", "month": 437, "text": "Turned sixty-two in January nineteen ninety: the nineties boom. At ninety-eight, the pile still has about *two hundred thirty-six thousand*." },
+    { "id": "V11", "speaker": "N", "scene": "r00", "month": 110, "text": "Turned sixty-two in January two thousand: the dot-com crash, then two thousand eight." },
+    { "id": "V12", "speaker": "T", "scene": "r00", "month": 287, "style": "sad", "text": "I'm almost eighty-six. *The pile is empty.*" },
+    { "id": "V13", "speaker": "N", "scene": "every", "text": "Every start since eighteen seventy-one, fourteen hundred and ten of them: the money lasted to a hundred a little under half the time. About *one in three*, it ran out before ninety." },
+    { "id": "V14", "speaker": "N", "scene": "answer", "text": "So the break-even is about eighty, and most people live past it. Investing early is a bet on the market. Waiting buys a check that rises with prices and lasts as long as you do." },
+    { "id": "V15", "speaker": "N", "scene": "panel", "text": "What we assumed: two thousand a month at sixty-seven, in today's money. Single, no taxes, paid in full as promised. Social Security's twenty twenty-three life table. The S and P with dividends. The family are illustrations. The history is real. This is history, not advice." },
+    { "id": "V16", "speaker": "N", "scene": "close", "text": "Would you take it at sixty-two, or wait until seventy? Tell me in the comments." }
+  ]
+}

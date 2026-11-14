@@ -1,0 +1,21 @@
+{
+  "note": "ep09 Short 2 (2026-11-07): about one minute, one story only: Uncle Tu's wait-for-a-10%-drop rule vs Minh buying every paycheck, starting at the October 2007 record. Built so the founder can alternate two Shorts through the week (the 2:13 vertical is Short 1). Same ledger and conventions as the long; every spoken number checked by tools/validate-ep09-story.mjs. Replay lines carry `month` (months since 2007-10). Speakers: N narrator, M Minh, T Uncle Tu. The family are illustrations.",
+  "leadIn": 0.2,
+  "gap": { "sameScene": 0.2, "sameSpeaker": 0.15, "sceneChange": 0.4 },
+  "tail": 1.0,
+  "voices": {
+    "N": { "name": "en-US-JasonNeural", "style": "friendly", "pitch": "+10%", "rate": "+10%" },
+    "M": { "name": "en-US-GuyNeural", "style": "friendly", "pitch": "+0%", "rate": "+10%" },
+    "T": { "name": "en-US-DavisNeural", "style": "friendly", "pitch": "-14%", "rate": "+6%" }
+  },
+  "lines": [
+    { "id": "S01", "speaker": "N", "scene": "kitchen", "text": "Stocks at a record. Wait for a dip? Uncle Tu keeps his *five hundred dollars* a month in cash until the market is ten percent down. Minh just buys every paycheck." },
+    { "id": "S02", "speaker": "N", "scene": "r07", "month": 0, "text": "October two thousand seven. A record, right before the worst crash since the Great Depression. Waiting should win, right?" },
+    { "id": "S03", "speaker": "T", "scene": "r07", "month": 3, "style": "cheerful", "text": "January two thousand eight. Ten percent down. *I buy.*" },
+    { "id": "S04", "speaker": "M", "scene": "r07", "month": 17, "style": "sad", "text": "March two thousand nine. I bought right into the crash. I'm down by about a third." },
+    { "id": "S05", "speaker": "T", "scene": "r07", "month": 72, "text": "Twenty thirteen. A new record. I stop buying." },
+    { "id": "S06", "speaker": "N", "scene": "r07", "month": 134, "text": "For more than six years, his paychecks piled up in cash: *thirty-eight thousand dollars*." },
+    { "id": "S07", "speaker": "N", "scene": "r07", "month": 224, "text": "June twenty twenty-six. Minh's way wins, by about *twenty-five thousand dollars*. The crash didn't cost Uncle Tu. Waiting did." },
+    { "id": "S08", "speaker": "N", "scene": "close", "text": "Every thirty-year window since eighteen seventy-one: waiting for a dip won *less than one time in four*. Would you wait? Tell me in the comments." }
+  ]
+}

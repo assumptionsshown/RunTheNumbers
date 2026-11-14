@@ -1,0 +1,17 @@
+{
+  "files": {
+    "period-life-table-2023.csv": {
+      "source": "https://www.ssa.gov/oact/STATS/table4c6.html",
+      "fetchedAt": "2026-11-13",
+      "what": "SSA Actuarial Life Table: the 2023 period life table for the Social Security area population, as used in the 2026 Trustees Report. Columns per sex: death probability qx, number of lives lx (of 100,000 born), period life expectancy ex.",
+      "how": "ssa.gov refuses plain HTTP clients (403), so the table was read from the rendered page in a browser and written row for row (ages 0-119, thousands separators removed). No values changed.",
+      "rows": 120,
+      "sha256": "a427b9b5161f532f8c157fcb622327d73a62f6756ee8d47ab98e67b2290236c3"
+    },
+    "claiming-rules.json": {
+      "source": "https://www.ssa.gov/oact/ProgData/ar_drc.html and https://www.ssa.gov/cola/",
+      "fetchedAt": "2026-11-13",
+      "what": "Benefit as a percentage of PIA by claiming age for births 1960 and later (NRA 67), and the 2027 COLA (3.6%)."
+    }
+  }
+}

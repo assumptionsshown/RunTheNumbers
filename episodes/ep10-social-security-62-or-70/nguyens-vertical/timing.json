@@ -1,0 +1,134 @@
+{
+  "seconds": 111.174,
+  "fps": 30,
+  "lines": [
+    {
+      "id": "V01",
+      "speaker": "N",
+      "scene": "kitchen",
+      "year": null,
+      "start": 0.2,
+      "end": 8.437
+    },
+    {
+      "id": "V02",
+      "speaker": "T",
+      "scene": "kitchen",
+      "year": null,
+      "start": 8.657,
+      "end": 11.707
+    },
+    {
+      "id": "V03",
+      "speaker": "L",
+      "scene": "kitchen",
+      "year": null,
+      "start": 11.927,
+      "end": 13.853
+    },
+    {
+      "id": "V04",
+      "speaker": "M",
+      "scene": "kitchen",
+      "year": null,
+      "start": 14.073,
+      "end": 15.801
+    },
+    {
+      "id": "V05",
+      "speaker": "N",
+      "scene": "race",
+      "year": null,
+      "start": 16.251,
+      "end": 24.248
+    },
+    {
+      "id": "V06",
+      "speaker": "N",
+      "scene": "race",
+      "year": null,
+      "start": 24.408,
+      "end": 29.636
+    },
+    {
+      "id": "V07",
+      "speaker": "N",
+      "scene": "people",
+      "year": null,
+      "start": 30.086,
+      "end": 38.003
+    },
+    {
+      "id": "V08",
+      "speaker": "L",
+      "scene": "people",
+      "year": null,
+      "start": 38.223,
+      "end": 42.343
+    },
+    {
+      "id": "V09",
+      "speaker": "N",
+      "scene": "plan",
+      "year": null,
+      "start": 42.793,
+      "end": 50.547
+    },
+    {
+      "id": "V10",
+      "speaker": "N",
+      "scene": "r90",
+      "year": null,
+      "start": 50.997,
+      "end": 58.486
+    },
+    {
+      "id": "V11",
+      "speaker": "N",
+      "scene": "r00",
+      "year": null,
+      "start": 58.936,
+      "end": 63.307
+    },
+    {
+      "id": "V12",
+      "speaker": "T",
+      "scene": "r00",
+      "year": null,
+      "start": 63.527,
+      "end": 66.779
+    },
+    {
+      "id": "V13",
+      "speaker": "N",
+      "scene": "every",
+      "year": null,
+      "start": 67.229,
+      "end": 76.013
+    },
+    {
+      "id": "V14",
+      "speaker": "N",
+      "scene": "answer",
+      "year": null,
+      "start": 76.463,
+      "end": 86.16
+    },
+    {
+      "id": "V15",
+      "speaker": "N",
+      "scene": "panel",
+      "year": null,
+      "start": 86.61,
+      "end": 105.363
+    },
+    {
+      "id": "V16",
+      "speaker": "N",
+      "scene": "close",
+      "year": null,
+      "start": 105.813,
+      "end": 110.174
+    }
+  ]
+}

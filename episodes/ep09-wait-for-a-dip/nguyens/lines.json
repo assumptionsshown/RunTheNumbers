@@ -1,0 +1,62 @@
+{
+  "note": "ep09 'The Nguyens: Wait for a Dip?' (2026-11-07). Minh's first 401(k) paycheck, $500 a month, while stocks set record after record. Uncle Tu's rule: hold the $500 in cash while the market is within 10% of its record (monthly average, nominal S&P price); when it is at least 10% below, invest every saved dollar. Minh buys every paycheck. Two real replays to June 2026 (start 2018-01 and 2007-10, both record months), then every 30-year window since 1871. Real dollars throughout: $500 of today's money. Every spoken number is checked by tools/validate-ep09-story.mjs. Replay lines carry `month` (months since the start) and scene r18 or r07. Speakers: N narrator, M Minh, L Lan, T Uncle Tu. Bin stays silent: his one line is a bubble. `*word*` = emphasis. The family are illustrations.",
+  "leadIn": 0.5,
+  "gap": { "sameScene": 0.3, "sameSpeaker": 0.22, "sceneChange": 0.8 },
+  "tail": 1.2,
+  "voices": {
+    "N": { "name": "en-US-JasonNeural", "style": "friendly", "pitch": "+10%", "rate": "+8%" },
+    "M": { "name": "en-US-GuyNeural", "style": "friendly", "pitch": "+0%", "rate": "+8%" },
+    "L": { "name": "en-US-AriaNeural", "style": "friendly", "pitch": "+0%", "rate": "+8%" },
+    "T": { "name": "en-US-DavisNeural", "style": "friendly", "pitch": "-14%", "rate": "+4%" }
+  },
+  "lines": [
+    { "id": "N00", "speaker": "N", "scene": "kitchen", "text": "Minh just got his first paycheck with a four-oh-one-k. *Five hundred dollars* a month goes into stocks. But stocks have hit record after record this year." },
+    { "id": "T01", "speaker": "T", "scene": "kitchen", "text": "Never buy at the top. *Wait for a drop.*" },
+    { "id": "M01", "speaker": "M", "scene": "kitchen", "text": "How long do I wait?" },
+    { "id": "T02", "speaker": "T", "scene": "kitchen", "text": "Until the market is *ten percent* below its record. Then you buy, with everything you saved." },
+    { "id": "L01", "speaker": "L", "scene": "kitchen", "text": "And if it never drops?" },
+    { "id": "T03", "speaker": "T", "scene": "kitchen", "text": "It always drops." },
+    { "id": "N01", "speaker": "N", "scene": "kitchen", "after": 0.9, "text": "So here's Uncle Tu's rule. While the market is near its record, the five hundred waits in cash. When the market is at least ten percent below its record, every saved dollar goes in. Minh just buys, every paycheck, record or not. We even let Uncle Tu's cash keep up with inflation, which is generous. Let's replay both on *real history*, in today's money." },
+
+    { "id": "N02", "speaker": "N", "scene": "r18", "month": 0, "text": "January twenty eighteen. Stocks at a record. On the left, Uncle Tu's way. On the right, Minh's way. Same five hundred a month." },
+    { "id": "T04", "speaker": "T", "scene": "r18", "month": 11, "text": "December twenty eighteen. The market is down more than ten percent. I buy, with *six thousand dollars* of cash." },
+    { "id": "T05", "speaker": "T", "scene": "r18", "month": 26, "text": "March twenty twenty. The COVID crash. I buy again: *seven thousand*." },
+    { "id": "M02", "speaker": "M", "scene": "r18", "month": 26, "text": "And I just kept buying. Every month." },
+    { "id": "T06", "speaker": "T", "scene": "r18", "month": 52, "text": "Twenty twenty-two. Another drop. *Twelve thousand* goes in." },
+    { "id": "N03", "speaker": "N", "scene": "r18", "month": 101, "text": "June twenty twenty-six. Uncle Tu has *eighty-seven thousand*. Minh, eighty-five. Uncle Tu's way wins, by about *two thousand dollars*." },
+    { "id": "T07", "speaker": "T", "scene": "r18", "month": 101, "style": "cheerful", "text": "See? Never buy at the top." },
+
+    { "id": "N04", "speaker": "N", "scene": "r07", "month": 0, "text": "Now a scarier start. October two thousand seven. Another record. And the worst crash since the Great Depression is coming." },
+    { "id": "T08", "speaker": "T", "scene": "r07", "month": 3, "style": "cheerful", "text": "January two thousand eight. Ten percent down. *I buy.*" },
+    { "id": "N05", "speaker": "N", "scene": "r07", "month": 17, "text": "And it kept falling. March two thousand nine: the market is about *half* its record. Both have put in eighty-five hundred dollars, and both have less than six thousand left. Minh's way is down by about a third. Buying right before a crash really hurts. Uncle Tu's fear is real." },
+    { "id": "M03", "speaker": "M", "scene": "r07", "month": 17, "style": "sad", "text": "Every paycheck, I bought right into the crash." },
+    { "id": "T09", "speaker": "T", "scene": "r07", "month": 72, "text": "Twenty thirteen. A new record. *I stop buying.* Never buy at the top." },
+    { "id": "N06", "speaker": "N", "scene": "r07", "month": 134, "text": "And then the market just kept setting records. For more than six years, Uncle Tu's paychecks piled up in cash: *thirty-eight thousand dollars*." },
+    { "id": "T10", "speaker": "T", "scene": "r07", "month": 135, "text": "December twenty eighteen. Finally, a drop. Everything goes in." },
+    { "id": "N07", "speaker": "N", "scene": "r07", "month": 224, "text": "June twenty twenty-six. Minh has *three hundred fifty-five thousand*. Uncle Tu, three hundred thirty. Starting right before the worst crash in a lifetime, Minh's way wins, by about *twenty-five thousand dollars*." },
+    { "id": "T11", "speaker": "T", "scene": "r07", "month": 224, "style": "sad", "text": "I waited for the drop. The drop came. And I still lost?" },
+    { "id": "N08", "speaker": "N", "scene": "r07", "month": 224, "text": "The crash didn't cost him. The six years in cash did." },
+
+    { "id": "L02", "speaker": "L", "scene": "why", "text": "So one start, Uncle Tu wins by two thousand. The other, Minh wins by twenty-five." },
+    { "id": "M04", "speaker": "M", "scene": "why", "text": "Two picks don't prove anything." },
+    { "id": "T12", "speaker": "T", "scene": "why", "text": "Fine. Check them all." },
+
+    { "id": "N09", "speaker": "N", "scene": "every", "text": "So we ran all of it. Every month since eighteen seventy-one where thirty years of paychecks could start and finish: *fifteen hundred and six* of them. After thirty years, buying every paycheck typically ended with about five hundred sixty thousand dollars. Blue means Minh's way ended ahead. Green means Uncle Tu's did." },
+    { "id": "N10", "speaker": "N", "scene": "every", "text": "Uncle Tu's way won *less than one time in four*. And look at the size. When it won, it usually won by about *four thousand dollars*. When it lost, it usually lost by about *twenty-five thousand*. Its best start ever won about seventy-five hundred. Its worst lost about *a hundred sixty-four thousand*." },
+
+    { "id": "T13", "speaker": "T", "scene": "ladder", "text": "Ten percent is too small. Wait for a *real* crash." },
+    { "id": "N11", "speaker": "N", "scene": "ladder", "text": "We tried that too. Each bar is a bigger drop to wait for. The longer the bar, the more the wait cost, for the typical start. Wait for ten percent: about *eleven thousand dollars* behind. Twenty percent: about twenty thousand. Thirty percent, a real crash: about *sixty-six thousand* behind. Waiting for thirty, the money sat in cash about eighty-five percent of the time." },
+
+    { "id": "N12", "speaker": "N", "scene": "bin", "after": 1.2, "text": "And Bin, who hasn't said a word this whole time, shakes his piggy bank." },
+    { "id": "L03", "speaker": "L", "scene": "bin", "style": "cheerful", "text": "Bin puts his allowance in every Saturday. He doesn't read the news." },
+    { "id": "M05", "speaker": "M", "scene": "bin", "style": "cheerful", "text": "Bin's way is my way." },
+    { "id": "T14", "speaker": "T", "scene": "bin", "text": "Hmph. The boy is lucky." },
+
+    { "id": "N13", "speaker": "N", "scene": "answer", "text": "So what does this mean for you? *Lesson one.* Records are normal. Since nineteen sixty, about *three months in ten* set a new one. A rule that won't buy at a record sits out a lot of paychecks." },
+    { "id": "N14", "speaker": "N", "scene": "answer", "text": "*Lesson two.* Waiting for a dip won small and lost big. It won less than one time in four, usually by about four thousand dollars. When it lost, usually by about twenty-five thousand." },
+    { "id": "N15", "speaker": "N", "scene": "answer", "text": "*Lesson three.* The bigger the crash you wait for, the more it cost. In this history, the boring way won: every paycheck, every month, record or not." },
+
+    { "id": "N16", "speaker": "N", "scene": "panel", "text": "Here's what we assumed. Stocks are the S and P with dividends, no fees and no taxes, like inside a four-oh-one-k. Five hundred a month in today's money, never skipped. Drops are measured on monthly averages, so Uncle Tu checks once a month. His cash keeps up with inflation, which is generous. The thirty-year windows overlap and share eras. The family are illustrations. The history is real. This is history, not advice." },
+    { "id": "N17", "speaker": "N", "scene": "close", "text": "Would you wait for the dip, or buy every paycheck? Tell me in the comments." }
+  ]
+}

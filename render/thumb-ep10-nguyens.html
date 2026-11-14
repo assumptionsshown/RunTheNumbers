@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Thumbnail: ep10 The Nguyens</title>
+<style>
+  html, body { margin: 0; background: #fbf3df; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1280" height="720"></canvas>
+<script type="module">
+// Thumbnails for ep10 "Social Security at 62 or 70?" (2026-11-13), three for Test & Compare.
+// Same kit and ledger as render/ep10-nguyens.html; every figure is read from the ledger, which
+// refuses to load if it disagrees with the scripts (validated by tools/validate-ep10-story.mjs).
+//   ?anim=a  "62 OR 70?" Uncle Tu's birthday, $1,400 vs $2,480
+//   ?anim=b  "WILL YOU LIVE PAST 80?" break-even ~80, 6 in 10 men do (100 icons)
+//   ?anim=c  "TOOK IT AT 62 + INVESTED IT" the Jan 2000 pile, "EMPTY BY 86" (Dec 2023, age 85 y 11 m)
+import { loadModel, makeKit, C, CAST, usd } from "./ep10-kit.js";
+const which = new URLSearchParams(location.search).get("anim") ?? "a";
+const W = 1280, H = 720;
+const ctx = document.getElementById("c").getContext("2d");
+const M = await loadModel("..");
+const { text, shape, person, cake, icon, stamp } = makeKit(ctx, W, H);
+const big = (s, x, y, size, fill, stroke = 14) => { ctx.font = `900 ${size}px "Segoe UI", system-ui, sans-serif`; ctx.textAlign = "center"; ctx.lineJoin = "round"; ctx.lineWidth = stroke; ctx.strokeStyle = "#ffffff"; ctx.strokeText(s, x, y); ctx.fillStyle = fill; ctx.fillText(s, x, y); };
+
+if (which === "a") {
+  ctx.fillStyle = C.tuTint; ctx.fillRect(0, 0, W / 2, H); ctx.fillStyle = C.lanTint; ctx.fillRect(W / 2, 0, W / 2, H);
+  shape(null, () => { ctx.moveTo(W / 2, 0); ctx.lineTo(W / 2, H); }, 8);
+  person(640, 900, { ...CAST.T, s: 1.25, mood: 0 });
+  cake(640, 690, 0.75, 0);
+  shape(C.gold, () => ctx.roundRect(240, 24, 800, 150, 40), 8);
+  text("62 OR 70?", 640, 136, { size: 112, weight: 900 });
+  big("AT 62", 250, 300, 70, C.tuDark); big(usd(M.EARLY), 250, 410, 104, C.tuDark);
+  big("AT 70", 1030, 300, 70, C.lanDark); big(usd(M.LATE), 1030, 410, 104, C.lanDark);
+  big("a month", 250, 480, 40, C.tuDark, 10); big("a month", 1030, 480, 40, C.lanDark, 10);
+} else if (which === "b") {
+  ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
+  const alive = Math.round(100 * M.surv("m", 80));
+  for (let j = 0; j < 100; j++) { const r = Math.floor(j / 10), c = j % 10; icon(80 + c * 56, 222 + r * 52, 36, j < alive ? C.tu : "#ddd5c3", 1); }
+  shape(C.gold, () => ctx.roundRect(40, 20, 1200, 120, 36), 8);
+  text("WILL YOU LIVE PAST 80?", 640, 108, { size: 84, weight: 900 });
+  big("BREAK-EVEN", 960, 270, 64, C.ink); big("≈ 80", 960, 400, 140, C.lanDark);
+  big("6 IN 10 MEN", 960, 520, 70, C.tuDark); big("live past it", 960, 590, 52, C.tuDark, 10);
+} else {
+  ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
+  const rp = M.R.r00, n = rp.runout, x0 = 70, x1 = 1210, y0 = 260, y1 = 640, MAXV = 170000;
+  const X = (k) => x0 + (x1 - x0) * k / n, Y = (v) => y1 - (y1 - y0) * v / MAXV;
+  ctx.lineWidth = 14; ctx.strokeStyle = C.minhDark; ctx.lineJoin = "round"; ctx.beginPath();
+  for (let k = 0; k <= n; k++) { const x = X(k), y = Y(rp.pile[k]); k ? ctx.lineTo(x, y) : ctx.moveTo(x, y); } ctx.stroke();
+  shape(C.red, () => ctx.arc(X(n), Y(0), 22, 0, Math.PI * 2), 7);
+  text("62", X(0), 690, { size: 40, fill: C.muted }); text("86", X(n) - 10, 690, { size: 40, fill: C.muted });
+  big("TOOK IT AT 62 + INVESTED IT", 640, 100, 66, C.minhDark);
+  big("(turned 62 in Jan 2000)", 640, 160, 40, C.muted, 10);
+  stamp(900, 470, "EMPTY BY 86", C.red, -0.06, 1, 84);
+}
+window.FRAME_COUNT = 1;
+window.renderFrame = () => true;
+document.documentElement.dataset.ready = "1";
+</script>
+</body>
+</html>

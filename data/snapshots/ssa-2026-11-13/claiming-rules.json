@@ -1,0 +1,16 @@
+{
+  "source": "https://www.ssa.gov/oact/ProgData/ar_drc.html",
+  "fetchedAt": "2026-11-13",
+  "note": "Benefit as a percentage of PIA by claiming age, row 'Year of birth 1960 and later' (normal retirement age 67, 8% delayed credit per year). Ages 68 and 69 are not columns on the SSA page; they follow from the 8%/year credit (2/3% per month) and are derived, not copied.",
+  "birthYears": "1960 and later",
+  "normalRetirementAge": 67,
+  "delayedCreditPerYear": 8,
+  "percentOfPIA": { "62": 70, "63": 75, "64": 80, "65": 86.6667, "66": 93.3333, "67": 100, "68": 108, "69": 116, "70": 124 },
+  "copiedFromPage": ["62", "63", "64", "65", "66", "67", "70"],
+  "cola2027": {
+    "source": "https://www.ssa.gov/cola/",
+    "fetchedAt": "2026-11-13",
+    "percent": 3.6,
+    "text": "Social Security and Supplemental Security Income (SSI) benefits for 76 million Americans will increase 3.6 percent in 2027."
+  }
+}

@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>ep09 vertical: Wait for a Dip?</title>
+<style>
+  html, body { margin: 0; background: #fbf3df; overflow: hidden; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<canvas id="c" width="1080" height="1920"></canvas>
+<script type="module">
+// ep09 vertical (2026-11-07), 1080x1920: the whole episode as a standalone Short under
+// 3 minutes. Same kit and same ledger as render/ep09-nguyens.html, recomposed for a phone:
+// the important parts stay above y=1620 and left of x=960, clear of the Shorts overlay.
+// Spoken numbers are checked by tools/validate-ep09-story.mjs. renderFrame(i) is pure.
+const W = 1080, H = 1920;
+const ctx = document.getElementById("c").getContext("2d");
+const load = async (p) => (await fetch(p)).json();
+const EP = "../episodes/ep09-wait-for-a-dip/nguyens-vertical";
+const [timing, script, mouth] = await Promise.all([load(`${EP}/timing.json`), load(`${EP}/lines.json`), load(`${EP}/mouth.json`)]);
+const FPS = mouth.fps;
+const parse = (t) => { const [h, ...rows] = t.trim().split(/\r?\n/); const c = h.split(","); return rows.map((r) => Object.fromEntries(r.split(",").map((v, i) => [c[i], v]))); };
+const shCsv = await fetch("../data/snapshots/shiller-2026-07-26/shiller-monthly.csv").then((r) => r.text()).then(parse);
+const SH = shCsv.filter((r) => r.cpi !== "" && Number.isFinite(+r.cpi) && r.price !== "").map((r) => ({ m: r.date, p: +r.price, real: +r.realTotalReturnPrice }));
+{ let hi = 0; for (const r of SH) { hi = Math.max(hi, r.p); r.hi = hi; r.dd = r.p / hi - 1; } }
+const AT = new Map(SH.map((r, i) => [r.m, i])), LAST = SH.length - 1, PAY = 500;
+function run(i0, n, X, wantPath) {
+  let minh = 0, stock = 0, cash = 0, cashMonths = 0;
+  const path = wantPath ? [{ minh: 0, stock: 0, cash: 0, put: 0 }] : null;
+  for (let k = 0; k < n; k++) {
+    const g = SH[i0 + k + 1].real / SH[i0 + k].real;
+    minh = (minh + PAY) * g; cash += PAY; let put = 0;
+    if (SH[i0 + k].dd <= -X) { put = cash; stock += cash; cash = 0; }
+    if (cash > 0) cashMonths++;
+    stock *= g;
+    if (wantPath) path.push({ minh, stock, cash, put });
+  }
+  return { m: SH[i0].m, i0, n, path, minh, tu: stock + cash, gap: stock + cash - minh, cashMonths };
+}
+const R = { r18: run(AT.get("2018-01"), LAST - AT.get("2018-01"), 0.1, true), r07: run(AT.get("2007-10"), LAST - AT.get("2007-10"), 0.1, true) };
+const median = (xs) => { const s = [...xs].sort((a, b) => a - b), h = 0.5 * (s.length - 1), lo = Math.floor(h), hi = Math.ceil(h); return s[lo] + (h - lo) * (s[hi] - s[lo]); };
+const windows = (X) => { const o = []; for (let i = 0; i + 360 <= LAST; i++) o.push(run(i, 360, X, false)); return o; };
+const ALL = { 10: windows(0.1), 20: windows(0.2), 30: windows(0.3) };
+const A10 = ALL[10], WINS = A10.filter((x) => x.gap > 0).map((x) => x.gap), LOSSES = A10.filter((x) => x.gap <= 0).map((x) => -x.gap);
+const TYP = Object.fromEntries([10, 20, 30].map((X) => [X, median(ALL[X].map((x) => x.gap))]));
+const claim = (ok, what) => { if (!ok) throw new Error(`ep09-vertical: claim false: ${what}`); };
+const K = (v) => Math.round(v / 1000);
+claim(K(R.r18.gap) === 2 && K(R.r07.minh) === 355 && K(R.r07.tu) === 330 && K(-R.r07.gap) === 25, "replays");
+claim(R.r07.path[134].cash === 38000, "the cash pile");
+claim(A10.length === 1506 && WINS.length / A10.length < 0.25 && K(median(WINS)) === 4 && K(median(LOSSES)) === 25, "every window");
+claim(K(-TYP[10]) === 11 && K(-TYP[20]) === 20 && K(-TYP[30]) === 66, "ladder");
+claim(timing.seconds < 180, "must fit a Short");
+
+// ---- timing
+const L = Object.fromEntries(timing.lines.map((l) => [l.id, l]));
+const TEXT = Object.fromEntries(script.lines.map((l) => [l.id, l.text.replace(/\*/g, "")]));
+const MONTH = Object.fromEntries(script.lines.map((l) => [l.id, l.month ?? null]));
+const tw = (id, phrase) => { const l = L[id], k = TEXT[id].indexOf(phrase); if (k < 0) throw new Error(`${id}: no "${phrase}"`); return l.start + (l.end - l.start) * k / TEXT[id].length; };
+const sceneOf = (t) => { let s = timing.lines[0].scene; for (const l of timing.lines) if (t >= l.start - 0.2) s = l.scene; return s; };
+const speaking = (t) => timing.lines.find((l) => t >= l.start && t <= l.end + 0.05) ?? null;
+const lineAt = (t) => { let c = null; for (const l of timing.lines) if (t >= l.start - 0.2) c = l; return c; };
+const clamp01 = (x) => Math.max(0, Math.min(1, x));
+const fade = (t, at, d = 0.3) => clamp01((t - at) / d);
+const ease = (x) => x * x * (3 - 2 * x);
+const keysFor = (scene) => { const k = []; let prev = 0; for (const l of timing.lines) { if (l.scene !== scene || MONTH[l.id] == null) continue; const mo = MONTH[l.id]; if (mo !== prev) k.push({ from: prev, to: mo, at: l.start, d: Math.min(3.5, 1.2 + (mo - prev) / 40) }); prev = mo; } return k; };
+const KEYS = { r18: keysFor("r18"), r07: keysFor("r07") };
+function monthAt(scene, t) { let m = 0; for (const k of KEYS[scene]) { if (t < k.at) break; m = k.from + (k.to - k.from) * ease(clamp01((t - k.at) / k.d)); } return m; }
+const valAt = (path, m, key) => { const a = Math.floor(m), b = Math.min(path.length - 1, a + 1), f = m - a; return path[a][key] * (1 - f) + path[b][key] * f; };
+const MON = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const label = (m) => { const [y, mo] = m.split("-"); return `${MON[+mo - 1]} ${y}`; };
+
+// ---- kit
+const C = { paper: "#fbf3df", ink: "#1d1d1f", skin: "#efc39c", hair: "#2a2522", grey: "#9a9590", muted: "#7a7468", red: "#e5646e", green: "#4caf5c",
+  gold: "#ffcf4a", mint: "#e3f1ea", tuTint: "#eaf0dc", minh: "#5b8fc7", lan: "#e98a7a", bin: "#f2c14e", tu: "#8aa05a", tuDark: "#4f6330", minhDark: "#2e5d8f", lanDark: "#b0574a", cash: "#d9e8c4" };
+const FONT = '"Segoe UI", system-ui, sans-serif', MONO = '"Cascadia Mono", Consolas, monospace';
+function text(s, x, y, { size = 48, fill = C.ink, align = "center", weight = 800, mono = false, alpha = 1 } = {}) {
+  if (alpha <= 0.01) return;
+  ctx.globalAlpha = Math.min(1, alpha); ctx.font = `${weight} ${size}px ${mono ? MONO : FONT}`;
+  ctx.fillStyle = fill; ctx.textAlign = align; ctx.fillText(s, x, y); ctx.globalAlpha = 1;
+}
+function shape(fill, draw, lw = 7) {
+  ctx.beginPath(); draw();
+  if (fill) { ctx.fillStyle = fill; ctx.fill(); }
+  if (lw) { ctx.lineWidth = lw; ctx.strokeStyle = C.ink; ctx.lineJoin = "round"; ctx.stroke(); }
+}
+const usd = (v) => `$${Math.round(v).toLocaleString("en-US")}`;
+const k$ = (v) => `$${Math.round(v / 1000).toLocaleString("en-US")}k`;
+function wrap(s, size, weight, maxW) {
+  ctx.font = `${weight} ${size}px ${FONT}`;
+  const rows = []; let row = "";
+  for (const w of s.split(" ")) { const t = row ? `${row} ${w}` : w; if (ctx.measureText(t).width > maxW && row) { rows.push(row); row = w; } else row = t; }
+  rows.push(row); return rows;
+}
+function person(cx, footY, o) {
+  ctx.save(); ctx.translate(cx, footY); ctx.scale(o.s, o.s);
+  if (o.hair === "long") shape(C.hair, () => ctx.roundRect(-80, -400, 160, 170, 50), 6);
+  if (o.shorts) {
+    shape(C.skin, () => { ctx.rect(-40, -100, 32, 100); ctx.rect(8, -100, 32, 100); }, 6);
+    shape("#5a6b8c", () => ctx.roundRect(-50, -150, 100, 66, 14), 6);
+  } else shape("#4a4f5c", () => { ctx.rect(-45, -112, 38, 112); ctx.rect(7, -112, 38, 112); }, 6);
+  const bw = o.belly ? 150 : 132;
+  shape(o.shirt, () => ctx.roundRect(-bw / 2, -258, bw, 156, 30));
+  shape(o.shirt, () => ctx.roundRect(-bw / 2 - 30, -244, 34, 114, 16), 6);
+  shape(o.shirt, () => ctx.roundRect(bw / 2 - 4, -244, 34, 114, 16), 6);
+  if (o.collar) shape("#ffffff", () => { ctx.moveTo(-26, -258); ctx.lineTo(0, -232); ctx.lineTo(26, -258); ctx.closePath(); }, 5);
+  if (o.pocket) shape(null, () => ctx.rect(14, -228, 30, 28), 4);
+  shape(C.skin, () => ctx.ellipse(0, -325, 62, 72, 0, 0, Math.PI * 2));
+  if (o.hair === "short") shape(C.hair, () => { ctx.moveTo(-64, -318); ctx.ellipse(0, -330, 66, 76, 0, Math.PI, 0); ctx.lineTo(64, -318); ctx.quadraticCurveTo(40, -372, -10, -366); ctx.quadraticCurveTo(-48, -362, -64, -318); ctx.closePath(); }, 6);
+  else if (o.hair === "long") shape(C.hair, () => { ctx.moveTo(-70, -300); ctx.ellipse(0, -330, 72, 82, 0, Math.PI, 0); ctx.lineTo(70, -300); ctx.quadraticCurveTo(58, -360, 10, -362); ctx.quadraticCurveTo(-40, -352, -70, -300); ctx.closePath(); }, 6);
+  else if (o.hair === "bowl") shape(C.hair, () => { ctx.moveTo(-68, -320); ctx.ellipse(0, -330, 70, 80, 0, Math.PI, 0); ctx.lineTo(68, -320); ctx.lineTo(60, -352); ctx.lineTo(-60, -352); ctx.closePath(); }, 6);
+  else if (o.hair === "receding") {
+    shape(C.grey, () => ctx.ellipse(-56, -340, 14, 30, 0.15, 0, Math.PI * 2), 5);
+    shape(C.grey, () => ctx.ellipse(56, -340, 14, 30, -0.15, 0, Math.PI * 2), 5);
+    shape(C.grey, () => ctx.ellipse(0, -392, 34, 10, 0, 0, Math.PI * 2), 4);
+  }
+  ctx.lineWidth = 5; ctx.strokeStyle = C.ink;
+  if (o.glasses) { ctx.beginPath(); ctx.arc(-24, -330, 16, 0, Math.PI * 2); ctx.moveTo(40, -330); ctx.arc(24, -330, 16, 0, Math.PI * 2); ctx.moveTo(-8, -330); ctx.lineTo(8, -330); ctx.stroke(); }
+  ctx.fillStyle = C.ink; ctx.beginPath(); ctx.arc(-24, -330, 6, 0, Math.PI * 2); ctx.arc(24, -330, 6, 0, Math.PI * 2); ctx.fill();
+  if (o.mustache) shape(C.grey, () => ctx.roundRect(-26, -305, 52, 11, 5), 4);
+  if ((o.mouth ?? 0) > 0.05) shape("#7a2e2e", () => ctx.ellipse(0, -294, 14, 4 + 14 * o.mouth, 0, 0, Math.PI * 2), 5);
+  else { ctx.lineWidth = 6; ctx.strokeStyle = C.ink; ctx.beginPath(); ctx.arc(0, -304, 22, 0.15 * Math.PI, 0.85 * Math.PI); ctx.stroke(); }
+  ctx.restore();
+}
+const CAST = {
+  L: { x: 160, s: 0.8, shirt: C.lan, hair: "long" },
+  M: { x: 400, s: 0.84, shirt: C.minh, hair: "short", glasses: true, collar: true },
+  BIN: { x: 630, s: 0.6, shirt: C.bin, hair: "bowl", shorts: true },
+  T: { x: 860, s: 0.82, shirt: C.tu, hair: "receding", glasses: true, mustache: true, belly: true, pocket: true },
+};
+function bubble(cx, bottomY, s, colour, alpha, tail = true) {
+  if (alpha <= 0.01) return;
+  const rows = s.split("|").flatMap((p) => wrap(p, 40, 800, 470));
+  ctx.font = `800 40px ${FONT}`;
+  const bw = Math.max(...rows.map((r) => ctx.measureText(r).width)) + 60, bh = rows.length * 50 + 36;
+  const bx = Math.max(20, Math.min(W - bw - 60, cx - bw / 2)), by = bottomY - bh - (tail ? 26 : 0);
+  ctx.globalAlpha = alpha; shape("#ffffff", () => ctx.roundRect(bx, by, bw, bh, 26), 6);
+  if (tail) {
+    shape("#ffffff", () => { ctx.moveTo(cx - 16, by + bh - 3); ctx.lineTo(cx, by + bh + 24); ctx.lineTo(cx + 16, by + bh - 3); }, 0);
+    ctx.lineWidth = 6; ctx.strokeStyle = C.ink; ctx.beginPath(); ctx.moveTo(cx - 16, by + bh); ctx.lineTo(cx, by + bh + 24); ctx.lineTo(cx + 16, by + bh); ctx.stroke();
+  }
+  ctx.globalAlpha = 1;
+  rows.forEach((r, k) => text(r, bx + bw / 2, by + 56 + k * 50, { size: 40, fill: colour, alpha }));
+}
+function card(rows, y, alpha, w = 960) {
+  if (alpha <= 0.01) return 0;
+  const laid = rows.flatMap(([s, fill, size]) => wrap(s, size ?? 48, 800, w - 70).map((r) => [r, fill ?? C.ink, size ?? 48]));
+  const h = 44 + laid.reduce((a, [, , size]) => a + size + 22, 0), x = (W - w) / 2;
+  ctx.globalAlpha = alpha; shape("#ffffff", () => ctx.roundRect(x, y, w, h, 30), 7); ctx.globalAlpha = 1;
+  let yy = y + 24;
+  for (const [s, fill, size] of laid) { yy += size + 22; text(s, W / 2, yy - 10, { size, fill, alpha }); }
+  return h;
+}
+function moneyBag(cx, footY, v, max) {
+  if (v > 50) {
+    const r = 16 + 74 * Math.sqrt(Math.min(v, max) / max);
+    shape("#9ccf7e", () => ctx.ellipse(cx, footY - r, r, r, 0, 0, Math.PI * 2));
+    shape("#9ccf7e", () => { ctx.moveTo(cx - r * 0.3, footY - 2 * r + 6); ctx.lineTo(cx, footY - 2 * r - r * 0.35); ctx.lineTo(cx + r * 0.3, footY - 2 * r + 6); ctx.closePath(); }, 6);
+    text("$", cx, footY - r + r * 0.35, { size: Math.max(24, r), fill: "#2f6b2a" });
+  }
+}
+function cashPile(cx, footY, v) {
+  const n = Math.ceil(v / 2000 - 1e-9);
+  for (let j = 0; j < n; j++) {
+    const row = Math.floor(j / 4), col = j % 4;
+    shape(C.cash, () => ctx.roundRect(cx - 140 + col * 68 + (row % 2) * 8, footY - 20 - row * 22, 64, 18, 4), 4);
+  }
+}
+function pill(s, colour, alpha, y, bg = "#ffffff", size = 54) {
+  if (alpha <= 0.01) return;
+  ctx.font = `900 ${size}px ${FONT}`; const w = ctx.measureText(s).width + 70;
+  ctx.globalAlpha = alpha; shape(bg, () => ctx.roundRect((W - w) / 2, y - 62, w, 124, 40), 8); ctx.globalAlpha = 1;
+  text(s, W / 2, y + size * 0.36, { size, fill: colour, weight: 900, alpha });
+}
+const footer = (s) => { text(s, W / 2, 1690, { size: 25, fill: C.muted, weight: 600 }); };
+const mouthOf = (who, i, t) => { const a = speaking(t); return a && a.speaker === who ? mouth.open[Math.min(i, mouth.open.length - 1)] : 0; };
+
+// ---- scenes
+const KITCHEN_BUBBLE = { V02: "Never buy at the top!", V03: "I'll buy every paycheck." };
+function kitchen(t, i, dim = 0) {
+  ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
+  ctx.fillStyle = "#efe3c6"; ctx.fillRect(0, 1500, W, 420);
+  shape(null, () => { ctx.moveTo(0, 1500); ctx.lineTo(W, 1500); }, 6);
+  shape("#c99a6b", () => ctx.roundRect(250, 1330, 580, 34, 12), 6);
+  shape("#a77a4f", () => { ctx.rect(290, 1364, 24, 136); ctx.rect(766, 1364, 24, 136); }, 6);
+  for (const [k, o] of Object.entries(CAST)) person(o.x, 1500, { ...o, mouth: mouthOf(k === "BIN" ? "X" : k, i, t) });
+  text("LAN", CAST.L.x, 1556, { size: 34 }); text("MINH", CAST.M.x, 1556, { size: 34 });
+  text("BIN", CAST.BIN.x, 1556, { size: 34 }); text("UNCLE TU", CAST.T.x, 1556, { size: 34 });
+  if (dim > 0) { ctx.fillStyle = `rgba(251,243,223,${dim})`; ctx.fillRect(0, 0, W, 1600); }
+  const act = speaking(t);
+  if (act && KITCHEN_BUBBLE[act.id] && CAST[act.speaker]) {
+    const o = CAST[act.speaker];
+    bubble(o.x, 1500 - o.s * 420, KITCHEN_BUBBLE[act.id], "#1f3c63", fade(t, act.start, 0.15));
+  }
+}
+function sceneKitchen(t, i) {
+  kitchen(t, i);
+  // no fade on the hook: the first frame has to read on its own
+  shape(C.gold, () => ctx.roundRect(50, 120, 980, 150, 44), 8);
+  text("WAIT FOR A DIP?", W / 2, 222, { size: 84, weight: 900 });
+  const out = 1 - fade(t, L.V04.start - 0.2, 0.25);
+  card([["stocks: record after record", C.red, 54], ["$500 a month to invest", C.minhDark, 54]], 310, out);
+  card([["UNCLE TU (top)", C.tuDark, 52], ["near the record: keep the $500 in cash", C.ink, 42], ["10% below the record: buy with all of it", C.ink, 42],
+    ["MINH (bottom)", C.minhDark, 52], ["buys every paycheck, record or not", C.ink, 42]], 310, fade(t, L.V04.start, 0.3));
+}
+function marketStrip(rp, m, k, x0, y0, w, h) {
+  const n = rp.n, ps = SH.slice(rp.i0, rp.i0 + n + 1);
+  const lo = Math.min(...ps.map((r) => r.p)) * 0.9, hi = Math.max(...ps.map((r) => r.hi)) * 1.04;
+  const X = (j) => x0 + w * j / n, Y = (p) => y0 + h - h * (Math.log(p) - Math.log(lo)) / (Math.log(hi) - Math.log(lo));
+  shape("#ffffff", () => ctx.roundRect(x0 - 20, y0 - 56, w + 40, h + 80, 18), 5);
+  text("THE MARKET", x0, y0 - 18, { size: 28, fill: C.muted, align: "left", weight: 800 });
+  for (let j = 0; j <= Math.min(n, m); j++) if (ps[j].dd <= -0.1) { ctx.fillStyle = "rgba(138,160,90,0.28)"; ctx.fillRect(X(j) - w / n / 2, y0, w / n + 0.5, h); }
+  const upto = k;
+  ctx.setLineDash([10, 8]); ctx.lineWidth = 3; ctx.strokeStyle = C.red; ctx.beginPath();
+  for (let j = 0; j <= upto; j++) { const x = X(j), y = Y(ps[j].hi); j ? ctx.lineTo(x, y) : ctx.moveTo(x, y); } ctx.stroke(); ctx.setLineDash([]);
+  ctx.lineWidth = 5; ctx.strokeStyle = C.ink; ctx.beginPath();
+  for (let j = 0; j <= upto; j++) { const x = X(j), y = Y(ps[j].p); j ? ctx.lineTo(x, y) : ctx.moveTo(x, y); } ctx.stroke();
+  const cur = ps[k];
+  shape(cur.dd <= -0.1 ? C.tu : C.gold, () => ctx.arc(X(k), Y(cur.p), 11, 0, Math.PI * 2), 4);
+  const tag = cur.dd === 0 ? "AT A RECORD" : cur.dd <= -0.1 ? `${Math.round(-cur.dd * 100)}% DOWN · TU BUYS` : `${Math.round(-cur.dd * 100)}% down · Tu waits`;
+  text(tag, x0 + w, y0 - 18, { size: 30, fill: cur.dd <= -0.1 ? C.tuDark : cur.dd === 0 ? C.red : C.muted, align: "right", weight: 900 });
+}
+const BUB = { V06: "Every drop, I buy cheap!", V09: "Down about a third.", V10: "A record. I stop buying." };
+function sceneReplay(t, i, scene) {
+  const rp = R[scene], m = monthAt(scene, t), k = Math.min(rp.n, Math.round(m));
+  const curLine = lineAt(t);
+  const payday = !!(curLine && curLine.speaker === "T" && curLine.scene === scene && MONTH[curLine.id] === k && SH[rp.i0 + k].dd <= -0.1);
+  ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
+  // date box and market strip
+  shape("#ffffff", () => ctx.roundRect(40, 30, 1000, 110, 26), 6);
+  text(label(SH[rp.i0 + k].m), 300, 110, { size: 70, mono: true });
+  text(`paid in ${usd((k + (payday ? 1 : 0)) * PAY)}`, 820, 102, { size: 40, fill: C.muted, weight: 700 });
+  marketStrip(rp, m, k, 80, 240, 920, 210);
+  const max = scene === "r18" ? 90000 : 360000;
+  const halves = [
+    { y0: 520, tint: C.tuTint, title: "UNCLE TU · waits for a 10% drop", who: "T", cast: CAST.T, colour: C.tuDark },
+    { y0: 1040, tint: C.mint, title: "MINH · buys every paycheck", who: "M", cast: CAST.M, colour: C.minhDark },
+  ];
+  for (const s of halves) {
+    ctx.fillStyle = s.tint; ctx.fillRect(0, s.y0, W, 500);
+    text(s.title, W / 2, s.y0 + 56, { size: 40, fill: s.colour });
+    person(170, s.y0 + 470, { ...s.cast, s: 0.72, mouth: mouthOf(s.who, i, t) });
+    // when Uncle Tu announces a buy, show that payday (as render/ep09-nguyens.html does)
+    let stock = valAt(rp.path, m, s.who === "T" ? "stock" : "minh"), cash = rp.path[k].cash;
+    if (payday) { if (s.who === "T") { stock += cash + PAY; cash = 0; } else stock += PAY; }
+    const bx = s.who === "T" ? 470 : 640;
+    moneyBag(bx, s.y0 + 420, stock, max);
+    text(`stocks ${k$(stock)}`, bx, s.y0 + 475, { size: 40 });
+    if (s.who === "T") { cashPile(820, s.y0 + 420, cash); text(`cash ${usd(cash)}`, 820, s.y0 + 475, { size: 40, fill: C.tuDark }); }
+    let mine = null; for (const l of timing.lines) if (l.speaker === s.who && l.scene === scene && t >= l.start - 0.05) mine = l;
+    if (mine && BUB[mine.id]) {
+      const next = timing.lines.find((l) => l.start > mine.start && l.scene === scene && MONTH[l.id] !== MONTH[mine.id]);
+      bubble(330, s.y0 + 200, BUB[mine.id], s.colour, fade(t, mine.start, 0.2) * (next ? 1 - fade(t, next.start, 0.2) : 1), false);
+    }
+  }
+  shape(null, () => { ctx.moveTo(0, 1040); ctx.lineTo(W, 1040); }, 8);
+  shape(null, () => { ctx.moveTo(0, 1540); ctx.lineTo(W, 1540); }, 6);
+  const gap = valAt(rp.path, m, "stock") + rp.path[k].cash - valAt(rp.path, m, "minh");
+  text(Math.abs(gap) < 250 ? "even so far" : gap > 0 ? `Uncle Tu ahead ${usd(Math.round(gap / 100) * 100)}` : `Minh ahead ${usd(Math.round(-gap / 100) * 100)}`, W / 2, 1610, { size: 52, fill: gap > 0 ? C.tuDark : C.minhDark });
+  footer("real US history · S&P with dividends · $500/mo in today's money · monthly averages");
+  const id = lineAt(t)?.id;
+  if (scene === "r18") {
+    pill("JAN 2018 · A RECORD", C.ink, fade(t, L.V05.start - 0.2, 0.2) * (1 - fade(t, L.V06.start, 0.2)), 360, C.gold);
+    if (id === "V07") pill(`TU WINS BY ~$${K(rp.gap)}K`, C.tuDark, fade(t, tw("V07", "Uncle Tu's way wins"), 0.25), 360, "#ffffff", 50);
+  } else {
+    pill("OCT 2007 · A RECORD", C.ink, fade(t, L.V08.start - 0.2, 0.2) * (1 - fade(t, L.V09.start, 0.2)), 360, C.gold);
+    if (id === "V11") pill("6+ YEARS IN CASH", C.tuDark, fade(t, tw("V11", "For more"), 0.25), 360, "#ffffff", 50);
+    if (id === "V12") pill(`MINH WINS BY ~$${K(-rp.gap)}K`, C.minhDark, fade(t, tw("V12", "Minh's way wins"), 0.25), 360, "#ffffff", 50);
+  }
+}
+function sceneEvery(t) {
+  ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
+  text("every 30-year window", W / 2, 260, { size: 64, alpha: fade(t, L.V13.start) });
+  text("since 1871", W / 2, 335, { size: 64, alpha: fade(t, L.V13.start) });
+  const cw = 8, ch = 32, x0 = (W - 126 * cw) / 2, y0 = 380;
+  const reveal = clamp01((t - L.V13.start - 0.3) / 6);
+  const coloured = fade(t, tw("V13", "Blue means"), 0.4);
+  const by = new Map(A10.map((x) => [x.m, x]));
+  for (let xi = 0; xi < 126; xi++) {
+    if (xi / 126 > reveal) continue;
+    for (let mo = 1; mo <= 12; mo++) {
+      const c = by.get(`${1871 + xi}-${String(mo).padStart(2, "0")}`);
+      if (!c) continue;
+      ctx.fillStyle = coloured > 0.5 ? (c.gap > 0 ? C.tu : C.minh) : "#d8d0bd";
+      ctx.fillRect(x0 + xi * cw, y0 + (mo - 1) * ch, cw - 1, ch - 2);
+    }
+  }
+  for (const yy of [1871, 1929, 1972, 1996]) { const xi = yy - 1871; if (xi / 126 <= reveal) text(String(yy), Math.min(1000, Math.max(70, x0 + xi * cw)), y0 + 12 * ch + 42, { size: 30, fill: C.muted, weight: 700 }); }
+  const lg = coloured, ly = y0 + 12 * ch + 92;
+  if (lg > 0.01) {
+    ctx.globalAlpha = lg; ctx.fillStyle = C.minh; ctx.fillRect(110, ly - 26, 34, 34); ctx.fillStyle = C.tu; ctx.fillRect(560, ly - 26, 34, 34); ctx.globalAlpha = 1;
+    text("Minh's way ahead", 156, ly, { size: 36, align: "left", fill: C.minhDark, alpha: lg }); text("Uncle Tu's ahead", 606, ly, { size: 36, align: "left", fill: C.tuDark, alpha: lg });
+  }
+  card([["waiting won less than 1 in 4", C.tuDark, 56], [`when it won: usually ~${k$(median(WINS))}`, C.tuDark, 48], [`when it lost: usually ~${k$(median(LOSSES))}`, C.minhDark, 48]], 970, fade(t, L.V14.start, 0.3));
+  footer("30 years of $500/mo · real S&P history with dividends, after inflation");
+}
+function sceneLadder(t) {
+  ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
+  text("what waiting cost", W / 2, 230, { size: 72 }); text("for the typical start", W / 2, 305, { size: 52, fill: C.muted });
+  text("each bar is the drop Uncle Tu waits for", W / 2, 380, { size: 38, fill: C.muted, weight: 700, alpha: fade(t, tw("V15", "Each bar")) });
+  const x0 = 120, w = 840, y0 = 470, rh = 260, maxCost = 70000;
+  const when = { 10: "Ten percent", 20: "Twenty:", 30: "Thirty:" };
+  [10, 20, 30].forEach((X, k) => {
+    const y = y0 + k * rh, base = fade(t, tw("V15", "Each bar"), 0.3), a = fade(t, tw("V15", when[X]), 0.3);
+    if (base <= 0.01) return;
+    text(`wait for ${X}%`, x0, y - 20, { size: 50, align: "left", alpha: base });
+    ctx.globalAlpha = base; shape("#efe3c6", () => ctx.roundRect(x0, y, w, 110, 16), 5); ctx.globalAlpha = 1;
+    if (a <= 0.01) return;
+    const bw = w * (-TYP[X] / maxCost) * ease(a);
+    shape(C.tu, () => ctx.roundRect(x0, y, Math.max(1, bw), 110, 16), 5);
+    text(`-${k$(-TYP[X])}`, Math.min(x0 + bw + 20, x0 + w - 200), y + 76, { size: 58, align: "left", alpha: a, fill: C.lanDark });
+  });
+  footer("typical (median) result over 1,506 thirty-year windows, 1871-2026");
+}
+function sceneAnswer(t) {
+  ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
+  shape(C.gold, () => ctx.roundRect(60, 280, 960, 150, 44), 8);
+  text("WON SMALL. LOST BIG.", W / 2, 382, { size: 76, weight: 900 });
+  card([["Records are normal", C.ink, 56], ["since 1960, about 3 months in 10 set one", C.muted, 42]], 520, fade(t, tw("V16", "Records are normal")));
+  card([["The boring way won", C.minhDark, 56], ["every paycheck, record or not", C.muted, 42]], 820, fade(t, tw("V16", "The boring way")));
+}
+function scenePanel(t) {
+  ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
+  text("THE ASSUMPTION PANEL", W / 2, 290, { size: 64 });
+  text("what we assumed", W / 2, 350, { size: 40, fill: C.muted, weight: 700 });
+  const rows = ["Stocks: S&P with dividends, no fees, no taxes", "$500 a month in today's money, never skipped", "Drops measured on monthly averages",
+    "Uncle Tu's cash keeps up with inflation (generous to waiting)", "30-year windows overlap and share eras", "The family are illustrations; the history is real"];
+  const al = fade(t, L.V17.start - 0.1, 0.4);
+  let y = 400;
+  for (const r of rows) {
+    const laid = wrap(r, 38, 700, 860), h = laid.length * 50 + 36;
+    ctx.globalAlpha = al; shape("#ffffff", () => ctx.roundRect(60, y, 960, h, 18), 5); ctx.globalAlpha = 1;
+    laid.forEach((s, k) => text(s, 95, y + 54 + k * 50, { size: 38, align: "left", weight: 700, alpha: al }));
+    y += h + 22;
+  }
+}
+function sceneClose(t, i) {
+  kitchen(t, i);
+  card([["Wait for the dip,", C.ink, 66], ["or buy every paycheck?", C.ink, 66], ["tell us in the comments", C.minhDark, 46]], 300, fade(t, L.V18.start, 0.3));
+}
+
+function renderFrame(i) {
+  const t = i / FPS, s = sceneOf(t);
+  if (s === "kitchen") sceneKitchen(t, i);
+  else if (s === "r18" || s === "r07") sceneReplay(t, i, s);
+  else if (s === "every") sceneEvery(t);
+  else if (s === "ladder") sceneLadder(t);
+  else if (s === "answer") sceneAnswer(t);
+  else if (s === "panel") scenePanel(t);
+  else sceneClose(t, i);
+  return true;
+}
+window.FRAME_COUNT = mouth.frames;
+window.renderFrame = renderFrame;
+window.renderAt = (seconds) => renderFrame(Math.round(seconds * FPS));
+renderFrame(0);
+document.documentElement.dataset.ready = "1";
+</script>
+</body>
+</html>
