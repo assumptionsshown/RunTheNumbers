@@ -21,9 +21,16 @@ const W = 1080, H = 1920, HALF = 960;
 const ctx = document.getElementById("c").getContext("2d");
 const load = async (p) => (await fetch(p)).json();
 const EP = "../episodes/ep06-four-percent-rule";
+// ?anim=hook = the hook-first cut (walt-june-hook/, 2026-11-14): frame 0 shows the ending, then rewinds.
+const HOOK = new URLSearchParams(location.search).get("anim") === "hook";
+const DIR = HOOK ? "walt-june-hook" : "walt-june-short";
 const [batch, timing, mouth] = await Promise.all([
-  load(`${EP}/batch.json`), load(`${EP}/walt-june-short/timing.json`), load(`${EP}/walt-june-short/mouth.json`),
+  load(`${EP}/batch.json`), load(`${EP}/${DIR}/timing.json`), load(`${EP}/${DIR}/mouth.json`),
 ]);
+if (HOOK && timing.seconds > 45) throw new Error(`hook cut is ${timing.seconds}s, the rule is <= 45s`);
+// line roles -> ids in this cut (both scripts share one structure)
+const P = HOOK ? "H" : "S";
+const R = Object.fromEntries(["hook", "crash", "fell", "june", "triple", "walt30", "out", "end"].map((k, j) => [k, `${P}0${j + 1}`]));
 const FPS = mouth.fps;
 const csv = (await (await fetch("../data/snapshots/shiller-2026-07-26/shiller-monthly.csv")).text()).trim().split(/\r?\n/);
 const HDR = csv[0].split(",");
@@ -43,6 +50,8 @@ claim(K(WALT.path[30]) === 749, "Walt y30 $749k");
 claim(cpiRatio(1929, 1932) < 1, "prices fell 1929-32");
 claim(cpiRatio(1966, 1982) >= 2.8 && cpiRatio(1966, 1982) < 3, "prices nearly tripled 1966-82");
 claim(RATE === 0.04 && HZ === 30, "4%, 30 years");
+const FAILED = batch.cohorts.filter((c) => !c.survived);
+claim(batch.cohorts.length === 126 && FAILED.length === 6 && FAILED.every((c) => c.startYear >= 1960 && c.startYear <= 1969), "6 of 126 ran out, all 1960s starts");
 
 const L = Object.fromEntries(timing.lines.map((l) => [l.id, l]));
 const speaking = (t) => timing.lines.find((l) => t >= l.start && t <= l.end + 0.05) ?? null;
@@ -155,17 +164,21 @@ function card(rows, y, alpha) {
 
 // ---- each half on its own clock: [line id, years retired] keyframes
 const STEPS = {
-  W: [["S02", 3], ["S06", HZ]],
-  J: [["S05", 16], ["S07", JUNE.depletedInYear - JUNE.startYear]],
+  W: [[R.crash, 3], [R.walt30, HZ]],
+  J: [[R.triple, 16], [R.out, JUNE.depletedInYear - JUNE.startYear]],
 };
+// hook cut: until the rewind, both halves sit at their ending
+const REWIND = L[R.crash].start - 0.5;
+const ending = (t) => HOOK && t < REWIND;
 function stateOf(k, t) {
   const P = k === "W" ? WALT : JUNE;
+  if (ending(t)) return k === "W" ? { yr: HZ, v: WALT.path[HZ], out: false, outA: 0 } : { yr: JUNE.depletedInYear - JUNE.startYear, v: 0, out: true, outA: 1 };
   let from = 0, to = 0, at = -1;
   for (const [id, yr] of STEPS[k]) if (t >= L[id].start) { from = to; to = yr; at = L[id].start; }
   const p = at < 0 ? 1 : ease(clamp01((t - at) / 1.6));
   const yr = Math.round(from + (to - from) * p);
   // June's bag fades away and the stamp fades in; nothing on screen switches in one frame
-  const outA = k === "J" ? fade(t, L.S07.start + 0.8, 0.4) : 0;
+  const outA = k === "J" ? fade(t, L[R.out].start + 0.8, 0.4) : 0;
   const v = P.path[from] + (P.path[Math.min(to, HZ)] - P.path[from]) * p;
   return { yr, v, out: outA > 0.5, outA };
 }
@@ -175,21 +188,21 @@ const HALVES = {
   J: { off: HALF, tint: C.mint, start: 1966, name: "JUNE", tag: "retired into the calm sixties", col: C.june, dark: C.juneDark },
 };
 const BUBBLE = {
-  S02: "1929: stocks −85%",
-  S03: `Prices fell: $40,000 → ${usd(40000 * cpiRatio(1929, 1932))}`,
-  S04: "No crash. Prices up, year after year",
-  S05: `Prices ×${cpiRatio(1966, 1982).toFixed(2)} by 1982`,
-  S06: `30 years later: ${fmtK(WALT.path[30])}`,
-  S07: "I ran out in 1989",
+  [R.crash]: "1929: stocks −85%",
+  [R.fell]: `Prices fell: $40,000 → ${usd(40000 * cpiRatio(1929, 1932))}`,
+  [R.june]: "No crash. Prices up, year after year",
+  [R.triple]: `Prices ×${cpiRatio(1966, 1982).toFixed(2)} by 1982`,
+  [R.walt30]: `30 years later: ${fmtK(WALT.path[30])}`,
+  [R.out]: "I ran out in 1989",
 };
-const MOOD = { S02: -1, S03: 0, S04: 1, S05: -1, S06: 1, S07: -1 };
+const MOOD = { [R.crash]: -1, [R.fell]: 0, [R.june]: 1, [R.triple]: -1, [R.walt30]: 1, [R.out]: -1 };
 
 function drawHalf(k, t, i) {
   const Hf = HALVES[k], o = Hf.off, s = stateOf(k, t);
   ctx.fillStyle = Hf.tint; ctx.fillRect(0, o, W, HALF);
   text(String(Hf.start + s.yr), 540, o + 170, { size: 130, mono: true, fill: s.out ? C.muted : C.ink });
   // the tag cross-fades from the hook line to the story line
-  const tagSwap = fade(t, L.S02.start - 0.5, 0.5);
+  const tagSwap = HOOK ? 1 : fade(t, L[R.crash].start - 0.5, 0.5);
   text(`${Hf.name} · $1M · $40,000 a year`, 540, o + 228, { size: 36, fill: Hf.dark, weight: 700, alpha: 1 - tagSwap });
   text(`${Hf.name} · ${Hf.tag}`, 540, o + 228, { size: 36, fill: Hf.dark, weight: 700, alpha: tagSwap });
   const act = speaking(t);
@@ -200,12 +213,13 @@ function drawHalf(k, t, i) {
   for (const l of timing.lines) if (l.speaker === k && t >= l.start - 0.05) mine = l;
   let mood = k === "W" ? 0 : 1;
   if (mine && MOOD[mine.id] != null) mood = MOOD[mine.id];
-  if (t >= L.S06.start) mood = k === "W" ? 1 : -1;
+  if (t >= L[R.walt30].start || ending(t)) mood = k === "W" ? 1 : -1;
   elder(270, o + 880, { s: 0.95, who: k, shirt: Hf.col, mood, mouth: talking ? mouth.open[Math.min(i, mouth.open.length - 1)] : 0 });
   moneyBag(800, o + 800, s.v, fmtK(s.v), 1 - s.outA);
   if (k === "J") stamp(800, o + 640, "RAN OUT · 1989", C.red, -0.08, s.outA, 54);
-  if (k === "W" && t >= L.S06.start + 0.9) stamp(800, o + 440, "MADE IT", C.green, -0.08, fade(t, L.S06.start + 0.9, 0.3));
-  if (mine && BUBBLE[mine.id]) bubble(300, o + 432, BUBBLE[mine.id], Hf.dark, fade(t, mine.start, 0.25) * (1 - fade(t, L.S08.start - 0.2, 0.3)));
+  if (k === "W" && ending(t)) stamp(800, o + 440, "MADE IT", C.green, -0.08, 1);
+  if (k === "W" && t >= L[R.walt30].start + 0.9) stamp(800, o + 440, "MADE IT", C.green, -0.08, fade(t, L[R.walt30].start + 0.9, 0.3));
+  if (mine && BUBBLE[mine.id]) bubble(300, o + 432, BUBBLE[mine.id], Hf.dark, fade(t, mine.start, 0.25) * (1 - fade(t, L[R.end].start - 0.2, 0.3)));
 }
 
 function renderFrame(i) {
@@ -215,16 +229,25 @@ function renderFrame(i) {
   shape(null, () => { ctx.moveTo(0, HALF); ctx.lineTo(W, HALF); }, 8);
   // hook: what is the same, then the question on the divider
   // the question sits on the divider from the first frame, then fades out
-  const hookA = 1 - fade(t, L.S02.start - 0.5, 0.5);
-  if (hookA > 0.01) {
-    ctx.globalAlpha = hookA;
-    shape(C.gold, () => ctx.roundRect(170, HALF - 58, 740, 116, 58), 8);
-    ctx.globalAlpha = 1;
-    text("WHO RUNS OUT?", 540, HALF + 28, { size: 78, fill: C.ink, weight: 900, alpha: hookA });
+  if (HOOK) {
+    // the ending is the hook: no fade on frame 0, the question cuts away at the rewind
+    if (ending(t)) {
+      shape(C.gold, () => ctx.roundRect(110, HALF - 58, 860, 116, 58), 8);
+      text("SHE RAN OUT. WHY?", 540, HALF + 26, { size: 72, fill: C.ink, weight: 900 });
+    }
+  } else {
+    const hookA = 1 - fade(t, L[R.crash].start - 0.5, 0.5);
+    if (hookA > 0.01) {
+      ctx.globalAlpha = hookA;
+      shape(C.gold, () => ctx.roundRect(170, HALF - 58, 740, 116, 58), 8);
+      ctx.globalAlpha = 1;
+      text("WHO RUNS OUT?", 540, HALF + 28, { size: 78, fill: C.ink, weight: 900, alpha: hookA });
+    }
   }
   // end card
-  const e = fade(t, L.S08.start, 0.3);
-  card([["The crash didn't sink Walt."], ["Rising prices sank June.", C.red], ["Full story on the channel", C.muted, 42]], HALF - 170, e);
+  const e = fade(t, L[R.end].start, 0.3);
+  if (HOOK) card([[`${FAILED.length} of ${batch.cohorts.length} start years ran out`], ["all 6 in the 1960s", C.red], ["crash: Walt made it"], ["rising prices sank June", C.red]], HALF - 200, e);
+  else card([["The crash didn't sink Walt."], ["Rising prices sank June.", C.red], ["Full story on the channel", C.muted, 42]], HALF - 170, e);
   ctx.fillStyle = C.paper; ctx.fillRect(0, H - 40, W, 40);
   text("illustration · real US market history · after inflation", 540, H - 12, { size: 24, fill: C.muted, weight: 600 });
   return true;

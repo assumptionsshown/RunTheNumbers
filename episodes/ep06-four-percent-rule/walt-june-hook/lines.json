@@ -1,0 +1,21 @@
+{
+  "note": "ep06 hook-first Short (2026-11-14), second test of the hook-first rule: <= 45 s; frame 0 already shows the ending (Walt MADE IT, June RAN OUT 1989); one story, one twist (all 6 failed start years since 1871 were in the 1960s); the close answers the opening 'Why?'. Same data as walt-june-short. Every number is checked by tools/validate-ep06-story.mjs (hook section). Walt and June are illustrations.",
+  "leadIn": 0.1,
+  "gap": { "sameScene": 0.18, "sameSpeaker": 0.12, "sceneChange": 0.3 },
+  "tail": 0.8,
+  "voices": {
+    "N": { "name": "en-US-JasonNeural", "style": "friendly", "pitch": "+10%", "rate": "+12%" },
+    "W": { "name": "en-US-DavisNeural", "style": "friendly", "pitch": "-8%", "rate": "+12%" },
+    "J": { "name": "en-US-NancyNeural", "style": "friendly", "pitch": "-4%", "rate": "+14%" }
+  },
+  "lines": [
+    { "id": "H01", "speaker": "N", "scene": "hook", "text": "She retired in the calm sixties. He retired into the Great Depression. Same million dollars, same forty thousand a year. *She* ran out. Why?" },
+    { "id": "H02", "speaker": "W", "scene": "story", "style": "sad", "text": "Nineteen twenty-nine. Stocks crash *eighty-five percent*." },
+    { "id": "H03", "speaker": "W", "scene": "story", "style": "hopeful", "text": "But prices fell too. My money stretched further." },
+    { "id": "H04", "speaker": "J", "scene": "story", "style": "cheerful", "text": "Nineteen sixty-six. No crash. Just prices going up, *year after year*." },
+    { "id": "H05", "speaker": "J", "scene": "story", "style": "sad", "text": "By nineteen eighty-two, prices had *nearly tripled*." },
+    { "id": "H06", "speaker": "W", "scene": "story", "style": "cheerful", "text": "Thirty years later, I still have *seven hundred forty-nine thousand*." },
+    { "id": "H07", "speaker": "J", "scene": "story", "style": "sad", "text": "I ran out in *nineteen eighty-nine*." },
+    { "id": "H08", "speaker": "N", "scene": "end", "text": "Since eighteen seventy-one, only six start years ran out. All six were in the sixties. The crash didn't sink Walt. *Rising prices* sank June." }
+  ]
+}

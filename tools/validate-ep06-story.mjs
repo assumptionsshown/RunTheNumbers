@@ -226,6 +226,34 @@ for (const l of shortScript.lines) {
   if (numberWords.test(l.text) && !["S01", "S02", "S04", "S05", "S06", "S07"].includes(l.id)) failures.push(`short ${l.id} speaks a number no claim checks: "${l.text}"`);
 }
 
+// ---- the hook-first Short (walt-june-hook/lines.json, 2026-11-14)
+const hookScript = JSON.parse(await readFile(join(ep, "walt-june-hook", "lines.json"), "utf8"));
+const hline = (id) => hookScript.lines.find((l) => l.id === id)?.text.replace(/\*/g, "") ?? "";
+const hsays = (id, phrase, ok, detail) => {
+  check(hline(id).includes(phrase), `hook ${id} no longer says "${phrase}"`);
+  check(ok, `hook ${id} "${phrase}" is false: ${detail}`);
+};
+hsays("H01", "She retired in the calm sixties", june.start === 1966, "June 1966");
+hsays("H01", "He retired into the Great Depression", walt.start === 1929, "Walt 1929");
+hsays("H01", "Same million dollars, same forty thousand a year", walt.path[0] === 1 && june.path[0] === 1 && RATE * 1e6 === 40000, "$1M, 4%");
+hsays("H01", "She ran out", !june.survived && walt.survived, "June out, Walt not");
+hsays("H02", "Nineteen twenty-nine", walt.start === 1929, "Walt 1929");
+hsays("H02", "eighty-five percent", Math.round(drop * 100) === 85, `${(drop * 100).toFixed(1)}%`);
+hsays("H03", "prices fell too", cpi(1929, 1932) < 1, `CPI x${cpi(1929, 1932).toFixed(3)}`);
+hsays("H04", "Nineteen sixty-six", june.start === 1966, "June 1966");
+hsays("H04", "year after year", risingEveryYear, "CPI rose every year 1966-82");
+hsays("H05", "nineteen eighty-two, prices had nearly tripled", c6682 >= 2.8 && c6682 < 3, `CPI x${c6682.toFixed(3)}`);
+hsays("H06", "Thirty years later", walt.survived, "Walt lasts 30 years");
+hsays("H06", "seven hundred forty-nine thousand", K(walt.path[30]) === 749, `${K(walt.path[30])}k`);
+hsays("H07", "nineteen eighty-nine", june.depleted === 1989, `out ${june.depleted}`);
+hsays("H08", "Since eighteen seventy-one", starts[0] === 1871, `${starts[0]}`);
+hsays("H08", "only six start years ran out", failed.length === 6 && all.length === 126, `${failed.length}/${all.length}`);
+hsays("H08", "All six were in the sixties", failed.every((r) => r.start >= 1960 && r.start <= 1969), failed.map((r) => r.start).join(","));
+hsays("H08", "The crash didn't sink Walt", walt.survived, "Walt survived");
+for (const l of hookScript.lines) {
+  if (numberWords.test(l.text) && !["H01", "H02", "H04", "H05", "H06", "H07", "H08"].includes(l.id)) failures.push(`hook ${l.id} speaks a number no claim checks: "${l.text}"`);
+}
+
 if (failures.length) {
   console.error(`validate-ep06-story: ${failures.length} FAIL of ${checks}`);
   for (const f of failures) console.error(`  - ${f}`);
