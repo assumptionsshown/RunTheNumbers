@@ -18,12 +18,15 @@
 // checked by tools/validate-ep10-story.mjs. renderFrame(i) is a pure function of i.
 import { loadModel, makeKit, makeTiming, C, CAST, monthLabel, usd, clamp01, fade, ease } from "./ep10-kit.js";
 const W = 1080, H = 1920;
-const CUT = new URLSearchParams(location.search).get("anim") === "short" ? "short" : "vertical";
+// ?anim=hook = the hook-first Short (nguyens-hook/, 2026-11-14): frame 0 already shows the ending.
+const Q = new URLSearchParams(location.search).get("anim");
+const CUT = Q === "short" ? "short" : Q === "hook" ? "hook" : "vertical";
 const ctx = document.getElementById("c").getContext("2d");
 const load = async (p) => (await fetch(p)).json();
 const EP = `../episodes/ep10-social-security-62-or-70/nguyens-${CUT}`;
 const [timing, script, mouth, M] = await Promise.all([load(`${EP}/timing.json`), load(`${EP}/lines.json`), load(`${EP}/mouth.json`), loadModel("..")]);
 if (timing.seconds >= 180) throw new Error("must fit a Short");
+if (CUT === "hook" && timing.seconds > 45) throw new Error(`hook cut is ${timing.seconds}s, the rule is <= 45s`);
 const FPS = mouth.fps;
 const { text, shape, person, bubble, card, stamp, moneyBag, cake, letter, icon } = makeKit(ctx, W, H);
 const { L, tw, sceneOf, speaking, lineAt, monthAt } = makeTiming(timing, script, 2.4);
@@ -160,7 +163,8 @@ function sceneReplay(t, i, scene) {
   const x0 = 120, x1 = 990, y0 = 340, y1 = 820, MAXV = scene === "r90" ? 450000 : 200000;
   const X = (mm) => x0 + (x1 - x0) * mm / n, Y = (v) => y1 - (y1 - y0) * Math.min(v, MAXV) / MAXV;
   shape("#ffffff", () => ctx.roundRect(60, 300, 960, 600, 22), 5);
-  text("MINH'S WAY: THE PILE", 100, 380 - 50 + 30, { size: 26, fill: C.muted, align: "left" });
+  const HK = CUT === "hook";
+  text(HK ? "HIS PILE" : "MINH'S WAY: THE PILE", 100, 380 - 50 + 30, { size: 26, fill: C.muted, align: "left" });
   for (let a = 62; a <= 62 + n / 12; a += (scene === "r90" ? 9 : 6)) text(String(a), X((a - 62) * 12), y1 + 44, { size: 32, fill: C.muted, weight: 700 });
   const x70 = X(96); ctx.setLineDash([8, 8]); ctx.lineWidth = 3; ctx.strokeStyle = C.lanDark; ctx.beginPath(); ctx.moveTo(x70, y0); ctx.lineTo(x70, y1); ctx.stroke(); ctx.setLineDash([]);
   ctx.lineWidth = 7; ctx.strokeStyle = C.minhDark; ctx.beginPath();
@@ -170,18 +174,28 @@ function sceneReplay(t, i, scene) {
   ctx.fillStyle = C.mint; ctx.fillRect(0, 960, 540, 600);
   ctx.fillStyle = C.lanTint; ctx.fillRect(540, 960, 540, 600);
   shape(null, () => { ctx.moveTo(540, 960); ctx.lineTo(540, 1560); }, 6);
-  text("MINH'S WAY", 270, 1020, { size: 44, fill: C.minhDark });
+  text(HK ? "TOOK IT + INVESTED" : "MINH'S WAY", 270, 1020, { size: 44, fill: C.minhDark });
   text("WAIT UNTIL 70", 810, 1020, { size: 44, fill: C.lanDark });
   moneyBag(270, 1360, rp.pile[k], MAXV, 120);
   text(empty ? "pile: empty" : `pile ${usd(rp.pile[k])}`, 270, 1430, { size: 44, fill: empty ? C.red : C.minhDark });
-  text(k < 96 ? "checks -> stocks" : empty ? `${usd(M.EARLY)} a month` : `${usd(M.LATE)} a month`, 270, 1080, { size: 38, fill: empty ? C.red : C.muted });
-  text(k < 96 ? "$0 until 70" : `${usd(M.LATE)} a month, for life`, 810, 1080, { size: 36, fill: C.lanDark });
-  person(810, 1520, { ...CAST.T, s: 0.55, mood: 1 });
+  const bigNow = HK && lineAt(t)?.id === "H05"; // the H05 overlay shows the two checks large instead
+  if (!bigNow) text(k < 96 ? "checks -> stocks" : empty ? `${usd(M.EARLY)} a month` : `${usd(M.LATE)} a month`, 270, 1080, { size: 38, fill: empty ? C.red : C.muted });
+  text(k < 96 ? "$0 until 70" : bigNow ? "a month, for life" : `${usd(M.LATE)} a month, for life`, 810, 1080, { size: 36, fill: C.lanDark });
+  if (bigNow) text("a month", 270, 1080, { size: 38, fill: C.red });
+  if (!HK) person(810, 1520, { ...CAST.T, s: 0.55, mood: 1 });
   const act = speaking(t);
   if (act?.id === "V12" && empty) bubble(810, 1520 - 0.55 * 520, "The pile is empty.", C.red, 1, { size: 40 });
   const id = lineAt(t)?.id;
   if (scene === "r90" && id === "V10" && k >= 437) stamp(560, 520, `STILL ~$${K(rp.pile[437])}K AT 98`, C.minhDark, -0.04, 1, 48);
-  if (scene === "r00" && id === "V12" && empty) stamp(560, 520, "EMPTY, ALMOST 86", C.red, -0.04, 1, 54);
+  if (scene === "r00" && (id === "V12" || id === "H04" || id === "H05") && empty) stamp(560, 520, "EMPTY, ALMOST 86", C.red, -0.04, 1, 54);
+  if (id === "H05") {
+    const a = fade(t, L.H05.start, 0.3);
+    ctx.globalAlpha = a; ctx.lineWidth = 10; ctx.strokeStyle = C.red; ctx.strokeRect(14, 970, 512, 580); ctx.globalAlpha = 1;
+    text(usd(M.EARLY), 270, 1210, { size: 84, fill: C.red, alpha: a });
+    const b = fade(t, tw("H05", "Waiting"), 0.3);
+    ctx.globalAlpha = b; ctx.strokeStyle = C.lanDark; ctx.strokeRect(554, 970, 512, 580); ctx.globalAlpha = 1;
+    text(usd(M.LATE), 810, 1210, { size: 84, fill: C.lanDark, alpha: b });
+  }
   honesty(FOOT.real);
 }
 
@@ -189,11 +203,12 @@ function sceneReplay(t, i, scene) {
 const BUCKET = (w) => w.runout == null ? 0 : M.ageOf(w.runout) >= 90 ? 1 : M.ageOf(w.runout) >= 85 ? 2 : 3;
 const BCOL = [C.minh, C.gold, C.orange, C.red];
 function sceneEvery(t) {
+  const ev = id1("V13", "H06"), P1 = ev === "V13" ? "the money lasted" : "it lasted";
   ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
-  text("every month since 1871", 540, 110, { size: 60, alpha: fade(t, L.V13.start) });
-  text("to turn 62, invest the checks, live to 100", 540, 170, { size: 38, fill: C.muted, alpha: fade(t, L.V13.start) });
+  text("every month since 1871", 540, 110, { size: 60, alpha: fade(t, L[ev].start) });
+  text("to turn 62, invest the checks, live to 100", 540, 170, { size: 38, fill: C.muted, alpha: fade(t, L[ev].start) });
   const cw = 8, ch = 34, x0 = 540 - (118 * cw) / 2, y0 = 230;
-  const reveal = clamp01((t - L.V13.start - 0.3) / 3.5);
+  const reveal = clamp01((t - L[ev].start - 0.3) / (ev === "V13" ? 3.5 : 2.2));
   const by = new Map(M.ALL.map((w) => [w.m, w]));
   for (let xi = 0; xi < 118; xi++) {
     if (xi / 118 > reveal) continue;
@@ -206,8 +221,9 @@ function sceneEvery(t) {
   for (const yy of [1871, 1929, 1966, 1988]) text(String(yy), x0 + (yy - 1871) * cw + 4, y0 + 12 * ch + 36, { size: 28, fill: C.muted, weight: 700 });
   const leg = [["lasted to 100", 0], ["ran out 90-100", 1], ["ran out 85-90", 2], ["ran out before 85", 3]];
   leg.forEach(([s, b], j) => { const x = 90 + (j % 2) * 480, y = 720 + Math.floor(j / 2) * 60; ctx.fillStyle = BCOL[b]; ctx.fillRect(x, y - 30, 36, 36); text(s, x + 50, y, { size: 34, align: "left", weight: 700 }); });
-  card([[`lasted to 100: ${M.lasted} of ${M.ALL.length.toLocaleString("en-US")}`, C.minhDark, 46], ["a little under half", C.minhDark, 40]], 880, fade(t, tw("V13", "the money lasted"), 0.3), 540, 960, 64);
-  card([[`ran out before 90: ${M.before(90)}`, C.orange, 46], ["about 1 in 3", C.orange, 40]], 1120, fade(t, tw("V13", "About one in three"), 0.3), 540, 960, 64);
+  card([[`lasted to 100: ${M.lasted} of ${M.ALL.length.toLocaleString("en-US")}`, C.minhDark, 46], ["a little under half", C.minhDark, 40]], 880, fade(t, tw(ev, P1), 0.3), 540, 960, 64);
+  card([[`ran out before 90: ${M.before(90)}`, C.orange, 46], ["about 1 in 3", C.orange, 40]], 1120, fade(t, tw(ev, "About one in three"), 0.3), 540, 960, 64);
+  if (ev === "H06") text("Jan 2000 was not the only one", 540, 1420, { size: 40, fill: C.muted, alpha: fade(t, L.H06.start, 0.3) });
   honesty("real US history since 1871 · starts overlap and share eras");
 }
 function sceneAnswer(t) {
@@ -247,8 +263,12 @@ function scenePanel(t) {
   });
 }
 function sceneClose(t, i) {
-  kitchen(t, i, CUT === "short" ? 0.2 : 0);
-  if (CUT === "short") {
+  kitchen(t, i, CUT === "vertical" ? 0 : 0.2);
+  if (CUT === "hook") {
+    card([["investing it early:", C.minhDark, 48], ["a bet on the market", C.minhDark, 56]], 200, fade(t, L.H07.start, 0.3), 540, 960, 76);
+    card([["waiting:", C.lanDark, 48], ["insurance", C.lanDark, 64]], 480, fade(t, tw("H07", "Waiting"), 0.3), 540, 960, 76);
+    card([["62 or 70?", C.ink, 84]], 760, fade(t, tw("H07", "Sixty-two"), 0.25), 540, 960, 100);
+  } else if (CUT === "short") {
     card([["waiting isn't a bet", C.ink, 52], ["that you live long", C.ink, 52], ["it's INSURANCE,", C.minhDark, 60], ["in case you do", C.minhDark, 52]], 200, fade(t, L.S07.start, 0.4), 540, 960, 80);
     card([["take it at 62, or wait?", C.ink, 52], ["tell us in the comments", C.muted, 38]], 640, fade(t, tw("S07", "Would you"), 0.4), 540, 960, 66);
   } else {
@@ -257,9 +277,32 @@ function sceneClose(t, i) {
   honesty(FOOT.now);
 }
 
+// ---- hook: the ending on frame 0, nothing fades in
+function sceneHook(t, i) {
+  const rp = M.R.r00, n = 317, end = rp.runout;
+  ctx.fillStyle = C.paper; ctx.fillRect(0, 0, W, H);
+  text("TOOK SOCIAL SECURITY AT 62", 540, 120, { size: 64, fill: C.ink });
+  text("+ INVESTED EVERY CHECK", 540, 200, { size: 64, fill: C.minhDark });
+  const x0 = 120, x1 = 990, y0 = 330, y1 = 900, MAXV = 250000;
+  const X = (mm) => x0 + (x1 - x0) * mm / n, Y = (v) => y1 - (y1 - y0) * Math.min(v, MAXV) / MAXV;
+  shape("#ffffff", () => ctx.roundRect(60, 260, 960, 720, 22), 5);
+  text("HIS PILE, turned 62 in Jan 2000", 100, 310, { size: 30, fill: C.muted, align: "left" });
+  for (let a = 62; a <= 62 + n / 12; a += 6) text(String(a), X((a - 62) * 12), y1 + 50, { size: 34, fill: C.muted, weight: 700 });
+  ctx.lineWidth = 9; ctx.strokeStyle = C.minhDark; ctx.beginPath();
+  for (let mm = 0; mm <= end; mm++) { const xx = X(mm), yy = Y(rp.pile[mm]); mm ? ctx.lineTo(xx, yy) : ctx.moveTo(xx, yy); } ctx.stroke();
+  shape(C.red, () => ctx.arc(X(end), Y(0), 18, 0, Math.PI * 2), 5);
+  const pulse = 1 + 0.04 * Math.sin(t * 6);
+  ctx.save(); ctx.translate(600, 430); ctx.scale(pulse, pulse); stamp(0, 0, "EMPTY BY 86", C.red, -0.05, 1, 84); ctx.restore();
+  const act = speaking(t);
+  person(540, 1560, { ...CAST.T, s: 0.62, mood: act?.id === "H02" ? 1 : -1, mouth: mouthOf("T", i, t), wave: act?.id === "H02" ? Math.sin(t * 7) * 0.12 + 0.12 : 0 });
+  if (act?.id === "H02") bubble(540, 1560 - 0.62 * 520, "Everybody said:|invest it!", "#1f3c63", fade(t, act.start, 0.15), { size: 44, maxW: 520 });
+  honesty(FOOT.real);
+}
+
 function renderFrame(i) {
   const t = i / FPS, s = sceneOf(t);
-  if (s === "kitchen") sceneKitchen(t, i);
+  if (s === "hook") sceneHook(t, i);
+  else if (s === "kitchen") sceneKitchen(t, i);
   else if (s === "race") sceneRace(t, i);
   else if (s === "people") scenePeople(t, i);
   else if (s === "plan") scenePlan(t);

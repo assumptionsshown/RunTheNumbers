@@ -1,0 +1,19 @@
+{
+  "note": "ep10 hook-first Short (2026-11-14): test of the new Shorts rule after the 11-14 channel read (stayed-to-watch never above 70%). Rules: <= 45 s; frame 0 already shows the ending (the Jan 2000 pile, empty by 86); one story, one twist; the close loops back to the opening question. Same model as nguyens/lines.json. Replay lines carry `month` = months since the 62nd birthday. Every spoken number is checked by tools/validate-ep10-story.mjs. The family are illustrations.",
+  "leadIn": 0.1,
+  "gap": { "sameScene": 0.18, "sameSpeaker": 0.12, "sceneChange": 0.3 },
+  "tail": 0.8,
+  "voices": {
+    "N": { "name": "en-US-JasonNeural", "style": "friendly", "pitch": "+10%", "rate": "+12%" },
+    "T": { "name": "en-US-DavisNeural", "style": "friendly", "pitch": "-14%", "rate": "+8%" }
+  },
+  "lines": [
+    { "id": "H01", "speaker": "N", "scene": "hook", "text": "He took Social Security at sixty-two and put every check into stocks. By *eighty-six*, it was all gone." },
+    { "id": "H02", "speaker": "T", "scene": "hook", "text": "Everybody said: take it early, and invest it!" },
+    { "id": "H03", "speaker": "N", "scene": "r00", "month": 110, "text": "January two thousand. Every fourteen hundred dollar check goes into stocks. Then the dot-com crash. Then two thousand eight." },
+    { "id": "H04", "speaker": "T", "scene": "r00", "month": 287, "style": "sad", "text": "December twenty twenty-three. *The pile is empty.*" },
+    { "id": "H05", "speaker": "N", "scene": "r00", "text": "Now he's back to fourteen hundred a month. Waiting until seventy pays *twenty-four eighty*, for life." },
+    { "id": "H06", "speaker": "N", "scene": "every", "text": "Was he just unlucky? Since eighteen seventy-one, it lasted to a hundred a little under half the time. About *one in three*, it ran out before ninety." },
+    { "id": "H07", "speaker": "N", "scene": "close", "text": "Investing it early is a bet on the market. Waiting is insurance. Sixty-two, or seventy?" }
+  ]
+}

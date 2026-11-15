@@ -39,6 +39,7 @@ const [shillerCsv, lifeCsv, rules, script, vertical, short] = await Promise.all(
   readFile(join(ep, "nguyens-vertical", "lines.json"), "utf8").then(JSON.parse),
   readFile(join(ep, "nguyens-short", "lines.json"), "utf8").then(JSON.parse),
 ]);
+const hook = JSON.parse(await readFile(join(ep, "nguyens-hook", "lines.json"), "utf8"));
 
 let checks = 0;
 const failures = [];
@@ -220,6 +221,24 @@ ssays("S05", "a man lives to about eighty-two", Math.round(62 + life[62].me) ===
 ssays("S06", "ahead by about a hundred ninety thousand", K10(collectedLate(396) - collectedEarly(396)) === 190, "95");
 const sTerms = new Set(["S02", "S07"]);
 for (const l of short.lines) if (numberWords.test(l.text) && !["S01", "S03", "S04", "S05", "S06"].includes(l.id) && !sTerms.has(l.id)) failures.push(`short ${l.id} speaks a number no claim checks`);
+
+// ---- hook-first Short (2026-11-14)
+const hsays = sayer(hook, "hook ");
+hsays("H01", "Social Security at sixty-two and put every check into stocks", true, "Minh's way, months 0-95");
+hsays("H01", "By eighty-six, it was all gone", R00.runout != null && ageOf(R00.runout) < 86 && ageOf(R00.runout) > 85.5, `pile empty at ${ageOf(R00.runout).toFixed(2)}`);
+hsays("H03", "January two thousand", R00.m === "2000-01", R00.m);
+hsays("H03", "Every fourteen hundred dollar check goes into stocks", EARLY === 1400, "early");
+hsays("H03", "Then two thousand eight", R00.runout > 110 && sh[at.get("2000-01") + 110].m === "2009-03", "month 110 lands in March 2009, pile still paying");
+hsays("H04", "December twenty twenty-three", sh[at.get("2000-01") + R00.runout].m === "2023-12", sh[at.get("2000-01") + R00.runout].m);
+hsays("H05", "back to fourteen hundred a month", EARLY === 1400, "early check after runout");
+hsays("H05", "Waiting until seventy pays twenty-four eighty, for life", LATE === 2480, "late");
+hsays("H06", "Since eighteen seventy-one", windows[0].m === "1871-01", windows[0].m);
+hsays("H06", "it lasted to a hundred a little under half the time", share(lasted) > 0.4 && share(lasted) < 0.5, `${lasted.length}/${windows.length}`);
+hsays("H06", "About one in three, it ran out before ninety", near(share(before(90)), 1 / 3, 0.03), `${before(90).length}`);
+const hMonth = Object.fromEntries(hook.lines.map((l) => [l.id, l.month]));
+check(hMonth.H03 === 110 && hMonth.H04 === R00.runout, `hook replay months ${hMonth.H03}/${hMonth.H04} vs runout ${R00.runout}`);
+const hTerms = new Set(["H07"]); // ages 62/70 as the two choices
+for (const l of hook.lines) if (numberWords.test(l.text) && !["H01", "H03", "H04", "H05", "H06"].includes(l.id) && !hTerms.has(l.id)) failures.push(`hook ${l.id} speaks a number no claim checks`);
 
 if (failures.length) {
   console.error(`validate-ep10-story: ${failures.length} FAIL of ${checks}`);
